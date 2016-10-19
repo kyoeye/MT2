@@ -2,12 +2,63 @@
     x:Class="MT2.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MT2"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:MT2"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="#FF0074B6"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
+        <Grid Grid.Row="0">
+            <Rectangle Height="50" Fill="#FF0074B6" />
+            <AppBarButton
+                Name="MenuButton"
+                Width="50"
+                Height="50">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Foreground="White"
+                    FontFamily="Segoe MDL2 Assets"
+                    Text="&#xE76C;" />
+            </AppBarButton>
+            <TextBlock
+                Name="Mytop"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="White">
+                <Run Text="萌豚" />
+                <Run
+                    Foreground="Gainsboro"
+                    FontWeight="Bold"
+                    Text="S" />
+            </TextBlock>
+            <AppBarButton
+                Name="SeachButton"
+                Width="50"
+                Height="50"
+                HorizontalAlignment="Right">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Foreground="White"
+                    FontFamily="Segoe MDL2 Assets"
+                    Text="&#xE11A;" />
+            </AppBarButton>
+
+            <AutoSuggestBox
+                Name="Mysourebox"
+                Width="130"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                PlaceholderText="搜索"
+                QueryIcon="Find"
+                Visibility="Collapsed" />
+        </Grid>
     </Grid>
 </Page>
