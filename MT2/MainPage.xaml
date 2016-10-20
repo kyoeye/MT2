@@ -13,6 +13,32 @@
             <RowDefinition Height="50" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="NarrowLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Mytop.HorizontalAlignment" Value="Center" />
+                        <Setter Target="MySeachBox.Visibility" Value="Collapsed" />
+                        <Setter Target="SeachButton.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="WideLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Mytop.HorizontalAlignment" Value="Left" />
+                        <Setter Target="Mytop.Margin" Value="60,0,0,0" />
+                        <Setter Target="MySeachBox.Visibility" Value="Visible" />
+                        <Setter Target="SeachButton.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
 
         <Grid Grid.Row="0">
             <Rectangle Height="50" Fill="#FF0074B6" />
@@ -34,7 +60,7 @@
                 Foreground="White">
                 <Run Text="萌豚" />
                 <Run
-                    Foreground="Gainsboro"
+                    Foreground="White"
                     FontWeight="Bold"
                     Text="S" />
             </TextBlock>
@@ -52,13 +78,15 @@
             </AppBarButton>
 
             <AutoSuggestBox
-                Name="Mysourebox"
-                Width="130"
+                Name="MySeachBox"
+                Width="330"
+                Margin="10,0,10,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
-                PlaceholderText="搜索"
+                PlaceholderText="搜索一下，或许会有有趣的事情发生"
                 QueryIcon="Find"
-                Visibility="Collapsed" />
+                Visibility="Visible" />
         </Grid>
+
     </Grid>
 </Page>
