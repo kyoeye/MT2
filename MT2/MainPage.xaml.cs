@@ -26,5 +26,10 @@ namespace MT2
         {
             this.InitializeComponent();
         }
+
+        private void MenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            Mymenu.IsPaneOpen = !Mymenu.IsPaneOpen;
+        }
     }
 }

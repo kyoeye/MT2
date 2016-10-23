@@ -32,13 +32,13 @@ namespace MT2.CS
                         {
 
                             id[0] = (string)item;
-                            textb.Text = id[0];
+                            //textb.Text = id[0];
 
                         }
                         else if (item.Name == "file_url")
                         {
                             uri[0] = (string)item;
-                            mybutton.Content = uri[0];
+                            //mybutton.Content = uri[0];
 
 
                         }
