@@ -159,7 +159,7 @@
                                     FontSize="20"
                                     Text="&#xE2AF;" />
                             </AppBarButton>
-                            <AppBarButton Width="50">
+                            <AppBarButton Name="SettingButton" Click="SettingButton_Click"  Width="50">
                                 <TextBlock
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"

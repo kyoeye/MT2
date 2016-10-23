@@ -1,0 +1,214 @@
+﻿<Page
+    x:Class="MT2.page.SettingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:MT2.page"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="#FF0074B6"
+    mc:Ignorable="d">
+
+    <Grid Background="#FF0074B6">
+
+        <Pivot Foreground="White">
+            <!--
+            <PivotItem FontSize=" 10"
+                       Foreground="White"
+                       Header="设置">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0">
+                        <ToggleSwitch Name="shengliu_kaiguan"
+                                      Foreground="White"
+                                      OffContent="关(づ￣3￣)づ╭❤～享受高质量图片"
+                                      OnContent="开(#‵′)凸就不会连个wifi？"
+                                      Toggled="shengliu_kaiguan_Toggled"
+                                      >
+                            <ToggleSwitch.Header>
+                                <TextBlock Foreground="White" Text="省流模式" />
+                            </ToggleSwitch.Header>
+                        </ToggleSwitch>
+                        <TextBlock Margin="5,5,0,0"
+                                   Foreground="White"
+                                   Text="注意！省流模式的原理是将图片返回更换成一个更低质量的返回，大屏幕pc预览效果可能不理想" />
+                    </StackPanel>
+                </Grid>
+            </PivotItem>-->
+            <PivotItem
+                Margin="-12,0,-12,0"
+                FontSize=" 10"
+                Header="关于">
+
+                <Grid>
+                    <Grid.ChildrenTransitions>
+                        <TransitionCollection>
+                            <EntranceThemeTransition />
+                        </TransitionCollection>
+                    </Grid.ChildrenTransitions>
+
+                    <ScrollViewer>
+                        <Grid>
+                            <Rectangle Fill="White" />
+                            <Rectangle
+                                Height="230"
+                                VerticalAlignment="Top"
+                                Fill="#FF007BC1" />
+                            <StackPanel>
+
+
+                                <Image
+                                    Width="130"
+                                    Height="130"
+                                    Source="ms-appx:///Assets/SplashScreen.scale-200.png" />
+
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    Foreground="#FFF7F7F7"
+                                    FontSize="25"
+                                    Text="萌豚" />
+                                <TextBlock
+                                    Margin="0,5,0,0"
+                                    HorizontalAlignment="Center"
+                                    Foreground="#FFE2E2E2"
+                                    Text="2016.10.17 Beta 神州十一号发射，第3次提交可能被驳回的更新。。" />
+
+
+
+                                <TextBlock
+                                    Margin="0,20,0,0"
+                                    HorizontalAlignment="Center"
+                                    Foreground="#FFE2E2E2"
+                                    FontSize="12"
+                                    Text="萌豚是一个提供各式各样的ACG美图の圣地 \(￣︶￣*\))" />
+
+                                <TextBlock
+                                    Margin="5,20,0,0"
+                                    HorizontalAlignment="Center"
+                                    Foreground="#FF2B2B2B"
+                                    FontSize="23"
+                                    Text="源" />
+                                <HyperlinkButton
+                                    Margin="0,0,0,0"
+                                    HorizontalAlignment="Center"
+                                    
+                                    Content="http://yande.re/ "
+                                    NavigateUri="http://yande.re/" />
+                                <HyperlinkButton
+                                    Margin="0,0,0,0"
+                                    HorizontalAlignment="Center"
+                                    Content="http://lelouchcrgallery.tk/(稳定性较差，划掉)"
+                                    NavigateUri="http://lelouchcrgallery.tk/" />
+
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    Foreground="#FF63ACE6"
+                                    Text="更多源正在收集ing(((φ(◎ロ◎;)φ)))" />
+                                <TextBlock
+                                    Margin="5,20,0,0"
+                                    HorizontalAlignment="Center"
+                                    Foreground="#FF2B2B2B"
+                                    FontSize="23"
+                                    Text="感谢" />
+                                <TextBlock
+                                    Margin="0,5,0,0"
+                                    HorizontalAlignment="Center"
+                                    Foreground="#FF424242"
+                                    FontSize="12"
+                                    Text="(排名不分先后 (*/ω＼*))" />
+                                <HyperlinkButton
+                                    Margin="0,10,0,0"
+                                    HorizontalAlignment="Center"
+                                    Foreground="#FF0078D7"
+                                    FontSize="13"
+                                    Content="旋风小伙（微页开发者）"
+                                    NavigateUri="https://www.microsoft.com/store/apps/9nblggh5lpfh" />
+                                <HyperlinkButton
+                                    Margin="0,5,0,0"
+                                    HorizontalAlignment="Center"
+                                    Foreground="#FF0078D7"
+                                    FontSize="13"
+                                    Content="大魔导（IT之家开发者）"
+                                    NavigateUri="https://www.microsoft.com/store/apps/9wzdncrfj3qd" />
+
+                                <TextBlock
+                                    Margin="5,40,0,0"
+                                    HorizontalAlignment="Center"
+                                    Foreground="#FF2B2B2B"
+                                    FontSize="23"
+                                    Text="二相箔" />
+                                <TextBlock
+                                    Margin="0,5,0,0"
+                                    HorizontalAlignment="Center"
+                                    Foreground="#FF424242"
+                                    FontSize="12"
+                                    Text="_(:з)∠)_" />
+                                <TextBlock
+                                    Margin="0,10,0,0"
+                                    HorizontalAlignment="Center"
+                                    Foreground="#FF2B2B2B"
+                                    FontSize="15"
+                                    Text="前期版本。。一些东西都没做好" />
+                                <TextBlock
+                                    Margin="5,40,0,0"
+                                    HorizontalAlignment="Center"
+                                    Foreground="#FF2B2B2B"
+                                    FontSize="23"
+                                    Text="单纯不做作的开发者" />
+                                <TextBlock
+                                    Margin="0,5,0,0"
+                                    HorizontalAlignment="Center"
+                                    Foreground="#FF424242"
+                                    FontSize="12"
+                                    Text="☆⌒(*＾-゜)v " />
+                                <TextBlock
+                                    Margin="0,10,0,0"
+                                    HorizontalAlignment="Center"
+                                    Foreground="#FF2B2B2B"
+                                    FontSize="15"
+                                    Text="画渣针眼" />
+                                <TextBlock
+                                    Margin="5,40,0,0"
+                                    HorizontalAlignment="Center"
+                                    Foreground="#FF2B2B2B"
+                                    FontSize="23"
+                                    Text="联系方式" />
+                                <TextBlock
+                                    Margin="0,5,0,0"
+                                    HorizontalAlignment="Center"
+                                    Foreground="#FF424242"
+                                    FontSize="12"
+                                    Text="（如侵犯了您的合法权益请立即联系我下架该应用）" />
+                                <TextBlock
+                                    Margin="0,10,0,0"
+                                    HorizontalAlignment="Center"
+                                    Foreground="#FF2B2B2B"
+                                    FontSize="15"
+                                    Text="QQ" />
+                                <Button
+                                    Name="qqclick"
+                                    Margin="0,0,0,20"
+                                    HorizontalAlignment="Center"
+                                    Click="qqclick_Click"
+                                    Content="1429293578" />
+
+                            </StackPanel>
+
+                        </Grid>
+
+
+
+                    </ScrollViewer>
+                </Grid>
+            </PivotItem>
+        </Pivot>
+
+    </Grid>
+
+</Page>

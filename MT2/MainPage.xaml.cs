@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MT2.page;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace MT2
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : Page 
     {
         public MainPage()
         {
@@ -30,6 +31,11 @@ namespace MT2
         private void MenuButton_Click(object sender, RoutedEventArgs e)
         {
             Mymenu.IsPaneOpen = !Mymenu.IsPaneOpen;
+        }
+
+        private void SettingButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof (SettingPage));
         }
     }
 }
