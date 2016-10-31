@@ -39,5 +39,7 @@ namespace MT2.page
             qqclick.Content = "已复制到剪贴板，请转至qq粘贴搜索";
         
         }
+
+      
     }
 }

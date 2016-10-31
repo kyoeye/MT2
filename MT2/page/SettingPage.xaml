@@ -77,8 +77,7 @@
                                     Margin="0,5,0,0"
                                     HorizontalAlignment="Center"
                                     Foreground="#FFE2E2E2"
-                                    Text="2016.10.17 Beta 神州十一号发射，第3次提交可能被驳回的更新。。" />
-
+                                    Text="2016.10.17 Beta 神州十一号发射，第3次提交可能被驳回的更新。。"/>
 
 
                                 <TextBlock
