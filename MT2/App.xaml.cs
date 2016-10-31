@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -53,6 +54,8 @@ namespace MT2
             {
                 // 创建要充当导航上下文的框架，并导航到第一页
                 rootFrame = new Frame();
+                //订阅后退导航事件
+                SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
@@ -74,11 +77,50 @@ namespace MT2
                     // 参数
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
                 }
+                rootFrame.Navigated += RootFrame_Navigated;
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
             }
         }
 
+        // 每次完成导航 确定下是否显示系统后退按钮  
+        private void RootFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+
+            // ReSharper disable once PossibleNullReferenceException  
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                (Window.Current.Content as Frame).BackStack.Any()
+                ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+        }
+        //响应后退事件
+        private async void App_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            // 这里面可以任意选择控制哪个Frame   
+            // 如果MainPage.xaml中使用了另外的Frame标签进行导航 可在此处获取需要GoBack的Frame  
+            var rootFrame = Window.Current.Content as Frame;
+            if (rootFrame.CanGoBack)
+            {
+                rootFrame.GoBack();
+                e.Handled = true;
+            }
+            // ReSharper disable once PossibleNullReferenceException  
+            else if (!rootFrame.CanGoBack)
+            {
+                e.Handled = true;
+                //  rootFrame.GoBack();
+                var dialog = new ContentDialog()
+                {
+                    Title = "确定离开？",
+                    Content = "/(ㄒoㄒ)/~~",
+                    PrimaryButtonText = "转身就走",
+                    FullSizeDesired = false,
+                };
+                dialog.PrimaryButtonClick += (_s, _e) => { Current.Exit(); };
+                await dialog.ShowAsync();
+
+            }
+
+        }
         /// <summary>
         /// 导航到特定页失败时调用
         /// </summary>
