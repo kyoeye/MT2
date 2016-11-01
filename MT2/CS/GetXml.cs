@@ -58,7 +58,7 @@ namespace MT2.CS
                 //后面加个弹窗(～o￣3￣)～
                 var ectc =  ec.ToString();
                 TextDialog ectctc = new TextDialog();
-                ectctc.TopTextblocktext("异常酱");
+                ectctc.TopTextblocktext("怒刷存在的异常酱");
                 ectctc.Contenttextblocktext(ectc );
                 result = null;
 
