@@ -13,6 +13,14 @@
             <RowDefinition Height="50" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        
+         <TextBlock
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="#FFB9B9B9"
+            Text="没网了233333333" />
+       
         <Grid Grid.Row="1" >
             <ItemsControl x:Name="Mygridview">
                 <ItemsControl.ItemsPanel >
@@ -45,12 +53,6 @@
             </ItemsControl>
         </Grid>
 
-        <TextBlock
-            Grid.Row="1"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Foreground="#FFB9B9B9"
-            Text="没人想体验失去网络带来的恐惧" />
         <Grid Grid.Row="0">
             <Rectangle Height="50" Fill="#FF0074B6" />
             <AppBarButton
