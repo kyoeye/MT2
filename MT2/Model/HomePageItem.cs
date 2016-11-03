@@ -10,8 +10,10 @@ namespace MT2.Model
     public class HomePageItem
     {
 
-        public string id { get; set; }
-        public string imguri { get; set; }
+        public string id { get; set; } //作者id
+        public string name { get; set; } //作者名字
+        public string imguri { get; set; } //图片uri
+
 
     }
 
