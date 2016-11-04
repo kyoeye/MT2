@@ -30,10 +30,10 @@
 
                                     </Viewbox>
                                     <TextBlock Name="tishitext" Margin="5,0,0,0" Visibility="Collapsed"  Text="我是提示，你不会看见这句话的" Foreground="#FF0074B6" />
-                                    <Viewbox  >
-                                        <TextBlock Margin="5" Text="这将决定你在公共场合时候是否会看到可能引起骚动的信息" Foreground="Black"/>
+                                   
+                                        <TextBlock FontSize="12" TextWrapping="Wrap"  Margin="5" Text="这将决定你在公共场合时候是否会看到可能引起骚动的信息" Foreground="Black"/>
 
-                                    </Viewbox>
+                                   
 
                                 </StackPanel>
 
@@ -43,10 +43,8 @@
                                 <StackPanel Margin="5" >
                                     <TextBlock Margin="5" FontSize="20" Text="首页设置" Foreground="#FF0074B6"/>
                                     <Slider IsEnabled="False"  Margin="5" Header="首页单次加载图片数量" />
-                                    <TextBlock Margin="5,0,5,5" Text="这将决定瀑布流一次加载图片的数量" TextWrapping="Wrap"  Foreground="Black"/>
-
+                                    <TextBlock Margin="5,0,5,5"  FontSize="12"  Text="这将决定瀑布流一次加载图片的数量" TextWrapping="Wrap"  Foreground="Black"/>
                                 </StackPanel>
-
                             </Grid>
 
                         </StackPanel>

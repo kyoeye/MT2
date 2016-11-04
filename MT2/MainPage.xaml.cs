@@ -37,5 +37,10 @@ namespace MT2
         {
             Frame.Navigate(typeof (SettingPage));
         }
+
+        public void GetWaterfall()
+        {
+
+        }
     }
 }
