@@ -31,7 +31,10 @@
                 <ItemsControl.Template>
                     <ControlTemplate>
                         <ScrollViewer>
-                            <ItemsPresenter/>
+                            <StackPanel >
+                                <ItemsPresenter/>
+                                <Button Content="加载更多(｡･∀･)ﾉﾞ" Name="Loadingbutton" HorizontalAlignment="Center" Margin="12" Click="Loadingbutton_Click"/>
+                            </StackPanel>
                         </ScrollViewer>
                     </ControlTemplate>
                 </ItemsControl.Template>
@@ -39,12 +42,11 @@
                     <DataTemplate >
                         <Grid >
                             <Grid   HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <Image   Source="{Binding itemuri}" Name="Gridimage" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <Image   Source="{Binding  preview_url}" Name="Gridimage" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Grid>
                             <StackPanel >
-
                                 <TextBlock Text="{Binding name }" Name="Imagetext"/>
-                                <TextBlock Text="{Binding itemuri}" Name="imageurl" />
+                                <TextBlock Text="{Binding id}" Name="imageurl" />
                             </StackPanel>
 
                         </Grid>
