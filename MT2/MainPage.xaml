@@ -15,7 +15,9 @@
         </Grid.RowDefinitions>
         
          <TextBlock
+             Name="NoNetworld"
             Grid.Row="1"
+             Visibility="Collapsed" 
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Foreground="#FFB9B9B9"
@@ -81,10 +83,11 @@
                     Text="S" />
             </TextBlock>
             <AppBarButton
-                Name="SeachButton"
+                Name="SearchButton"
                 Width="50"
                 Height="50"
-                HorizontalAlignment="Right">
+                HorizontalAlignment="Right"
+                Click="SearchButton_Click">
                 <TextBlock
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -94,7 +97,7 @@
             </AppBarButton>
 
             <AutoSuggestBox
-                Name="MySeachBox"
+                Name="MySearchBox"
                 Width="330"
                 Margin="10,0,10,0"
                 HorizontalAlignment="Right"
@@ -227,8 +230,8 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="Mytop.HorizontalAlignment" Value="Center" />
-                        <Setter Target="MySeachBox.Visibility" Value="Collapsed" />
-                        <Setter Target="SeachButton.Visibility" Value="Visible" />
+                        <Setter Target="MySearchBox.Visibility" Value="Collapsed" />
+                        <Setter Target="SearchButton.Visibility" Value="Visible" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="WideLayout">
@@ -238,8 +241,8 @@
                     <VisualState.Setters>
                         <Setter Target="Mytop.HorizontalAlignment" Value="Left" />
                         <Setter Target="Mytop.Margin" Value="60,0,0,0" />
-                        <Setter Target="MySeachBox.Visibility" Value="Visible" />
-                        <Setter Target="SeachButton.Visibility" Value="Collapsed" />
+                        <Setter Target="MySearchBox.Visibility" Value="Visible" />
+                        <Setter Target="SearchButton.Visibility" Value="Collapsed" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
