@@ -16,6 +16,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock
+            Name="NoNetworld"
             Grid.Row="1"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
@@ -23,13 +24,13 @@
             Text="没网了233333333" />
 
         <Grid Grid.Row="1">
-            <ItemsControl x:Name="Mygridview">
-                <ItemsControl.ItemsPanel>
+            <GridView SelectionMode="Single"  x:Name="Mygridview">
+                <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <local:WaterfallPanel ColumnNum="3" />
                     </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.Template>
+                </GridView.ItemsPanel>
+                <GridView.Template>
                     <ControlTemplate>
                         <ScrollViewer>
                             <StackPanel>
@@ -43,26 +44,14 @@
                             </StackPanel>
                         </ScrollViewer>
                     </ControlTemplate>
-                </ItemsControl.Template>
-                <ItemsControl.ItemTemplate>
+                </GridView.Template>
+                <GridView.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
-
-                            <controls:DropShadowPanel
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                BlurRadius="10"
-                                OffsetX="0"
-                                OffsetY="0"
-                                ShadowOpacity="0.45"
-                                Color="Black">
-                                <Rectangle
-                                    Width="{Binding ElementName=gridstackpanel, Path=Width, Mode=TwoWay}"
-                                    Height="{Binding ElementName=gridstackpanel, Path=Height, Mode=TwoWay}"
-                                    Fill="White"
-                                    Opacity="0.3" />
-                            </controls:DropShadowPanel>
-                            <StackPanel x:Name="gridstackpanel" Margin="3">
+                        <Grid Margin="3">
+                            
+                            <Border CornerRadius="0,0,3,3" Padding="2" Background="#FF3198D3" />
+                          
+                            <StackPanel Margin="1" Name="gridstackpanel">
                                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <Image
                                         Name="Gridimage"
@@ -71,26 +60,33 @@
                                         Source="{Binding preview_url}" />
                                 </Grid>
                                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+                                    <!--<Rectangle
+                                            Width="{Binding ElementName=gridstackpanel, Path=Width, Mode=TwoWay}"
+                                            Height="{Binding ElementName=gridstackpanel, Path=Height, Mode=TwoWay}"
+                                            Fill="White"
+                                            Opacity="0.3" />-->
                                     <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
                                         <TextBlock
                                             Name="Imagetext"
                                             Margin="2,0,0,0"
-                                            Foreground="#FF0074B6"
-                                            Text="{Binding name}" />
+                                            Foreground="White"
+                                            Text="{Binding name}"  
+                                            TextWrapping="Wrap" />
                                         <TextBlock
                                             Name="imageurl"
                                             Margin="2,1,1,0"
-                                            Text="{Binding id}" />
+                                            Text="{Binding id}" Foreground="#FFDEDEDE" />
                                     </StackPanel>
                                 </Grid>
 
                             </StackPanel>
 
 
+
                         </Grid>
                     </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                </GridView.ItemTemplate>
+            </GridView>
         </Grid>
 
         <Grid Grid.Row="0">
@@ -122,6 +118,7 @@
                 Name="SeachButton"
                 Width="50"
                 Height="50"
+                Click="SeachButton_Click"
                 HorizontalAlignment="Right">
                 <TextBlock
                     HorizontalAlignment="Center"

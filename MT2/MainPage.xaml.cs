@@ -166,7 +166,8 @@ namespace MT2
              
         }
 
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
+
+        private void SeachButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(SearchPage));
 
