@@ -102,54 +102,63 @@ namespace MT2
             string homeimguri = ("https://yande.re/post.xml?limit=" + b);
             var mystring = await GetXml.GetWebString(homeimguri, null);
 
-            XElement root = XElement.Parse(mystring);
-            IEnumerable<XElement> elements = root.Elements();
-            foreach (var element in elements)
+          
+            if (mystring != null)
             {
-                if (element.Name == "post")
+                XElement root = XElement.Parse(mystring);
+                IEnumerable<XElement> elements = root.Elements();
+                foreach (var element in elements)
                 {
-                    IEnumerable<XAttribute> Items = element.Attributes();
-                    foreach (var item in Items)
+                    if (element.Name == "post")
                     {
-                        if (item.Name == "id")
+                        IEnumerable<XAttribute> Items = element.Attributes();
+                        foreach (var item in Items)
                         {
-                            authorid[a] = (string)item;
-                        }
-                        else if (item.Name == "preview_url")
-                        {
-                            previewurl[a] = (string)item;
-                        }
-                        else if (item.Name == "author")
-                        {
-                            authorname[a] = (string)item;
-                        }
-
-                        else if (item.Name == "rating") // 这个判断需要重新写11.5留
-                        {
-                            bool fc = (item.Value != "e");
-                            if (fc == false)
+                            if (item.Name == "id")
                             {
-                                break;
+                                authorid[a] = (string)item;
                             }
-                            //break;
+                            else if (item.Name == "preview_url")
+                            {
+                                previewurl[a] = (string)item;
+                            }
+                            else if (item.Name == "author")
+                            {
+                                authorname[a] = (string)item;
+                            }
+
+                            else if (item.Name == "rating") // 这个判断需要重新写11.5留
+                            {
+                                bool fc = (item.Value != "e");
+                                if (fc == false)
+                                {
+                                    break;
+                                }
+                                //break;
+                            }
+                        }
+                        if (a < 50)
+                        {
+
+                            a++;
+                        }
+                        else
+                        {
+                            //  GetWaterfall();
+                            return;
                         }
                     }
-                    if (a < 50)
-                    {
 
-                        a++;
-                    }
-                    else
-                    {
-                        //  GetWaterfall();
-                        return;
-                    }
                 }
                 //break;
-            }
+          
             GetWaterfall();
             Mygridview.ItemsSource = Listapiitems;
-            // Mygridview.ItemsSource = Listapiitems;
+  }
+           else
+            {
+                NoNetworld.Visibility = Visibility.Visible;
+            }
         }
       
         public void getwitch()
@@ -157,5 +166,10 @@ namespace MT2
              
         }
 
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(SearchPage));
+
+        }
     }
 }
