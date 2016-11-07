@@ -151,6 +151,11 @@ namespace MT2
             Mygridview.ItemsSource = Listapiitems;
             // Mygridview.ItemsSource = Listapiitems;
         }
+      
+        public void getwitch()
+        {
+             
+        }
 
     }
 }
