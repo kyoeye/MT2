@@ -27,7 +27,7 @@
             <GridView SelectionMode="Single"  x:Name="Mygridview">
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <local:WaterfallPanel ColumnNum="3" />
+                        <local:WaterfallPanel x:Name ="waterfallpanel" ColumnNum="3" />
                     </ItemsPanelTemplate>
                 </GridView.ItemsPanel>
                 <GridView.Template>
@@ -269,11 +269,20 @@
                         <Setter Target="SeachButton.Visibility" Value="Visible" />
                     </VisualState.Setters>
                 </VisualState>
+                <VisualState >
+                    <VisualState.StateTriggers >
+                        <AdaptiveTrigger MinWindowWidth="480"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters >
+                        <Setter Target="waterfallpanel.ColumnNum" Value="2" />
+                    </VisualState.Setters>
+                </VisualState>
                 <VisualState x:Name="WideLayout">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="600" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
+                        <Setter Target="waterfallpanel.ColumnNum" Value="4" />
                         <Setter Target="Mytop.HorizontalAlignment" Value="Left" />
                         <Setter Target="Mytop.Margin" Value="60,0,0,0" />
                         <Setter Target="MySeachBox.Visibility" Value="Visible" />

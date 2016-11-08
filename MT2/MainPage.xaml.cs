@@ -102,7 +102,7 @@ namespace MT2
             string homeimguri = ("https://yande.re/post.xml?limit=" + b);
             var mystring = await GetXml.GetWebString(homeimguri, null);
 
-          
+
             if (mystring != null)
             {
                 XElement root = XElement.Parse(mystring);
@@ -126,13 +126,28 @@ namespace MT2
                             {
                                 authorname[a] = (string)item;
                             }
+                            //else if (item.Name == "")
+                            //{
 
+                            //}
+                            //else if (item.Name == "")
+                            //{
+
+                            //}
+                            //else if (item.Name == "")
+                            //{
+
+                            //}
+                            //else if (item.Name == "")
+                            //{
+
+                            //}
                             else if (item.Name == "rating") // 这个判断需要重新写11.5留
                             {
-                                bool fc = (item.Value != "e");
-                                if (fc == false)
+                                bool fc = (item.Value == "e");
+                                if (fc == true)
                                 {
-                                    break;
+                                    continue;
                                 }
                                 //break;
                             }
@@ -151,19 +166,19 @@ namespace MT2
 
                 }
                 //break;
-          
-            GetWaterfall();
-            Mygridview.ItemsSource = Listapiitems;
-  }
-           else
+
+                GetWaterfall();
+                Mygridview.ItemsSource = Listapiitems;
+            }
+            else
             {
                 NoNetworld.Visibility = Visibility.Visible;
             }
         }
-      
+
         public void getwitch()
         {
-             
+
         }
 
 
