@@ -40,6 +40,9 @@ namespace MT2.page
         
         }
 
-      
+        private void betaclick_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(LookImg));
+        }
     }
 }

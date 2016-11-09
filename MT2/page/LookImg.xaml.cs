@@ -25,6 +25,15 @@ namespace MT2.page
         public LookImg()
         {
             this.InitializeComponent();
+            var f =  Window.Current.Bounds;
+            wit = f.Width;
+            hei = f.Height;
+            betatext.Text = "宽度"+wit+"--高度："+hei;
+            betaborder.Height = hei;
+            //betatext.Text = System.Windows.Forms.Screen.GetWorkingArea(this);
         }
+        double  wit;
+        double hei;
+        
     }
 }

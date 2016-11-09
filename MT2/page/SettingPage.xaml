@@ -46,7 +46,13 @@
                                     <TextBlock Margin="5,0,5,5"  FontSize="12"  Text="这将决定瀑布流一次加载图片的数量" TextWrapping="Wrap"  Foreground="Black"/>
                                 </StackPanel>
                             </Grid>
-
+                            <Grid  Margin="10,5,10,0" >
+                                <Border Visibility="Visible"  Opacity="0.8" Background="#FFEAEAEA" CornerRadius="5"/>
+                                <StackPanel Margin="5" >
+                                   <TextBlock Margin="5" FontSize="20" Text="开发者选项" Foreground="#FF0074B6"/>
+                                    <Button Margin="5" Name="betaclick" Click="betaclick_Click" Content="测试页"/>
+                                </StackPanel>
+                            </Grid>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
