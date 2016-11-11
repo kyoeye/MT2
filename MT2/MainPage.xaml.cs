@@ -109,7 +109,7 @@ namespace MT2
         public async void getimage()
         {
         
-            int b = 50;
+           
             string homeimguri = ("https://yande.re/post.xml?limit=50");
             var mystring = await GetXml.GetWebString(homeimguri, null);
 
