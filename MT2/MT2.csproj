@@ -104,6 +104,7 @@
     </Compile>
     <Compile Include="CS\apiset\Listapiset.cs" />
     <Compile Include="CS\GetXml.cs" />
+    <Compile Include="CS\SETall.cs" />
     <Compile Include="CS\XmlHelper.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

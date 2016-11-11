@@ -28,11 +28,18 @@ namespace MT2
     public sealed partial class MainPage : Page
     {
         int a = 0; // 数组索引
-        int cc = 1;//加载更多
+        
 
         string[] authorname = new string[100];
         string[] authorid = new string[100];
         string[] previewurl = new string[100];//瀑布流概览图
+
+        public class Lookimgclass
+        {
+           public string[] sampleurl = new string[100];
+        }
+        Lookimgclass lookit = new Lookimgclass();
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -71,6 +78,9 @@ namespace MT2
             public string tags { get; set; } // 标签，这个实现的方式有点特殊
             public string created_at { get; set; }//创建者
             public string approver_id { get; set; }//审核人
+
+            public string sample_url { get; set; }//二级预览
+            
         }
 
         public ObservableCollection<Listapiset> Listapiitems { get; set; }
@@ -81,7 +91,7 @@ namespace MT2
 
             for (int i = 0; i < 20; i++) // 50为一次瀑布流显示的所有数量
             {
-                Listapiitems.Add(new Listapiset { name = "作者：" + authorname[a] + a, id = authorid[a], preview_url = previewurl[a] });
+                Listapiitems.Add(new Listapiset { name = "作者：" + authorname[a] + a, id = authorid[a], preview_url = previewurl[a],sample_url = lookit.sampleurl[a] });
                 a++;
             }
         }
@@ -90,16 +100,17 @@ namespace MT2
         {
             int count = Listapiitems.Count;
 
-            for (int i = count; i < count + cc; i++)
+            for (int i = count; i < count + 1; i++)
             {
-                Listapiitems.Add(new Listapiset { name = "作者：" + authorname[count], id = authorid[count], preview_url = previewurl[count] });
+                Listapiitems.Add(new Listapiset { name = "作者：" + authorname[count], id = authorid[count], preview_url = previewurl[count], sample_url = lookit.sampleurl[a] });
             }
         }
 
         public async void getimage()
         {
+        
             int b = 50;
-            string homeimguri = ("https://yande.re/post.xml?limit=" + b);
+            string homeimguri = ("https://yande.re/post.xml?limit=50");
             var mystring = await GetXml.GetWebString(homeimguri, null);
 
 
@@ -126,10 +137,10 @@ namespace MT2
                             {
                                 authorname[a] = (string)item;
                             }
-                            //else if (item.Name == "")
-                            //{
-
-                            //}
+                            else if (item.Name == "sample_url")
+                            {
+                                lookit.sampleurl[a] = (string)item;
+                            }
                             //else if (item.Name == "")
                             //{
 
@@ -186,6 +197,17 @@ namespace MT2
         {
             Frame.Navigate(typeof(SearchPage));
 
+        }
+
+        private void gridstackpanel_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var boxs = sender as StackPanel;
+            var box = boxs.DataContext as Listapiset;
+            var lookimguri = box.sample_url;
+            Frame.Navigate(typeof(LookImg),lookimguri);
+
+ 
+            
         }
     }
 }

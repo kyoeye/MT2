@@ -24,7 +24,7 @@
             Text="没网了233333333" />
 
         <Grid Grid.Row="1">
-            <GridView SelectionMode="Single"  x:Name="Mygridview">
+            <GridView   SelectionMode="Single"  x:Name="Mygridview">
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <local:WaterfallPanel x:Name ="waterfallpanel" ColumnNum="3" />
@@ -51,7 +51,7 @@
                             
                             <Border CornerRadius="0,0,3,3" Padding="2" Background="#FF3198D3" />
                           
-                            <StackPanel Margin="1" Name="gridstackpanel">
+                            <StackPanel Tapped="gridstackpanel_Tapped"  Margin="1" Name="gridstackpanel">
                                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <Image
                                         Name="Gridimage"
@@ -274,6 +274,7 @@
                         <AdaptiveTrigger MinWindowWidth="480"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters >
+                        <Setter Target="MySeachBox.Visibility" Value="Collapsed" />
                         <Setter Target="waterfallpanel.ColumnNum" Value="2" />
                     </VisualState.Setters>
                 </VisualState>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MT2.CS;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,6 +12,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
@@ -25,15 +27,30 @@ namespace MT2.page
         public LookImg()
         {
             this.InitializeComponent();
-            var f =  Window.Current.Bounds;
-            wit = f.Width;
-            hei = f.Height;
-            betatext.Text = "宽度"+wit+"--高度："+hei;
-            betaborder.Height = hei;
+            Getsuface();
+
             //betatext.Text = System.Windows.Forms.Screen.GetWorkingArea(this);
         }
-        double  wit;
+        double wit;
         double hei;
-        
+
+        SETall setall = new SETall();
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            var value = (string)e.Parameter;
+            setall.sample_url = value;
+            BitmapImage bitmapimage = new BitmapImage(new Uri(value));
+            SeeImage.Source = bitmapimage;
+        }
+
+        public void Getsuface()
+        {
+            var f = Window.Current.Bounds;
+            wit = f.Width;
+            hei = f.Height;
+            betatext.Text = "宽度" + wit + "--高度：" + hei;
+            betaborder.Height = hei;
+        }
     }
 }
