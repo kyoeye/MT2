@@ -1,6 +1,7 @@
 ﻿using MT2.Control;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -9,12 +10,12 @@ using System.Threading.Tasks;
 namespace MT2.CS
 {
     class GetXml
-    {
-        
-        public static async Task <string> GetWebString (string url,string formData)
+    { 
+       
+        public static async Task<string> GetWebString(string url, string formData)
         {
-            string RequestUri =  url ;
-            
+            string RequestUri = url;
+
             //string requestUri = "";
             //if (formData.Contains("="))
             //{
@@ -47,23 +48,31 @@ namespace MT2.CS
                 {
                     using (HttpResponseMessage httpResponseMessage = await httpclient.GetAsync(new Uri(RequestUri))) //使用httpResponMessage接收uri返回的信息
                     {
-                        httpResponseMessage.EnsureSuccessStatusCode(); 
+                        httpResponseMessage.EnsureSuccessStatusCode();
                         var text = await httpResponseMessage.Content.ReadAsStringAsync(); //异步读取字符串
                         result = text;
+
+                        //var inputstream = await httpResponseMessage.Content.ReadAsStreamAsync();
+                        //Stream stream = inputstream.AsRandomAccessStream();
+                        //using (StreamReader reader = new StreamReader(stream))
+                        //{
+                        //    string result = reader.ReadToEnd();
+                        //    wv.NavigateToString(result);
+                        //}
                     }
                 }
             }
-            catch(Exception ec)
+            catch (Exception ec)
             {
                 //后面加个弹窗(～o￣3￣)～
-                var ectc =  ec.ToString();
+                var ectc = ec.ToString();
                 TextDialog ectctc = new TextDialog();
                 ectctc.TopTextblocktext("怒刷存在的异常酱");
-                ectctc.Contenttextblocktext(ectc );
+                ectctc.Contenttextblocktext(ectc);
                 result = null;
 
             }
             return result;
-        } 
+        }
     }
 }

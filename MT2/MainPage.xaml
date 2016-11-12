@@ -9,7 +9,7 @@
     Background="#FF0074B6"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="#FFE4E4E4">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition Height="*" />
@@ -21,13 +21,14 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Foreground="#FFB9B9B9"
+            Visibility="Collapsed"
             Text="没网了233333333" />
 
         <Grid Grid.Row="1">
             <GridView   SelectionMode="Single"  x:Name="Mygridview">
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <local:WaterfallPanel x:Name ="waterfallpanel" ColumnNum="3" />
+                        <local:WaterfallPanel x:Name ="waterfallpanel"  ColumnNum="2" />
                     </ItemsPanelTemplate>
                 </GridView.ItemsPanel>
                 <GridView.Template>
@@ -49,7 +50,7 @@
                     <DataTemplate>
                         <Grid Margin="3">
                             
-                            <Border CornerRadius="0,0,3,3" Padding="2" Background="#FF3198D3" />
+                            <Border CornerRadius="0,0,3,3" Padding="2" Background="White" />
                           
                             <StackPanel Tapped="gridstackpanel_Tapped"  Margin="1" Name="gridstackpanel">
                                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -91,6 +92,7 @@
 
         <Grid Grid.Row="0">
             <Rectangle Height="50" Fill="#FF0074B6" />
+            <ProgressBar Name="Networdprogress" Height="50" Value="50" />
             <AppBarButton
                 Name="MenuButton"
                 Width="50"
@@ -128,34 +130,15 @@
                     Text="&#xE11A;" />
             </AppBarButton>
 
-            <AutoSuggestBox
-                Name="MySeachBox"
-                Width="330"
-                Margin="10,0,10,0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                PlaceholderText="搜索一下，或许会有有趣的事情发生"
-                QueryIcon="Find"
-                Visibility="Visible" />
         </Grid>
 
-        <!--<GridView Grid.Row="1">
-            <GridView.ItemTemplate>
-                <DataTemplate>
-                    <Grid
-                        Width="200"
-                        Height="275"
-                        Margin="10">
-                        <Image Name="HomeImage" />
-                    </Grid>
-                </DataTemplate>
-            </GridView.ItemTemplate>
-        </GridView>-->
         <!--  汉堡菜单  -->
         <SplitView
-            Name="Mymenu"
+            x:Name="Mymenu"
             Grid.RowSpan="2"
-            OpenPaneLength="300">
+            OpenPaneLength="300"
+            DisplayMode="Overlay" 
+            >
             <SplitView.Pane>
                 <Grid Background="#FF0074B6">
                     <Grid.RowDefinitions>
@@ -265,17 +248,16 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="Mytop.HorizontalAlignment" Value="Center" />
-                        <Setter Target="MySeachBox.Visibility" Value="Collapsed" />
                         <Setter Target="SeachButton.Visibility" Value="Visible" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState >
                     <VisualState.StateTriggers >
-                        <AdaptiveTrigger MinWindowWidth="480"/>
+                        <AdaptiveTrigger MinWindowWidth="450"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters >
                         <Setter Target="MySeachBox.Visibility" Value="Collapsed" />
-                        <Setter Target="waterfallpanel.ColumnNum" Value="2" />
+                        <Setter Target="waterfallpanel.ColumnNum" Value="3" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="WideLayout">
@@ -283,10 +265,10 @@
                         <AdaptiveTrigger MinWindowWidth="600" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
+                        
                         <Setter Target="waterfallpanel.ColumnNum" Value="4" />
                         <Setter Target="Mytop.HorizontalAlignment" Value="Left" />
                         <Setter Target="Mytop.Margin" Value="60,0,0,0" />
-                        <Setter Target="MySeachBox.Visibility" Value="Visible" />
                         <Setter Target="SeachButton.Visibility" Value="Collapsed" />
                     </VisualState.Setters>
                 </VisualState>

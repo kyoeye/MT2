@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading;
 using System.Xml.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -17,6 +18,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Web.Http;
+using static MT2.CS.GetXml;
 
 //“空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 上有介绍
 
@@ -36,7 +39,7 @@ namespace MT2
 
         public class Lookimgclass
         {
-           public string[] sampleurl = new string[100];
+            public string[] sampleurl = new string[100];
         }
         Lookimgclass lookit = new Lookimgclass();
 
@@ -53,7 +56,13 @@ namespace MT2
             base.OnNavigatedTo(e);
             //Mygridview.ItemsSource = Listapiitems;
             //getimage();
+            //下面是判断瀑布流列
+            //var f = Window.Current.Bounds;
+            //var wit = (int)f.Width;
+            //if (wit < 500)
+            //{
 
+            //}
             //GetWaterfall();
 
         }
@@ -80,7 +89,7 @@ namespace MT2
             public string approver_id { get; set; }//审核人
 
             public string sample_url { get; set; }//二级预览
-            
+
         }
 
         public ObservableCollection<Listapiset> Listapiitems { get; set; }
@@ -91,7 +100,7 @@ namespace MT2
 
             for (int i = 0; i < 20; i++) // 50为一次瀑布流显示的所有数量
             {
-                Listapiitems.Add(new Listapiset { name = "作者：" + authorname[a] + a, id = authorid[a], preview_url = previewurl[a],sample_url = lookit.sampleurl[a] });
+                Listapiitems.Add(new Listapiset { name = "作者：" + authorname[a] + a, id = authorid[a], preview_url = previewurl[a], sample_url = lookit.sampleurl[a] });
                 a++;
             }
         }
@@ -106,14 +115,22 @@ namespace MT2
             }
         }
 
+        private HttpClient httpclient;
+        private CancellationTokenSource cts;
         public async void getimage()
         {
-        
-           
+            httpclient = new HttpClient ();
+            cts = new CancellationTokenSource();
             string homeimguri = ("https://yande.re/post.xml?limit=50");
             var mystring = await GetXml.GetWebString(homeimguri, null);
-
-
+          
+            //string resuri = homeimguri;
+            //const uint streamLength = 1000000;
+            //HttpStreamContent streamContent = new HttpStreamContent(new SlowInputStream(streamLength));
+            IProgress<HttpProgress> httpprogress = new Progress<HttpProgress>(ProgressHandler);
+   
+            HttpRequestMessage response = await httpclient.PostAsync(new Uri(homeimguri)).AsTask(cts.Token ,httpprogress);
+            //依旧没有实现进度条
             if (mystring != null)
             {
                 XElement root = XElement.Parse(mystring);
@@ -141,18 +158,6 @@ namespace MT2
                             {
                                 lookit.sampleurl[a] = (string)item;
                             }
-                            //else if (item.Name == "")
-                            //{
-
-                            //}
-                            //else if (item.Name == "")
-                            //{
-
-                            //}
-                            //else if (item.Name == "")
-                            //{
-
-                            //}
                             else if (item.Name == "rating") // 这个判断需要重新写11.5留
                             {
                                 bool fc = (item.Value == "e");
@@ -187,6 +192,11 @@ namespace MT2
             }
         }
 
+        private void ProgressHandler(HttpProgress obj)
+        {
+            throw new NotImplementedException();
+        }
+
         public void getwitch()
         {
 
@@ -204,10 +214,7 @@ namespace MT2
             var boxs = sender as StackPanel;
             var box = boxs.DataContext as Listapiset;
             var lookimguri = box.sample_url;
-            Frame.Navigate(typeof(LookImg),lookimguri);
-
- 
-            
+            Frame.Navigate(typeof(LookImg), lookimguri);
         }
     }
 }
