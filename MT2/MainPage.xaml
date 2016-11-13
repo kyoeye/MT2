@@ -10,137 +10,29 @@
     mc:Ignorable="d">
 
     <Grid Background="#FFE4E4E4">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
-        <TextBlock
-            Name="NoNetworld"
-            Grid.Row="1"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Foreground="#FFB9B9B9"
-            Visibility="Collapsed"
-            Text="没网了233333333" />
-
-        <Grid Grid.Row="1">
-            <GridView   SelectionMode="Single"  x:Name="Mygridview">
-                <GridView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <local:WaterfallPanel x:Name ="waterfallpanel"  ColumnNum="2" />
-                    </ItemsPanelTemplate>
-                </GridView.ItemsPanel>
-                <GridView.Template>
-                    <ControlTemplate>
-                        <ScrollViewer>
-                            <StackPanel>
-                                <ItemsPresenter />
-                                <Button
-                                    Name="Loadingbutton"
-                                    Margin="12"
-                                    HorizontalAlignment="Center"
-                                    Click="Loadingbutton_Click"
-                                    Content="加载更多(｡･∀･)ﾉﾞ" />
-                            </StackPanel>
-                        </ScrollViewer>
-                    </ControlTemplate>
-                </GridView.Template>
-                <GridView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Margin="3">
-                            
-                            <Border CornerRadius="0,0,3,3" Padding="2" Background="White" />
-                          
-                            <StackPanel Tapped="gridstackpanel_Tapped"  Margin="1" Name="gridstackpanel">
-                                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image
-                                        Name="Gridimage"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        Source="{Binding preview_url}" />
-                                </Grid>
-                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
-                                    <!--<Rectangle
-                                            Width="{Binding ElementName=gridstackpanel, Path=Width, Mode=TwoWay}"
-                                            Height="{Binding ElementName=gridstackpanel, Path=Height, Mode=TwoWay}"
-                                            Fill="White"
-                                            Opacity="0.3" />-->
-                                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                                        <TextBlock
-                                            Name="Imagetext"
-                                            Margin="2,0,0,0"
-                                            Foreground="White"
-                                            Text="{Binding name}"  
-                                            TextWrapping="Wrap" />
-                                        <TextBlock
-                                            Name="imageurl"
-                                            Margin="2,1,1,0"
-                                            Text="{Binding id}" Foreground="#FFDEDEDE" />
-                                    </StackPanel>
-                                </Grid>
-
-                            </StackPanel>
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
 
 
 
-                        </Grid>
-                    </DataTemplate>
-                </GridView.ItemTemplate>
-            </GridView>
-        </Grid>
-
-        <Grid Grid.Row="0">
-            <Rectangle Height="50" Fill="#FF0074B6" />
-            <ProgressBar Name="Networdprogress" Height="50" Value="50" />
-            <AppBarButton
-                Name="MenuButton"
-                Width="50"
-                Height="50"
-                Click="MenuButton_Click">
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Foreground="White"
-                    FontFamily="Segoe MDL2 Assets"
-                    Text="&#xE76C;" />
-            </AppBarButton>
-            <TextBlock
-                Name="Mytop"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Foreground="White">
-                <Run Text="萌豚" />
-                <Run
-                    Foreground="White"
-                    FontWeight="Bold"
-                    Text="S" />
-            </TextBlock>
-            <AppBarButton
-                Name="SeachButton"
-                Width="50"
-                Height="50"
-                Click="SeachButton_Click"
-                HorizontalAlignment="Right">
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Foreground="White"
-                    FontFamily="Segoe MDL2 Assets"
-                    Text="&#xE11A;" />
-            </AppBarButton>
-
-        </Grid>
 
         <!--  汉堡菜单  -->
         <SplitView
             x:Name="Mymenu"
             Grid.RowSpan="2"
             OpenPaneLength="300"
-            DisplayMode="Overlay" 
+          
             >
             <SplitView.Pane>
                 <Grid Background="#FF0074B6">
+                    <Grid.ChildrenTransitions>
+                        <TransitionCollection>
+                            <EntranceThemeTransition FromHorizontalOffset="-200"/>
+                        </TransitionCollection>
+                    </Grid.ChildrenTransitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="auto" />
@@ -202,6 +94,11 @@
                     </ListBox>
 
                     <Grid Grid.Row="1" Height="50">
+                        <Grid.ChildrenTransitions>
+                            <TransitionCollection>
+                                <EntranceThemeTransition FromVerticalOffset="100"/>
+                            </TransitionCollection>
+                        </Grid.ChildrenTransitions>
                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                             <AppBarButton Width="50">
                                 <TextBlock
@@ -238,6 +135,137 @@
 
                 </Grid>
             </SplitView.Pane>
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock
+            Name="NoNetworld"
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="#FFB9B9B9"
+            Visibility="Collapsed"
+            Text="没网了233333333" />
+
+                <Grid Grid.Row="1">
+                    <GridView   SelectionMode="Single"  x:Name="Mygridview">
+                      
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                
+                                <local:WaterfallPanel x:Name ="waterfallpanel"  ColumnNum="2" />
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.Template>
+                            <ControlTemplate>
+                                <ScrollViewer>
+                                    <StackPanel>
+                                        <ItemsPresenter />
+                                        <Button
+                                    Name="Loadingbutton"
+                                    Margin="12"
+                                    HorizontalAlignment="Center"
+                                    Click="Loadingbutton_Click"
+                                    Content="加载更多(｡･∀･)ﾉﾞ(有逻辑错误）" />
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </ControlTemplate>
+                        </GridView.Template>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                
+                                <Grid Margin="3">
+                                    <Grid.ChildrenTransitions>
+                                        <TransitionCollection>
+                                            <EntranceThemeTransition FromHorizontalOffset="200"/>
+                                        </TransitionCollection>
+                                    </Grid.ChildrenTransitions>
+                                    <Border CornerRadius="0,0,3,3" Padding="2" Background="White" />
+
+                                    <StackPanel Tapped="gridstackpanel_Tapped"  Margin="1" Name="gridstackpanel">
+                                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Image
+                                        Name="Gridimage"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Source="{Binding preview_url}" />
+                                        </Grid>
+                                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+                                            <!--<Rectangle
+                                            Width="{Binding ElementName=gridstackpanel, Path=Width, Mode=TwoWay}"
+                                            Height="{Binding ElementName=gridstackpanel, Path=Height, Mode=TwoWay}"
+                                            Fill="White"
+                                            Opacity="0.3" />-->
+                                            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                                <TextBlock
+                                            Name="Imagetext"
+                                            Margin="2,0,0,0"
+                                            Foreground="Black"
+                                            Text="{Binding name}"  
+                                            TextWrapping="Wrap" />
+                                                <TextBlock
+                                            Name="imageurl"
+                                            Margin="2,1,1,0"
+                                            Text="{Binding id}" Foreground="#FFDEDEDE" />
+                                            </StackPanel>
+                                        </Grid>
+
+                                    </StackPanel>
+
+
+
+                                </Grid>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+                </Grid>
+
+                <Grid Grid.Row="0">
+                    <Rectangle Height="50" Fill="#FF0074B6" />
+                    <ProgressBar Name="Networdprogress" Height="50" Value="50" />
+                    <AppBarButton
+                Name="MenuButton"
+                Width="50"
+                Height="50"
+                Click="MenuButton_Click">
+                        <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Foreground="White"
+                    FontFamily="Segoe MDL2 Assets"
+                    Text="&#xE76C;" />
+                    </AppBarButton>
+                    <TextBlock
+                Name="Mytop"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="White">
+                <Run Text="萌豚" />
+                <Run
+                    Foreground="White"
+                    FontWeight="Bold"
+                    Text="S" />
+                    </TextBlock>
+                    <AppBarButton
+                Name="SeachButton"
+                Width="50"
+                Height="50"
+                Click="SeachButton_Click"
+                HorizontalAlignment="Right">
+                        <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Foreground="White"
+                    FontFamily="Segoe MDL2 Assets"
+                    Text="&#xE11A;" />
+                    </AppBarButton>
+
+                </Grid>
+
+
+            </Grid>
         </SplitView>
 
         <VisualStateManager.VisualStateGroups>
@@ -247,8 +275,10 @@
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
+                        <Setter Target="Mymenu.DisplayMode" Value="Overlay" />
                         <Setter Target="Mytop.HorizontalAlignment" Value="Center" />
-                        <Setter Target="SeachButton.Visibility" Value="Visible" />
+                        <Setter Target="waterfallpanel.ColumnNum" Value="2" />
+                        <!--<Setter Target="SeachButton.Visibility" Value="Visible" />-->
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState >
@@ -256,7 +286,10 @@
                         <AdaptiveTrigger MinWindowWidth="450"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters >
-                        <Setter Target="MySeachBox.Visibility" Value="Collapsed" />
+                        <Setter Target="Mymenu.DisplayMode" Value="Overlay" />
+                        <Setter Target="Mytop.HorizontalAlignment" Value="Center" />
+
+                        <!--<Setter Target="MySeachBox.Visibility" Value="Collapsed" />-->
                         <Setter Target="waterfallpanel.ColumnNum" Value="3" />
                     </VisualState.Setters>
                 </VisualState>
@@ -265,11 +298,12 @@
                         <AdaptiveTrigger MinWindowWidth="600" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        
+                        <Setter Target="Mymenu.DisplayMode" Value="Inline" />
+                        <Setter Target="Mymenu.IsPaneOpen" Value="True" />
                         <Setter Target="waterfallpanel.ColumnNum" Value="4" />
                         <Setter Target="Mytop.HorizontalAlignment" Value="Left" />
                         <Setter Target="Mytop.Margin" Value="60,0,0,0" />
-                        <Setter Target="SeachButton.Visibility" Value="Collapsed" />
+
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

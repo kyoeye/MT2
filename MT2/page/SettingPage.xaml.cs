@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,19 +31,26 @@ namespace MT2.page
 
         private void qqclick_Click(object sender, RoutedEventArgs e)
         {
- 
+
             string text = (string)qqclick.Content;
             /*用了数据绑定的呀  先找控件  找到控件就找到内容了*/
             DataPackage dp = new DataPackage();
             dp.SetText(text);
             Clipboard.SetContent(dp);
             qqclick.Content = "已复制到剪贴板，请转至qq粘贴搜索";
-        
+
         }
 
-        private void betaclick_Click(object sender, RoutedEventArgs e)
+        private async void betaclick_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(LookImg));
+            //Frame.Navigate(typeof(LookImg));
+
+            var applicationdata = ApplicationData.Current.TemporaryFolder;
+            var Content = applicationdata.Provider;
+            if (Content != null)
+            {
+                await applicationdata.DeleteAsync();//不可用
+            }
         }
     }
 }

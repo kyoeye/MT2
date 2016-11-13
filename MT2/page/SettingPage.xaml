@@ -9,11 +9,20 @@
     mc:Ignorable="d">
 
     <Grid Background="#FF0074B6">
-
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
         <Pivot Foreground="White">
 
             <PivotItem Header="设置">
                 <Grid >
+                    <Grid.ChildrenTransitions>
+                        <TransitionCollection>
+                            <PopupThemeTransition/>
+                        </TransitionCollection>
+                    </Grid.ChildrenTransitions>
                     <TextBlock Text="应用内有彩蛋" VerticalAlignment="Bottom" Foreground="#FFC7C7C7" HorizontalAlignment="Center"/>
                     <ScrollViewer Margin="-10,5,-10,0" Background="White" >
                         <StackPanel >
@@ -50,7 +59,7 @@
                                 <Border Visibility="Visible"  Opacity="0.8" Background="#FFEAEAEA" CornerRadius="5"/>
                                 <StackPanel Margin="5" >
                                    <TextBlock Margin="5" FontSize="20" Text="开发者选项" Foreground="#FF0074B6"/>
-                                    <Button Margin="5" Name="betaclick" Click="betaclick_Click" Content="测试页"/>
+                                    <Button Margin="5" Name="betaclick" Click="betaclick_Click" Content="清理缓存"/>
                                 </StackPanel>
                             </Grid>
                         </StackPanel>

@@ -1,6 +1,7 @@
 ﻿using MT2.CS;
 using MT2.CS.apiset;
 using MT2.page;
+using MT2.pubuliu;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -31,7 +32,7 @@ namespace MT2
     public sealed partial class MainPage : Page
     {
         int a = 0; // 数组索引
-        
+
 
         string[] authorname = new string[100];
         string[] authorid = new string[100];
@@ -46,8 +47,10 @@ namespace MT2
         public MainPage()
         {
             this.InitializeComponent();
-
+           
             getimage();
+
+            NavigationCacheMode = NavigationCacheMode.Enabled;
 
         }
 
@@ -60,9 +63,7 @@ namespace MT2
             //var f = Window.Current.Bounds;
             //var wit = (int)f.Width;
             //if (wit < 500)
-            //{
-
-            //}
+            
             //GetWaterfall();
 
         }
@@ -119,17 +120,17 @@ namespace MT2
         private CancellationTokenSource cts;
         public async void getimage()
         {
-            httpclient = new HttpClient ();
+            httpclient = new HttpClient();
             cts = new CancellationTokenSource();
             string homeimguri = ("https://yande.re/post.xml?limit=50");
             var mystring = await GetXml.GetWebString(homeimguri, null);
-          
+
             //string resuri = homeimguri;
             //const uint streamLength = 1000000;
             //HttpStreamContent streamContent = new HttpStreamContent(new SlowInputStream(streamLength));
             IProgress<HttpProgress> httpprogress = new Progress<HttpProgress>(ProgressHandler);
-   
-            HttpRequestMessage response = await httpclient.PostAsync(new Uri(homeimguri)).AsTask(cts.Token ,httpprogress);
+
+            //HttpRequestMessage response = await httpclient.PostAsync(new Uri(homeimguri)).AsTask(cts.Token, httpprogress);
             //依旧没有实现进度条
             if (mystring != null)
             {

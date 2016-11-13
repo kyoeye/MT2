@@ -16,6 +16,8 @@ namespace MT2.pubuliu
             get { return (int)GetValue(ColumnCountProperty); }
             set { SetValue(ColumnCountProperty, value); }
         }
+       
+
         // Using a DependencyProperty as the backing store for ColumnCount.  This enables animation, styling, binding, etc...  
         public static readonly DependencyProperty ColumnCountProperty =
                     DependencyProperty.Register("ColumnNum", typeof(int), typeof(WaterfallPanel), new PropertyMetadata(2));
