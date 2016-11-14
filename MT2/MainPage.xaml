@@ -1,4 +1,4 @@
-﻿<Page
+﻿ <Page
     x:Class="MT2.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -15,10 +15,36 @@
                 <EntranceThemeTransition/>
             </TransitionCollection>
         </Grid.ChildrenTransitions>
-
-
-
-
+        <!--#region 子框架进入动画-->
+        <!--<Storyboard x:Name="childrenInStoryboard"
+                    x:FieldModifier="public"
+                    Completed="childrenInStoryboard_Completed">
+            <DoubleAnimation x:Name="childrenInDA"
+                             Storyboard.TargetName="childrenFrameCompositeTransform"          
+                             Storyboard.TargetProperty="TranslateX"
+                             To="0"
+                             Duration="0:0:0.5">
+                <DoubleAnimation.EasingFunction>
+                    <QuarticEase  EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>-->
+        <!--#endregion-->
+        <!--#region 子框架退出动画-->
+        <!--<Storyboard x:Name="childrenOutStoryboard"
+                    x:FieldModifier="public"
+                    Completed="childrenOutStoryboard_Completed">
+            <DoubleAnimation x:Name="childrenOutDA"
+                             Storyboard.TargetName="childrenFrameCompositeTransform"
+                             Storyboard.TargetProperty="TranslateX"
+                             From="0"
+                             Duration="0:0:0.5">
+                <DoubleAnimation.EasingFunction>
+                    <QuarticEase  EasingMode="EaseInOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>-->
+        <!--#endregion-->
         <!--  汉堡菜单  -->
         <SplitView
             x:Name="Mymenu"
