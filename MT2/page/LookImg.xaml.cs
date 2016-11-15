@@ -28,7 +28,6 @@ namespace MT2.page
         {
             this.InitializeComponent();
             Getsuface();
-
             //betatext.Text = System.Windows.Forms.Screen.GetWorkingArea(this);
         }
         double wit;
@@ -49,8 +48,10 @@ namespace MT2.page
             var f = Window.Current.Bounds;
             wit = f.Width;
             hei = f.Height;
-            betatext.Text = "宽度" + wit + "--高度：" + hei;
+            //betatext.Text = "宽度" + wit + "--高度：" + hei;
             betaborder.Height = hei;
         }
+
+        
     }
 }

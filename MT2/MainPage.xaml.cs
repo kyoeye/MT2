@@ -37,6 +37,7 @@ namespace MT2
         string[] authorname = new string[100];
         string[] authorid = new string[100];
         string[] previewurl = new string[100];//瀑布流概览图
+        string[] ratings = new string[100];
 
         public class Lookimgclass
         {
@@ -90,6 +91,8 @@ namespace MT2
             public string approver_id { get; set; }//审核人
 
             public string sample_url { get; set; }//二级预览
+            public string rating { get; set; }//安全等级
+
 
         }
 
@@ -100,8 +103,15 @@ namespace MT2
             Listapiitems = new ObservableCollection<Listapiset>();
 
             for (int i = 0; i < 20; i++) // 50为一次瀑布流显示的所有数量
-            {
-                Listapiitems.Add(new Listapiset { name = "作者：" + authorname[a] + a, id = authorid[a], preview_url = previewurl[a], sample_url = lookit.sampleurl[a] });
+            {  
+                if (ratings[a] != "e")
+                {
+                   Listapiitems.Add(new Listapiset { name = "作者：" + authorname[a] + a, id = authorid[a], preview_url = previewurl[a], sample_url = lookit.sampleurl[a] });
+                }
+                else
+                {
+                    continue;
+                }
                 a++;
             }
         }
@@ -161,7 +171,7 @@ namespace MT2
                             }
                             else if (item.Name == "rating") // 这个判断需要重新写11.5留
                             {
-                                bool fc = (item.Value == "e");
+                                bool fc = (item.Value == "e" );
                                 if (fc == true)
                                 {
                                     continue;

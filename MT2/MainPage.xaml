@@ -10,12 +10,13 @@
     mc:Ignorable="d">
 
     <Grid Background="#FFE4E4E4">
+      
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
             </TransitionCollection>
         </Grid.ChildrenTransitions>
-        <!--#region 子框架进入动画-->
+        <!--子框架进入动画-->
         <!--<Storyboard x:Name="childrenInStoryboard"
                     x:FieldModifier="public"
                     Completed="childrenInStoryboard_Completed">
@@ -29,8 +30,7 @@
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>-->
-        <!--#endregion-->
-        <!--#region 子框架退出动画-->
+        <!-- 子框架退出动画-->
         <!--<Storyboard x:Name="childrenOutStoryboard"
                     x:FieldModifier="public"
                     Completed="childrenOutStoryboard_Completed">
@@ -44,7 +44,7 @@
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>-->
-        <!--#endregion-->
+
         <!--  汉堡菜单  -->
         <SplitView
             x:Name="Mymenu"
