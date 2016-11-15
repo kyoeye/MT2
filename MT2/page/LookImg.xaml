@@ -135,6 +135,43 @@
                             </Grid>
                         </Button.Content>
                     </Button>
+                    <Button
+                        Name="ShareButton"
+                        Width="100"
+                        Margin="10"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Background="{x:Null}"
+                        BorderBrush="{x:Null}">
+                        <Button.Content>
+                            <Grid>
+                                <Viewbox>
+                                    <Grid>
+                                        <Rectangle
+                                            Width="150"
+                                            Height="90"
+                                            HorizontalAlignment="Center"
+                                            Stroke="#FF2291DE"
+                                            StrokeThickness="2"
+                                            RadiusX="40"
+                                            RadiusY="40">
+                                            <Rectangle.Fill>
+                                                <SolidColorBrush Opacity="0.699999988079071" Color="#FF4F4F4F" />
+                                            </Rectangle.Fill>
+                                        </Rectangle>
+                                        <TextBlock
+                                            Margin="70,25"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Foreground="#FFCFCFCF"
+                                            FontFamily="Segoe MDL2 Assets"
+                                            FontSize="40"
+                                            Text="&#xE72D;" />
+                                    </Grid>
+                                </Viewbox>
+                            </Grid>
+                        </Button.Content>
+                    </Button>
 
                 </StackPanel>
                 <Grid>
