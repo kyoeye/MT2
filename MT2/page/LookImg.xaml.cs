@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using static MT2.MainPage;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
 
@@ -37,14 +38,28 @@ namespace MT2.page
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var value = (string)e.Parameter;
-            setall.sample_url = value;
-            BitmapImage bitmapimage = new BitmapImage(new Uri(value));
-            SeeImage.Source = bitmapimage;
+            base.OnNavigatedTo(e);
+            Lookimgclass lookit = (Lookimgclass)e.Parameter;
+            if (lookit != null)
+            {
+                var sample_url = lookit.lookimguri;
+                //var value = (string)e.Parameter;
+                //setall.sample_url = value;
+                BitmapImage bitmapimage = new BitmapImage(new Uri(sample_url));
+                SeeImage.Source = bitmapimage;
+
+            }
+            else
+
+            {
+                
+            }
         }
 
         public void Getsuface()
         {
+
+
             var f = Window.Current.Bounds;
             wit = f.Width;
             hei = f.Height;
@@ -52,6 +67,6 @@ namespace MT2.page
             betaborder.Height = hei;
         }
 
-        
+
     }
 }

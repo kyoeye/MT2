@@ -20,6 +20,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Web.Http;
+using System.Collections;
+
 using static MT2.CS.GetXml;
 
 //“空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 上有介绍
@@ -31,17 +33,21 @@ namespace MT2
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        int a = 0; // 数组索引
+        
 
 
         string[] authorname = new string[100];
         string[] authorid = new string[100];
         string[] previewurl = new string[100];//瀑布流概览图
-        string[] ratings = new string[100];
 
+       
         public class Lookimgclass
         {
+            public string lookimguri;//选中索引
+            public int a = 0; // 数组索引
             public string[] sampleurl = new string[100];
+            public string[] ratings = new string[100];
+
         }
         Lookimgclass lookit = new Lookimgclass();
 
@@ -52,7 +58,8 @@ namespace MT2
             getimage();
 
             NavigationCacheMode = NavigationCacheMode.Enabled;
-
+           
+         
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -99,20 +106,20 @@ namespace MT2
         public ObservableCollection<Listapiset> Listapiitems { get; set; }
         public void GetWaterfall()
         {
-            a = 0;
+           lookit.a = 0;
             Listapiitems = new ObservableCollection<Listapiset>();
 
             for (int i = 0; i < 20; i++) // 50为一次瀑布流显示的所有数量
             {  
-                if (ratings[a] != "e")
+                if (lookit.ratings[lookit.a] != "e")
                 {
-                   Listapiitems.Add(new Listapiset { name = "作者：" + authorname[a] + a, id = authorid[a], preview_url = previewurl[a], sample_url = lookit.sampleurl[a] });
+                   Listapiitems.Add(new Listapiset { name = "作者：" + authorname[lookit.a] , id = authorid[lookit.a], preview_url = previewurl[lookit.a], sample_url = lookit.sampleurl[lookit.a] });
                 }
                 else
                 {
                     continue;
                 }
-                a++;
+                lookit.a++;
             }
         }
 
@@ -122,7 +129,7 @@ namespace MT2
 
             for (int i = count; i < count + 1; i++)
             {
-                Listapiitems.Add(new Listapiset { name = "作者：" + authorname[count], id = authorid[count], preview_url = previewurl[count], sample_url = lookit.sampleurl[a] });
+                Listapiitems.Add(new Listapiset { name = "作者：" + authorname[count], id = authorid[count], preview_url = previewurl[count], sample_url = lookit.sampleurl[count] });
             }
         }
 
@@ -155,22 +162,24 @@ namespace MT2
                         {
                             if (item.Name == "id")
                             {
-                                authorid[a] = (string)item;
+                                authorid[lookit.a] = (string)item;
                             }
                             else if (item.Name == "preview_url")
                             {
-                                previewurl[a] = (string)item;
+                                previewurl[lookit.a] = (string)item;
                             }
                             else if (item.Name == "author")
                             {
-                                authorname[a] = (string)item;
+                                authorname[lookit.a] = (string)item;
                             }
                             else if (item.Name == "sample_url")
                             {
-                                lookit.sampleurl[a] = (string)item;
+                                lookit.sampleurl[lookit.a] = (string)item;
                             }
                             else if (item.Name == "rating") // 这个判断需要重新写11.5留
                             {
+                                lookit.ratings[lookit.a] = (string)item;
+
                                 bool fc = (item.Value == "e" );
                                 if (fc == true)
                                 {
@@ -179,10 +188,10 @@ namespace MT2
                                 //break;
                             }
                         }
-                        if (a < 50)
+                        if (lookit.a < 50)
                         {
 
-                            a++;
+                            lookit.a++;
                         }
                         else
                         {
@@ -224,8 +233,8 @@ namespace MT2
         {
             var boxs = sender as StackPanel;
             var box = boxs.DataContext as Listapiset;
-            var lookimguri = box.sample_url;
-            Frame.Navigate(typeof(LookImg), lookimguri);
+            lookit.lookimguri = box.sample_url;
+            Frame.Navigate(typeof(LookImg), lookit);
         }
     }
 }
