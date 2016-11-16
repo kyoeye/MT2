@@ -33,8 +33,8 @@ namespace MT2
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        
 
+      
 
         string[] authorname = new string[100];
         string[] authorid = new string[100];
@@ -71,7 +71,8 @@ namespace MT2
             //var f = Window.Current.Bounds;
             //var wit = (int)f.Width;
             //if (wit < 500)
-            
+         
+
             //GetWaterfall();
 
         }
@@ -111,12 +112,13 @@ namespace MT2
 
             for (int i = 0; i < 20; i++) // 50为一次瀑布流显示的所有数量
             {  
-                if (lookit.ratings[lookit.a] != "e")
+                if (lookit.ratings[lookit.a] != "q")
                 {
-                   Listapiitems.Add(new Listapiset { name = "作者：" + authorname[lookit.a] , id = authorid[lookit.a], preview_url = previewurl[lookit.a], sample_url = lookit.sampleurl[lookit.a] });
+                   Listapiitems.Add(new Listapiset { name = "作者：" + authorname[lookit.a] , rating = lookit.ratings[lookit.a], preview_url = previewurl[lookit.a], sample_url = lookit.sampleurl[lookit.a] });
                 }
                 else
                 {
+                    lookit.a++;
                     continue;
                 }
                 lookit.a++;
@@ -129,7 +131,7 @@ namespace MT2
 
             for (int i = count; i < count + 1; i++)
             {
-                Listapiitems.Add(new Listapiset { name = "作者：" + authorname[count], id = authorid[count], preview_url = previewurl[count], sample_url = lookit.sampleurl[count] });
+                Listapiitems.Add(new Listapiset { name = "作者：" + authorname[count], rating = lookit.ratings[count], preview_url = previewurl[count], sample_url = lookit.sampleurl[count] });
             }
         }
 
@@ -180,7 +182,7 @@ namespace MT2
                             {
                                 lookit.ratings[lookit.a] = (string)item;
 
-                                bool fc = (item.Value == "e" );
+                                bool fc = (item.Value == "q" );
                                 if (fc == true)
                                 {
                                     continue;

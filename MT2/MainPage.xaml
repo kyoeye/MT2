@@ -85,6 +85,23 @@
                                     Foreground="White"
                                     FontFamily="Segoe MDL2 Assets"
                                     FontSize="18"
+                                    Text="&#xE17D;" />
+                                <TextBlock
+                                    Margin="5,0,5,0"
+                                    Foreground="White"
+                                    FontSize="18"
+                                    Text="热榜" />
+                            </StackPanel>
+                        </ListBoxItem>
+
+                        <ListBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                                    Margin="5,0,5,0"
+                                    VerticalAlignment="Center"
+                                    Foreground="White"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    FontSize="18"
                                     Text="&#xE15F;" />
                                 <TextBlock
                                     Margin="5,0,5,0"
@@ -172,7 +189,7 @@
 
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <local:WaterfallPanel x:Name="waterfallpanel" ColumnNum="2" />
+                                <local:WaterfallPanel x:Name="waterfallpanel"  />
                             </ItemsPanelTemplate>
                         </GridView.ItemsPanel>
                         <GridView.Template>
@@ -231,8 +248,8 @@
                                                 <TextBlock
                                                     Name="imageurl"
                                                     Margin="2,1,1,0"
-                                                    Foreground="#FFDEDEDE"
-                                                    Text="{Binding id}" />
+                                                    Foreground="#FF9B9B9B"
+                                                    Text="{Binding rating}" />
                                             </StackPanel>
                                         </Grid>
 
