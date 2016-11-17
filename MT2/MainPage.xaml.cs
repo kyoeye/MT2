@@ -34,19 +34,21 @@ namespace MT2
     public sealed partial class MainPage : Page
     {
 
-      
+
 
         string[] authorname = new string[100];
         string[] authorid = new string[100];
         string[] previewurl = new string[100];//瀑布流概览图
 
-       
+
         public class Lookimgclass
         {
+            public int b;
             public string lookimguri;//选中索引
             public int a = 0; // 数组索引
             public string[] sampleurl = new string[100];
             public string[] ratings = new string[100];
+            public string[] jpegurl = new string[100];
 
         }
         Lookimgclass lookit = new Lookimgclass();
@@ -54,12 +56,12 @@ namespace MT2
         public MainPage()
         {
             this.InitializeComponent();
-           
+
             getimage();
 
             NavigationCacheMode = NavigationCacheMode.Enabled;
-           
-         
+
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -71,7 +73,7 @@ namespace MT2
             //var f = Window.Current.Bounds;
             //var wit = (int)f.Width;
             //if (wit < 500)
-         
+
 
             //GetWaterfall();
 
@@ -88,6 +90,7 @@ namespace MT2
 
         public class Listapiset
         {
+            public int _a { get; set; }
             public string id { get; set; } //作者id
             public string name { get; set; } //作者名字
             public string imguri { get; set; } //图片uri
@@ -107,14 +110,22 @@ namespace MT2
         public ObservableCollection<Listapiset> Listapiitems { get; set; }
         public void GetWaterfall()
         {
-           lookit.a = 0;
+            lookit.a = 0;
             Listapiitems = new ObservableCollection<Listapiset>();
 
             for (int i = 0; i < 20; i++) // 50为一次瀑布流显示的所有数量
-            {  
+            {
                 if (lookit.ratings[lookit.a] != "q")
                 {
-                   Listapiitems.Add(new Listapiset { name = "作者：" + authorname[lookit.a] , rating = lookit.ratings[lookit.a], preview_url = previewurl[lookit.a], sample_url = lookit.sampleurl[lookit.a] });
+                    if (lookit.ratings[lookit.a] != "e")
+                    {
+                        Listapiitems.Add(new Listapiset { name = "作者：" + authorname[lookit.a], rating = lookit.ratings[lookit.a], preview_url = previewurl[lookit.a], sample_url = lookit.sampleurl[lookit.a], _a = lookit.a });
+                    }
+                    else
+                    {
+                        lookit.a++;
+                        continue;
+                    }
                 }
                 else
                 {
@@ -129,9 +140,27 @@ namespace MT2
         {
             int count = Listapiitems.Count;
 
-            for (int i = count; i < count + 1; i++)
+            for (int i = count; i < count + 20; i++)
             {
-                Listapiitems.Add(new Listapiset { name = "作者：" + authorname[count], rating = lookit.ratings[count], preview_url = previewurl[count], sample_url = lookit.sampleurl[count] });
+                if (lookit.ratings[lookit.a] != "q")
+                {
+                    if (lookit.ratings[lookit.a] != "e")
+                    {
+                        Listapiitems.Add(new Listapiset { name = "作者：" + authorname[lookit.a], rating = lookit.ratings[lookit.a], preview_url = previewurl[lookit.a], sample_url = lookit.sampleurl[lookit.a], _a = lookit.a });
+                    }
+                    else
+                    {
+                        lookit.a++;
+                        continue;
+                    }
+                }
+                else
+                {
+                    lookit.a++;
+                    continue;
+                }
+                lookit.a++;
+                //Listapiitems.Add(new Listapiset { name = "作者：" + authorname[count], rating = lookit.ratings[count], preview_url = previewurl[count], sample_url = lookit.sampleurl[count] });
             }
         }
 
@@ -162,6 +191,7 @@ namespace MT2
                         IEnumerable<XAttribute> Items = element.Attributes();
                         foreach (var item in Items)
                         {
+
                             if (item.Name == "id")
                             {
                                 authorid[lookit.a] = (string)item;
@@ -178,15 +208,19 @@ namespace MT2
                             {
                                 lookit.sampleurl[lookit.a] = (string)item;
                             }
+                            else if (item.Name == "jpeg_url")
+                            {
+                                lookit.jpegurl[lookit.a] = (string)item;
+                            }
                             else if (item.Name == "rating") // 这个判断需要重新写11.5留
                             {
                                 lookit.ratings[lookit.a] = (string)item;
 
-                                bool fc = (item.Value == "q" );
-                                if (fc == true)
-                                {
-                                    continue;
-                                }
+                                //bool fc = (item.Value == "q");
+                                //if (fc == true)
+                                //{
+                                //    continue;
+                                //}
                                 //break;
                             }
                         }
@@ -236,6 +270,7 @@ namespace MT2
             var boxs = sender as StackPanel;
             var box = boxs.DataContext as Listapiset;
             lookit.lookimguri = box.sample_url;
+            lookit.b = box._a;
             Frame.Navigate(typeof(LookImg), lookit);
         }
     }

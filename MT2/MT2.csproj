@@ -120,6 +120,7 @@
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="pubuliu\SufaceLoader.cs" />
     <Compile Include="pubuliu\WaterfallPanel.cs" />
   </ItemGroup>
   <ItemGroup>

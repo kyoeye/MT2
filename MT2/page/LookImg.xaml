@@ -70,6 +70,7 @@
                     <Viewbox Grid.Column="0">
                         <Button
                             Name="DownloadButton"
+                            Click="DownloadButton_Click"
                             Grid.Column="0"
                             Width="100"
                             Margin="10"
@@ -90,14 +91,14 @@
                                                 RadiusX="40"
                                                 RadiusY="40">
                                                 <Rectangle.Fill>
-                                                    <SolidColorBrush Opacity="0.699999988079071" Color="#FF4F4F4F" />
+                                                    <SolidColorBrush Opacity="0.699999988079071" Color="#FFDEDEDE" />
                                                 </Rectangle.Fill>
                                             </Rectangle>
                                             <TextBlock
                                                 Margin="70,25"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"
-                                                Foreground="#FFCFCFCF"
+                                                Foreground="Black"
                                                 FontFamily="Segoe MDL2 Assets"
                                                 FontSize="40"
                                                 Text="&#xE118;" />
@@ -251,7 +252,8 @@
 
                     </Border>
                 </Grid>
-                <Button Content="哇哈哈哈哈" />
+                <Button Name="textbutoon" Click="textbutoon_Click"  Content="哇哈哈哈哈" />
+                <TextBlock Name="textblock"/>
             </StackPanel>
 
         </ScrollViewer>

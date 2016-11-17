@@ -254,9 +254,6 @@
                                         </Grid>
 
                                     </StackPanel>
-
-
-
                                 </Grid>
                             </DataTemplate>
                         </GridView.ItemTemplate>
@@ -311,7 +308,7 @@
 
             </Grid>
         </SplitView>
-
+        <Frame Name="MainFrame" />
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="NarrowLayout">
@@ -352,5 +349,7 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
+        
     </Grid>
+   
 </Page>

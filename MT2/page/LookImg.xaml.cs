@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -35,30 +36,34 @@ namespace MT2.page
         double hei;
 
         SETall setall = new SETall();
-
+        public int a;
+        public string imguri;
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            base.OnNavigatedTo(e);
-            Lookimgclass lookit = (Lookimgclass)e.Parameter;
-            if (lookit != null)
+            try
             {
+                base.OnNavigatedTo(e);
+                Lookimgclass lookit = (Lookimgclass)e.Parameter;
                 var sample_url = lookit.lookimguri;
-                //var value = (string)e.Parameter;
-                //setall.sample_url = value;
+               
+                    //var value = (string)e.Parameter;
+                    //setall.sample_url = value;
                 BitmapImage bitmapimage = new BitmapImage(new Uri(sample_url));
                 SeeImage.Source = bitmapimage;
-
-            }
-            else
-
-            {
+                a = lookit.b;
+                textblock.Text = "是"+a;
                 
+                imguri = lookit.jpegurl[a];
+            }
+            catch
+            {
+
             }
         }
 
         public void Getsuface()
         {
-
+         
 
             var f = Window.Current.Bounds;
             wit = f.Width;
@@ -67,6 +72,20 @@ namespace MT2.page
             betaborder.Height = hei;
         }
 
+        private void textbutoon_Click(object sender, RoutedEventArgs e)
+        {
+            textbutoon.Content = imguri;
+            string text = (string)imguri;
+            /*用了数据绑定的呀  先找控件  找到控件就找到内容了*/
+            DataPackage dp = new DataPackage();
+            dp.SetText(text);
+            Clipboard.SetContent(dp);
+            
+        }
 
+        private void DownloadButton_Click(object sender, RoutedEventArgs e)
+        {
+            //下载
+        }
     }
 }

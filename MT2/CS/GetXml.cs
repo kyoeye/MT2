@@ -5,13 +5,15 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MT2.CS
 {
     class GetXml
-    { 
-       
+    {
+        private CancellationTokenSource cts = new CancellationTokenSource();
+
         public static async Task<string> GetWebString(string url, string formData)
         {
             string RequestUri = url;
@@ -44,13 +46,17 @@ namespace MT2.CS
 
             try
             {
-                using (HttpClient httpclient = new HttpClient())
-                {
-                    using (HttpResponseMessage httpResponseMessage = await httpclient.GetAsync(new Uri(RequestUri))) //使用httpResponMessage接收uri返回的信息
-                    {
+                
+                IProgress<Windows.Web.Http.HttpProgress> progress = new Progress<Windows.Web.Http.HttpProgress>();
+                
+                   HttpClient httpclient = new HttpClient();
+                   
+                       HttpResponseMessage httpResponseMessage = await httpclient.GetAsync(new Uri(RequestUri)); //使用httpResponMessage接收uri返回的信息
+                   
                         httpResponseMessage.EnsureSuccessStatusCode();
                         var text = await httpResponseMessage.Content.ReadAsStringAsync(); //异步读取字符串
                         result = text;
+
 
                         //var inputstream = await httpResponseMessage.Content.ReadAsStreamAsync();
                         //Stream stream = inputstream.AsRandomAccessStream();
@@ -59,8 +65,8 @@ namespace MT2.CS
                         //    string result = reader.ReadToEnd();
                         //    wv.NavigateToString(result);
                         //}
-                    }
-                }
+                    
+                
             }
             catch (Exception ec)
             {
