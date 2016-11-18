@@ -103,6 +103,7 @@
       <DependentUpon>TextDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="CS\apiset\Listapiset.cs" />
+    <Compile Include="CS\betatt.cs" />
     <Compile Include="CS\GetXml.cs" />
     <Compile Include="CS\SETall.cs" />
     <Compile Include="CS\XmlHelper.cs" />

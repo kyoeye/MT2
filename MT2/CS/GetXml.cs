@@ -57,7 +57,7 @@ namespace MT2.CS
                         var text = await httpResponseMessage.Content.ReadAsStringAsync(); //异步读取字符串
                         result = text;
 
-
+                        
                         //var inputstream = await httpResponseMessage.Content.ReadAsStreamAsync();
                         //Stream stream = inputstream.AsRandomAccessStream();
                         //using (StreamReader reader = new StreamReader(stream))

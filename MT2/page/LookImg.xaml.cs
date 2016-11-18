@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
@@ -85,7 +86,15 @@ namespace MT2.page
 
         private void DownloadButton_Click(object sender, RoutedEventArgs e)
         {
+            getjpg(imguri);
             //下载
+        }
+
+        public async void getjpg(string jpguri)
+        {
+            HttpClient httpclient = new HttpClient();
+            HttpResponseMessage httpResponseMessage = await httpclient.GetAsync(new Uri(jpguri));
+
         }
     }
 }
