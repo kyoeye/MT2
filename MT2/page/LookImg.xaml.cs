@@ -38,7 +38,9 @@ namespace MT2.page
 
         SETall setall = new SETall();
         public int a;
+        public int imgid;
         public string imguri;
+        public string imgname;
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             try
@@ -55,6 +57,8 @@ namespace MT2.page
                 textblock.Text = "是"+a;
                 
                 imguri = lookit.jpegurl[a];
+                imgname = lookit.thisname[a];
+                imgid = int.Parse (lookit._id[a]) ;
             }
             catch
             {
@@ -77,7 +81,6 @@ namespace MT2.page
         {
             textbutoon.Content = imguri;
             string text = (string)imguri;
-            /*用了数据绑定的呀  先找控件  找到控件就找到内容了*/
             DataPackage dp = new DataPackage();
             dp.SetText(text);
             Clipboard.SetContent(dp);
@@ -90,11 +93,11 @@ namespace MT2.page
             //下载
         }
 
-        public async void getjpg(string jpguri)
+        public void getjpg(string jpguri)
         {
-            HttpClient httpclient = new HttpClient();
-            HttpResponseMessage httpResponseMessage = await httpclient.GetAsync(new Uri(jpguri));
-
+            //HttpClient httpclient = new HttpClient();
+            //HttpResponseMessage httpResponseMessage = await httpclient.GetAsync(new Uri(jpguri));
+            string Filename = imgname+imgid;
         }
     }
 }
