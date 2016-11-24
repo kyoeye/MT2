@@ -8,5 +8,6 @@ namespace MT2.Model
 {
     class TransferModel
     {
+
     }
 }

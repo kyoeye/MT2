@@ -8,6 +8,9 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Networking.BackgroundTransfer;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -48,17 +51,17 @@ namespace MT2.page
                 base.OnNavigatedTo(e);
                 Lookimgclass lookit = (Lookimgclass)e.Parameter;
                 var sample_url = lookit.lookimguri;
-               
-                    //var value = (string)e.Parameter;
-                    //setall.sample_url = value;
+
+                //var value = (string)e.Parameter;
+                //setall.sample_url = value;
                 BitmapImage bitmapimage = new BitmapImage(new Uri(sample_url));
                 SeeImage.Source = bitmapimage;
                 a = lookit.b;
-                textblock.Text = "是"+a;
-                
+                textblock.Text = "是" + a;
+
                 imguri = lookit.jpegurl[a];
                 imgname = lookit.thisname[a];
-                imgid = int.Parse (lookit._id[a]) ;
+                imgid = int.Parse(lookit._id[a]);
             }
             catch
             {
@@ -68,7 +71,7 @@ namespace MT2.page
 
         public void Getsuface()
         {
-         
+
 
             var f = Window.Current.Bounds;
             wit = f.Width;
@@ -84,20 +87,72 @@ namespace MT2.page
             DataPackage dp = new DataPackage();
             dp.SetText(text);
             Clipboard.SetContent(dp);
-            
+
         }
 
         private void DownloadButton_Click(object sender, RoutedEventArgs e)
         {
-            getjpg(imguri);
+            //getjpg(imguri);
             //下载
+            Savefile();
         }
-
-        public void getjpg(string jpguri)
+        public StorageFile storagefile;
+        public async void Savefile()
         {
+            FileSavePicker savefile = new FileSavePicker();
+            savefile.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+            string f = "保存文件类型";
+            savefile.FileTypeChoices.Add(f, new List<string>() { ".jpg", ".png", ".bmp" });
+            savefile.SuggestedFileName = imgname + "ID" + imgid;
+            storagefile = await savefile.PickSaveFileAsync();
+
+            if (storagefile != null)
+            {
+                CachedFileManager.DeferUpdates(storagefile);
+
+                string Filename = imgname + imgid;
+                string _transferUri = imguri;
+                Uri transferUri;
+                try
+                {
+                    transferUri = new Uri(Uri.EscapeUriString(_transferUri), UriKind.RelativeOrAbsolute);
+                }
+                catch
+                {
+                    return;
+                }
+
+                BackgroundDownloader backgrounddownloader = new BackgroundDownloader();//后台下载
+                DownloadOperation downloader = backgrounddownloader.CreateDownload(transferUri, storagefile);
+                await downloader.StartAsync();
+            }
+        }
+        public async void getjpg(string jpguri)
+        {
+            Savefile();
+            if (storagefile != null)
+            {
+                CachedFileManager.DeferUpdates(storagefile);
+
+                string Filename = imgname + imgid;
+                string _transferUri = jpguri;
+                Uri transferUri;
+                try
+                {
+                    transferUri = new Uri(Uri.EscapeUriString(_transferUri), UriKind.RelativeOrAbsolute);
+                }
+                catch
+                {
+                    return;
+                }
+
+                BackgroundDownloader backgrounddownloader = new BackgroundDownloader();//后台下载
+                DownloadOperation downloader = backgrounddownloader.CreateDownload(transferUri, storagefile);
+                await downloader.StartAsync();
+            }
             //HttpClient httpclient = new HttpClient();
             //HttpResponseMessage httpResponseMessage = await httpclient.GetAsync(new Uri(jpguri));
-            string Filename = imgname+imgid;
+
         }
     }
 }
