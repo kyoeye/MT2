@@ -35,7 +35,7 @@ namespace MT2
     {
 
 
-
+        public int shuzu;//数组容量变量
       
       
         string[] previewurl = new string[100];//瀑布流概览图
@@ -58,12 +58,8 @@ namespace MT2
         public MainPage()
         {
             this.InitializeComponent();
-
             getimage();
-
             NavigationCacheMode = NavigationCacheMode.Enabled;
-
-
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
