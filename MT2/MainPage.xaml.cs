@@ -36,7 +36,7 @@ namespace MT2
 
 
         public int shuzu;//数组容量变量
-      
+        public int pageint; //页码索引
       
         string[] previewurl = new string[100];//瀑布流概览图
 
@@ -168,7 +168,7 @@ namespace MT2
         {
             httpclient = new HttpClient();
             cts = new CancellationTokenSource();
-            string homeimguri = ("https://yande.re/post.xml?limit=50");
+            string homeimguri = ("https://yande.re/post.xml?limit=99");
             var mystring = await GetXml.GetWebString(homeimguri, null);
 
             //string resuri = homeimguri;
@@ -222,7 +222,7 @@ namespace MT2
                                 //break;
                             }
                         }
-                        if (lookit.a < 50)
+                        if (lookit.a < 99)
                         {
 
                             lookit.a++;
