@@ -1,28 +1,15 @@
 ﻿using MT2.CS;
-using MT2.CS.apiset;
 using MT2.page;
-using MT2.pubuliu;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Xml.Linq;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Web.Http;
-using System.Collections;
-
-using static MT2.CS.GetXml;
 
 //“空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 上有介绍
 
@@ -34,31 +21,46 @@ namespace MT2
     public sealed partial class MainPage : Page
     {
 
+        //public class Uridh
+        //{           
+            public int shuzu = 100;//数组容量变量
+            public int pageint = 1; //页码索引
+        //}
 
-        public int shuzu;//数组容量变量
-        public int pageint; //页码索引
-      
+
         string[] previewurl = new string[100];//瀑布流概览图
 
 
         public class Lookimgclass
         {
-           public   string[] _id = new string[100];
-            public  string[] authorname = new string[100];
+
+            public string[] _id;
+            public string[] authorname ;
             public int b;
             public string lookimguri;//选中索引
             public int a = 0; // 数组索引
-            public string[] sampleurl = new string[100];
-            public string[] ratings = new string[100];
-            public string[] jpegurl = new string[100];
-            public string[] thisname = new string[100];         
+            public string[] sampleurl;
+            public string[] ratings ;
+            public string[] jpegurl;
+            public string[] thisname;
         }
         Lookimgclass lookit = new Lookimgclass();
-
+        public void getsz() //数组用一个方法引用
+        {
+            lookit._id = new string[shuzu];
+            lookit.ratings = new string[shuzu];
+            lookit.authorname = new string[shuzu];
+            lookit.sampleurl = new string[shuzu];
+            lookit.jpegurl = new string[shuzu];
+            lookit.thisname = new string[shuzu];
+        }
+        //Uridh uridh = new Uridh();
         public MainPage()
         {
+            
             this.InitializeComponent();
-            getimage();
+            getsz();
+            getimage(null);
             NavigationCacheMode = NavigationCacheMode.Enabled;
         }
 
@@ -104,7 +106,7 @@ namespace MT2
 
 
         }
-
+        
         public ObservableCollection<Listapiset> Listapiitems { get; set; }
         public void GetWaterfall()
         {
@@ -117,7 +119,7 @@ namespace MT2
                 {
                     if (lookit.ratings[lookit.a] != "e")
                     {
-                        Listapiitems.Add(new Listapiset { _name = "作者：" + lookit.authorname[lookit.a], rating = lookit.ratings[lookit.a], preview_url = previewurl[lookit.a], sample_url = lookit.sampleurl[lookit.a], _a = lookit.a ,id =lookit._id[lookit.a]});
+                        Listapiitems.Add(new Listapiset { _name = "作者：" + lookit.authorname[lookit.a], rating = lookit.ratings[lookit.a], preview_url = previewurl[lookit.a], sample_url = lookit.sampleurl[lookit.a], _a = lookit.a, id = lookit._id[lookit.a] });
                     }
                     else
                     {
@@ -138,7 +140,7 @@ namespace MT2
         {
             int count = Listapiitems.Count;
 
-            for (int i = count; i < count + 20; i++)
+            for (int i = count;  i < count + 20; i++)
             {
                 if (lookit.ratings[lookit.a] != "q")
                 {
@@ -164,85 +166,86 @@ namespace MT2
 
         private HttpClient httpclient;
         private CancellationTokenSource cts;
-        public async void getimage()
+        public async void getimage(int? a)
         {
-            httpclient = new HttpClient();
-            cts = new CancellationTokenSource();
-            string homeimguri = ("https://yande.re/post.xml?limit=99");
-            var mystring = await GetXml.GetWebString(homeimguri, null);
-
-            //string resuri = homeimguri;
-            //const uint streamLength = 1000000;
-            //HttpStreamContent streamContent = new HttpStreamContent(new SlowInputStream(streamLength));
-            IProgress<HttpProgress> httpprogress = new Progress<HttpProgress>(ProgressHandler);
-
-            //HttpRequestMessage response = await httpclient.PostAsync(new Uri(homeimguri)).AsTask(cts.Token, httpprogress);
-            //依旧没有实现进度条
-            if (mystring != null)
+            if (a != null)
             {
-                XElement root = XElement.Parse(mystring);
-                IEnumerable<XElement> elements = root.Elements();
-                foreach (var element in elements)
-                {
-                    if (element.Name == "post")
-                    {
-                        IEnumerable<XAttribute> Items = element.Attributes();
-                        foreach (var item in Items)
-                        {
-
-                            if (item.Name == "id")
-                            {
-                                lookit._id[lookit.a] = (string)item;
-                            }
-                            else if (item.Name == "preview_url")
-                            {
-                                previewurl[lookit.a] = (string)item;
-                            }
-                            else if (item.Name == "author")
-                            {
-                                lookit.authorname[lookit.a] = (string)item;
-                            }
-                            else if (item.Name == "sample_url")
-                            {
-                                lookit.sampleurl[lookit.a] = (string)item;
-                            }
-                            else if (item.Name == "jpeg_url")
-                            {
-                                lookit.jpegurl[lookit.a] = (string)item;
-                            }
-                            else if (item.Name == "rating") // 这个判断需要重新写11.5留
-                            {
-                                lookit.ratings[lookit.a] = (string)item;
-
-                                //bool fc = (item.Value == "q");
-                                //if (fc == true)
-                                //{
-                                //    continue;
-                                //}
-                                //break;
-                            }
-                        }
-                        if (lookit.a < 99)
-                        {
-
-                            lookit.a++;
-                        }
-                        else
-                        {
-                            //  GetWaterfall();
-                            return;
-                        }
-                    }
-
-                }
-                //break;
-
-                GetWaterfall();
-                Mygridview.ItemsSource = Listapiitems;
+                //我要干啥了？
             }
             else
             {
-                NoNetworld.Visibility = Visibility.Visible;
+                httpclient = new HttpClient();
+                cts = new CancellationTokenSource();
+                string homeimguri = ("https://yande.re/post.xml?limit=100" + "&page=" + pageint);
+                var mystring = await GetXml.GetWebString(homeimguri, null);
+
+                //string resuri = homeimguri;
+                //const uint streamLength = 1000000;
+                //HttpStreamContent streamContent = new HttpStreamContent(new SlowInputStream(streamLength));
+                IProgress<HttpProgress> httpprogress = new Progress<HttpProgress>(ProgressHandler);
+
+                //HttpRequestMessage response = await httpclient.PostAsync(new Uri(homeimguri)).AsTask(cts.Token, httpprogress);
+                //依旧没有实现进度条
+                if (mystring != null)
+                {
+                    XElement root = XElement.Parse(mystring);
+                    IEnumerable<XElement> elements = root.Elements();
+                    foreach (var element in elements)
+                    {
+                        if (element.Name == "post")
+                        {
+                            IEnumerable<XAttribute> Items = element.Attributes();
+                            foreach (var item in Items)
+                            {
+
+                                if (item.Name == "id")
+                                {
+                                    lookit._id[lookit.a] = (string)item;
+                                }
+                                else if (item.Name == "preview_url")
+                                {
+                                    previewurl[lookit.a] = (string)item;
+                                }
+                                else if (item.Name == "author")
+                                {
+                                    lookit.authorname[lookit.a] = (string)item;
+                                }
+                                else if (item.Name == "sample_url")
+                                {
+                                    lookit.sampleurl[lookit.a] = (string)item;
+                                }
+                                else if (item.Name == "jpeg_url")
+                                {
+                                    lookit.jpegurl[lookit.a] = (string)item;
+                                }
+                                else if (item.Name == "rating") // 这个判断需要重新写11.5留
+                                {
+                                    lookit.ratings[lookit.a] = (string)item;
+
+                                }
+                            }
+                            if (lookit.a < 100)
+                            {
+
+                                lookit.a++;
+                            }
+                            else
+                            {
+                                //  GetWaterfall();
+                                return;
+                            }
+                        }
+                    }
+
+                    //break;
+
+                    GetWaterfall();
+                    Mygridview.ItemsSource = Listapiitems;
+                }
+                else
+                {
+                    NoNetworld.Visibility = Visibility.Visible;
+                }
             }
         }
 
@@ -251,16 +254,15 @@ namespace MT2
             throw new NotImplementedException();
         }
 
-        public void getwitch()
+        public void GetNextPage()
         {
-
+            pageint++;
         }
 
 
         private void SeachButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(SearchPage));
-
         }
 
         private void gridstackpanel_Tapped(object sender, TappedRoutedEventArgs e)
