@@ -189,7 +189,7 @@
 
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <local:WaterfallPanel x:Name="waterfallpanel"  />
+                                <local:WaterfallPanel x:Name="waterfallpanel" />
                             </ItemsPanelTemplate>
                         </GridView.ItemsPanel>
                         <GridView.Template>
@@ -202,7 +202,7 @@
                                             Margin="12"
                                             HorizontalAlignment="Center"
                                             Click="Loadingbutton_Click"
-                                            Content="加载更多(｡･∀･)ﾉﾞ(有逻辑错误）" />
+                                            Content="加载更多(｡･∀･)ﾉﾞ" />
                                     </StackPanel>
                                 </ScrollViewer>
                             </ControlTemplate>
@@ -265,6 +265,7 @@
                     <ProgressBar
                         Name="Networdprogress"
                         Height="50"
+                        Visibility="Collapsed"
                         Value="50" />
                     <AppBarButton
                         Name="MenuButton"
@@ -278,17 +279,16 @@
                             FontFamily="Segoe MDL2 Assets"
                             Text="&#xE76C;" />
                     </AppBarButton>
-                    <TextBlock
+                    <StackPanel
                         Name="Mytop"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Foreground="White">
-                        <Run Text="萌豚" />
-                        <Run
-                            Foreground="White"
-                            FontWeight="Bold"
-                            Text="S" />
-                    </TextBlock>
+                        Orientation="Horizontal">
+                        <TextBlock Foreground="White" Text="首页" />
+                    </StackPanel>
+
+
+
                     <AppBarButton
                         Name="SeachButton"
                         Width="50"
@@ -349,7 +349,6 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        
     </Grid>
-   
+
 </Page>
