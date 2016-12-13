@@ -23,30 +23,31 @@ namespace MT2
 
         //public class Uridh
         //{           
-            public int shuzu = 100;//数组容量变量
-            public int pageint = 1; //页码索引
+        public int shuzu = 100;//数组容量变量
+        public int pageint = 1; //页码索引
         //}
 
 
-        string[] previewurl = new string[100];//瀑布流概览图
+        //string[] previewurl = new string[100];//瀑布流概览图
 
 
         public class Lookimgclass
         {
-
+            public string[] previewurl;
             public string[] _id;
-            public string[] authorname ;
+            public string[] authorname;
             public int b;
             public string lookimguri;//选中索引
             public int a = 0; // 数组索引
             public string[] sampleurl;
-            public string[] ratings ;
+            public string[] ratings;
             public string[] jpegurl;
             public string[] thisname;
         }
         Lookimgclass lookit = new Lookimgclass();
         public void getsz() //数组用一个方法引用
         {
+            lookit.previewurl = new string[shuzu];
             lookit._id = new string[shuzu];
             lookit.ratings = new string[shuzu];
             lookit.authorname = new string[shuzu];
@@ -57,7 +58,7 @@ namespace MT2
         //Uridh uridh = new Uridh();
         public MainPage()
         {
-            
+
             this.InitializeComponent();
             getsz();
             getimage(null);
@@ -83,10 +84,10 @@ namespace MT2
             Mymenu.IsPaneOpen = !Mymenu.IsPaneOpen;
         }
 
-        private void SettingButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(SettingPage));
-        }
+        //private void SettingButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Frame.Navigate(typeof(Setting));
+        //}
 
         public class Listapiset
         {
@@ -106,7 +107,7 @@ namespace MT2
 
 
         }
-        
+
         public ObservableCollection<Listapiset> Listapiitems { get; set; }
         public void GetWaterfall()
         {
@@ -119,7 +120,12 @@ namespace MT2
                 {
                     if (lookit.ratings[lookit.a] != "e")
                     {
-                        Listapiitems.Add(new Listapiset { _name = "作者：" + lookit.authorname[lookit.a], rating = lookit.ratings[lookit.a], preview_url = previewurl[lookit.a], sample_url = lookit.sampleurl[lookit.a], _a = lookit.a, id = lookit._id[lookit.a] });
+                        Listapiitems.Add(new Listapiset { _name = "作者：" + lookit.authorname[lookit.a],
+                            rating = lookit.ratings[lookit.a],
+                            preview_url =lookit.previewurl[lookit.a],
+                            sample_url = lookit.sampleurl[lookit.a],
+                            _a = lookit.a,
+                            id = lookit._id[lookit.a] });
                     }
                     else
                     {
@@ -140,28 +146,41 @@ namespace MT2
         {
             int count = Listapiitems.Count;
 
-            for (int i = count;  i < count + 20; i++)
-            {
-                if (lookit.ratings[lookit.a] != "q")
+                for (int i = count; i < count + 20; i++)
                 {
-                    if (lookit.ratings[lookit.a] != "e")
+                    if (lookit.ratings[lookit.a] != "q")
                     {
-                        Listapiitems.Add(new Listapiset { _name = "作者：" + lookit.authorname[lookit.a], rating = lookit.ratings[lookit.a], preview_url = previewurl[lookit.a], sample_url = lookit.sampleurl[lookit.a], _a = lookit.a, id = lookit._id[lookit.a] });
+                        if (lookit.ratings[lookit.a] != "e")
+                        {
+                            Listapiitems.Add(
+                                new Listapiset
+                                {
+                                    _name = "作者：" + lookit.authorname[lookit.a],
+                                    rating = lookit.ratings[lookit.a],
+                                    preview_url =lookit. previewurl[lookit.a],
+                                    sample_url = lookit.sampleurl[lookit.a],
+                                    _a = lookit.a,
+                                    id = lookit._id[lookit.a]
+                                });
+                        }
+                        else
+                        {
+                            lookit.a++;
+                            continue;
+                        }
                     }
                     else
                     {
                         lookit.a++;
                         continue;
                     }
-                }
-                else
-                {
                     lookit.a++;
-                    continue;
+
+                    //Listapiitems.Add(new Listapiset { name = "作者：" + authorname[count], rating = lookit.ratings[count], preview_url = previewurl[count], sample_url = lookit.sampleurl[count] });
                 }
-                lookit.a++;
-                //Listapiitems.Add(new Listapiset { name = "作者：" + authorname[count], rating = lookit.ratings[count], preview_url = previewurl[count], sample_url = lookit.sampleurl[count] });
-            }
+            
+
+
         }
 
         private HttpClient httpclient;
@@ -170,7 +189,8 @@ namespace MT2
         {
             if (a != null)
             {
-                //我要干啥了？
+                pageint++;
+                //页码增加1
             }
             else
             {
@@ -178,13 +198,7 @@ namespace MT2
                 cts = new CancellationTokenSource();
                 string homeimguri = ("https://yande.re/post.xml?limit=100" + "&page=" + pageint);
                 var mystring = await GetXml.GetWebString(homeimguri, null);
-
-                //string resuri = homeimguri;
-                //const uint streamLength = 1000000;
-                //HttpStreamContent streamContent = new HttpStreamContent(new SlowInputStream(streamLength));
                 IProgress<HttpProgress> httpprogress = new Progress<HttpProgress>(ProgressHandler);
-
-                //HttpRequestMessage response = await httpclient.PostAsync(new Uri(homeimguri)).AsTask(cts.Token, httpprogress);
                 //依旧没有实现进度条
                 if (mystring != null)
                 {
@@ -204,7 +218,7 @@ namespace MT2
                                 }
                                 else if (item.Name == "preview_url")
                                 {
-                                    previewurl[lookit.a] = (string)item;
+                                    lookit.previewurl[lookit.a] = (string)item;
                                 }
                                 else if (item.Name == "author")
                                 {
@@ -221,19 +235,13 @@ namespace MT2
                                 else if (item.Name == "rating") // 这个判断需要重新写11.5留
                                 {
                                     lookit.ratings[lookit.a] = (string)item;
-
                                 }
                             }
                             if (lookit.a < 100)
                             {
-
                                 lookit.a++;
                             }
-                            else
-                            {
-                                //  GetWaterfall();
-                                return;
-                            }
+                          
                         }
                     }
 
@@ -245,6 +253,7 @@ namespace MT2
                 else
                 {
                     NoNetworld.Visibility = Visibility.Visible;
+
                 }
             }
         }
@@ -264,7 +273,6 @@ namespace MT2
         {
             Frame.Navigate(typeof(SearchPage));
         }
-
         private void gridstackpanel_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var boxs = sender as StackPanel;
@@ -272,6 +280,11 @@ namespace MT2
             lookit.lookimguri = box.sample_url;
             lookit.b = box._a;
             Frame.Navigate(typeof(LookImg), lookit);
+        }
+
+        private void Setting_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Setting));
         }
     }
 }

@@ -129,11 +129,11 @@
                     </ListBox>
 
                     <Grid Grid.Row="1" Height="50">
-                        <Grid.ChildrenTransitions>
+                        <!--<Grid.ChildrenTransitions>
                             <TransitionCollection>
                                 <EntranceThemeTransition FromVerticalOffset="100" />
                             </TransitionCollection>
-                        </Grid.ChildrenTransitions>
+                        </Grid.ChildrenTransitions>-->
                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                             <AppBarButton Width="50">
                                 <TextBlock
@@ -147,7 +147,7 @@
                             <AppBarButton
                                 Name="SettingButton"
                                 Width="50"
-                                Click="SettingButton_Click">
+                                Click="Setting_Click">
                                 <TextBlock
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
@@ -186,10 +186,9 @@
 
                 <Grid Grid.Row="1">
                     <GridView x:Name="Mygridview" SelectionMode="Single">
-
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <local:WaterfallPanel x:Name="waterfallpanel" />
+                                <local:WaterfallPanel ColumnNum="3" x:Name="waterfallpanel" />
                             </ItemsPanelTemplate>
                         </GridView.ItemsPanel>
                         <GridView.Template>
@@ -209,18 +208,16 @@
                         </GridView.Template>
                         <GridView.ItemTemplate>
                             <DataTemplate>
-
-                                <Grid Margin="3">
-                                    <Grid.ChildrenTransitions>
+                                <Grid Margin="2">
+                                    <!--<Grid.ChildrenTransitions>
                                         <TransitionCollection>
                                             <EntranceThemeTransition />
                                         </TransitionCollection>
-                                    </Grid.ChildrenTransitions>
+                                    </Grid.ChildrenTransitions>-->
                                     <Border
                                         Padding="2"
                                         Background="White"
                                         CornerRadius="0,0,3,3" />
-
                                     <StackPanel
                                         Name="gridstackpanel"
                                         Margin="1"
@@ -232,7 +229,7 @@
                                                 VerticalAlignment="Center"
                                                 Source="{Binding preview_url}" />
                                         </Grid>
-                                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+                                        <Grid Visibility="Collapsed"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
                                             <!--<Rectangle
                                             Width="{Binding ElementName=gridstackpanel, Path=Width, Mode=TwoWay}"
                                             Height="{Binding ElementName=gridstackpanel, Path=Height, Mode=TwoWay}"

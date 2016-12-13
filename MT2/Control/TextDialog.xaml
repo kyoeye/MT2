@@ -13,8 +13,19 @@
         <Grid Padding="10,10,10,10" VerticalAlignment="Center"  >
             <Rectangle Fill="Black" Opacity="0.4" />
             <StackPanel  >
+                <Image Name="PopupPic" />
                 <TextBlock Margin="10" Name="TopTextblock" HorizontalAlignment="Center" Text="弹窗标题" FontSize="30" Foreground="White"  />
-                <TextBlock Margin="10" Name="ContentTextblock" HorizontalAlignment="Center" Text="弹窗标题" FontSize="20" Foreground="#FFE6E6E6" />
+                <TextBlock Margin="10" Name="ContentTextblock" HorizontalAlignment="Center" Text="弹窗内容" FontSize="20" Foreground="#FFE6E6E6" />
+                <Grid >
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Name="RetryButton" Margin="10" MinWidth="300" VerticalAlignment="Center"   HorizontalAlignment="Center"  Content="重试" />
+                    <Button Name="UnopenButton" Grid.Column="1" Margin="10" MinWidth="300" VerticalAlignment="Center"   HorizontalAlignment="Center"  Content="取消" />
+
+                </Grid>
+
             </StackPanel>
 
         </Grid>
