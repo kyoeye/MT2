@@ -199,7 +199,6 @@ namespace MT2
                 string homeimguri = ("https://yande.re/post.xml?limit=100" + "&page=" + pageint);
                 var mystring = await GetXml.GetWebString(homeimguri, null);
                 IProgress<HttpProgress> httpprogress = new Progress<HttpProgress>(ProgressHandler);
-                //依旧没有实现进度条
                 if (mystring != null)
                 {
                     XElement root = XElement.Parse(mystring);
