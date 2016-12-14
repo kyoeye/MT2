@@ -214,10 +214,19 @@
                                             <EntranceThemeTransition />
                                         </TransitionCollection>
                                     </Grid.ChildrenTransitions>-->
-                                    <Border
+                                    <controls:DropShadowPanel BlurRadius="8"
+                                  ShadowOpacity="0.7"
+                                  OffsetX="2"
+                                  OffsetY="2"
+                                  Color="Black"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center">
+                                        <Border
                                         Padding="2"
                                         Background="White"
                                         CornerRadius="0,0,3,3" />
+
+                                    </controls:DropShadowPanel>
                                     <StackPanel
                                         Name="gridstackpanel"
                                         Margin="1"
@@ -227,7 +236,13 @@
                                                 Name="Gridimage"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"
-                                                Source="{Binding preview_url}" />
+                                                Source="{Binding preview_url}" >
+                                                <Image.Transitions >
+                                                    <TransitionCollection >
+                                                        <EntranceThemeTransition />
+                                                    </TransitionCollection>
+                                                </Image.Transitions>
+                                            </Image>
                                         </Grid>
                                         <Grid Visibility="Collapsed"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
                                             <!--<Rectangle

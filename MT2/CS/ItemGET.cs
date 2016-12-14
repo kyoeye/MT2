@@ -11,14 +11,14 @@
 //    {
 //        public ItemGET()
 //        {
-           
+             
 //        }
-        
-//        public void Toitem( string _mystring)
+
+//        public void Toitem(string _mystring)
 //        {
 //            XElement xelement = XElement.Parse(_mystring);
-//            IEnumerable<XElement> elements = xelement.Elements ();
-//            foreach (var element in elements )
+//            IEnumerable<XElement> elements = xelement.Elements();
+//            foreach (var element in elements)
 //            {
 //                if (element.Name == "post")
 //                {
@@ -46,11 +46,11 @@
 //                        {
 //                            lookit.jpegurl[lookit.a] = (string)item;
 //                        }
-//                        else if (item.Name == "rating") // 这个判断需要重新写11.5留
+//                        else if (item.Name == "rating")
 //                        {
 //                            lookit.ratings[lookit.a] = (string)item;
 //                        }
 //                    }
+//                }
+//            }
 //        }
-//    }
-//} 

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -52,21 +53,30 @@ namespace MT2.CS
                    HttpClient httpclient = new HttpClient();
                    
                        HttpResponseMessage httpResponseMessage = await httpclient.GetAsync(new Uri(RequestUri)); //使用httpResponMessage接收uri返回的信息
-                   
-                        httpResponseMessage.EnsureSuccessStatusCode();
-                        var text = await httpResponseMessage.Content.ReadAsStringAsync(); //异步读取字符串
-                        result = text;
+                      //  HttpStatusCode      statuscode =   httpResponseMessage.StatusCode; //这是一个枚举//可能是不必要的
+                        var s = httpResponseMessage.StatusCode.ToString();
+                        switch ( s )
+                {
+                    case "200":
+                       
+                        break;
+                    case "421":
 
-                        
-                        //var inputstream = await httpResponseMessage.Content.ReadAsStreamAsync();
-                        //Stream stream = inputstream.AsRandomAccessStream();
-                        //using (StreamReader reader = new StreamReader(stream))
-                        //{
-                        //    string result = reader.ReadToEnd();
-                        //    wv.NavigateToString(result);
-                        //}
-                    
-                
+                        break;   
+
+                }
+                httpResponseMessage.EnsureSuccessStatusCode();
+                var text = await httpResponseMessage.Content.ReadAsStringAsync(); //异步读取字符串
+                result = text;
+                //var inputstream = await httpResponseMessage.Content.ReadAsStreamAsync();
+                //Stream stream = inputstream.AsRandomAccessStream();
+                //using (StreamReader reader = new StreamReader(stream))
+                //{
+                //    string result = reader.ReadToEnd();
+                //    wv.NavigateToString(result);
+                //}
+
+
             }
             catch (Exception ec)
             {
