@@ -56,8 +56,7 @@ namespace MT2.CS
 
                 HttpResponseMessage httpResponseMessage = await httpclient.GetAsync(new Uri(RequestUri)); //使用httpResponMessage接收uri返回的信息
                                                                                                           //  HttpStatusCode      statuscode =   httpResponseMessage.StatusCode; //这是一个枚举//可能是不必要的
-                var s = httpResponseMessage.StatusCode.ToString();
-                getStatuscode(s);
+             
 
                 httpResponseMessage.EnsureSuccessStatusCode();
                 var text = await httpResponseMessage.Content.ReadAsStringAsync(); //异步读取字符串
@@ -74,11 +73,15 @@ namespace MT2.CS
             }
             catch (Exception ec)
             {
-                //后面加个弹窗(～o￣3￣)～
-                var ectc = ec.ToString();
-                TextDialog ectctc = new TextDialog();
-                ectctc.TopTextblocktext("怒刷存在的异常酱");
-                ectctc.Contenttextblocktext(ectc);
+                var s = ec.Message.ToString();
+                await new MessageDialog(s ).ShowAsync();
+                //var s = httpResponseMessage.StatusCode.ToString();
+                //getStatuscode(s);
+
+                //var ectc = ec.ToString();
+                //TextDialog ectctc = new TextDialog();
+                //ectctc.TopTextblocktext("怒刷存在的异常酱");
+                //ectctc.Contenttextblocktext(ectc);
                 result = null;
 
             }
