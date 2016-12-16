@@ -66,14 +66,14 @@
                                 <TextBlock
                                     Margin="5,0,5,0"
                                     VerticalAlignment="Center"
-                                    Foreground="White"
                                     FontFamily="Segoe MDL2 Assets"
                                     FontSize="18"
+                                    Foreground="White"
                                     Text="&#xE10F;" />
                                 <TextBlock
                                     Margin="5,0,5,0"
-                                    Foreground="White"
                                     FontSize="18"
+                                    Foreground="White"
                                     Text="首页" />
                             </StackPanel>
                         </ListBoxItem>
@@ -82,14 +82,14 @@
                                 <TextBlock
                                     Margin="5,0,5,0"
                                     VerticalAlignment="Center"
-                                    Foreground="White"
                                     FontFamily="Segoe MDL2 Assets"
                                     FontSize="18"
+                                    Foreground="White"
                                     Text="&#xE17D;" />
                                 <TextBlock
                                     Margin="5,0,5,0"
-                                    Foreground="White"
                                     FontSize="18"
+                                    Foreground="White"
                                     Text="热榜" />
                             </StackPanel>
                         </ListBoxItem>
@@ -99,14 +99,14 @@
                                 <TextBlock
                                     Margin="5,0,5,0"
                                     VerticalAlignment="Center"
-                                    Foreground="White"
                                     FontFamily="Segoe MDL2 Assets"
                                     FontSize="18"
+                                    Foreground="White"
                                     Text="&#xE15F;" />
                                 <TextBlock
                                     Margin="5,0,5,0"
-                                    Foreground="White"
                                     FontSize="18"
+                                    Foreground="White"
                                     Text="评论" />
                             </StackPanel>
                         </ListBoxItem>
@@ -115,14 +115,14 @@
                                 <TextBlock
                                     Margin="5,0,5,0"
                                     VerticalAlignment="Center"
-                                    Foreground="White"
                                     FontFamily="Segoe MDL2 Assets"
                                     FontSize="18"
+                                    Foreground="White"
                                     Text="&#xE734;" />
                                 <TextBlock
                                     Margin="5,0,5,0"
-                                    Foreground="White"
                                     FontSize="18"
+                                    Foreground="White"
                                     Text="收藏" />
                             </StackPanel>
                         </ListBoxItem>
@@ -139,9 +139,9 @@
                                 <TextBlock
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Foreground="White"
                                     FontFamily="Segoe MDL2 Assets"
                                     FontSize="20"
+                                    Foreground="White"
                                     Text="&#xE2AF;" />
                             </AppBarButton>
                             <AppBarButton
@@ -151,9 +151,9 @@
                                 <TextBlock
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Foreground="White"
                                     FontFamily="Segoe MDL2 Assets"
                                     FontSize="20"
+                                    Foreground="White"
                                     Text="&#xE713;" />
                             </AppBarButton>
                         </StackPanel>
@@ -161,9 +161,9 @@
                             <TextBlock
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Foreground="White"
                                 FontFamily="Segoe MDL2 Assets"
                                 FontSize="20"
+                                Foreground="White"
                                 Text="&#xE76E;" />
                         </AppBarButton>
                     </Grid>
@@ -188,7 +188,7 @@
                     <GridView x:Name="Mygridview" SelectionMode="Single">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <local:WaterfallPanel ColumnNum="3" x:Name="waterfallpanel" />
+                                <local:WaterfallPanel x:Name="waterfallpanel" ColumnNum="3" />
                             </ItemsPanelTemplate>
                         </GridView.ItemsPanel>
                         <GridView.Template>
@@ -214,17 +214,18 @@
                                             <EntranceThemeTransition />
                                         </TransitionCollection>
                                     </Grid.ChildrenTransitions>-->
-                                    <controls:DropShadowPanel BlurRadius="8"
-                                  ShadowOpacity="0.7"
-                                  OffsetX="2"
-                                  OffsetY="2"
-                                  Color="Black"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Center">
+                                    <controls:DropShadowPanel
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        BlurRadius="8"
+                                        OffsetX="2"
+                                        OffsetY="2"
+                                        ShadowOpacity="0.7"
+                                        Color="Black">
                                         <Border
-                                        Padding="2"
-                                        Background="White"
-                                        CornerRadius="0,0,3,3" />
+                                            Padding="2"
+                                            Background="White"
+                                            CornerRadius="0,0,3,3" />
 
                                     </controls:DropShadowPanel>
                                     <StackPanel
@@ -236,15 +237,18 @@
                                                 Name="Gridimage"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"
-                                                Source="{Binding preview_url}" >
-                                                <Image.Transitions >
-                                                    <TransitionCollection >
+                                                Source="{Binding preview_url}">
+                                                <Image.Transitions>
+                                                    <TransitionCollection>
                                                         <EntranceThemeTransition />
                                                     </TransitionCollection>
                                                 </Image.Transitions>
                                             </Image>
                                         </Grid>
-                                        <Grid Visibility="Collapsed"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+                                        <Grid
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Bottom"
+                                            Visibility="Collapsed">
                                             <!--<Rectangle
                                             Width="{Binding ElementName=gridstackpanel, Path=Width, Mode=TwoWay}"
                                             Height="{Binding ElementName=gridstackpanel, Path=Height, Mode=TwoWay}"
@@ -287,8 +291,8 @@
                         <TextBlock
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Foreground="White"
                             FontFamily="Segoe MDL2 Assets"
+                            Foreground="White"
                             Text="&#xE76C;" />
                     </AppBarButton>
                     <StackPanel
@@ -310,8 +314,8 @@
                         <TextBlock
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Foreground="White"
                             FontFamily="Segoe MDL2 Assets"
+                            Foreground="White"
                             Text="&#xE11A;" />
                     </AppBarButton>
 

@@ -2,17 +2,23 @@
     x:Class="MT2.Control.LoadingControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MT2.Control"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:MT2.Control"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    mc:Ignorable="d">
 
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
-            <ProgressRing IsActive="True"  Height="70" Width="70"/>
-            <TextBlock Name="LoadingText" Text="正在加载…" Foreground="#FF797979"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ProgressRing
+                Width="70"
+                Height="70"
+                IsActive="True" />
+            <TextBlock
+                Name="LoadingText"
+                Foreground="#FF797979"
+                Text="正在加载…" />
         </StackPanel>
     </Grid>
 </UserControl>

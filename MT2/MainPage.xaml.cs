@@ -210,6 +210,22 @@ namespace MT2
                             IEnumerable<XAttribute> Items = element.Attributes();
                             foreach (var item in Items)
                             {
+                                switch (item.Name.ToString())
+                                {
+                                    case "id":
+                                        break;
+                                    case "preview_url":
+                                        break;
+                                    case "author":
+                                        break;
+                                    case "sample_url":
+                                        break;
+                                    case "jpeg_url":
+                                        break;
+                                    case "rating":
+                                        break;
+
+                                }
 
                                 if (item.Name == "id")
                                 {

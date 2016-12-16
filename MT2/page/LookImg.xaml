@@ -48,16 +48,16 @@
                                     Height="20"
                                     Margin="0,14,0,4"
                                     HorizontalAlignment="Stretch"
-                                    Foreground="{TemplateBinding Foreground}"
                                     AutomationProperties.AccessibilityView="Raw"
-                                    Content="{TemplateBinding Icon}" />
+                                    Content="{TemplateBinding Icon}"
+                                    Foreground="{TemplateBinding Foreground}" />
                                 <TextBlock
                                     x:Name="TextLabel"
                                     Grid.Row="1"
                                     Margin="2,0,2,6"
-                                    Foreground="#FF2291DE"
                                     FontFamily="{TemplateBinding FontFamily}"
                                     FontSize="12"
+                                    Foreground="#FF2291DE"
                                     Text="{TemplateBinding Label}"
                                     TextAlignment="Center"
                                     TextWrapping="Wrap" />
@@ -68,9 +68,9 @@
                                 Padding="0,5,0,7"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Center"
-                                Foreground="{TemplateBinding Foreground}"
                                 FontFamily="{TemplateBinding FontFamily}"
                                 FontSize="15"
+                                Foreground="{TemplateBinding Foreground}"
                                 Text="{TemplateBinding Label}"
                                 TextAlignment="Left"
                                 TextTrimming="Clip"
@@ -233,13 +233,13 @@
         <Grid.Background>
             <SolidColorBrush Color="White" />
         </Grid.Background>
-       
+
         <ScrollViewer>
-            <Grid >
-                <Grid.RowDefinitions >
+            <Grid>
+                <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <Grid Name="betaborder" Background="Black">
                     <Image Name="SeeImage" Stretch="Uniform" />
@@ -259,10 +259,10 @@
                                             Width="150"
                                             Height="90"
                                             HorizontalAlignment="Center"
-                                            Stroke="#FF2291DE"
-                                            StrokeThickness="2"
                                             RadiusX="40"
-                                            RadiusY="40">
+                                            RadiusY="40"
+                                            Stroke="#FF2291DE"
+                                            StrokeThickness="2">
                                             <Rectangle.Fill>
                                                 <SolidColorBrush Opacity="0.699999988079071" Color="#FF383838" />
                                             </Rectangle.Fill>
@@ -271,9 +271,9 @@
                                             Margin="70,25"
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
-                                            Foreground="#FFCFCFCF"
                                             FontFamily="Segoe MDL2 Assets"
                                             FontSize="40"
+                                            Foreground="#FFCFCFCF"
                                             Text="&#xE8A3;" />
                                     </Grid>
                                 </Viewbox>
@@ -315,31 +315,52 @@
                             VerticalAlignment="Center"
                             Icon="World"
                             Label="pixiv" />
-                                
+
                                 </StackPanel>
 
                             </Grid>
                         </CommandBar.Content>
                     </CommandBar>
                 </Grid>-->
-                <Grid Grid.Row="1" >
+                <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Grid.Background >
+                    <Grid.Background>
                         <SolidColorBrush Color="{ThemeResource SystemChromeMediumLowColor}" />
                     </Grid.Background>
-                    <AppBarButton  Name="DownloadButton" Click="DownloadButton_Click" Grid.Column="0" Label="下载" Icon="Download" HorizontalAlignment="Center" VerticalAlignment="Center"  />
-                    <AppBarButton Grid.Column="1" Label="收藏" Icon="OutlineStar" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <AppBarButton Grid.Column="2" Label="分享" HorizontalAlignment="Stretch" VerticalAlignment="Center"  >
+                    <AppBarButton
+                        Name="DownloadButton"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Click="DownloadButton_Click"
+                        Icon="Download"
+                        Label="下载" />
+                    <AppBarButton
+                        Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Icon="OutlineStar"
+                        Label="收藏" />
+                    <AppBarButton
+                        Grid.Column="2"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center"
+                        Label="分享">
                         <AppBarButton.Icon>
-                            <FontIcon Glyph="&#xE72D;" FontFamily="Segoe MDL2 Assets"/>
+                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72D;" />
                         </AppBarButton.Icon>
                     </AppBarButton>
-                    <AppBarButton Grid.Column="3" Label="pixiv" Icon="World" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <AppBarButton
+                        Grid.Column="3"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Icon="World"
+                        Label="pixiv" />
                 </Grid>
                 <!--<Grid Height="100" HorizontalAlignment="Center">
                     <Grid.ColumnDefinitions>
@@ -535,10 +556,10 @@
                     </Border>
                 </Grid>
                 <Button
-                    Visibility="Collapsed "
                     Name="textbutoon"
                     Click="textbutoon_Click"
-                    Content="复制下载链接" />
+                    Content="复制下载链接"
+                    Visibility="Collapsed " />
                 <TextBlock Name="textblock" />
             </Grid>
 
