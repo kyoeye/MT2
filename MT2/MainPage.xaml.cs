@@ -120,12 +120,15 @@ namespace MT2
                 {
                     if (lookit.ratings[lookit.a] != "e")
                     {
-                        Listapiitems.Add(new Listapiset { _name = "作者：" + lookit.authorname[lookit.a],
+                        Listapiitems.Add(new Listapiset
+                        {
+                            _name = "作者：" + lookit.authorname[lookit.a],
                             rating = lookit.ratings[lookit.a],
-                            preview_url =lookit.previewurl[lookit.a],
+                            preview_url = lookit.previewurl[lookit.a],
                             sample_url = lookit.sampleurl[lookit.a],
                             _a = lookit.a,
-                            id = lookit._id[lookit.a] });
+                            id = lookit._id[lookit.a]
+                        });
                     }
                     else
                     {
@@ -146,39 +149,39 @@ namespace MT2
         {
             int count = Listapiitems.Count;
 
-                for (int i = count; i < count + 20; i++)
+            for (int i = count; i < count + 20; i++)
+            {
+                if (lookit.ratings[lookit.a] != "q")
                 {
-                    if (lookit.ratings[lookit.a] != "q")
+                    if (lookit.ratings[lookit.a] != "e")
                     {
-                        if (lookit.ratings[lookit.a] != "e")
-                        {
-                            Listapiitems.Add(
-                                new Listapiset
-                                {
-                                    _name = "作者：" + lookit.authorname[lookit.a],
-                                    rating = lookit.ratings[lookit.a],
-                                    preview_url =lookit. previewurl[lookit.a],
-                                    sample_url = lookit.sampleurl[lookit.a],
-                                    _a = lookit.a,
-                                    id = lookit._id[lookit.a]
-                                });
-                        }
-                        else
-                        {
-                            lookit.a++;
-                            continue;
-                        }
+                        Listapiitems.Add(
+                            new Listapiset
+                            {
+                                _name = "作者：" + lookit.authorname[lookit.a],
+                                rating = lookit.ratings[lookit.a],
+                                preview_url = lookit.previewurl[lookit.a],
+                                sample_url = lookit.sampleurl[lookit.a],
+                                _a = lookit.a,
+                                id = lookit._id[lookit.a]
+                            });
                     }
                     else
                     {
                         lookit.a++;
                         continue;
                     }
-                    lookit.a++;
-
-                    //Listapiitems.Add(new Listapiset { name = "作者：" + authorname[count], rating = lookit.ratings[count], preview_url = previewurl[count], sample_url = lookit.sampleurl[count] });
                 }
-            
+                else
+                {
+                    lookit.a++;
+                    continue;
+                }
+                lookit.a++;
+
+                //Listapiitems.Add(new Listapiset { name = "作者：" + authorname[count], rating = lookit.ratings[count], preview_url = previewurl[count], sample_url = lookit.sampleurl[count] });
+            }
+
 
 
         }
@@ -213,50 +216,57 @@ namespace MT2
                                 switch (item.Name.ToString())
                                 {
                                     case "id":
+                                        lookit._id[lookit.a] = item.ToString();
                                         break;
                                     case "preview_url":
+                                        lookit.previewurl[lookit.a] = (string)item;
                                         break;
                                     case "author":
+                                        lookit.authorname[lookit.a] = (string)item;
                                         break;
                                     case "sample_url":
+                                        lookit.sampleurl[lookit.a] = (string)item;
                                         break;
                                     case "jpeg_url":
+                                        lookit.jpegurl[lookit.a] = (string)item;
+
                                         break;
                                     case "rating":
+                                        lookit.ratings[lookit.a] = (string)item;
                                         break;
 
                                 }
 
-                                if (item.Name == "id")
-                                {
-                                    lookit._id[lookit.a] = (string)item;
-                                }
-                                else if (item.Name == "preview_url")
-                                {
-                                    lookit.previewurl[lookit.a] = (string)item;
-                                }
-                                else if (item.Name == "author")
-                                {
-                                    lookit.authorname[lookit.a] = (string)item;
-                                }
-                                else if (item.Name == "sample_url")
-                                {
-                                    lookit.sampleurl[lookit.a] = (string)item;
-                                }
-                                else if (item.Name == "jpeg_url")
-                                {
-                                    lookit.jpegurl[lookit.a] = (string)item;
-                                }
-                                else if (item.Name == "rating") // 这个判断需要重新写11.5留
-                                {
-                                    lookit.ratings[lookit.a] = (string)item;
-                                }
+                                //if (item.Name == "id")
+                                //{
+                                //    lookit._id[lookit.a] = (string)item;
+                                //}
+                                //else if (item.Name == "preview_url")
+                                //{
+                                //    lookit.previewurl[lookit.a] = (string)item;
+                                //}
+                                //else if (item.Name == "author")
+                                //{
+                                //    lookit.authorname[lookit.a] = (string)item;
+                                //}
+                                //else if (item.Name == "sample_url")
+                                //{
+                                //    lookit.sampleurl[lookit.a] = (string)item;
+                                //}
+                                //else if (item.Name == "jpeg_url")
+                                //{
+                                //    lookit.jpegurl[lookit.a] = (string)item;
+                                //}
+                                //else if (item.Name == "rating") // 这个判断需要重新写11.5留
+                                //{
+                                //    lookit.ratings[lookit.a] = (string)item;
+                                //}
                             }
                             if (lookit.a < 100)
                             {
                                 lookit.a++;
                             }
-                          
+
                         }
                     }
 

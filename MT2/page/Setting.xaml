@@ -23,7 +23,7 @@
             <ColorAnimation
                 EnableDependentAnimation="True"
                 Storyboard.TargetName="SettingTop"
-                Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)"
+                Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.                 Color)"
                 From="#FFF4F4F4"
                 To="#FF0074B6"
                 Duration="0:0:1" />
