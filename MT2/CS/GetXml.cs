@@ -17,6 +17,7 @@ namespace MT2.CS
 
         private CancellationTokenSource cts = new CancellationTokenSource();
 
+
         public static async Task<string> GetWebString(string url, string formData)
         {
             string RequestUri = url;
@@ -50,42 +51,89 @@ namespace MT2.CS
             try
             {
 
-                IProgress<Windows.Web.Http.HttpProgress> progress = new Progress<Windows.Web.Http.HttpProgress>();
-
-                HttpClient httpclient = new HttpClient();
-                HttpResponseMessage httpResponseMessage = await httpclient.GetAsync(new Uri(RequestUri)); //使用httpResponMessage接收uri返回的信息
-                 httpResponseMessage.EnsureSuccessStatusCode();
-                                                                                                          //var s = httpResponseMessage.StatusCode.ToString();
-                                                                                                          //getStatuscode(s);
-                var text = await httpResponseMessage.Content.ReadAsStringAsync(); //异步读取字符串
-                result = text;
-                //var inputstream = await httpResponseMessage.Content.ReadAsStreamAsync();
-                //Stream stream = inputstream.AsRandomAccessStream();
-                //using (StreamReader reader = new StreamReader(stream))
-                //{
-                //    string result = reader.ReadToEnd();
-                //    wv.NavigateToString(result);
-                //}
 
 
+                using (Windows.Web .Http .HttpClient httpclient = new Windows .Web .Http . HttpClient())
+                {
+                    using (Windows.Web .Http . HttpResponseMessage httpResponseMessage = await httpclient.GetAsync(new Uri(RequestUri)))
+                    {
+                        //var inputstream = await httpResponseMessage.Content.ReadAsStreamAsync();
+                        httpResponseMessage.EnsureSuccessStatusCode();
+                        result = await httpResponseMessage.Content.ReadAsStringAsync();
+                        //Stream stream = inputstream.AsRandomAccessStream();
+                        //Stream stream = inputstream;
+                        //using (StreamReader reader = new StreamReader(stream))
+                        //{
+                        //    string a = reader.ReadToEnd();
+                        //    //wv.NavigateToString(result);
+                        //    getStatuscode(a);
+                        //}
+                    }
+
+                }
+                //var   s = httpResponseMessage.StatusCode.ToString();
+                //getStatuscode(s);
+                //var text = await httpResponseMessage.Content.ReadAsStringAsync(); //异步读取字符串
+                //result = text;
             }
             catch (Exception ec)
             {
 
                 var s = ec.Message.ToString();
                 await new MessageDialog(s).ShowAsync();
-                //var s = httpResponseMessage.StatusCode.ToString();
-                //getStatuscode(s);
-
-                //var ectc = ec.ToString();
-                //TextDialog ectctc = new TextDialog();
-                //ectctc.TopTextblocktext("怒刷存在的异常酱");
-                //ectctc.Contenttextblocktext(ectc);
                 result = null;
 
             }
             return result;
         }
+        //public static async Task<string> GetWebString(string url, string a)        //{
+        //    Windows.Web.Http.HttpStatusCode statecode = new Windows.Web.Http.HttpStatusCode();        //    string webString = null;        //    try        //    {        //        using (Windows.Web.Http.HttpClient httpClient = new Windows.Web.Http.HttpClient())        //        {        //            using (Windows.Web.Http.HttpResponseMessage httpResponseMessage = await httpClient.GetAsync(new Uri(url)))        //            {
+        //                statecode = httpResponseMessage.StatusCode;
+        //                string dialog = "";
+        //                switch (statecode.ToString())
+        //                {
+        //                    case "200":
+
+        //                        break;
+        //                    case "403":
+        //                        dialog = "403：错误，拒绝访问";
+        //                        showText(dialog);
+        //                        break;
+        //                    case "404":
+        //                        dialog = "404：错误，没有找到";
+        //                        showText(dialog);
+        //                        break;
+        //                    case "420":
+        //                        dialog = "420：错误，无效记录，记录无法保存";
+        //                        showText(dialog);
+        //                        break;
+        //                    case "421":
+        //                        dialog = "421：错误，当日访问次数上限";
+        //                        showText(dialog);
+        //                        break;
+        //                    case "422":
+        //                        dialog = "422：错误，当前资源被锁定无法修改";
+        //                        showText(dialog);
+        //                        break;
+        //                    case "423":
+        //                        dialog = "423：错误，资源已经存在";
+        //                        showText(dialog);
+        //                        break;
+        //                    case "424":
+        //                        dialog = "424：错误，无效参数，给定参数无效";
+        //                        showText(dialog);
+        //                        break;
+        //                    case "500":
+        //                        dialog = "500：错误，服务器内部错误";
+        //                        showText(dialog);
+        //                        break;
+        //                    case "503":
+        //                        dialog = "503：错误，服务器无法处理当前请求";
+        //                        showText(dialog);
+        //                        break;
+
+        //                }
+        //                httpResponseMessage.EnsureSuccessStatusCode();        //                string text = await httpResponseMessage.Content.ReadAsStringAsync();        //                webString = text;        //            }        //        }        //    }        //    catch        //    {        //        webString = null;        //    }        //    return webString;        //}
 
         private static void getStatuscode(string s)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,72 +8,102 @@ using System.Xml.Linq;
 
 namespace MT2.CS
 {
-    public class lcclass
+    //public class lcclass
+    //{
+    //    public string[] previewurl;
+    //    public string[] _id;
+    //    public string[] authorname;
+    //    public int b;
+    //    public string lookimguri;//选中索引
+    //    public int a = 0; // 数组索引
+    //    public string[] sampleurl;
+    //    public string[] ratings;
+    //    public string[] jpegurl;
+    //    public string[] thisname;
+    //}
+
+    public class _itemsave
     {
-        public string[] previewurl;
-        public string[] _id;
-        public string[] authorname;
-        public int b;
-        public string lookimguri;//选中索引
-        public int a = 0; // 数组索引
-        public string[] sampleurl;
-        public string[] ratings;
-        public string[] jpegurl;
-        public string[] thisname;
+        public string previewurl { get; set; }
+        public string id { get; set; }
+        public string authorname { get; set; }
+        public string lookimguri { get; set; }
+        public string sampleurl { get; set; }
+        public string ratings { get; set; }
+        public string jpegurl { get; set; }
+        public string thisname { get; set; }
     }
 
     public class ItemGET
     {
-        lcclass lc = new lcclass();
+        public string previewurl;
+        public string id;
+        public string authorname;
+        public string lookimguri;
+        public string sampleurl;
+        public string ratings;
+        public string jpegurl;
+        public string thisname;
+        //lcclass lc = new lcclass();
         public ItemGET()
         {
-            
         }
-        
-        public void _lc (int a ) //a为数组容量
-        {
-            lc.previewurl = new string[a];
-            lc._id = new string[a];
-            lc.ratings = new string[a];
-            lc.authorname = new string[a];
-            lc.sampleurl = new string[a];
-            lc.jpegurl = new string[a];
-            lc.thisname = new string[a];
-        }
+
+        ObservableCollection<_itemsave >itemlist  { get; set; }
+
+
+        _itemsave itemsave = new _itemsave();
         public void Toitem(string _mystring)
         {
+
+
             XElement xelement = XElement.Parse(_mystring);
             IEnumerable<XElement> elements = xelement.Elements();
             foreach (var element in elements)
             {
                 if (element.Name == "post")
                 {
+                    for ( int a = 0; a<1000;a++)
+                    {
+                        itemlist.Add(new CS._itemsave
+                        { id = this.id ,
+                            jpegurl = this .jpegurl ,
+                            authorname = this.authorname ,
+                            ratings = this .ratings ,
+                            lookimguri = this .lookimguri ,
+                            previewurl =this .previewurl ,
+                            sampleurl =this .sampleurl ,
+                            thisname = this.thisname });
+                    }
                     IEnumerable<XAttribute> Items = element.Attributes();
                     foreach (var item in Items)
                     {
                         switch (item.Name.ToString())
                         {
                             case "id":
-                                lc._id[lc.a] = item.ToString();
+                               this. id  = item.ToString();
                                 break;
                             case "preview_url":
-                                lc.previewurl[lc.a] = (string)item;
+                               previewurl = (string)item;
                                 break;
                             case "author":
-                                lc.authorname[lc.a] = (string)item;
+                              authorname  = (string)item;
                                 break;
                             case "sample_url":
-                                lc.sampleurl[lc.a] = (string)item;
+                               sampleurl  = (string)item;
                                 break;
                             case "jpeg_url":
-                                lc.jpegurl[lc.a] = (string)item;
+                                jpegurl = (string)item;
 
                                 break;
                             case "rating":
-                                lc.ratings[lc.a] = (string)item;
+                               ratings  = (string)item;
                                 break;
                         }
                     }
                 }
             }
         }
+    }
+}
+

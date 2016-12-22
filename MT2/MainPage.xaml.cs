@@ -23,7 +23,7 @@ namespace MT2
 
         //public class Uridh
         //{           
-        public int shuzu = 100;//数组容量变量
+        public int shuzu = 1000000;//数组容量变量
         public int pageint = 1; //页码索引
         //}
 
@@ -84,10 +84,10 @@ namespace MT2
             Mymenu.IsPaneOpen = !Mymenu.IsPaneOpen;
         }
 
-        //private void SettingButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Frame.Navigate(typeof(Setting));
-        //}
+        private void SettingButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Setting));
+        }
 
         public class Listapiset
         {
@@ -111,6 +111,7 @@ namespace MT2
         public ObservableCollection<Listapiset> Listapiitems { get; set; }
         public void GetWaterfall()
         {
+           
             lookit.a = 0;
             Listapiitems = new ObservableCollection<Listapiset>();
 
