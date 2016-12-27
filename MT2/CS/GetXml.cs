@@ -86,8 +86,16 @@ namespace MT2.CS
             }
             return result;
         }
-        //public static async Task<string> GetWebString(string url, string a)        //{
-        //    Windows.Web.Http.HttpStatusCode statecode = new Windows.Web.Http.HttpStatusCode();        //    string webString = null;        //    try        //    {        //        using (Windows.Web.Http.HttpClient httpClient = new Windows.Web.Http.HttpClient())        //        {        //            using (Windows.Web.Http.HttpResponseMessage httpResponseMessage = await httpClient.GetAsync(new Uri(url)))        //            {
+        //public static async Task<string> GetWebString(string url, string a)
+        //{
+        //    Windows.Web.Http.HttpStatusCode statecode = new Windows.Web.Http.HttpStatusCode();
+        //    string webString = null;
+        //    try
+        //    {
+        //        using (Windows.Web.Http.HttpClient httpClient = new Windows.Web.Http.HttpClient())
+        //        {
+        //            using (Windows.Web.Http.HttpResponseMessage httpResponseMessage = await httpClient.GetAsync(new Uri(url)))
+        //            {
         //                statecode = httpResponseMessage.StatusCode;
         //                string dialog = "";
         //                switch (statecode.ToString())
@@ -133,7 +141,19 @@ namespace MT2.CS
         //                        break;
 
         //                }
-        //                httpResponseMessage.EnsureSuccessStatusCode();        //                string text = await httpResponseMessage.Content.ReadAsStringAsync();        //                webString = text;        //            }        //        }        //    }        //    catch        //    {        //        webString = null;        //    }        //    return webString;        //}
+        //                httpResponseMessage.EnsureSuccessStatusCode();
+        //                string text = await httpResponseMessage.Content.ReadAsStringAsync();
+        //                webString = text;
+        //            }
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        webString = null;
+
+        //    }
+        //    return webString;
+        //}
 
         private static void getStatuscode(string s)
         {

@@ -97,7 +97,7 @@ namespace MT2
         private async void App_BackRequested(object sender, BackRequestedEventArgs e)
         {
             // 这里面可以任意选择控制哪个Frame   
-            // 如果MainPage.xaml中使用了另外的Frame标签进行导航 可在此处获取需要GoBack的Frame  
+            // 如果MainPage.xaml中使用了另外的Frame标签进2行导航 可在此处获取需要GoBack的Frame  
             var rootFrame = Window.Current.Content as Frame;
             if (rootFrame.CanGoBack)
             {

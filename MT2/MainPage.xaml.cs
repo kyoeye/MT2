@@ -23,7 +23,8 @@ namespace MT2
 
         //public class Uridh
         //{           
-        public int shuzu = 1000000;//数组容量变量
+        public int shuzu = 200;//数组容量变量
+        public int buttonint;
         public int pageint = 1; //页码索引
         //}
 
@@ -156,9 +157,7 @@ namespace MT2
                 {
                     if (lookit.ratings[lookit.a] != "e")
                     {
-                        Listapiitems.Add(
-                            new Listapiset
-                            {
+                        Listapiitems.Add(new Listapiset {
                                 _name = "作者：" + lookit.authorname[lookit.a],
                                 rating = lookit.ratings[lookit.a],
                                 preview_url = lookit.previewurl[lookit.a],
@@ -311,6 +310,17 @@ namespace MT2
         private void Setting_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Setting));
+        }
+
+        private void MenuListboxitem_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+                  foreach (var item in e.AddedItems )
+            {
+                if (item == hotitem)
+                {
+                    Frame.Navigate(typeof(hotitempage));
+                }
+            }
         }
     }
 }
