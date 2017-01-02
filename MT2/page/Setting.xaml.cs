@@ -26,13 +26,15 @@ namespace MT2.page
         public Setting()
         {
             this.InitializeComponent();
+           
         }
-      
+
         //private void aboutButton_Click(object sender, RoutedEventArgs e)
         //{
         //    storyboard1.Begin();        
         //}
-
+       
+        
         private void myListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
               foreach (var item in e.AddedItems )

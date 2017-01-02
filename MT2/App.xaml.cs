@@ -99,6 +99,7 @@ namespace MT2
             // 这里面可以任意选择控制哪个Frame   
             // 如果MainPage.xaml中使用了另外的Frame标签进2行导航 可在此处获取需要GoBack的Frame  
             var rootFrame = Window.Current.Content as Frame;
+          
             if (rootFrame.CanGoBack)
             {
                 rootFrame.GoBack();
@@ -111,9 +112,9 @@ namespace MT2
                 //  rootFrame.GoBack();
                 var dialog = new ContentDialog()
                 {
-                    Title = "确定离开？",
+                    Title = "真的。。真的就不再逛逛嘛O_O",
                     Content = "/(ㄒoㄒ)/~~",
-                    PrimaryButtonText = "转身就走",
+                    PrimaryButtonText = "滚",
                     FullSizeDesired = false,
                 };
                 dialog.PrimaryButtonClick += (_s, _e) => { Current.Exit(); };

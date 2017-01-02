@@ -9,67 +9,84 @@ using System.Xml.Linq;
 
 namespace MT2.CS
 {
-    //public class lcclass
-    //{
-    //    public string[] previewurl;
-    //    public string[] _id;
-    //    public string[] authorname;
-    //    public int b;
-    //    public string lookimguri;//选中索引
-    //    public int a = 0; // 数组索引
-    //    public string[] sampleurl;
-    //    public string[] ratings;
-    //    public string[] jpegurl;
-    //    public string[] thisname;
-    //}
-
-    public class _itemshow
+    public class listClass
     {
-        public string previewurl { get; set; }
-        public string id { get; set; }
-        public string authorname { get; set; }
-        public string lookimguri { get; set; }
-        public string sampleurl { get; set; }
-        public string ratings { get; set; }
-        public string jpegurl { get; set; }
-        public string thisname { get; set; }
+        public int a;
+        public List<string> previewurl = new List<string>();
+        public List<string> id = new List<string>();
+        public List<string> authorname = new List<string>();
+        public List<string> lookimguri = new List<string>();
+        public List<string> sampleurl = new List<string>();
+        public List<string> ratings = new List<string>();
+        public List<string> jpegurl = new List<string>();
+        public List<string> thisname = new List<string>();
     }
-    //public class _itemget
-    //{
-    //    public string previewurl { get; set; }
-    //    public string id { get; set; }
-    //    public string authorname { get; set; }
-    //    public string lookimguri { get; set; }
-    //    public string sampleurl { get; set; }
-    //    public string ratings { get; set; }
-    //    public string jpegurl { get; set; }
-    //    public string thisname { get; set; }
-    //}
+    public class listsave
+    {
+        public int _a { get; set; }
+        public string id { get; set; } //作品id
+        public string _name { get; set; } //作者名字
+        public string imguri { get; set; } //图片uri
+        public string preview_url { get; set; }//瀑布流预览图
+        public string tags { get; set; } // 标签，这个实现的方式有点特殊
+        public string created_at { get; set; }//创建者
+        public string approver_id { get; set; }//审核人
+        public string sample_url { get; set; }//二级预览
+        public string rating { get; set; }//安全等级
+
+    }
+
+
+
     public class ItemGET
     {
-        public int a = 0;
-        public string previewurl;
-        public string id;
-        public string authorname;
-        public string lookimguri;
-        public string sampleurl;
 
-        public string ratings;
-        public string jpegurl ;
-        public string thisname;
-        //lcclass lc = new lcclass();
+        public ObservableCollection<listsave> Listapiitems { get; set; }
+
+        listClass listclass = new listClass ();
         public ItemGET()
         {
         }
 
-        public ObservableCollection<_itemshow> itemlist { get; set; }
+       public void getlistitems()
+        {
+            Listapiitems = new ObservableCollection<listsave >();
 
-        //List<_itemget> _Toitemllis = new List<_itemget>();
-        _itemshow itemsave = new _itemshow();
+            for (int i = 0; i < 20; i++) // 50为一次瀑布流显示的所有数量
+            {
+                if (listclass.ratings[listclass .a] != "q")
+                {
+                    if (listclass.ratings[listclass.a] != "e")
+                    {
+                        Listapiitems.Add(new CS.listsave
+                        {
+                            _name = "作者：" + listclass .authorname[listclass .a],
+                            rating = listclass .ratings[listclass .a],
+                            preview_url = listclass.previewurl[listclass.a],
+                            sample_url = listclass.sampleurl[listclass.a],
+                            _a = listclass.a,
+                            id = listclass.id[listclass.a]
+                        });
+                    }
+                    else
+                    {
+                        listclass.a++;
+                        continue;
+                    }
+                }
+                else
+                {
+                    listclass.a++;
+                    continue;
+                }
+                listclass.a++;
+            }
+         
+        }
         public void Toitem(string _mystring)
         {
-            a = 0;
-
+           
+            //listclass = new CS.listClass();
             XElement xelement = XElement.Parse(_mystring);
             IEnumerable<XElement> elements = xelement.Elements();
             foreach (var element in elements)
@@ -81,51 +98,29 @@ namespace MT2.CS
                     {
                         switch (item.Name.ToString())
                         {
-                            case "id":
-                                id = item.ToString();
+                            case "id":                              
+                                    listclass.id.Add((string)item);                             
                                 break;
                             case "preview_url":
-                                previewurl = (string)item;
+                                listclass.previewurl.Add((string)item);
                                 break;
                             case "author":
-                                authorname = (string)item;
+                                listclass.authorname.Add((string)item);
                                 break;
                             case "sample_url":
-                                sampleurl = (string)item;
+                                listclass.sampleurl.Add((string)item);
                                 break;
                             case "jpeg_url":
-                                jpegurl = (string)item;
+                                listclass.jpegurl.Add((string)item);
                                 break;
                             case "rating":
-                                ratings = (string)item;
+                                listclass.ratings.Add((string)item);
                                 break;
                         }
                     }
                 }
-                itemlist.Add(new CS._itemshow
-                {
-                    id = this.id,
-                    previewurl = this.previewurl,
-                    authorname = this.authorname,
-                    sampleurl = this.sampleurl,
-                    jpegurl = this.jpegurl,
-                    ratings = this.ratings
-                });
-                a++;
             }
         }
     }
 }
 
-//for (int a = 0; a < 1000; a++)
-//{
-//    itemlist.Add(new CS._itemsave
-//    { id = this.id ,
-//        jpegurl = this .jpegurl ,
-//        authorname = this.authorname ,
-//        ratings = this .ratings ,
-//        lookimguri = this .lookimguri ,
-//        previewurl =this .previewurl ,
-//        sampleurl =this .sampleurl ,
-//        thisname = this.thisname });
-//}

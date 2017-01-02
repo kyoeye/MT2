@@ -24,32 +24,26 @@ namespace MT2.page
     /// </summary>
     public sealed partial class hotitempage : Page
     {
-        string hotapiuri = "https://yande.re/post.xml?popular_by_week";
+        string hotapiuri = "https://yande.re/post/popular_recent.xml";
+        string xmltext;
+        ItemGET itemget = new ItemGET();
         //string mystring;
         public  hotitempage()
         {
             this.InitializeComponent();
-            xmlstring(hotapiuri);
-
-            Mygridview.ItemsSource = _itemget .itemlist;
+            getxmltext();
+            NavigationCacheMode = NavigationCacheMode.Enabled;
         }
-        
-        GetXml getxml = new GetXml();
-        ItemGET _itemget = new ItemGET();
 
-        public async  void  xmlstring (string homeimguri)
+        public async void getxmltext()
         {
-            //string result;
-            var mystring = await GetXml.GetWebString(homeimguri, null);
-            _itemget.Toitem(mystring);
-
-            //mystring = await GetXml.GetWebString(homeimguri, null);
-            //HttpClient httpclient1 = new HttpClient();
-            //HttpResponseMessage httpResponseMessage = await httpclient1.GetAsync(new Uri(homeimguri));
-            //httpResponseMessage.EnsureSuccessStatusCode();
-            //mystring  = await httpResponseMessage.Content.ReadAsStringAsync();
-
+            xmltext = await GetXml.GetWebString(hotapiuri ,null);
+            itemget.Toitem(xmltext);
+            itemget.getlistitems();
+            Mygridview.ItemsSource = itemget.Listapiitems;
         }
+
+
 
     }
 }

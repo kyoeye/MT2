@@ -20,7 +20,7 @@ namespace MT2
     /// </summary>
     public sealed partial class MainPage : Page
     {
-
+        
         //public class Uridh
         //{           
         public int shuzu = 200;//数组容量变量
@@ -35,7 +35,8 @@ namespace MT2
         public class Lookimgclass
         {
             public string[] previewurl;
-            public string[] _id;
+            public List<string> _id;
+            //public string[] _id;
             public string[] authorname;
             public int b;
             public string lookimguri;//选中索引
@@ -49,7 +50,7 @@ namespace MT2
         public void getsz() //数组用一个方法引用
         {
             lookit.previewurl = new string[shuzu];
-            lookit._id = new string[shuzu];
+            lookit._id = new List<string>();
             lookit.ratings = new string[shuzu];
             lookit.authorname = new string[shuzu];
             lookit.sampleurl = new string[shuzu];
@@ -59,7 +60,6 @@ namespace MT2
         //Uridh uridh = new Uridh();
         public MainPage()
         {
-
             this.InitializeComponent();
             getsz();
             getimage(null);
@@ -216,7 +216,7 @@ namespace MT2
                                 switch (item.Name.ToString())
                                 {
                                     case "id":
-                                        lookit._id[lookit.a] = item.ToString();
+                                        lookit._id.Add((string)item);
                                         break;
                                     case "preview_url":
                                         lookit.previewurl[lookit.a] = (string)item;
