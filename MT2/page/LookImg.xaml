@@ -227,6 +227,15 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Storyboard x:Name="storyboard1">
+            <ColorAnimation
+                EnableDependentAnimation="True"
+                Storyboard.TargetName="Buttonrectangle"
+                Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
+                From="#FF383838"
+                To="#FF0074B6"
+                Duration="0:0:1" />
+        </Storyboard>
     </Page.Resources>
 
     <Grid>
@@ -242,7 +251,13 @@
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <Grid Name="betaborder" Background="Black">
+                    <ProgressBar
+                        Name="Myprogressbar"
+                        Height="10"
+                        VerticalAlignment="Top"
+                        Foreground="#FF0078D7" />
                     <Image Name="SeeImage" Stretch="Uniform" />
+
                     <Button
                         Name="AppBarButton"
                         Width="100"
@@ -250,12 +265,14 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
                         Background="{x:Null}"
-                        BorderBrush="{x:Null}">
+                        BorderBrush="{x:Null}"
+                        PointerEntered="AppBarButton_PointerEntered">
                         <Button.Content>
                             <Grid>
                                 <Viewbox>
                                     <Grid>
                                         <Rectangle
+                                            Name="Buttonrectangle"
                                             Width="150"
                                             Height="90"
                                             HorizontalAlignment="Center"
@@ -281,47 +298,6 @@
                         </Button.Content>
                     </Button>
                 </Grid>
-                <!--<Grid Grid.Row="1" Background="#FFE6E6E6" VerticalAlignment="Top">
-                    <CommandBar ClosedDisplayMode="Compact" HorizontalAlignment="Center" VerticalAlignment="Top">
-                        <CommandBar.Content >
-                            <Grid HorizontalAlignment="Center" >
-                                <StackPanel Orientation="Horizontal" >
-                                    <AppBarButton
-                            Name="DownloadButton"
-                            Grid.Column="0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Style="{StaticResource AppBarButtonStyle1}"
-                            Icon="Download"
-                            Label="下载" />
-                                <AppBarButton
-                            Grid.Column="1"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Icon="OutlineStar"
-                            Label="收藏" />
-                                <AppBarButton
-                            Grid.Column="2"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Center"
-                            Label="分享">
-                                    <AppBarButton.Icon>
-                                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72D;" />
-                                    </AppBarButton.Icon>
-                                </AppBarButton>
-                                <AppBarButton
-                            Grid.Column="3"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Icon="World"
-                            Label="pixiv" />
-
-                                </StackPanel>
-
-                            </Grid>
-                        </CommandBar.Content>
-                    </CommandBar>
-                </Grid>-->
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -362,177 +338,6 @@
                         Icon="World"
                         Label="pixiv" />
                 </Grid>
-                <!--<Grid Height="100" HorizontalAlignment="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-
-                    </Grid.ColumnDefinitions>
-                    <Viewbox Grid.Column="0">
-                        <Button
-                            Name="DownloadButton"
-                            Click="DownloadButton_Click"
-                            Grid.Column="0"
-                            Width="100"
-                            Margin="10"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Bottom"
-                            Background="{x:Null}"
-                            BorderBrush="{x:Null}">
-                            <Button.Content>
-                                <Grid>
-                                    <Viewbox>
-                                        <Grid>
-                                            <Rectangle
-                                                Width="150"
-                                                Height="90"
-                                                HorizontalAlignment="Center"
-                                                Stroke="#FF2291DE"
-                                                StrokeThickness="2"
-                                                RadiusX="40"
-                                                RadiusY="40">
-                                                <Rectangle.Fill>
-                                                    <SolidColorBrush Opacity="0.699999988079071" Color="#FFDEDEDE" />
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                            <TextBlock
-                                                Margin="70,25"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                Foreground="Black"
-                                                FontFamily="Segoe MDL2 Assets"
-                                                FontSize="40"
-                                                Text="&#xE118;" />
-                                        </Grid>
-                                    </Viewbox>
-                                </Grid>
-                            </Button.Content>
-                        </Button>
-                    </Viewbox>
-                    <Viewbox Grid.Column="1">
-                        <Button
-                            Name="StarButton"
-                            Width="100"
-                            Margin="10"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Bottom"
-                            Background="{x:Null}"
-                            BorderBrush="{x:Null}">
-                            <Button.Content>
-                                <Grid>
-                                    <Viewbox>
-                                        <Grid>
-                                            <Rectangle
-                                                Width="150"
-                                                Height="90"
-                                                HorizontalAlignment="Center"
-                                                Stroke="#FF2291DE"
-                                                StrokeThickness="2"
-                                                RadiusX="40"
-                                                RadiusY="40">
-                                                <Rectangle.Fill>
-                                                    <SolidColorBrush Opacity="0.699999988079071" Color="#FF4F4F4F" />
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                            <TextBlock
-                                                Margin="70,25"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                Foreground="#FFCFCFCF"
-                                                FontFamily="Segoe MDL2 Assets"
-                                                FontSize="40"
-                                                Text="&#xE113;" />
-                                        </Grid>
-                                    </Viewbox>
-                                </Grid>
-                            </Button.Content>
-                        </Button>
-
-                    </Viewbox>
-                    <Viewbox Grid.Column="2">
-                        <Button
-                            Name="ShareButton"
-                            Width="100"
-                            Margin="10"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Bottom"
-                            Background="{x:Null}"
-                            BorderBrush="{x:Null}">
-                            <Button.Content>
-                                <Grid>
-                                    <Viewbox>
-                                        <Grid>
-                                            <Rectangle
-                                                Width="150"
-                                                Height="90"
-                                                HorizontalAlignment="Center"
-                                                Stroke="#FF2291DE"
-                                                StrokeThickness="2"
-                                                RadiusX="40"
-                                                RadiusY="40">
-                                                <Rectangle.Fill>
-                                                    <SolidColorBrush Opacity="0.699999988079071" Color="#FF4F4F4F" />
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                            <TextBlock
-                                                Margin="70,25"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                Foreground="#FFCFCFCF"
-                                                FontFamily="Segoe MDL2 Assets"
-                                                FontSize="40"
-                                                Text="&#xE72D;" />
-                                        </Grid>
-                                    </Viewbox>
-                                </Grid>
-                            </Button.Content>
-                        </Button>
-
-                    </Viewbox>
-                    <Viewbox Grid.Column="3">
-                        <Button
-                            Name="shezhibutton"
-                            Width="100"
-                            Margin="10"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Bottom"
-                            Background="{x:Null}"
-                            BorderBrush="{x:Null}">
-                            <Button.Content>
-                                <Grid>
-                                    <Viewbox>
-                                        <Grid>
-                                            <Rectangle
-                                                Width="150"
-                                                Height="90"
-                                                HorizontalAlignment="Center"
-                                                Stroke="#FF2291DE"
-                                                StrokeThickness="2"
-                                                RadiusX="40"
-                                                RadiusY="40">
-                                                <Rectangle.Fill>
-                                                    <SolidColorBrush Opacity="0.699999988079071" Color="#FF4F4F4F" />
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                            <TextBlock
-                                                Margin="70,25"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                Foreground="#FFCFCFCF"
-                                                FontFamily="Segoe MDL2 Assets"
-                                                FontSize="40"
-                                                Text="&#xE10C;" />
-                                        </Grid>
-                                    </Viewbox>
-                                </Grid>
-                            </Button.Content>
-                        </Button>
-
-                    </Viewbox>
-
-                </Grid>-->
                 <Grid Grid.Row="2">
                     <Border
                         Margin="10"
@@ -560,7 +365,7 @@
                     Click="textbutoon_Click"
                     Content="复制下载链接"
                     Visibility="Collapsed " />
-                <TextBlock Name="textblock" />
+
             </Grid>
 
         </ScrollViewer>

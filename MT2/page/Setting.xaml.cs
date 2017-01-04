@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -26,15 +27,27 @@ namespace MT2.page
         public Setting()
         {
             this.InitializeComponent();
-           
+            SystemNavigationManager.GetForCurrentView().BackRequested += ddbacke;
+
+        }
+
+        private void ddbacke(object sender, BackRequestedEventArgs e)
+        {
+           if (settingframe .CanGoBack)
+            {
+                settingframe.GoBack();
+                e.Handled = true;
+                SystemNavigationManager.GetForCurrentView().BackRequested -= ddbacke;
+
+            }
         }
 
         //private void aboutButton_Click(object sender, RoutedEventArgs e)
         //{
         //    storyboard1.Begin();        
         //}
-       
-        
+
+
         private void myListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
               foreach (var item in e.AddedItems )

@@ -98,8 +98,7 @@ namespace MT2
         {
             // 这里面可以任意选择控制哪个Frame   
             // 如果MainPage.xaml中使用了另外的Frame标签进2行导航 可在此处获取需要GoBack的Frame  
-            var rootFrame = Window.Current.Content as Frame;
-          
+            var rootFrame = Window.Current.Content as Frame;         
             if (rootFrame.CanGoBack)
             {
                 rootFrame.GoBack();

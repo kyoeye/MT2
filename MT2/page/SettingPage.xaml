@@ -11,55 +11,105 @@
     <Grid Background="#FF0074B6">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
-                <EntranceThemeTransition/>
+                <EntranceThemeTransition />
             </TransitionCollection>
         </Grid.ChildrenTransitions>
         <Pivot Foreground="White">
 
             <PivotItem Header="设置">
-                <Grid >
+                <Grid>
                     <Grid.ChildrenTransitions>
                         <TransitionCollection>
-                            <PopupThemeTransition/>
+                            <PopupThemeTransition />
                         </TransitionCollection>
                     </Grid.ChildrenTransitions>
-                    <TextBlock Text="应用内有彩蛋" VerticalAlignment="Bottom" Foreground="#FFC7C7C7" HorizontalAlignment="Center"/>
-                    <ScrollViewer Margin="-10,5,-10,0" Background="White" >
-                        <StackPanel >
-                            <Grid  Margin="10,10,10,5" >
-                                <Border Visibility="Visible"  Opacity="0.8" Background="#FFEAEAEA" CornerRadius="5"/>
-                                <StackPanel Margin="5" >
-                                    <TextBlock Margin="5" FontSize="20" Text="安全级别" Foreground="#FF0074B6"/>
-                                    <Viewbox >
-                                        <StackPanel Orientation="Horizontal"  >
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Foreground="#FFC7C7C7"
+                        Text="应用内有彩蛋" />
+                    <ScrollViewer Margin="-10,5,-10,0" Background="White">
+                        <StackPanel>
+                            <Grid Margin="10,10,10,5">
+                                <Border
+                                    Background="#FFEAEAEA"
+                                    CornerRadius="5"
+                                    Opacity="0.8"
+                                    Visibility="Visible" />
+                                <StackPanel Margin="5">
+                                    <TextBlock
+                                        Margin="5"
+                                        FontSize="20"
+                                        Foreground="#FF0074B6"
+                                        Text="安全级别" />
+                                    <Viewbox>
+                                        <StackPanel Orientation="Horizontal">
                                             <RadioButton Margin="5" Content="安全的" />
                                             <RadioButton Margin="5" Content="绅士的" />
                                             <RadioButton Margin="5" Content="Hentai的" />
                                         </StackPanel>
 
                                     </Viewbox>
-                                    <TextBlock Name="tishitext" Margin="5,0,0,0" Visibility="Collapsed"  Text="我是提示，你不会看见这句话的" Foreground="#FF0074B6" />
-                                   
-                                        <TextBlock FontSize="12" TextWrapping="Wrap"  Margin="5" Text="这将决定你在公共场合时候是否会看到可能引起骚动的信息" Foreground="Black"/>
+                                    <TextBlock
+                                        Name="tishitext"
+                                        Margin="5,0,0,0"
+                                        Foreground="#FF0074B6"
+                                        Text="我是提示，你不会看见这句话的"
+                                        Visibility="Collapsed" />
 
-                                   
+                                    <TextBlock
+                                        Margin="5"
+                                        FontSize="12"
+                                        Foreground="Black"
+                                        Text="这将决定你在公共场合时候是否会看到可能引起骚动的信息"
+                                        TextWrapping="Wrap" />
+
+
 
                                 </StackPanel>
 
                             </Grid>
-                            <Grid  Margin="10,5,10,0" >
-                                <Border Visibility="Visible"  Opacity="0.8" Background="#FFEAEAEA" CornerRadius="5"/>
-                                <StackPanel Margin="5" >
-                                    <TextBlock Margin="5" FontSize="20" Text="首页设置" Foreground="#FF0074B6"/>
-                                    <Slider IsEnabled="False"  Margin="5" Header="首页单次加载图片数量" />
-                                    <TextBlock Margin="5,0,5,5"  FontSize="12"  Text="这将决定瀑布流一次加载图片的数量" TextWrapping="Wrap"  Foreground="Black"/>
+                            <Grid Margin="10,5,10,0">
+                                <Border
+                                    Background="#FFEAEAEA"
+                                    CornerRadius="5"
+                                    Opacity="0.8"
+                                    Visibility="Visible" />
+                                <StackPanel Margin="5">
+                                    <TextBlock
+                                        Margin="5"
+                                        FontSize="20"
+                                        Foreground="#FF0074B6"
+                                        Text="首页设置" />
+                                    <Slider
+                                        Margin="5"
+                                        Header="首页单次加载图片数量"
+                                        IsEnabled="False" />
+                                    <TextBlock
+                                        Margin="5,0,5,5"
+                                        FontSize="12"
+                                        Foreground="Black"
+                                        Text="这将决定瀑布流一次加载图片的数量"
+                                        TextWrapping="Wrap" />
                                 </StackPanel>
                             </Grid>
-                            <Grid  Margin="10,5,10,0" >
-                                <Border Visibility="Visible"  Opacity="0.8" Background="#FFEAEAEA" CornerRadius="5"/>
-                                <StackPanel Margin="5" >
-                                   <TextBlock Margin="5" FontSize="20" Text="开发者选项" Foreground="#FF0074B6"/>
-                                    <Button Margin="5" Name="betaclick" Click="betaclick_Click" Content="清理缓存"/>
+                            <Grid Margin="10,5,10,0">
+                                <Border
+                                    Background="#FFEAEAEA"
+                                    CornerRadius="5"
+                                    Opacity="0.8"
+                                    Visibility="Visible" />
+                                <StackPanel Margin="5">
+                                    <TextBlock
+                                        Margin="5"
+                                        FontSize="20"
+                                        Foreground="#FF0074B6"
+                                        Text="开发者选项" />
+                                    <Button
+                                        Name="betaclick"
+                                        Margin="5"
+                                        Click="betaclick_Click"
+                                        Content="清理缓存" />
                                 </StackPanel>
                             </Grid>
                         </StackPanel>
@@ -96,41 +146,40 @@
 
                                 <TextBlock
                                     HorizontalAlignment="Center"
-                                    Foreground="#FFF7F7F7"
                                     FontSize="25"
+                                    Foreground="#FFF7F7F7"
                                     Text="萌豚" />
                                 <TextBlock
                                     Margin="0,5,0,0"
                                     HorizontalAlignment="Center"
                                     Foreground="#FFE2E2E2"
-                                    Text="2016.10.17 Beta 神州十一号发射，第3次提交可能被驳回的更新。。"/>
+                                    Text="2016.10.17 Beta 神州十一号发射，第3次提交可能被驳回的更新。。" />
 
 
                                 <TextBlock
                                     Margin="0,20,0,0"
                                     HorizontalAlignment="Center"
-                                    Foreground="#FFE2E2E2"
                                     FontSize="12"
+                                    Foreground="#FFE2E2E2"
                                     Text="萌豚是一个提供各式各样的ACG美图の圣地 \(￣︶￣*\))" />
 
                                 <TextBlock
                                     Margin="5,20,0,0"
                                     HorizontalAlignment="Center"
-                                    Foreground="#FF2B2B2B"
                                     FontSize="23"
+                                    Foreground="#FF2B2B2B"
                                     Text="源" />
                                 <HyperlinkButton
                                     Margin="0,0,0,0"
                                     HorizontalAlignment="Center"
-                                    
                                     Content="http://yande.re/ "
                                     NavigateUri="http://yande.re/" />
                                 <HyperlinkButton
-                                    Visibility="Collapsed" 
                                     Margin="0,0,0,0"
                                     HorizontalAlignment="Center"
                                     Content="http://lelouchcrgallery.tk/(稳定性较差，划掉)"
-                                    NavigateUri="http://lelouchcrgallery.tk/" />
+                                    NavigateUri="http://lelouchcrgallery.tk/"
+                                    Visibility="Collapsed" />
 
                                 <TextBlock
                                     HorizontalAlignment="Center"
@@ -139,83 +188,83 @@
                                 <TextBlock
                                     Margin="5,20,0,0"
                                     HorizontalAlignment="Center"
-                                    Foreground="#FF2B2B2B"
                                     FontSize="23"
+                                    Foreground="#FF2B2B2B"
                                     Text="感谢" />
                                 <TextBlock
                                     Margin="0,5,0,0"
                                     HorizontalAlignment="Center"
-                                    Foreground="#FF424242"
                                     FontSize="12"
+                                    Foreground="#FF424242"
                                     Text="(排名不分先后 (*/ω＼*))" />
                                 <HyperlinkButton
                                     Margin="0,10,0,0"
                                     HorizontalAlignment="Center"
-                                    Foreground="#FF0078D7"
-                                    FontSize="13"
                                     Content="旋风小伙（微页开发者）"
+                                    FontSize="13"
+                                    Foreground="#FF0078D7"
                                     NavigateUri="https://www.microsoft.com/store/apps/9nblggh5lpfh" />
                                 <HyperlinkButton
                                     Margin="0,5,0,0"
                                     HorizontalAlignment="Center"
-                                    Foreground="#FF0078D7"
-                                    FontSize="13"
                                     Content="大魔导（IT之家开发者）"
+                                    FontSize="13"
+                                    Foreground="#FF0078D7"
                                     NavigateUri="https://www.microsoft.com/store/apps/9wzdncrfj3qd" />
 
                                 <TextBlock
                                     Margin="5,40,0,0"
                                     HorizontalAlignment="Center"
-                                    Foreground="#FF2B2B2B"
                                     FontSize="23"
+                                    Foreground="#FF2B2B2B"
                                     Text="二相箔" />
                                 <TextBlock
                                     Margin="0,5,0,0"
                                     HorizontalAlignment="Center"
-                                    Foreground="#FF424242"
                                     FontSize="12"
+                                    Foreground="#FF424242"
                                     Text="_(:з)∠)_" />
                                 <TextBlock
                                     Margin="0,10,0,0"
                                     HorizontalAlignment="Center"
-                                    Foreground="#FF2B2B2B"
                                     FontSize="15"
+                                    Foreground="#FF2B2B2B"
                                     Text="前期版本。。一些东西都没做好" />
                                 <TextBlock
                                     Margin="5,40,0,0"
                                     HorizontalAlignment="Center"
-                                    Foreground="#FF2B2B2B"
                                     FontSize="23"
+                                    Foreground="#FF2B2B2B"
                                     Text="单纯不做作的开发者" />
                                 <TextBlock
                                     Margin="0,5,0,0"
                                     HorizontalAlignment="Center"
-                                    Foreground="#FF424242"
                                     FontSize="12"
+                                    Foreground="#FF424242"
                                     Text="☆⌒(*＾-゜)v " />
                                 <TextBlock
                                     Margin="0,10,0,0"
                                     HorizontalAlignment="Center"
-                                    Foreground="#FF2B2B2B"
                                     FontSize="15"
+                                    Foreground="#FF2B2B2B"
                                     Text="画渣针眼" />
                                 <TextBlock
                                     Margin="5,40,0,0"
                                     HorizontalAlignment="Center"
-                                    Foreground="#FF2B2B2B"
                                     FontSize="23"
+                                    Foreground="#FF2B2B2B"
                                     Text="联系方式" />
                                 <TextBlock
                                     Margin="0,5,0,0"
                                     HorizontalAlignment="Center"
-                                    Foreground="#FF424242"
                                     FontSize="12"
+                                    Foreground="#FF424242"
                                     Text="（如侵犯了您的合法权益请立即联系我下架该应用）" />
                                 <TextBlock
                                     Margin="0,10,0,0"
                                     HorizontalAlignment="Center"
-                                    Foreground="#FF2B2B2B"
                                     FontSize="15"
+                                    Foreground="#FF2B2B2B"
                                     Text="QQ" />
                                 <Button
                                     Name="qqclick"

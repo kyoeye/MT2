@@ -172,11 +172,50 @@
                                     <StackPanel>
                                         <ItemsPresenter />
                                         <Button
+                                            Name="appbarbutton"
+                                            Width="100"
+                                            Margin="10"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Bottom"
+                                            Background="{x:Null}"
+                                            BorderBrush="{x:Null}"
+                                            Click="Loadingbutton_Click"
+                                            Visibility="Visible">
+                                            <Button.Content>
+                                                <Grid>
+                                                    <Viewbox>
+                                                        <Grid>
+                                                            <Rectangle
+                                                                Name="Buttonrectangle"
+                                                                Width="300"
+                                                                Height="120"
+                                                                HorizontalAlignment="Center"
+                                                                RadiusX="40"
+                                                                RadiusY="40"
+                                                                Stroke="#FF2291DE"
+                                                                StrokeThickness="2">
+                                                                <Rectangle.Fill>
+                                                                    <SolidColorBrush Opacity="0.699999988079071" Color="#FF383838" />
+                                                                </Rectangle.Fill>
+                                                            </Rectangle>
+                                                            <TextBlock
+                                                                Margin="40"
+                                                                HorizontalAlignment="Center"
+                                                                VerticalAlignment="Center"
+                                                                FontSize="50"
+                                                                Foreground="#FFCFCFCF"
+                                                                Text="加载更多" />
+                                                        </Grid>
+                                                    </Viewbox>
+                                                </Grid>
+                                            </Button.Content>
+                                        </Button>
+                                        <!--<Button
                                             Name="Loadingbutton"
                                             Margin="12"
                                             HorizontalAlignment="Center"
                                             Click="Loadingbutton_Click"
-                                            Content="加载更多(｡･∀･)ﾉﾞ" />
+                                            Content="加载更多(｡･∀･)ﾉﾞ" />-->
                                     </StackPanel>
                                 </ScrollViewer>
                             </ControlTemplate>
@@ -184,18 +223,6 @@
                         <GridView.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="2">
-                                    <!--<Grid.ChildrenTransitions>
-                                        <TransitionCollection>
-                                            <EntranceThemeTransition />
-                                        </TransitionCollection>
-                                    </Grid.ChildrenTransitions>-->
-
-                                    <!--<Border
-                                            Padding="2"
-                                            Background="White"
-                                            CornerRadius="0,0,3,3" />-->
-
-
                                     <StackPanel
                                         Name="gridstackpanel"
                                         Margin="1"
@@ -289,7 +316,12 @@
                 </Grid>
 
                 <Frame Name="MainFrame" Grid.RowSpan="2" />
-
+                <ProgressRing
+                    Name="Myprogressring"
+                    Grid.Row="1"
+                    Width=" 60"
+                    Height="60"
+                    IsActive="True" />
             </Grid>
 
         </SplitView>

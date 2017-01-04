@@ -55,16 +55,25 @@ namespace MT2.page
                 //var value = (string)e.Parameter;
                 //setall.sample_url = value;
                 BitmapImage bitmapimage = new BitmapImage(new Uri(sample_url));
+                bitmapimage.DownloadProgress += Bitmapimage_DownloadProgress;
                 SeeImage.Source = bitmapimage;
-                a = lookit.b;
-                textblock.Text = "是" + a;
-
+                a = lookit.b;             
                 imguri = lookit.jpegurl[a];
                 imgname = lookit.thisname[a];
                 imgid = int.Parse(lookit._id[a]);
             }
             catch
             {
+
+            }
+        }
+
+        private void Bitmapimage_DownloadProgress(object sender, DownloadProgressEventArgs e)
+        {
+           Myprogressbar .Value  = e.Progress;
+            if (Myprogressbar .Value == 100)
+            {
+                Myprogressbar.Visibility = Visibility.Collapsed;
 
             }
         }
@@ -153,6 +162,11 @@ namespace MT2.page
             //HttpClient httpclient = new HttpClient();
             //HttpResponseMessage httpResponseMessage = await httpclient.GetAsync(new Uri(jpguri));
 
+        }
+
+        private void AppBarButton_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            storyboard1.Begin();
         }
     }
 }

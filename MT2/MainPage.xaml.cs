@@ -64,6 +64,7 @@ namespace MT2
             getsz();
             getimage(null);
             NavigationCacheMode = NavigationCacheMode.Enabled;
+            Myprogressring.Visibility = Visibility.Visible;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -145,6 +146,8 @@ namespace MT2
                 }
                 lookit.a++;
             }
+            Myprogressring.Visibility = Visibility.Collapsed;
+            
         }
 
         private void Loadingbutton_Click(object sender, RoutedEventArgs e)
