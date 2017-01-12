@@ -37,7 +37,7 @@
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
             <ColorAnimation
-                EnableDependentAnimation="True"
+                EnableDependentAnimation="False"
                 Storyboard.TargetName="SettingTop"
                 Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)"
                 From="#FFF4F4F4"

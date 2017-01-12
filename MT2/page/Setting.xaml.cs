@@ -27,10 +27,13 @@ namespace MT2.page
         public Setting()
         {
             this.InitializeComponent();
-            SystemNavigationManager.GetForCurrentView().BackRequested += ddbacke;
 
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            SystemNavigationManager.GetForCurrentView().BackRequested += ddbacke;
+        }
         private void ddbacke(object sender, BackRequestedEventArgs e)
         {
            if (settingframe .CanGoBack)

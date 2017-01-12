@@ -31,6 +31,7 @@ namespace MT2.page
         public  hotitempage()
         {
             this.InitializeComponent();
+            progressrin.IsActive = true;
             getxmltext();
             NavigationCacheMode = NavigationCacheMode.Enabled;
         }
@@ -41,6 +42,7 @@ namespace MT2.page
             itemget.Toitem(xmltext);
             itemget.getlistitems();
             Mygridview.ItemsSource = itemget.Listapiitems;
+            progressrin.IsActive = false;
         }
 
 

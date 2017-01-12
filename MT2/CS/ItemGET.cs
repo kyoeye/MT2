@@ -52,7 +52,7 @@ namespace MT2.CS
         {
             Listapiitems = new ObservableCollection<listsave >();
 
-            for (int i = 0; i < 20; i++) // 50为一次瀑布流显示的所有数量
+            for (int i = 0; i < listclass .id .Count ; i++) // 50为一次瀑布流显示的所有数量
             {
                 if (listclass.ratings[listclass .a] != "q")
                 {

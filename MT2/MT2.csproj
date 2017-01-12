@@ -102,6 +102,9 @@
     <Compile Include="Control\LoadingControl.xaml.cs">
       <DependentUpon>LoadingControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\MyToastControl.xaml.cs">
+      <DependentUpon>MyToastControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\TextDialog.xaml.cs">
       <DependentUpon>TextDialog.xaml</DependentUpon>
     </Compile>
@@ -164,6 +167,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Control\LoadingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\MyToastControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

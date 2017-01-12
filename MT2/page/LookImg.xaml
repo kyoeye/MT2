@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="using:MT2.page"
+    xmlns:local="using:MT2.Control"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="Black"
     mc:Ignorable="d">
@@ -229,21 +229,28 @@
         </Style>
         <Storyboard x:Name="storyboard1">
             <ColorAnimation
-                EnableDependentAnimation="True"
                 Storyboard.TargetName="Buttonrectangle"
                 Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
                 From="#FF383838"
                 To="#FF0074B6"
-                Duration="0:0:1" />
+                Duration="0:0:0.6" />
         </Storyboard>
+        <Storyboard x:Name="storyboard2">
+            <ColorAnimation
+                Storyboard.TargetName="Buttonrectangle"
+                Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
+                From="#FF0074B6"
+                To="#FF383838"
+                Duration="0:0:0.6" />
+        </Storyboard>
+
     </Page.Resources>
 
     <Grid>
         <Grid.Background>
-            <SolidColorBrush Color="White" />
+            <SolidColorBrush Color="Black" />
         </Grid.Background>
-
-        <ScrollViewer>
+        <ScrollViewer Background="#FFFCFCFC">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
@@ -266,7 +273,9 @@
                         VerticalAlignment="Bottom"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}"
-                        PointerEntered="AppBarButton_PointerEntered">
+                        PointerEntered="AppBarButton_PointerEntered"
+                        PointerExited="AppBarButton_PointerExited_1">
+
                         <Button.Content>
                             <Grid>
                                 <Viewbox>
@@ -297,6 +306,16 @@
                             </Grid>
                         </Button.Content>
                     </Button>
+                    <!--<Popup Name="Mypopup">
+                        <local:MyToastControl
+                            x:Name="Toastpopup"
+                            Width="200"
+                            Height="100"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            entity="{Binding Info, Mode=TwoWay}" />
+                    </Popup>-->
+
                 </Grid>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -353,11 +372,7 @@
                                 VerticalAlignment="Center"
                                 Foreground="#FF4B4B4B"
                                 Text="标签" />
-                            <!--<GridView >
-
-                            </GridView>-->
                         </StackPanel>
-
                     </Border>
                 </Grid>
                 <Button
@@ -365,7 +380,6 @@
                     Click="textbutoon_Click"
                     Content="复制下载链接"
                     Visibility="Collapsed " />
-
             </Grid>
 
         </ScrollViewer>

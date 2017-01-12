@@ -20,12 +20,12 @@ namespace MT2
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        
+
         //public class Uridh
         //{           
         public int shuzu = 200;//数组容量变量
         public int buttonint;
-        public int pageint = 1; //页码索引
+        public int pageint; //页码索引
         //}
 
 
@@ -34,28 +34,28 @@ namespace MT2
 
         public class Lookimgclass
         {
-            public string[] previewurl;
+            public List<string> previewurl;
             public List<string> _id;
             //public string[] _id;
-            public string[] authorname;
+            public List<string> authorname;
             public int b;
-            public string lookimguri;//选中索引
+            public string lookimguri;//选中索引  
             public int a = 0; // 数组索引
-            public string[] sampleurl;
-            public string[] ratings;
-            public string[] jpegurl;
-            public string[] thisname;
+            public List<string> sampleurl;
+            public List<string> ratings;
+            public List<string> jpegurl;
+            public List<string> thisname;
         }
         Lookimgclass lookit = new Lookimgclass();
         public void getsz() //数组用一个方法引用
         {
-            lookit.previewurl = new string[shuzu];
+            lookit.previewurl = new List<string>();
             lookit._id = new List<string>();
-            lookit.ratings = new string[shuzu];
-            lookit.authorname = new string[shuzu];
-            lookit.sampleurl = new string[shuzu];
-            lookit.jpegurl = new string[shuzu];
-            lookit.thisname = new string[shuzu];
+            lookit.ratings = new List<string>();
+            lookit.authorname = new List<string>();
+            lookit.sampleurl = new List<string>();
+            lookit.jpegurl = new List<string>();
+            lookit.thisname = new List<string>();
         }
         //Uridh uridh = new Uridh();
         public MainPage()
@@ -76,8 +76,6 @@ namespace MT2
             //var f = Window.Current.Bounds;
             //var wit = (int)f.Width;
             //if (wit < 500)
-
-
             //GetWaterfall();
 
         }
@@ -113,10 +111,12 @@ namespace MT2
         public ObservableCollection<Listapiset> Listapiitems { get; set; }
         public void GetWaterfall()
         {
-           
-            lookit.a = 0;
-            Listapiitems = new ObservableCollection<Listapiset>();
 
+            if (pageint == 1)
+            {
+                lookit.a = 0;
+                Listapiitems = new ObservableCollection<Listapiset>();
+            }
             for (int i = 0; i < 20; i++) // 50为一次瀑布流显示的所有数量
             {
                 if (lookit.ratings[lookit.a] != "q")
@@ -147,20 +147,31 @@ namespace MT2
                 lookit.a++;
             }
             Myprogressring.Visibility = Visibility.Collapsed;
-            
-        }
-
-        private void Loadingbutton_Click(object sender, RoutedEventArgs e)
-        {
-            int count = Listapiitems.Count;
-
-            for (int i = count; i < count + 20; i++)
+            if (pageint ==1)
             {
-                if (lookit.ratings[lookit.a] != "q")
+                Mygridview.ItemsSource = Listapiitems;
+            }
+            
+
+        }
+        
+        private void Loadingbutton_Click(object sender, RoutedEventArgs e)
+        {                       
+            int count = Listapiitems.Count;
+            if (lookit.a == lookit._id.Count)
+            {
+                getimage(true);
+            }
+            else
+            {
+                for (int i = count; i < count + 20; i++)
                 {
-                    if (lookit.ratings[lookit.a] != "e")
+                    if (lookit.ratings[lookit.a] != "q")
                     {
-                        Listapiitems.Add(new Listapiset {
+                        if (lookit.ratings[lookit.a] != "e")
+                        {
+                            Listapiitems.Add(new Listapiset
+                            {
                                 _name = "作者：" + lookit.authorname[lookit.a],
                                 rating = lookit.ratings[lookit.a],
                                 preview_url = lookit.previewurl[lookit.a],
@@ -168,128 +179,99 @@ namespace MT2
                                 _a = lookit.a,
                                 id = lookit._id[lookit.a]
                             });
+                        }
+                        else
+                        {
+                            lookit.a++;
+                            continue;
+                        }
                     }
                     else
                     {
                         lookit.a++;
                         continue;
                     }
-                }
-                else
-                {
                     lookit.a++;
-                    continue;
+
+                    //Listapiitems.Add(new Listapiset { name = "作者：" + authorname[count], rating = lookit.ratings[count], preview_url = previewurl[count], sample_url = lookit.sampleurl[count] });
                 }
-                lookit.a++;
 
-                //Listapiitems.Add(new Listapiset { name = "作者：" + authorname[count], rating = lookit.ratings[count], preview_url = previewurl[count], sample_url = lookit.sampleurl[count] });
             }
-
-
-
         }
 
-        private HttpClient httpclient;
-        private CancellationTokenSource cts;
-        public async void getimage(int? a)
+        private HttpClient httpclient = new HttpClient();
+        //private CancellationTokenSource cts;
+        public async void getimage(bool? a)
         {
-            if (a != null)
+            if (a == true)
             {
                 pageint++;
                 //页码增加1
             }
             else
             {
-                httpclient = new HttpClient();
-                cts = new CancellationTokenSource();
-                string homeimguri = ("https://yande.re/post.xml?limit=100" + "&page=" + pageint);
-                var mystring = await GetXml.GetWebString(homeimguri, null);
-                IProgress<HttpProgress> httpprogress = new Progress<HttpProgress>(ProgressHandler);
-                if (mystring != null)
+                pageint = 1;
+            }
+            //httpclient = new HttpClient();
+            //cts = new CancellationTokenSource();
+            string homeimguri = ("https://yande.re/post.xml?limit=100" + "&page=" + pageint);
+            var mystring = await GetXml.GetWebString(homeimguri, null);
+            //IProgress<HttpProgress> httpprogress = new Progress<HttpProgress>(ProgressHandler);
+            if (mystring != null)
+            {
+                XElement root = XElement.Parse(mystring);
+                IEnumerable<XElement> elements = root.Elements();
+                foreach (var element in elements)
                 {
-                    XElement root = XElement.Parse(mystring);
-                    IEnumerable<XElement> elements = root.Elements();
-                    foreach (var element in elements)
+                    if (element.Name == "post")
                     {
-                        if (element.Name == "post")
+                        IEnumerable<XAttribute> Items = element.Attributes();
+                        foreach (var item in Items)
                         {
-                            IEnumerable<XAttribute> Items = element.Attributes();
-                            foreach (var item in Items)
+                            switch (item.Name.ToString())
                             {
-                                switch (item.Name.ToString())
-                                {
-                                    case "id":
-                                        lookit._id.Add((string)item);
-                                        break;
-                                    case "preview_url":
-                                        lookit.previewurl[lookit.a] = (string)item;
-                                        break;
-                                    case "author":
-                                        lookit.authorname[lookit.a] = (string)item;
-                                        break;
-                                    case "sample_url":
-                                        lookit.sampleurl[lookit.a] = (string)item;
-                                        break;
-                                    case "jpeg_url":
-                                        lookit.jpegurl[lookit.a] = (string)item;
-
-                                        break;
-                                    case "rating":
-                                        lookit.ratings[lookit.a] = (string)item;
-                                        break;
-
-                                }
-
-                                //if (item.Name == "id")
-                                //{
-                                //    lookit._id[lookit.a] = (string)item;
-                                //}
-                                //else if (item.Name == "preview_url")
-                                //{
-                                //    lookit.previewurl[lookit.a] = (string)item;
-                                //}
-                                //else if (item.Name == "author")
-                                //{
-                                //    lookit.authorname[lookit.a] = (string)item;
-                                //}
-                                //else if (item.Name == "sample_url")
-                                //{
-                                //    lookit.sampleurl[lookit.a] = (string)item;
-                                //}
-                                //else if (item.Name == "jpeg_url")
-                                //{
-                                //    lookit.jpegurl[lookit.a] = (string)item;
-                                //}
-                                //else if (item.Name == "rating") // 这个判断需要重新写11.5留
-                                //{
-                                //    lookit.ratings[lookit.a] = (string)item;
-                                //}
+                                case "id":
+                                    lookit._id.Add((string)item);
+                                    break;
+                                case "preview_url":
+                                    lookit.previewurl.Add((string)item);
+                                    break;
+                                case "author":
+                                    lookit.authorname.Add((string)item);
+                                    break;
+                                case "sample_url":
+                                    lookit.sampleurl.Add((string)item);
+                                    break;
+                                case "jpeg_url":
+                                    lookit.jpegurl.Add((string)item);
+                                    break;
+                                case "rating":
+                                    lookit.ratings.Add((string)item);
+                                    break;
                             }
-                            if (lookit.a < 100)
-                            {
-                                lookit.a++;
-                            }
-
+                        }
+                        if (lookit.a < 100)
+                        {
+                            lookit.a++;
                         }
                     }
-
-                    //break;
-
+                }
+               
                     GetWaterfall();
-                    Mygridview.ItemsSource = Listapiitems;
-                }
-                else
-                {
-                    NoNetworld.Visibility = Visibility.Visible;
-
-                }
+                
             }
+
+            else
+            {
+                NoNetworld.Visibility = Visibility.Visible;
+            }
+
         }
 
-        private void ProgressHandler(HttpProgress obj)
-        {
-            throw new NotImplementedException();
-        }
+        //private void ProgressHandler(HttpProgress obj)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public void GetNextPage()
         {
@@ -317,9 +299,13 @@ namespace MT2
 
         private void MenuListboxitem_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-                  foreach (var item in e.AddedItems )
+            foreach (var item in e.AddedItems)
             {
-                if (item == hotitem)
+                if (item == homepage)
+                {
+                    Frame.Navigate(typeof(MainPage));
+                }
+                else if (item == hotitem)
                 {
                     Frame.Navigate(typeof(hotitempage));
                 }

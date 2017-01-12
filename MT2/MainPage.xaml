@@ -14,14 +14,9 @@
         <SplitView
             x:Name="Mymenu"
             Grid.RowSpan="2"
-            OpenPaneLength="300">
+            OpenPaneLength="250">
             <SplitView.Pane>
                 <Grid Background="#FF0074B6">
-                    <Grid.ChildrenTransitions>
-                        <TransitionCollection>
-                            <EntranceThemeTransition FromHorizontalOffset="-200" />
-                        </TransitionCollection>
-                    </Grid.ChildrenTransitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="auto" />
@@ -29,26 +24,26 @@
                     <ListBox
                         Name="MenuListboxitem"
                         Grid.Row="0"
-                        Background="#FF2385BD"
+                        Background="White"
                         SelectionChanged="MenuListboxitem_SelectionChanged">
                         <ListBoxItem Height="200">
                             <ListBoxItem.Background>
                                 <ImageBrush x:Name="ListBoximg" />
                             </ListBoxItem.Background>
                         </ListBoxItem>
-                        <ListBoxItem>
+                        <ListBoxItem Name="homepage">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock
                                     Margin="5,0,5,0"
                                     VerticalAlignment="Center"
                                     FontFamily="Segoe MDL2 Assets"
                                     FontSize="18"
-                                    Foreground="White"
+                                    Foreground="Black"
                                     Text="&#xE10F;" />
                                 <TextBlock
                                     Margin="5,0,5,0"
                                     FontSize="18"
-                                    Foreground="White"
+                                    Foreground="Black"
                                     Text="首页" />
                             </StackPanel>
                         </ListBoxItem>
@@ -59,12 +54,12 @@
                                     VerticalAlignment="Center"
                                     FontFamily="Segoe MDL2 Assets"
                                     FontSize="18"
-                                    Foreground="White"
+                                    Foreground="Black"
                                     Text="&#xE17D;" />
                                 <TextBlock
                                     Margin="5,0,5,0"
                                     FontSize="18"
-                                    Foreground="White"
+                                    Foreground="Black"
                                     Text="热榜" />
                             </StackPanel>
                         </ListBoxItem>
@@ -76,12 +71,12 @@
                                     VerticalAlignment="Center"
                                     FontFamily="Segoe MDL2 Assets"
                                     FontSize="18"
-                                    Foreground="White"
+                                    Foreground="Black"
                                     Text="&#xE15F;" />
                                 <TextBlock
                                     Margin="5,0,5,0"
                                     FontSize="18"
-                                    Foreground="White"
+                                    Foreground="Black"
                                     Text="评论" />
                             </StackPanel>
                         </ListBoxItem>
@@ -92,12 +87,12 @@
                                     VerticalAlignment="Center"
                                     FontFamily="Segoe MDL2 Assets"
                                     FontSize="18"
-                                    Foreground="White"
+                                    Foreground="Black"
                                     Text="&#xE734;" />
                                 <TextBlock
                                     Margin="5,0,5,0"
                                     FontSize="18"
-                                    Foreground="White"
+                                    Foreground="Black"
                                     Text="收藏" />
                             </StackPanel>
                         </ListBoxItem>
@@ -172,7 +167,7 @@
                                     <StackPanel>
                                         <ItemsPresenter />
                                         <Button
-                                            Name="appbarbutton"
+                                            x:Name="appbarbutton"
                                             Width="100"
                                             Margin="10"
                                             HorizontalAlignment="Center"
@@ -199,6 +194,7 @@
                                                                 </Rectangle.Fill>
                                                             </Rectangle>
                                                             <TextBlock
+                                                                Name="loadingbuttontext"
                                                                 Margin="40"
                                                                 HorizontalAlignment="Center"
                                                                 VerticalAlignment="Center"

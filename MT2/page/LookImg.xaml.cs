@@ -1,6 +1,8 @@
-﻿using MT2.CS;
+﻿using MT2.Control;
+using MT2.CS;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -19,6 +21,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using static MT2.Control.MyToastControl;
 using static MT2.MainPage;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
@@ -30,10 +33,14 @@ namespace MT2.page
     /// </summary>
     public sealed partial class LookImg : Page
     {
+        TosatModel tosalmodel = new TosatModel();
+
+
         public LookImg()
         {
             this.InitializeComponent();
             Getsuface();
+            //Toastpopup.DataContext = tosalmodel;
             //betatext.Text = System.Windows.Forms.Screen.GetWorkingArea(this);
         }
         double wit;
@@ -80,8 +87,6 @@ namespace MT2.page
 
         public void Getsuface()
         {
-
-
             var f = Window.Current.Bounds;
             wit = f.Width;
             hei = f.Height;
@@ -99,9 +104,8 @@ namespace MT2.page
 
         }
 
-        private void DownloadButton_Click(object sender, RoutedEventArgs e)
-        {
-            //getjpg(imguri);
+    private void DownloadButton_Click(object sender, RoutedEventArgs e)
+        {         
             //下载
             Savefile();
         }
@@ -134,6 +138,8 @@ namespace MT2.page
                 BackgroundDownloader backgrounddownloader = new BackgroundDownloader();//后台下载
                 DownloadOperation downloader = backgrounddownloader.CreateDownload(transferUri, storagefile);
                 await downloader.StartAsync();
+                tosalmodel.Info = new Entity() { name = "正在后台下载……" };
+                //Mypopup.IsOpen = true;
             }
         }
         public async void getjpg(string jpguri)
@@ -168,5 +174,21 @@ namespace MT2.page
         {
             storyboard1.Begin();
         }
+        private void AppBarButton_PointerExited_1(object sender, PointerRoutedEventArgs e)
+        {
+            storyboard2.Begin();
+        }
     }
+    //弹窗
+    public class TosatModel : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+        private Entity _info;
+        public Entity Info
+        {
+            get { return _info; }
+            set { _info = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Info")); }
+        }
+    }
+
 }
