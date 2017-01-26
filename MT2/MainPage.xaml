@@ -293,8 +293,6 @@
                         <TextBlock Foreground="White" Text="首页" />
                     </StackPanel>
 
-
-
                     <AppBarButton
                         Name="SeachButton"
                         Width="50"
@@ -308,10 +306,9 @@
                             Foreground="White"
                             Text="&#xE11A;" />
                     </AppBarButton>
-
                 </Grid>
 
-                <Frame Name="MainFrame" Grid.RowSpan="2" />
+                <!--<Frame Name="MainFrame" Grid.RowSpan="2" />-->
                 <ProgressRing
                     Name="Myprogressring"
                     Grid.Row="1"

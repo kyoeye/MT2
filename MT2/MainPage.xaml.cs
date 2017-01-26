@@ -84,10 +84,10 @@ namespace MT2
             Mymenu.IsPaneOpen = !Mymenu.IsPaneOpen;
         }
 
-        private void SettingButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(Setting));
-        }
+        //private void SettingButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Frame.Navigate(typeof(SettingPage));
+        //}
 
         public class Listapiset
         {
@@ -294,7 +294,7 @@ namespace MT2
 
         private void Setting_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(Setting));
+            this.Frame.Navigate(typeof(Setting2Page));
         }
 
         private void MenuListboxitem_SelectionChanged(object sender, SelectionChangedEventArgs e)

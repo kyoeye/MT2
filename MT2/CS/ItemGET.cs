@@ -21,25 +21,25 @@ namespace MT2.CS
         public List<string> jpegurl = new List<string>();
         public List<string> thisname = new List<string>();
     }
-    public class listsave
-    {
-        public int _a { get; set; }
-        public string id { get; set; } //作品id
-        public string _name { get; set; } //作者名字
-        public string imguri { get; set; } //图片uri
-        public string preview_url { get; set; }//瀑布流预览图
-        public string tags { get; set; } // 标签，这个实现的方式有点特殊
-        public string created_at { get; set; }//创建者
-        public string approver_id { get; set; }//审核人
-        public string sample_url { get; set; }//二级预览
-        public string rating { get; set; }//安全等级
-
-    }
 
 
 
     public class ItemGET
     {
+        public class listsave
+        {
+            public int _a { get; set; }
+            public string id { get; set; } //作品id
+            public string _name { get; set; } //作者名字
+            public string imguri { get; set; } //图片uri
+            public string preview_url { get; set; }//瀑布流预览图
+            public string tags { get; set; } // 标签，这个实现的方式有点特殊
+            public string created_at { get; set; }//创建者
+            public string approver_id { get; set; }//审核人
+            public string sample_url { get; set; }//二级预览
+            public string rating { get; set; }//安全等级
+
+        }
 
         public ObservableCollection<listsave> Listapiitems { get; set; }
 
@@ -58,7 +58,7 @@ namespace MT2.CS
                 {
                     if (listclass.ratings[listclass.a] != "e")
                     {
-                        Listapiitems.Add(new CS.listsave
+                        Listapiitems.Add(new listsave
                         {
                             _name = "作者：" + listclass .authorname[listclass .a],
                             rating = listclass .ratings[listclass .a],

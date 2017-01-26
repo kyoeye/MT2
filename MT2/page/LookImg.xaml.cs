@@ -53,26 +53,32 @@ namespace MT2.page
         public string imgname;
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            try
-            {
-                base.OnNavigatedTo(e);
-                Lookimgclass lookit = (Lookimgclass)e.Parameter;
-                var sample_url = lookit.lookimguri;
+            base.OnNavigatedTo(e);
+            ItemGET.listsave lookit2 = (ItemGET.listsave)e.Parameter;
+            BitmapImage bitmapimage = new BitmapImage(new Uri(lookit2.sample_url));
+            SeeImage.Source = bitmapimage;
+            bitmapimage.DownloadProgress += Bitmapimage_DownloadProgress;
 
-                //var value = (string)e.Parameter;
-                //setall.sample_url = value;
-                BitmapImage bitmapimage = new BitmapImage(new Uri(sample_url));
-                bitmapimage.DownloadProgress += Bitmapimage_DownloadProgress;
-                SeeImage.Source = bitmapimage;
-                a = lookit.b;             
-                imguri = lookit.jpegurl[a];
-                imgname = lookit.thisname[a];
-                imgid = int.Parse(lookit._id[a]);
-            }
-            catch
-            {
+            //try
+            //{
+            //    base.OnNavigatedTo(e);
+            //    Lookimgclass lookit = (Lookimgclass)e.Parameter;
+            //    var sample_url = lookit.lookimguri;
 
-            }
+            //    //var value = (string)e.Parameter;
+            //    //setall.sample_url = value;
+            //    BitmapImage bitmapimage = new BitmapImage(new Uri(sample_url));
+            //    bitmapimage.DownloadProgress += Bitmapimage_DownloadProgress;
+            //    SeeImage.Source = bitmapimage;
+            //    a = lookit.b;             
+            //    imguri = lookit.jpegurl[a];
+            //    imgname = lookit.thisname[a];
+            //    imgid = int.Parse(lookit._id[a]);
+            //}
+            //catch
+            //{
+
+            //}
         }
 
         private void Bitmapimage_DownloadProgress(object sender, DownloadProgressEventArgs e)

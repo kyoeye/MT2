@@ -60,7 +60,10 @@
                                             CornerRadius="0,0,3,3" />-->
 
 
-                            <StackPanel Name="gridstackpanel" Margin="1">
+                            <StackPanel
+                                Name="gridstackpanel"
+                                Margin="1"
+                                Tapped="gridstackpanel_Tapped">
                                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <Grid.ChildrenTransitions>
                                         <TransitionCollection>

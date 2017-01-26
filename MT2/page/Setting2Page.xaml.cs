@@ -5,7 +5,6 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -21,14 +20,11 @@ namespace MT2.page
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class Setting2 : Page
+    public sealed partial class Setting2Page : Page
     {
-        public Setting2()
+        public Setting2Page()
         {
-
-                this.InitializeComponent();
+            this.InitializeComponent();
         }
-
-  
     }
 }

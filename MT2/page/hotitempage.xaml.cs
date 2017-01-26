@@ -45,7 +45,12 @@ namespace MT2.page
             progressrin.IsActive = false;
         }
 
-
-
+        private void gridstackpanel_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var boxs = sender as StackPanel;
+            var box = boxs.DataContext as ItemGET.listsave;
+            string lookuri = box.sample_url;
+            Frame.Navigate(typeof(LookImg), box);
+        }
     }
 }

@@ -1,0 +1,163 @@
+﻿<Page
+    x:Class="MT2.page.Setting2Page"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:MT2.page"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ScrollViewer Name="myScrollviewer">
+        <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <Grid Height="250" Background="{ThemeResource AppBarBackground}">
+                <StackPanel
+                    Height="50"
+                    VerticalAlignment="Top"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        Margin="15"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="20"
+                        Text="&#xE713;" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        Text="设置" />
+                </StackPanel>
+                <TextBlock
+                    Margin="15"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Text="{Binding ElementName=myScrollviewer, Path=VerticalOffset, Mode=TwoWay}" />
+            </Grid>
+            <StackPanel>
+                <Grid Margin="4" Background="{ThemeResource AppBarBorderThemeBrush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                        Margin="10"
+                        HorizontalAlignment="left"
+                        FontSize="20"
+                        FontWeight="bold"
+                        Foreground="#ff4b4b4b"
+                        Text="安全控制" />
+                    <Grid
+                        Grid.Row="1"
+                        BorderBrush="#ffd7d7d7"
+                        BorderThickness="0,2,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Margin="15,15,15,15"
+                            FontSize="17"
+                            Text="启动密码" />
+                        <PasswordBox
+                            Name="loagingpassword"
+                            Grid.Column="1"
+                            Margin="10,10,0,10"
+                            HorizontalAlignment="Right"
+                            PlaceholderText="没有输入则不需要密码" />
+                        <Button
+                            Grid.Column="2"
+                            Width="50"
+                            Margin="0,10,15,10"
+                            VerticalAlignment="stretch"
+                            Background="#ffcdcdcd"
+                            Content="&#xe081;"
+                            FontFamily="segoe mdl2 assets" />
+                    </Grid>
+                    <Grid Grid.Row="2" BorderBrush="#ffd7d7d7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock
+                            Margin="15,15,15,15"
+                            FontSize="17"
+                            Text="安全级别" />
+                        <Viewbox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            MaxWidth="300"
+                            Margin="5,5,15,5">
+                            <TextBlock
+                                VerticalAlignment="center"
+                                FontSize="13"
+                                Foreground="#ff424242"
+                                Text="（以确保你不会在公共场合看到不该看的内容）" />
+                        </Viewbox>
+                        <StackPanel
+                            Grid.Row="1"
+                            Grid.ColumnSpan="3"
+                            Margin="15,5,15,5"
+                            Orientation="horizontal">
+                            <CheckBox Content="安全的" />
+                            <CheckBox Content="隐晦的" />
+                            <CheckBox Content="暴露的" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                <Grid Margin="4" Background="{ThemeResource AppBarBorderThemeBrush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                        Margin="10"
+                        HorizontalAlignment="left"
+                        FontSize="20"
+                        FontWeight="bold"
+                        Foreground="#ff4b4b4b"
+                        Text="御坂网络中枢" />
+                    <Grid
+                        Grid.Row="1"
+                        BorderBrush="#ffd7d7d7"
+                        BorderThickness="0,2,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock
+                            Margin="15,5,15,5"
+                            HorizontalAlignment="left"
+                            VerticalAlignment="center"
+                            FontSize="17"
+                            Text="瀑布流单次加载图片数量" />
+                        <TextBlock
+                            Margin="15,0,15,0"
+                            HorizontalAlignment="right"
+                            VerticalAlignment="center"
+                            Text="{Binding ElementName=listslider, Path=Value, Mode=TwoWay}" />
+                        <Slider
+                            Name="listslider"
+                            Grid.Row="1"
+                            Margin="15,5,15,10"
+                            Minimum=" 15" />
+                        <Viewbox
+                            Grid.Row="2"
+                            MaxWidth="500"
+                            Margin="15,0,15,15">
+                            <TextBlock
+                                FontSize="13"
+                                Foreground="#ff595959"
+                                Text="（注意：这个值在安全模式下实际显示图片会存在数量偏差，最低15，最高100）" />
+                        </Viewbox>
+                    </Grid>
+                </Grid>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

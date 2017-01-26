@@ -112,6 +112,7 @@
     <Compile Include="CS\ArraryHelp.cs" />
     <Compile Include="CS\betatt.cs" />
     <Compile Include="CS\GetXml.cs" />
+    <Compile Include="CS\HotimageHub.cs" />
     <Compile Include="CS\ItemGET.cs" />
     <Compile Include="CS\SETall.cs" />
     <Compile Include="CS\XmlHelper.cs" />
@@ -132,14 +133,8 @@
     <Compile Include="page\SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="page\Setting.xaml.cs">
-      <DependentUpon>Setting.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="page\Setting2.xaml.cs">
-      <DependentUpon>Setting2.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="page\SettingPage.xaml.cs">
-      <DependentUpon>SettingPage.xaml</DependentUpon>
+    <Compile Include="page\Setting2Page.xaml.cs">
+      <DependentUpon>Setting2Page.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="pubuliu\SufaceLoader.cs" />
@@ -198,15 +193,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="page\Setting.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="page\Setting2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="page\SettingPage.xaml">
+    <Page Include="page\Setting2Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
