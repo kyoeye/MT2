@@ -33,6 +33,7 @@ namespace MT2
             this.Suspending += OnSuspending;
         }
 
+        public MainPage b;
         /// <summary>
         /// 在应用程序由最终用户正常启动时进行调用。
         /// 将在启动应用程序以打开特定文件等情况下使用。
@@ -40,13 +41,15 @@ namespace MT2
         /// <param name="e">有关启动请求和过程的详细信息。</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
-            Frame rootFrame = Window.Current.Content as Frame;
+            //Frame rootframe = Window.Current.Content as MainFrame;
+            Frame rootFrame = Window.Current.Content as Frame  ;
 
             // 不要在窗口已包含内容时重复应用程序初始化，
             // 只需确保窗口处于活动状态

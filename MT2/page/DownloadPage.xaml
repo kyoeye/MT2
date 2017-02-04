@@ -13,46 +13,49 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Pivot Name="pivot">
-            <PivotItem Margin="-0,0,-0,0" Header="下载列表">
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Button Margin="4" Content="全部暂停" />
-                        <Button Margin="4" Content="全部取消" />
-                    </StackPanel>
-                    <ListView>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <ProgressBar Name="Downloadprogress" Height="100" />
-                                    <TextBlock
-                                        Name="imgid"
-                                        HorizontalAlignment="Left"
-                                        FontSize="30" />
-                                    <StackPanel HorizontalAlignment="Right">
-                                        <AppBarButton
-                                            Name="Zanting"
-                                            Width="50"
-                                            Height="100">
-                                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE769;" />
-                                        </AppBarButton>
-                                        <AppBarButton
-                                            Name="Quxiao"
-                                            Width="50"
-                                            Height="100">
-                                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE106;" />
-                                        </AppBarButton>
+        <Grid
+            Grid.Row="0"
+            Height="50"
+            Background="{ThemeResource AppBarBorderThemeBrush}">
+            <TextBlock
+                Margin="10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="下载管理" />
+        </Grid>
+        <Pivot Grid.Row="1">
+            <PivotItem
+                Name="Nowdownload"
+                Margin="0"
+                Header="当前下载">
+                <Grid
+                    Height="50"
+                    VerticalAlignment="Bottom"
+                    Background="{ThemeResource AppBarBackgroundThemeBrush}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <AppBarButton HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="全部暂停" />
+                    </AppBarButton>
+                    <AppBarButton
+                        Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="全部取消" />
+                    </AppBarButton>
+                </Grid>
+            </PivotItem>
+            <PivotItem Name="Downloaded" Header="下载历史" />
 
-                                    </StackPanel>
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </StackPanel>
-            </PivotItem>
-            <PivotItem Margin="0" Header="下载历史">
-                <TextBlock Text="1" />
-            </PivotItem>
         </Pivot>
+
     </Grid>
 </Page>

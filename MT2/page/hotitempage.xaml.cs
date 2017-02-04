@@ -40,7 +40,7 @@ namespace MT2.page
         {
             xmltext = await GetXml.GetWebString(hotapiuri ,null);
             itemget.Toitem(xmltext);
-            itemget.getlistitems();
+            itemget.getlistitems(false);
             Mygridview.ItemsSource = itemget.Listapiitems;
             progressrin.IsActive = false;
         }

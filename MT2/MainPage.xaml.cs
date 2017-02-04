@@ -21,6 +21,8 @@ namespace MT2
     public sealed partial class MainPage : Page
     {
 
+
+      
         //public class Uridh
         //{           
         public int shuzu = 200;//数组容量变量
@@ -60,6 +62,7 @@ namespace MT2
         //Uridh uridh = new Uridh();
         public MainPage()
         {
+            
             this.InitializeComponent();
             getsz();
             getimage(null);
@@ -70,14 +73,7 @@ namespace MT2
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            //Mygridview.ItemsSource = Listapiitems;
-            //getimage();
-            //下面是判断瀑布流列
-            //var f = Window.Current.Bounds;
-            //var wit = (int)f.Width;
-            //if (wit < 500)
-            //GetWaterfall();
-
+           
         }
         private void MenuButton_Click(object sender, RoutedEventArgs e)
         {

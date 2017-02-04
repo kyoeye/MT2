@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MT2.CS;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,18 @@ namespace MT2.page
     /// </summary>
     public sealed partial class Setting2Page : Page
     {
+       
+        public List<ThemeColors> themeColors;
+        Fallsclass falclass = new Fallsclass();
+        //public int fallshub { get { return falclass.FallsHub; } set { falclass.FallsHub = value; } }
+
         public Setting2Page()
         {
-            this.InitializeComponent();
+
+            this.InitializeComponent();       
+            themeColors = ThemeColorsAdd.GetThemeColors(); //返回主题数据
+          falclass .FallsHub  =(int)listslider.Value;
         }
+
     }
 }

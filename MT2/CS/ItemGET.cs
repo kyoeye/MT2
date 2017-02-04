@@ -1,10 +1,11 @@
-﻿using System;
+﻿using MT2.page;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading .Tasks;
 using System.Xml.Linq;
 
 namespace MT2.CS
@@ -22,9 +23,7 @@ namespace MT2.CS
         public List<string> thisname = new List<string>();
     }
 
-
-
-    public class ItemGET
+    public class ItemGET:Fallsclass 
     {
         public class listsave
         {
@@ -43,49 +42,86 @@ namespace MT2.CS
 
         public ObservableCollection<listsave> Listapiitems { get; set; }
 
-        listClass listclass = new listClass ();
+        listClass listclass = new listClass();
         public ItemGET()
         {
+
         }
 
-       public void getlistitems()
+        public void getlistitems(bool IsCommon)
         {
-            Listapiitems = new ObservableCollection<listsave >();
-
-            for (int i = 0; i < listclass .id .Count ; i++) // 50为一次瀑布流显示的所有数量
+            Listapiitems = new ObservableCollection<listsave>();
+            if (IsCommon == true )
             {
-                if (listclass.ratings[listclass .a] != "q")
+              
+                for (int i = 0; i < FallsHub ; i++)
                 {
-                    if (listclass.ratings[listclass.a] != "e")
+                    if (listclass.ratings[listclass.a] != "q")
                     {
-                        Listapiitems.Add(new listsave
+                        if (listclass.ratings[listclass.a] != "e")
                         {
-                            _name = "作者：" + listclass .authorname[listclass .a],
-                            rating = listclass .ratings[listclass .a],
-                            preview_url = listclass.previewurl[listclass.a],
-                            sample_url = listclass.sampleurl[listclass.a],
-                            _a = listclass.a,
-                            id = listclass.id[listclass.a]
-                        });
+                            Listapiitems.Add(new listsave
+                            {
+                                _name = "作者：" + listclass.authorname[listclass.a],
+                                rating = listclass.ratings[listclass.a],
+                                preview_url = listclass.previewurl[listclass.a],
+                                sample_url = listclass.sampleurl[listclass.a],
+                                _a = listclass.a,
+                                id = listclass.id[listclass.a]
+                            });
+                        }
+                        else
+                        {
+                            listclass.a++;
+                            continue;
+                        }
                     }
                     else
                     {
                         listclass.a++;
                         continue;
                     }
-                }
-                else
-                {
                     listclass.a++;
-                    continue;
                 }
-                listclass.a++;
             }
-         
+            else  
+            {
+                for (int i = 0; i < listclass.id.Count; i++)
+                {
+                    if (listclass.ratings[listclass.a] != "q")
+                    {
+                        if (listclass.ratings[listclass.a] != "e")
+                        {
+                            Listapiitems.Add(new listsave
+                            {
+                                _name = "作者：" + listclass.authorname[listclass.a],
+                                rating = listclass.ratings[listclass.a],
+                                preview_url = listclass.previewurl[listclass.a],
+                                sample_url = listclass.sampleurl[listclass.a],
+                                _a = listclass.a,
+                                id = listclass.id[listclass.a]
+                            });
+                        }
+                        else
+                        {
+                            listclass.a++;
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        listclass.a++;
+                        continue;
+                    }
+                    listclass.a++;
+                }
+            }
+            
+
         }
         public void Toitem(string _mystring)
         {
-           
+
             //listclass = new CS.listClass();
             XElement xelement = XElement.Parse(_mystring);
             IEnumerable<XElement> elements = xelement.Elements();
@@ -98,8 +134,8 @@ namespace MT2.CS
                     {
                         switch (item.Name.ToString())
                         {
-                            case "id":                              
-                                    listclass.id.Add((string)item);                             
+                            case "id":
+                                listclass.id.Add((string)item);
                                 break;
                             case "preview_url":
                                 listclass.previewurl.Add((string)item);
