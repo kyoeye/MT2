@@ -32,6 +32,14 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
                     Text="{Binding ElementName=myScrollviewer, Path=VerticalOffset, Mode=TwoWay}" />
+
+                <TextBlock
+                    Margin="10"
+                    VerticalAlignment="Bottom"
+                    Foreground="#FFAEA9A9"
+                    Opacity="0"
+                    Text="软件为免费的开源项目，请从微软官方应用商店下载，其他任何渠道下载的应用均为二次打包盗版，为了避免不必要的风险，请不要相信任何所谓的第三方商店下载的app"
+                    TextWrapping="Wrap" />
             </Grid>
             <StackPanel>
                 <Grid Margin="4" Background="{ThemeResource AppBarBorderThemeBrush}">
