@@ -110,7 +110,6 @@
     </Compile>
     <Compile Include="CS\apiset\Listapiset.cs" />
     <Compile Include="CS\ArraryHelp.cs" />
-    <Compile Include="CS\betatt.cs" />
     <Compile Include="CS\GetXml.cs" />
     <Compile Include="CS\HotimageHub.cs" />
     <Compile Include="CS\ItemGET.cs" />
@@ -120,6 +119,9 @@
     <Compile Include="CS\XmlHelper.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainPage1.xaml.cs">
+      <DependentUpon>MainPage1.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\HomePageItem.cs" />
     <Compile Include="Model\TransferModel.cs" />
@@ -178,6 +180,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainPage1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="page\DownloadPage.xaml">
       <SubType>Designer</SubType>
