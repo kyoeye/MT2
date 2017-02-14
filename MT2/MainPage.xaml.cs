@@ -10,6 +10,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using Windows.Web.Http;
+using static MT2.CS.ItemGET;
 
 //“空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 上有介绍
 
@@ -20,22 +21,35 @@ namespace MT2
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        string hotapiuri = "https://yande.re/post.xml?limit=100";
-        
+      
+        string Mainapiuri = "https://yande.re/post.xml?limit=100";
+        string xmltext;
         public MainPage()
         {
             
             this.InitializeComponent();
-         
+            getxmltext();
             NavigationCacheMode = NavigationCacheMode.Enabled;
-         
         }
+        ItemGET MainItemget = new CS.ItemGET();
+
+
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
            
         }
+
+        public async void getxmltext()
+        {
+            xmltext = await GetXml.GetWebString(Mainapiuri, null);//在这种传参处做下一页
+            MainItemget.Toitem(xmltext);
+            MainItemget.getlistitems(true );
+            Mygridview.ItemsSource = MainItemget.Listapiitems;
+            //progressrin.IsActive = false;
+        }
+
         private void MenuButton_Click(object sender, RoutedEventArgs e)
         {
             Mymenu.IsPaneOpen = !Mymenu.IsPaneOpen;

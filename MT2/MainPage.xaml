@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:data="using:MT2.CS"
     xmlns:local="using:MT2.pubuliu"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="#FF0074B6"
@@ -109,15 +110,15 @@
                             Text="TOP1" />
                     </Grid>
                     <Grid Margin="5">
-                        <GridView>
+                        <GridView Name="Mygridview" HorizontalAlignment="Center" VerticalAlignment="Top">
                             <GridView.ItemTemplate>
-                                <DataTemplate>
+                                <DataTemplate  >
                                     <Grid
-                                        Width="100"
+                                        Width="130"
                                         Height="200"
                                         Margin="3"
-                                        Background="#FFD1D1D1">
-                                        <Image />
+                                        Background="#FFD1D1D1" HorizontalAlignment="Center">
+                                        <Image Stretch="UniformToFill"  Height="205" Source="{Binding preview_url}" HorizontalAlignment="Center" />
                                     </Grid>
                                 </DataTemplate>
                             </GridView.ItemTemplate>

@@ -54,7 +54,7 @@ namespace MT2.CS
             if (IsCommon == true )
             {
               
-                for (int i = 0; i < FallsHub ; i++)
+                for (int i = 0; i < 100 ; i++)
                 {
                     if (listclass.ratings[listclass.a] != "q")
                     {
