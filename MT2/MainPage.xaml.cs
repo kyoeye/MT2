@@ -46,7 +46,7 @@ namespace MT2
             xmltext = await GetXml.GetWebString(Mainapiuri, null);//在这种传参处做下一页
             MainItemget.Toitem(xmltext);
             MainItemget.getlistitems(true );
-            Mygridview.ItemsSource = MainItemget.Listapiitems;
+            Pictureada.ItemsSource = MainItemget.Listapiitems;
             //progressrin.IsActive = false;
         }
 
@@ -57,18 +57,6 @@ namespace MT2
 
        
 
-        //private void SeachButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Frame.Navigate(typeof(SearchPage));
-        //}
-        //private void gridstackpanel_Tapped(object sender, TappedRoutedEventArgs e)
-        //{
-        //    var boxs = sender as StackPanel;
-        //    var box = boxs.DataContext as Listapiset;
-        //    lookit.lookimguri = box.sample_url;
-        //    lookit.b = box._a;
-        //    Frame.Navigate(typeof(LookImg), lookit);
-        //}
 
         private void Setting_Click(object sender, RoutedEventArgs e)
         {
@@ -93,6 +81,13 @@ namespace MT2
 
                 }
             }
+        }
+
+        private void Picturegrid_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var boxs = sender as Grid;
+            var box = boxs.DataContext as ItemGET.listsave;
+            Frame.Navigate(typeof(LookImg), box);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿
-<Page
+﻿<Page
     x:Class="MT2.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,6 +8,7 @@
     xmlns:local="using:MT2.pubuliu"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="#FF0074B6"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     RequestedTheme="Light"
     mc:Ignorable="d">
     <SplitView Name="Mymenu" OpenPaneLength="250">
@@ -97,7 +97,7 @@
 
             <ScrollViewer>
                 <StackPanel>
-                    <Grid Height="400" Background="#FFBFBFBF">
+                    <Grid animations:ParallaxService.VerticalMultiplier="-0.8" Height="400" Background="#FFBFBFBF">
                         <Image Name="HomeHot" />
                         <TextBlock
                             Margin="10"
@@ -109,35 +109,57 @@
                             Opacity="0.5"
                             Text="TOP1" />
                     </Grid>
-                    <Grid Margin="5">
-                        <GridView Name="Mygridview" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Grid Margin="5" Background="White">
+                        <Grid.Resources >
+                            <DataTemplate x:Key="GridviewTemplete">
+                                <Grid
+                                        Name="Picturegrid"
+                                        Tapped="Picturegrid_Tapped" 
+                                        Width="130"
+                                        Height="200"
+                                        Margin="0.5"
+                                        Background="#FFD1D1D1" HorizontalAlignment="Center">
+                                    <Image Stretch="UniformToFill"  Height="205" Source="{Binding preview_url}" HorizontalAlignment="Center" />
+                                </Grid>
+                            </DataTemplate>
+                        </Grid.Resources>
+                        <controls:AdaptiveGridView Name="Pictureada" animations:ReorderGridAnimation.Duration="450" OneRowModeEnabled="False" ItemHeight="200" DesiredWidth="130"  SelectionMode="Single"
+                                   IsItemClickEnabled="True"
+                                   ItemTemplate="{StaticResource GridviewTemplete}" />
+
+                        <!--<GridView  animations:ReorderGridAnimation.Duration="450"  Name="Pictureada" HorizontalAlignment="Stretch"  VerticalAlignment="Top">
                             <GridView.ItemTemplate>
                                 <DataTemplate  >
                                     <Grid
+                                        Name="Picturegrid"
+                                        Tapped="Picturegrid_Tapped" 
                                         Width="130"
                                         Height="200"
-                                        Margin="3"
+                                        Margin="0.5"
                                         Background="#FFD1D1D1" HorizontalAlignment="Center">
                                         <Image Stretch="UniformToFill"  Height="205" Source="{Binding preview_url}" HorizontalAlignment="Center" />
                                     </Grid>
                                 </DataTemplate>
                             </GridView.ItemTemplate>
-                        </GridView>
+                        </GridView>-->
                     </Grid>
                 </StackPanel>
             </ScrollViewer>
             <Grid Height="50" VerticalAlignment="Top">
                 <Border Name="TopBorder" Background="{ThemeResource AppBarBackground}" />
-                <AppBarButton
+                <StackPanel Orientation="Horizontal" >
+                    <AppBarButton
                     Width="50"
                     Height="50"
                     Click="MenuButton_Click">
-                    <TextBlock
+                        <TextBlock
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontFamily="Segoe MDL2 Assets"
                         Text="&#xE700;" />
-                </AppBarButton>
+                    </AppBarButton>
+                    <TextBlock Text="首页"  Margin="5" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                </StackPanel>
             </Grid>
 
             <!--<SplitView
