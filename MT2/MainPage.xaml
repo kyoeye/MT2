@@ -123,7 +123,7 @@
                                 </Grid>
                             </DataTemplate>
                         </Grid.Resources>
-                        <controls:AdaptiveGridView Name="Pictureada" animations:ReorderGridAnimation.Duration="450" OneRowModeEnabled="False" ItemHeight="200" DesiredWidth="130"  SelectionMode="Single"
+                        <controls:AdaptiveGridView x:Name="Pictureada" animations:ReorderGridAnimation.Duration="450" OneRowModeEnabled="False" ItemHeight="200" DesiredWidth="130"  SelectionMode="Single"
                                    IsItemClickEnabled="True"
                                    ItemTemplate="{StaticResource GridviewTemplete}" />
 

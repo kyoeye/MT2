@@ -28,6 +28,7 @@
                         Text="设置" />
                 </StackPanel>
                 <TextBlock
+                    Visibility="Collapsed" 
                     Margin="15"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
@@ -75,13 +76,17 @@
                             HorizontalAlignment="Right"
                             PlaceholderText="没有输入则不需要密码" />
                         <Button
+                            Name="PasswordClick"
+                            Click="PasswordClick_Click"
+                       
                             Grid.Column="2"
                             Width="50"
                             Margin="0,10,15,10"
                             VerticalAlignment="stretch"
                             Background="#ffcdcdcd"
                             Content="&#xe081;"
-                            FontFamily="segoe mdl2 assets" />
+                            FontFamily="segoe mdl2 assets" >
+                        </Button>
                     </Grid>
                     <Grid Grid.Row="2" BorderBrush="#ffd7d7d7">
                         <Grid.ColumnDefinitions>

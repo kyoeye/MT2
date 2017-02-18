@@ -40,13 +40,13 @@ namespace MT2
             base.OnNavigatedTo(e);
            
         }
-
+      
         public async void getxmltext()
         {
             xmltext = await GetXml.GetWebString(Mainapiuri, null);//在这种传参处做下一页
             MainItemget.Toitem(xmltext);
             MainItemget.getlistitems(true );
-            Pictureada.ItemsSource = MainItemget.Listapiitems;
+             Pictureada.ItemsSource = MainItemget.Listapiitems;
             //progressrin.IsActive = false;
         }
 

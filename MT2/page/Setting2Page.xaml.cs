@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,7 +24,7 @@ namespace MT2.page
     /// </summary>
     public sealed partial class Setting2Page : Page
     {
-       
+        ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
         public List<ThemeColors> themeColors;
         Fallsclass falclass = new Fallsclass();
         //public int fallshub { get { return falclass.FallsHub; } set { falclass.FallsHub = value; } }
@@ -33,8 +34,23 @@ namespace MT2.page
 
             this.InitializeComponent();       
             themeColors = ThemeColorsAdd.GetThemeColors(); //返回主题数据
-          falclass .FallsHub  =(int)listslider.Value;
+            falclass .FallsHub  =(int)listslider.Value;
+          
         }
+
+        private void PasswordClick_Click(object sender, RoutedEventArgs e)
+        {
+            if (loagingpassword != null)
+            {
+                localsettings.Values["password"] = loagingpassword;
+            }
+            else
+            {
+                localsettings.Values["password"] = null;
+
+            }
+        }
+
 
     }
 }
