@@ -18,33 +18,10 @@ namespace MT2.CS
         private CancellationTokenSource cts = new CancellationTokenSource();
 
 
-        public static async Task<string> GetWebString(string url, string formData)
+        public   async Task<string> GetWebString(string url ) //删除静态关键字
         {
             string RequestUri = url;
 
-            //string requestUri = "";
-            //if (formData.Contains("="))
-            //{
-            //    requestUri = string.Concat(new object[]
-            //    {
-            //        url,
-            //        "?",
-            //        formData,
-            //        "r=",
-            //        DateTime.Now.Ticks
-            //    });
-            //}
-            //else
-            //{
-            //    if (string.IsNullOrEmpty(formData))
-            //    {
-            //        requestUri = url + "?r=" + DateTime.Now.Ticks;
-            //    }
-            //    else
-            //    {
-            //        requestUri = url + formData;
-            //    }
-            //}
 
             string result;
 
@@ -53,28 +30,15 @@ namespace MT2.CS
 
 
 
-                using (Windows.Web .Http .HttpClient httpclient = new Windows .Web .Http . HttpClient())
+                using (Windows.Web.Http.HttpClient httpclient = new Windows.Web.Http.HttpClient())
                 {
-                    using (Windows.Web .Http . HttpResponseMessage httpResponseMessage = await httpclient.GetAsync(new Uri(RequestUri)))
+                    using (Windows.Web.Http.HttpResponseMessage httpResponseMessage = await httpclient.GetAsync(new Uri(RequestUri)))
                     {
                         //var inputstream = await httpResponseMessage.Content.ReadAsStreamAsync();
                         httpResponseMessage.EnsureSuccessStatusCode();
                         result = await httpResponseMessage.Content.ReadAsStringAsync();
-                        //Stream stream = inputstream.AsRandomAccessStream();
-                        //Stream stream = inputstream;
-                        //using (StreamReader reader = new StreamReader(stream))
-                        //{
-                        //    string a = reader.ReadToEnd();
-                        //    //wv.NavigateToString(result);
-                        //    getStatuscode(a);
-                        //}
                     }
-
                 }
-                //var   s = httpResponseMessage.StatusCode.ToString();
-                //getStatuscode(s);
-                //var text = await httpResponseMessage.Content.ReadAsStringAsync(); //异步读取字符串
-                //result = text;
             }
             catch (Exception ec)
             {
@@ -85,6 +49,7 @@ namespace MT2.CS
 
             }
             return result;
+            
         }
         //public static async Task<string> GetWebString(string url, string a)
         //{
@@ -155,7 +120,7 @@ namespace MT2.CS
         //    return webString;
         //}
 
-        private static void getStatuscode(string s)
+        private  void getStatuscode(string s)
         {
             string dialog = "";
             switch (s)
@@ -204,7 +169,7 @@ namespace MT2.CS
             }
         }
 
-        public async static void showText(string a)
+        public async  void showText(string a)
         {
             await new MessageDialog(a).ShowAsync();
         }

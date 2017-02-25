@@ -4,10 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows.Web.Http;
 using static MT2.CS.ItemGET;
@@ -24,11 +26,13 @@ namespace MT2
       
         string Mainapiuri = "https://yande.re/post.xml?limit=100";
         string xmltext;
+        string hotimg;
         public MainPage()
         {
             
             this.InitializeComponent();
             getxmltext();
+         
             NavigationCacheMode = NavigationCacheMode.Enabled;
         }
         ItemGET MainItemget = new CS.ItemGET();
@@ -43,12 +47,33 @@ namespace MT2
       
         public async void getxmltext()
         {
-            xmltext = await GetXml.GetWebString(Mainapiuri, null);//在这种传参处做下一页
+            GetXml getxml = new CS.GetXml();
+            xmltext = await getxml.GetWebString(Mainapiuri);
             MainItemget.Toitem(xmltext);
             MainItemget.getlistitems(true );
              Pictureada.ItemsSource = MainItemget.Listapiitems;
+            GetHotimage();
+
             //progressrin.IsActive = false;
         }
+        public void GetHotimage()
+        {
+             try
+            {
+                HotimageHub hih = new HotimageHub();
+
+                hih.Gethotxml();
+                hih.Gethotimg();
+                hotimg = hih.Tophotimg;
+                BitmapImage bit = new BitmapImage(new Uri(hotimg));
+                HomeHot.Source = bit;
+            }
+         catch
+            {
+
+            }
+        }
+
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
         {

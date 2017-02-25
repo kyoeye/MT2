@@ -3,7 +3,7 @@
   <Identity Name="5758613C2F966.uwp-Beta" Publisher="CN=9D42EBA3-43E5-47AA-B257-4FD8FB569F35" Version="1.1.8.0" />
   <mp:PhoneIdentity PhoneProductId="f5f3516c-6ed8-4d92-8232-2ff56ab2ca98" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>萌豚uwp-Beta</DisplayName>
+    <DisplayName>MTACG</DisplayName>
     <PublisherDisplayName>画渣针眼</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -16,7 +16,7 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="MT2.App">
       <uap:VisualElements DisplayName="MTACG" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="MT2" BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\Square71x71Logo.png" Square310x310Logo="Assets\Square310x310Logo.png" ShortName="萌豚-MTACG">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\Square71x71Logo.png" Square310x310Logo="Assets\Square310x310Logo.png" ShortName="萌豚">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
             <uap:ShowOn Tile="wide310x150Logo" />

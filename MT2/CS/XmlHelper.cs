@@ -9,6 +9,8 @@ namespace MT2.CS
 {
     class XmlHelper
     {
+        GetXml getxml = new GetXml();
+
         string[] id = new string[30];
         string[] uri = new string[30];
         //注意，这里暂时还不可行，需要先确定目标，不然这样访问会很乱。。。
@@ -16,7 +18,7 @@ namespace MT2.CS
         {
             string url = "https://yande.re/post.xml?limit=30";
           
-            var mystring = await GetXml.GetWebString(url, null);
+            var mystring = await getxml.GetWebString(url);
 
 
             XElement root = XElement.Parse(mystring);

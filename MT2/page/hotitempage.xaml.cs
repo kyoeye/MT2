@@ -26,6 +26,7 @@ namespace MT2.page
     {
         string hotapiuri = "https://yande.re/post/popular_recent.xml";
         string xmltext;
+        public string  XmlText { get { return xmltext; }set { xmltext = value; } } 
         ItemGET itemget = new ItemGET();
         //string mystring;
         public  hotitempage()
@@ -33,18 +34,25 @@ namespace MT2.page
             this.InitializeComponent();
             progressrin.IsActive = true;
             getxmltext();
+            
             NavigationCacheMode = NavigationCacheMode.Enabled;
         }
 
         public async void getxmltext()
         {
-            xmltext = await GetXml.GetWebString(hotapiuri ,null);
+            GetXml getxml = new GetXml();
+            XmlText  = await getxml.GetWebString(hotapiuri );
+           
+            itemssoureGet();
+        }
+        public void itemssoureGet()
+        {
             itemget.Toitem(xmltext);
             itemget.getlistitems(false);
             Mygridview.ItemsSource = itemget.Listapiitems;
+            
             progressrin.IsActive = false;
         }
-
         private void gridstackpanel_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var boxs = sender as StackPanel;
