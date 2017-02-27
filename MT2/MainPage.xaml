@@ -20,7 +20,7 @@
                         Padding="0"
                         Background="#FFD6D6D6">
                         <Grid Width="250" Height="250">
-                            <Image />
+                            <Image Stretch="UniformToFill"  Source="{Binding ElementName=HomeHot, Path=Source ,Mode=TwoWay }" />
                             <AppBarButton
                                 Width="50"
                                 Height="50"
@@ -98,7 +98,7 @@
             <ScrollViewer>
                 <StackPanel>
                     <Grid animations:ParallaxService.VerticalMultiplier="-0.8" Height="400" Background="#FFBFBFBF">
-                        <Image  Name="HomeHot" />
+                        <Image Stretch="UniformToFill"  Height="410"  Name="HomeHot" />
                         <TextBlock
                             Margin="10"
                             HorizontalAlignment="Left"
@@ -160,6 +160,9 @@
                     </AppBarButton>
                     <TextBlock Text="首页"  Margin="5" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 </StackPanel>
+                <AppBarButton VerticalAlignment="Center" HorizontalAlignment="Right" >
+                    <TextBlock Text="&#xE1A3;" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"/>
+                </AppBarButton>
             </Grid>
 
             <!--<SplitView

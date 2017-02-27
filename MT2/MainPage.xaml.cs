@@ -23,56 +23,73 @@ namespace MT2
     /// </summary>
     public sealed partial class MainPage : Page
     {
-      
+
         string Mainapiuri = "https://yande.re/post.xml?limit=100";
         string xmltext;
         string hotimg;
         public MainPage()
         {
-            
+
             this.InitializeComponent();
             getxmltext();
-         
+
             NavigationCacheMode = NavigationCacheMode.Enabled;
         }
         ItemGET MainItemget = new CS.ItemGET();
-
+        ItemGET Hotitemget = new ItemGET();
 
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-           
+
         }
-      
+
         public async void getxmltext()
         {
             GetXml getxml = new CS.GetXml();
             xmltext = await getxml.GetWebString(Mainapiuri);
             MainItemget.Toitem(xmltext);
-            MainItemget.getlistitems(true );
-             Pictureada.ItemsSource = MainItemget.Listapiitems;
+            MainItemget.getlistitems(true);
+            Pictureada.ItemsSource = MainItemget.Listapiitems;
             GetHotimage();
-
             //progressrin.IsActive = false;
         }
-        HotimageHub hih = new HotimageHub();
+        //HotimageHub hih = new HotimageHub();
 
-        public void GetHotimage()
+        string homehoturl;
+        public string Homehoturl { get { return homehoturl; } set { homehoturl = value; } }
+
+        public async void GetHotimage() //按照获取首页瀑布流的方法获取热榜瀑布流数据，热榜直接继承这个类
         {
-             try
+            GetXml gethotxml = new GetXml();
+            try
             {
-
-                //hih.Gethotxml();
-                hih.Gethotimg();
-                hotimg = hih.Tophotimg;
-                BitmapImage bit = new BitmapImage(new Uri(hotimg));
+                string hotxmltext = await gethotxml.GetWebString(@"https://yande.re/post/popular_recent.xml");
+                Hotitemget.Toitem(hotxmltext);
+                Hotitemget.getlistitems(false);
+                var HotitemList = Hotitemget.Listapiitems;
+                Homehoturl = HotitemList[1].sample_url;
+                BitmapImage bit = new BitmapImage(new Uri(Homehoturl));
                 HomeHot.Source = bit;
             }
-         catch
+            catch
             {
 
             }
+
+         //    try
+         //   {
+         //       //hih.Gethotxml();
+         //       hih.Gethotimg();
+         //       hotimg = hih.Tophotimg;
+         //       BitmapImage bit = new BitmapImage(new Uri(hotimg));
+         //       HomeHot.Source = bit;
+         //   }
+         //catch
+         //   {
+
+            //   }
         }
 
 
@@ -80,9 +97,6 @@ namespace MT2
         {
             Mymenu.IsPaneOpen = !Mymenu.IsPaneOpen;
         }
-
-       
-
 
         private void Setting_Click(object sender, RoutedEventArgs e)
         {
