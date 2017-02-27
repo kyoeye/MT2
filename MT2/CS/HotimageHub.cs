@@ -11,30 +11,31 @@ namespace MT2.CS
   public class HotimageHub 
     {
     
-       public  string hoturl = "https://yande.re/post/popular_recent.xml";
+       //string hoturl = "https://yande.re/post/popular_recent.xml";
         string xmltext;
         string tohotimg;
-       
-        //public HotimageHub()
-        //{         
-        //    Gethotxml();
-        //}
-      
-        public async void Gethotxml()
+        ItemGET hotitemget2 = new ItemGET();
+
+        public HotimageHub()
         {
-            GetXml getxml = new GetXml();
-            xmltext = await getxml.GetWebString(hoturl);
-          //Gethotimg();
-          
+            Gethotxml();
+        }
+
+        public  async void Gethotxml()
+        {
+            GetXml getxml2 = new GetXml();
+            xmltext = await getxml2.GetWebString(@"https://yande.re/post/popular_recent.xml");
+            Gethotimg();
+
         }
         public void Gethotimg()
         {
-            ItemGET hotitemget2 = new ItemGET();
+         
             hotitemget2.Toitem(xmltext);
             hotitemget2.getlistitems(false);
             Tophotimg = hotitemget2.Listapiitems[1].sample_url;
         }
 
-        public string Tophotimg { get { return tohotimg; } set { value = tohotimg; } }
+        public string Tophotimg { get { return tohotimg; } set {  tohotimg = value ; } }
     }
 }

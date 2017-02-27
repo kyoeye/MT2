@@ -56,13 +56,14 @@ namespace MT2
 
             //progressrin.IsActive = false;
         }
+        HotimageHub hih = new HotimageHub();
+
         public void GetHotimage()
         {
              try
             {
-                HotimageHub hih = new HotimageHub();
 
-                hih.Gethotxml();
+                //hih.Gethotxml();
                 hih.Gethotimg();
                 hotimg = hih.Tophotimg;
                 BitmapImage bit = new BitmapImage(new Uri(hotimg));

@@ -98,7 +98,7 @@
             <ScrollViewer>
                 <StackPanel>
                     <Grid animations:ParallaxService.VerticalMultiplier="-0.8" Height="400" Background="#FFBFBFBF">
-                        <Image Name="HomeHot" />
+                        <Image  Name="HomeHot" />
                         <TextBlock
                             Margin="10"
                             HorizontalAlignment="Left"

@@ -15,7 +15,7 @@ namespace MT2.CS
     class GetXml
     {
 
-        private CancellationTokenSource cts = new CancellationTokenSource();
+        //private CancellationTokenSource cts = new CancellationTokenSource();
 
 
         public   async Task<string> GetWebString(string url ) //删除静态关键字
