@@ -17,14 +17,47 @@ using Windows.UI.Xaml.Navigation;
 
 namespace MT2.page
 {
+
+    
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
     public sealed partial class SearchPage : Page
     {
+        public List<Seachitem> secitem;
         public SearchPage()
         {
             this.InitializeComponent();
+            secitem = Seachitems.seachitem();
+        }
+    }
+
+   public  class Seachitem
+    {
+        //public string Canseestring { get; set; }
+       public   string Seachstring { get; set; }
+    }
+
+    public  class Seachitems
+    {
+        public static   List<Seachitem> seachitem ()
+        {
+            var seachitems = new List<Seachitem>();
+            seachitems.Add(new page.Seachitem { Seachstring = "loli" });
+            seachitems.Add(new page.Seachitem { Seachstring = "loli" });
+            seachitems.Add(new page.Seachitem { Seachstring = "loli" });
+            seachitems.Add(new page.Seachitem { Seachstring = "loli" });
+            seachitems.Add(new page.Seachitem { Seachstring = "loli" });
+            seachitems.Add(new page.Seachitem { Seachstring = "loli" });
+            seachitems.Add(new page.Seachitem { Seachstring = "loli" });
+            seachitems.Add(new page.Seachitem { Seachstring = "loli" });
+            seachitems.Add(new page.Seachitem { Seachstring = "loli" });
+            seachitems.Add(new page.Seachitem { Seachstring = "loli" });
+            seachitems.Add(new page.Seachitem { Seachstring = "loli" });
+            seachitems.Add(new page.Seachitem { Seachstring = "loli" });
+            seachitems.Add(new page.Seachitem { Seachstring = "loli" });
+
+            return seachitems;
         }
     }
 }

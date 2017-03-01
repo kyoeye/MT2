@@ -129,5 +129,10 @@ namespace MT2
             var box = boxs.DataContext as ItemGET.listsave;
             Frame.Navigate(typeof(LookImg), box);
         }
+
+        private void Searchbutton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(SearchPage));
+        }
     }
 }

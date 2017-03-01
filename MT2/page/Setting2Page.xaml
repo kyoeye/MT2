@@ -34,13 +34,14 @@
                     VerticalAlignment="Top"
                     Text="{Binding ElementName=myScrollviewer, Path=VerticalOffset, Mode=TwoWay}" />
 
-                <TextBlock
+                <Grid
                     Margin="10"
                     VerticalAlignment="Bottom"
-                    Foreground="#FFAEA9A9"
-                    Opacity="0"
-                    Text="软件为免费的开源项目，请从微软官方应用商店下载，其他任何渠道下载的应用均为二次打包盗版，为了避免不必要的风险，请不要相信任何所谓的第三方商店下载的app"
-                    TextWrapping="Wrap" />
+                    >
+                    <Button  HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}"  >
+                        <TextBlock FontSize="16" Margin="5" Text="关于MTACG" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Button>
+                </Grid>
             </Grid>
             <StackPanel>
                 <Grid Margin="4" Background="{ThemeResource AppBarBorderThemeBrush}">
@@ -53,29 +54,34 @@
                         Margin="10"
                         HorizontalAlignment="left"
                         FontSize="20"
-                        FontWeight="bold"
                         Foreground="#ff4b4b4b"
                         Text="安全控制" />
                     <Grid
                         Grid.Row="1"
                         BorderBrush="#ffd7d7d7"
                         BorderThickness="0,2,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                      
+                        <Grid Grid.Row="0" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
                             Margin="15,15,15,15"
                             FontSize="17"
                             Text="启动密码" />
-                        <PasswordBox
+                            <PasswordBox
                             Name="loagingpassword"
                             Grid.Column="1"
                             Margin="10,10,0,10"
                             HorizontalAlignment="Right"
                             PlaceholderText="没有输入则不需要密码" />
-                        <Button
+                            <Button
                             Name="PasswordClick"
                             Click="PasswordClick_Click"
                        
@@ -86,7 +92,10 @@
                             Background="#ffcdcdcd"
                             Content="&#xe081;"
                             FontFamily="segoe mdl2 assets" >
-                        </Button>
+                            </Button>
+
+                        </Grid>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"  Name="Nowpassword" Visibility="Collapsed"   Grid.Row="1" FontSize="14" />
                     </Grid>
                     <Grid Grid.Row="2" BorderBrush="#ffd7d7d7">
                         <Grid.ColumnDefinitions>
@@ -132,7 +141,6 @@
                         Margin="10"
                         HorizontalAlignment="left"
                         FontSize="20"
-                        FontWeight="bold"
                         Foreground="#ff4b4b4b"
                         Text="御坂网络中枢" />
                     <Grid
@@ -180,9 +188,8 @@
                         Margin="10"
                         HorizontalAlignment="left"
                         FontSize="20"
-                        FontWeight="bold"
                         Foreground="#ff4b4b4b"
-                        Text="关照" />
+                        Text="美化" />
                     <Grid
                         Grid.Row="1"
                         BorderBrush="#ffd7d7d7"

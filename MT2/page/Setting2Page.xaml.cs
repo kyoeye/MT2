@@ -31,22 +31,34 @@ namespace MT2.page
 
         public Setting2Page()
         {
-
-            this.InitializeComponent();       
+            this.InitializeComponent();
             themeColors = ThemeColorsAdd.GetThemeColors(); //返回主题数据
-            falclass .FallsHub  =(int)listslider.Value;
-          
+            falclass.FallsHub = (int)listslider.Value;
+            if (localsettings.Values["password"] != null)
+            {
+                Nowpassword.Text = "当前密码是：" + localsettings.Values["password"].ToString();
+                Nowpassword.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Nowpassword.Visibility = Visibility.Collapsed;
+            }
+
         }
 
         private void PasswordClick_Click(object sender, RoutedEventArgs e)
         {
             if (loagingpassword != null)
             {
-                localsettings.Values["password"] = loagingpassword;
+                localsettings.Values["password"] = loagingpassword.Password;
+                Nowpassword.Text = "当前密码是：" + localsettings.Values["password"].ToString();
+                Nowpassword.Visibility = Visibility.Visible;
+
             }
             else
             {
                 localsettings.Values["password"] = null;
+                Nowpassword.Visibility = Visibility.Collapsed;
 
             }
         }
