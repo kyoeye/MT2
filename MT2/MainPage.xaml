@@ -106,7 +106,7 @@
                             FontSize="30"
                             FontWeight="Bold"
                             Foreground="#FF606060"
-                            Opacity="0.5"
+                           
                             Text="TOP1" />
                     </Grid>
                     <Grid Margin="5" Background="White">
