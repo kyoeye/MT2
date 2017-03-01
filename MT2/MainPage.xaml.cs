@@ -26,7 +26,7 @@ namespace MT2
 
         string Mainapiuri = "https://yande.re/post.xml?limit=100";
         string xmltext;
-        string hotimg;
+        //string hotimg;
         public MainPage()
         {
 
@@ -37,6 +37,7 @@ namespace MT2
         }
         ItemGET MainItemget = new CS.ItemGET();
         ItemGET Hotitemget = new ItemGET();
+        GetXml getxml = new CS.GetXml(); // 拓展加载更多，getxml共用
 
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -47,7 +48,6 @@ namespace MT2
 
         public async void getxmltext()
         {
-            GetXml getxml = new CS.GetXml();
             xmltext = await getxml.GetWebString(Mainapiuri);
             MainItemget.Toitem(xmltext);
             MainItemget.getlistitems(true);

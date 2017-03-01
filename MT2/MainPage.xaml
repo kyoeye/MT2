@@ -122,10 +122,18 @@
                                     <Image Stretch="UniformToFill"  Height="205" Source="{Binding preview_url}" HorizontalAlignment="Center" />
                                 </Grid>
                             </DataTemplate>
+                            <ControlTemplate x:Key="Controltemplate">
+                                <StackPanel >
+                                    <ItemsPresenter />
+                                    <Button HorizontalAlignment="Center" VerticalAlignment="Center"  Content="加载"/>
+                                </StackPanel>
+               
+                            </ControlTemplate>                     
                         </Grid.Resources>
                         
                             <controls:AdaptiveGridView x:Name="Pictureada" animations:ReorderGridAnimation.Duration="450" OneRowModeEnabled="False" ItemHeight="200" DesiredWidth="140"  SelectionMode="Single"
                                    IsItemClickEnabled="True"
+                                  Control.Template="{StaticResource Controltemplate }"
                                    ItemTemplate="{StaticResource GridviewTemplete}"  />
 
  
@@ -148,8 +156,8 @@
                     </Grid>
                 </StackPanel>
             </ScrollViewer>
-            <Grid Height="50" VerticalAlignment="Top">
-                <Border Name="TopBorder" Background="{ThemeResource AppBarBackground}" />
+            <Grid Height="50" VerticalAlignment="Top" Background="Black">
+                <Border Background="#FFDDDDDD" />
                 <StackPanel Orientation="Horizontal" >
                     <AppBarButton
                     Width="50"
