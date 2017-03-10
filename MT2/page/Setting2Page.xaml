@@ -10,6 +10,7 @@
     <ScrollViewer Name="myScrollviewer">
         <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <Grid Height="250" Background="{ThemeResource AppBarBackground}">
+                <!--<Image Name="Logobackground"  Source="{ x:Bind Mode=TwoWay ,Path=mainpage.Homehoturl }" />-->
                 <StackPanel
                     Height="50"
                     VerticalAlignment="Top"

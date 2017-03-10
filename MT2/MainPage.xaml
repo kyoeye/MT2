@@ -4,13 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:data="using:MT2.CS"
-    xmlns:local="using:MT2.pubuliu"
+    xmlns:data="using:MT2.CS"  
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="#FF0074B6"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     RequestedTheme="Light"
     mc:Ignorable="d">
+    <!--xmlns:local="using:MT2.pubuliu"-->
     <SplitView Name="Mymenu" OpenPaneLength="250">
         <SplitView.Pane>
             <Grid HorizontalAlignment="Left">
@@ -19,7 +19,7 @@
                         Height="250"
                         Padding="0"
                         Background="#FFD6D6D6">
-                        <Grid Width="250" Height="250">
+                        <Grid  Width="250" Height="250">
                             <Image Stretch="UniformToFill"  Source="{Binding ElementName=HomeHot, Path=Source ,Mode=TwoWay }" />
                             <AppBarButton
                                 Width="50"
@@ -37,7 +37,7 @@
                     <ListBoxItem Name="homepage">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock
-                                Margin="10"
+                                Margin="5"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 FontFamily="Segoe MDL2 Assets"
@@ -53,7 +53,7 @@
                     <ListBoxItem Name="hotitem">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock
-                                Margin="10"
+                                Margin="5"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 FontFamily="Segoe MDL2 Assets"

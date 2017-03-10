@@ -124,6 +124,9 @@
     </Compile>
     <Compile Include="Model\HomePageItem.cs" />
     <Compile Include="Model\TransferModel.cs" />
+    <Compile Include="page\AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="page\DownloadPage.xaml.cs">
       <DependentUpon>DownloadPage.xaml</DependentUpon>
     </Compile>
@@ -205,6 +208,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="page\AboutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="page\DownloadPage.xaml">
       <SubType>Designer</SubType>

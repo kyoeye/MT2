@@ -28,9 +28,11 @@ namespace MT2.page
         public List<ThemeColors> themeColors;
         Fallsclass falclass = new Fallsclass();
         //public int fallshub { get { return falclass.FallsHub; } set { falclass.FallsHub = value; } }
-
+        MainPage mainpage;
         public Setting2Page()
         {
+            //Logobackground.Source =  mainpage.Homehoturl;
+            
             this.InitializeComponent();
             themeColors = ThemeColorsAdd.GetThemeColors(); //返回主题数据
             falclass.FallsHub = (int)listslider.Value;
