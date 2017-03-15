@@ -110,7 +110,8 @@ namespace MT2.page
 
         }
 
-    private void DownloadButton_Click(object sender, RoutedEventArgs e)
+        #region 后台下载方法
+        private void DownloadButton_Click(object sender, RoutedEventArgs e)
         {         
             //下载
             Savefile();
@@ -175,7 +176,7 @@ namespace MT2.page
             //HttpResponseMessage httpResponseMessage = await httpclient.GetAsync(new Uri(jpguri));
 
         }
-
+        #endregion
         private void AppBarButton_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
             storyboard1.Begin();

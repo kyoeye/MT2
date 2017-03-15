@@ -115,6 +115,9 @@
     <Compile Include="CS\GetXml.cs" />
     <Compile Include="CS\HotimageHub.cs" />
     <Compile Include="CS\ItemGET.cs" />
+    <Compile Include="CS\LockedPage.xaml.cs">
+      <DependentUpon>LockedPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CS\SETall.cs" />
     <Compile Include="CS\SettingHub.cs" />
     <Compile Include="CS\ThemeColors.cs" />
@@ -202,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Control\TextDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CS\LockedPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

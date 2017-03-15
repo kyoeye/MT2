@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:data="using:MT2.CS" 
+    xmlns:data="using:MT2.CS"
     xmlns:local="using:MT2.page"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -29,18 +29,34 @@
                         Text="设置" />
                 </StackPanel>
                 <TextBlock
-                    Visibility="Collapsed" 
                     Margin="15"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
-                    Text="{Binding ElementName=myScrollviewer, Path=VerticalOffset, Mode=TwoWay}" />
-
-                <Grid
-                    Margin="10"
-                    VerticalAlignment="Bottom"
-                    >
-                    <Button  HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}"  >
-                        <TextBlock FontSize="16" Margin="5" Text="关于MTACG" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    Text="{Binding ElementName=myScrollviewer, Path=VerticalOffset, Mode=TwoWay}"
+                    Visibility="Collapsed" />
+                <StackPanel VerticalAlignment="Center">
+                    <Image
+                        Width="80"
+                        Height="80"
+                        Source="ms-appx:///Assets/StoreLogo.png" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        Foreground="Black"
+                        Text="当前版本：" />
+                </StackPanel>
+                <Grid Margin="10" VerticalAlignment="Bottom">
+                    <Button
+                        Name="Abutopagebutton"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="{x:Null}"
+                        Click="Abutopagebutton_Click">
+                        <TextBlock
+                            Margin="5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="16"
+                            Text="关于MTACG" />
                     </Button>
                 </Grid>
             </Grid>
@@ -61,42 +77,46 @@
                         Grid.Row="1"
                         BorderBrush="#ffd7d7d7"
                         BorderThickness="0,2,0,0">
-                        <Grid.RowDefinitions >
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
-                      
-                        <Grid Grid.Row="0" >
+
+                        <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
                             <TextBlock
-                            Margin="15,15,15,15"
-                            FontSize="17"
-                            Text="启动密码" />
+                                Margin="15,15,15,15"
+                                FontSize="17"
+                                Text="启动密码" />
                             <PasswordBox
-                            Name="loagingpassword"
-                            Grid.Column="1"
-                            Margin="10,10,0,10"
-                            HorizontalAlignment="Right"
-                            PlaceholderText="没有输入则不需要密码" />
+                                Name="loagingpassword"
+                                Grid.Column="1"
+                                Margin="10,10,0,10"
+                                HorizontalAlignment="Right"
+                                PlaceholderText="没有输入则不需要密码" />
                             <Button
-                            Name="PasswordClick"
-                            Click="PasswordClick_Click"
-                       
-                            Grid.Column="2"
-                            Width="50"
-                            Margin="0,10,15,10"
-                            VerticalAlignment="stretch"
-                            Background="#ffcdcdcd"
-                            Content="&#xe081;"
-                            FontFamily="segoe mdl2 assets" >
-                            </Button>
+                                Name="PasswordClick"
+                                Grid.Column="2"
+                                Width="50"
+                                Margin="0,10,15,10"
+                                VerticalAlignment="stretch"
+                                Background="#ffcdcdcd"
+                                Click="PasswordClick_Click"
+                                Content="&#xe081;"
+                                FontFamily="segoe mdl2 assets" />
 
                         </Grid>
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"  Name="Nowpassword" Visibility="Collapsed"   Grid.Row="1" FontSize="14" />
+                        <TextBlock
+                            Name="Nowpassword"
+                            Grid.Row="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="14"
+                            Visibility="Collapsed" />
                     </Grid>
                     <Grid Grid.Row="2" BorderBrush="#ffd7d7d7">
                         <Grid.ColumnDefinitions>
@@ -129,7 +149,7 @@
                             Orientation="horizontal">
                             <CheckBox Content="安全的" />
                             <CheckBox Content="隐晦的" />
-                            <CheckBox Content="暴露的" />
+                            <CheckBox Content="里区" />
                         </StackPanel>
                     </Grid>
                 </Grid>

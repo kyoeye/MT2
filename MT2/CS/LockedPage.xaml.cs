@@ -13,26 +13,18 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
+// https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
-namespace MT2.page
+namespace MT2.CS
 {
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class AboutPage : Page
+    public sealed partial class LockedPage : Page
     {
-        public AboutPage()
+        public LockedPage()
         {
             this.InitializeComponent();
-        }
-
-        private void Gobackbutton_Click(object sender, RoutedEventArgs e)
-        {
-             if (Frame.CanGoBack)
-            {
-                Frame.GoBack();
-            }
         }
     }
 }

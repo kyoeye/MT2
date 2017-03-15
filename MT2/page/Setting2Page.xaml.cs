@@ -65,6 +65,9 @@ namespace MT2.page
             }
         }
 
-
+        private void Abutopagebutton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(AboutPage));
+        }
     }
 }
