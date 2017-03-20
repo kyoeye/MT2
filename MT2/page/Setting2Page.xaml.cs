@@ -28,7 +28,7 @@ namespace MT2.page
         public List<ThemeColors> themeColors;
         Fallsclass falclass = new Fallsclass();
         //public int fallshub { get { return falclass.FallsHub; } set { falclass.FallsHub = value; } }
-        MainPage mainpage;
+        //MainPage mainpage;
         public Setting2Page()
         {
             //Logobackground.Source =  mainpage.Homehoturl;
@@ -68,6 +68,11 @@ namespace MT2.page
         private void Abutopagebutton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(AboutPage));
+        }
+
+        private void loagingpassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

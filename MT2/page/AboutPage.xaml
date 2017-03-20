@@ -16,9 +16,9 @@
                 Background="#FF0074B6">
                 <StackPanel VerticalAlignment="Center">
                     <Image
-                        Width="80"
-                        Height="80"
-                        Source="ms-appx:///Assets/StoreLogo.png" />
+                        Width="180"
+                        Height="180"
+                        Source="ms-appx:///Assets/Square310x310Logo.png" />
                     <TextBlock
                         HorizontalAlignment="Center"
                         Foreground="White"

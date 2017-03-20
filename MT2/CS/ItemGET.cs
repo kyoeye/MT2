@@ -51,6 +51,7 @@ namespace MT2.CS
         public void getlistitems(bool IsCommon)
         {
             Listapiitems = new ObservableCollection<listsave>();
+
             if (IsCommon == true )
             {
               

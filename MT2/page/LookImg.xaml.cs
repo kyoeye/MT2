@@ -58,7 +58,7 @@ namespace MT2.page
             BitmapImage bitmapimage = new BitmapImage(new Uri(lookit2.sample_url));
             SeeImage.Source = bitmapimage;
             bitmapimage.DownloadProgress += Bitmapimage_DownloadProgress;
-
+            #region 旧的
             //try
             //{
             //    base.OnNavigatedTo(e);
@@ -79,6 +79,7 @@ namespace MT2.page
             //{
 
             //}
+#endregion
         }
 
         private void Bitmapimage_DownloadProgress(object sender, DownloadProgressEventArgs e)

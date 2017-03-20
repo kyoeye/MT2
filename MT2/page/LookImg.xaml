@@ -229,7 +229,7 @@
         </Style>
         <Storyboard x:Name="storyboard1">
             <ColorAnimation
-                Storyboard.TargetName="Buttonrectangle" 
+                Storyboard.TargetName="Buttonrectangle"
                 Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
                 From="#FF383838"
                 To="#FF0074B6"

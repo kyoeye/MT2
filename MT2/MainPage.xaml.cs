@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Windows.ApplicationModel.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -26,11 +27,16 @@ namespace MT2
 
         string Mainapiuri = "https://yande.re/post.xml?limit=100";
         string xmltext;
+        int page;
         //string hotimg;
         public MainPage()
         {
-
+            //需要判断运行环境是否为手机（如果是则需要隐藏MyTitleBar)，建议在启动的时候判断，以免影响首页加载速度
             this.InitializeComponent();
+            CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            coreTitleBar.ExtendViewIntoTitleBar = true;
+
+            Topprogress.Visibility = Visibility.Visible;
             getxmltext();
 
             NavigationCacheMode = NavigationCacheMode.Enabled;
@@ -47,12 +53,14 @@ namespace MT2
         }
 
         public async void getxmltext()
-        {
+     {
+            Progresstext.Text = "正在下载瀑布流数据……";
             xmltext = await getxml.GetWebString(Mainapiuri);
             MainItemget.Toitem(xmltext);
             MainItemget.getlistitems(true);
             Pictureada.ItemsSource = MainItemget.Listapiitems;
-            GetHotimage();
+            await GetHotimage();
+
             //progressrin.IsActive = false;
         }
         //HotimageHub hih = new HotimageHub();
@@ -60,9 +68,11 @@ namespace MT2
         string homehoturl;
         public string Homehoturl { get { return homehoturl; } set { homehoturl = value; } }
 
-        public async void GetHotimage() //按照获取首页瀑布流的方法获取热榜瀑布流数据，热榜直接继承这个类
+        public async Task  GetHotimage() //按照获取首页瀑布流的方法获取热榜瀑布流数据，热榜直接继承这个类
         {
             GetXml gethotxml = new GetXml();
+            Progresstext.Text = "正在下载TOP数据……";
+
             try
             {
                 string hotxmltext = await gethotxml.GetWebString(@"https://yande.re/post/popular_recent.xml");
@@ -72,6 +82,8 @@ namespace MT2
                 Homehoturl = HotitemList[1].sample_url;
                 BitmapImage bit = new BitmapImage(new Uri(Homehoturl));
                 HomeHot.Source = bit;
+                Topprogress.Visibility = Visibility.Collapsed;
+
             }
             catch
             {
@@ -100,7 +112,9 @@ namespace MT2
 
         private void Setting_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(Setting2Page));
+            //this.Frame.Navigate(typeof(Setting2Page));
+            Mainframe.Navigate(typeof(Setting2Page));
+
             Mymenu.IsPaneOpen = false;
 
         }
@@ -134,5 +148,22 @@ namespace MT2
         {
             Frame.Navigate(typeof(SearchPage));
         }
+        #region 加载更多
+        private void LoadingButton_Click(object sender, RoutedEventArgs e)
+        {
+            LoadingfuctionAsync();
+        }
+        private async void  LoadingfuctionAsync()
+        {
+            page++;
+
+            xmltext = await getxml.GetWebString(Mainapiuri + "&page=" + page);
+            MainItemget.Toitem(xmltext);
+            MainItemget.getlistitems(true);
+
+
+
+        }
+        #endregion
     }
 }

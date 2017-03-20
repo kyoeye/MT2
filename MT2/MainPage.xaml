@@ -11,153 +11,202 @@
     RequestedTheme="Light"
     mc:Ignorable="d">
     <!--  xmlns:local="using:MT2.pubuliu"  -->
-    <SplitView Name="Mymenu" OpenPaneLength="250">
-        <SplitView.Pane>
-            <Grid HorizontalAlignment="Left">
-                <ListBox HorizontalAlignment="Left" SelectionChanged="MenuListboxitem_SelectionChanged">
-                    <ListBoxItem
-                        Height="250"
-                        Padding="0"
-                        Background="#FFD6D6D6">
-                        <Grid Width="250" Height="250">
-                            <Image Source="{Binding ElementName=HomeHot, Path=Source, Mode=TwoWay}" Stretch="UniformToFill" />
-                            <AppBarButton
-                                Width="50"
-                                Height="50"
-                                HorizontalAlignment="Left"
-                                Click="MenuButton_Click">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid
+            Name="MyTitleBar"
+            Height="30"
+            Background="#FFDDDDDD">
+            <Image
+                Width="55"
+                Height="30"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Source="Assets/Wide310x150Logo.png" />
+            <TextBlock
+                Margin="55,0,0,0"
+                VerticalAlignment="Center"
+                Text="欢迎来到MTACG" />
+        </Grid>
+        <SplitView
+            Name="Mymenu"
+            Grid.Row="1"
+            OpenPaneLength="250">
+            <SplitView.Pane>
+                <Grid HorizontalAlignment="Left">
+                    <Grid.Background>
+                        <ImageBrush
+                            x:Name="MenuBlur"
+                            ImageSource="{Binding ElementName=HomeHot, Path=Source, Mode=TwoWay}"
+                            Stretch="UniformToFill" />
+                    </Grid.Background>
+                    <ListBox
+                        HorizontalAlignment="Left"
+                        Background="{x:Null}"
+                        SelectionChanged="MenuListboxitem_SelectionChanged">
+                        <ListBoxItem
+                            Height="250"
+                            Padding="0"
+                            Background="#FFD6D6D6">
+                            <Grid Width="250" Height="250">
+                                <Image Source="{Binding ElementName=HomeHot, Path=Source, Mode=TwoWay}" Stretch="UniformToFill" />
+                                <AppBarButton
+                                    Width="50"
+                                    Height="50"
+                                    HorizontalAlignment="Left"
+                                    Click="MenuButton_Click">
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontFamily="Segoe MDL2 Assets"
+                                        Text="&#xE09A;" />
+                                </AppBarButton>
+                            </Grid>
+                        </ListBoxItem>
+                        <ListBoxItem Name="homepage">
+                            <StackPanel Orientation="Horizontal">
                                 <TextBlock
+                                    Margin="5"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     FontFamily="Segoe MDL2 Assets"
-                                    Text="&#xE09A;" />
-                            </AppBarButton>
-                        </Grid>
-                    </ListBoxItem>
-                    <ListBoxItem Name="homepage">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock
-                                Margin="5"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                FontFamily="Segoe MDL2 Assets"
-                                FontSize="18"
-                                Text="&#xE10F;" />
-                            <TextBlock
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                FontSize="18"
-                                Text="首页" />
-                        </StackPanel>
-                    </ListBoxItem>
-                    <ListBoxItem Name="hotitem">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock
-                                Margin="5"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                FontFamily="Segoe MDL2 Assets"
-                                FontSize="18"
-                                Text="&#xE8E1;" />
-                            <TextBlock
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                FontSize="18"
-                                Text="热榜" />
-                        </StackPanel>
-                    </ListBoxItem>
-                </ListBox>
-                <Grid Height="50" VerticalAlignment="Bottom">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <AppBarButton
-                        Name="SettingButton"
-                        Grid.Column="2"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch"
-                        Click="Setting_Click">
-                        <TextBlock
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            FontFamily="Segoe MDL2 Assets"
-                            FontSize="18"
-                            Text="&#xE713;" />
-                    </AppBarButton>
-                </Grid>
-            </Grid>
-
-        </SplitView.Pane>
-        <Grid>
-            <Grid.Background>
-                <SolidColorBrush Color="White" />
-            </Grid.Background>
-
-            <ScrollViewer>
-                <StackPanel>
-                    <Grid
-                        Height="400"
-                        animations:ParallaxService.VerticalMultiplier="-0.8"
-                        Background="#FFBFBFBF">
-                        <Image
-                            Name="HomeHot"
-                            Height="410"
-                            Stretch="UniformToFill" />
-                        <TextBlock
-                            Margin="10"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Bottom"
-                            FontSize="30"
-                            FontWeight="Bold"
-                            Foreground="#FF606060"
-                            Text="TOP1" />
-                    </Grid>
-                    <Grid Margin="5" Background="White">
-                        <Grid.Resources>
-                            <DataTemplate x:Key="GridviewTemplete">
-                                <Grid
-                                    Name="Picturegrid"
-                                    Width="145"
-                                    Height="200"
-                                    Margin="0.5"
+                                    FontSize="18"
+                                    Text="&#xE10F;" />
+                                <TextBlock
                                     HorizontalAlignment="Center"
-                                    Background="#FFD1D1D1"
-                                    Tapped="Picturegrid_Tapped">
-                                    <Image
-                                        Height="205"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Text="首页" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Name="hotitem">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                                    Margin="5"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    FontSize="18"
+                                    Text="&#xE8E1;" />
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Text="热榜" />
+                            </StackPanel>
+                        </ListBoxItem>
+                    </ListBox>
+                    <Grid Height="50" VerticalAlignment="Bottom">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <AppBarButton
+                            Name="SettingButton"
+                            Grid.Column="2"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Click="Setting_Click">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontFamily="Segoe MDL2 Assets"
+                                FontSize="18"
+                                Text="&#xE713;" />
+                        </AppBarButton>
+                    </Grid>
+                </Grid>
+
+            </SplitView.Pane>
+            <Grid>
+                <Grid.Background>
+                    <SolidColorBrush Color="White" />
+                </Grid.Background>
+
+                <ScrollViewer>
+                    <StackPanel>
+                        <Grid
+                            Height="400"
+                            animations:ParallaxService.VerticalMultiplier="-0.8"
+                            Background="#FFBFBFBF">
+                            <Image
+                                Name="HomeHot"
+                                Height="410"
+                                Stretch="UniformToFill" />
+                            <TextBlock
+                                Margin="10"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                FontSize="30"
+                                FontWeight="Bold"
+                                Foreground="#FF606060"
+                                Text="TOP1" />
+                            <StackPanel
+                                Name="Topprogress"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                                <ProgressRing
+                                    Width="50"
+                                    Height="50"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    IsActive="True" />
+                                <TextBlock
+                                    Name="Progresstext"
+                                    Margin="10"
+                                    FontSize="15" />
+                            </StackPanel>
+                        </Grid>
+                        <Grid Margin="5" Background="White">
+                            <Grid.Resources>
+                                <DataTemplate x:Key="GridviewTemplete">
+                                    <Grid
+                                        Name="Picturegrid"
+                                        Width="145"
+                                        Height="200"
+                                        Margin="0.5"
                                         HorizontalAlignment="Center"
-                                        Source="{Binding preview_url}"
-                                        Stretch="UniformToFill" />
-                                </Grid>
-                            </DataTemplate>
-                            <ControlTemplate x:Key="Controltemplate">
-                                <StackPanel>
-                                    <ItemsPresenter />
-                                    <Button
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        Content="加载" />
-                                </StackPanel>
+                                        Background="#FFD1D1D1"
+                                        Tapped="Picturegrid_Tapped">
+                                        <Image
+                                            Height="205"
+                                            HorizontalAlignment="Center"
+                                            Source="{Binding preview_url}"
+                                            Stretch="UniformToFill" />
+                                    </Grid>
+                                </DataTemplate>
+                                <ControlTemplate x:Key="Controltemplate">
+                                    <StackPanel>
+                                        <ItemsPresenter />
+                                        <Button
+                                            Name="LoadingButton"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Click="LoadingButton_Click"
+                                            Content="加载" />
+                                    </StackPanel>
 
-                            </ControlTemplate>
-                        </Grid.Resources>
+                                </ControlTemplate>
+                            </Grid.Resources>
 
-                        <controls:AdaptiveGridView
-                            x:Name="Pictureada"
-                            animations:ReorderGridAnimation.Duration="450"
-                            Control.Template="{StaticResource Controltemplate}"
-                            DesiredWidth="140"
-                            IsItemClickEnabled="True"
-                            ItemHeight="200"
-                            ItemTemplate="{StaticResource GridviewTemplete}"
-                            OneRowModeEnabled="False"
-                            SelectionMode="Single" />
+                            <controls:AdaptiveGridView
+                                x:Name="Pictureada"
+                                animations:ReorderGridAnimation.Duration="450"
+                                Control.Template="{StaticResource Controltemplate}"
+                                DesiredWidth="140"
+                                IsItemClickEnabled="True"
+                                ItemHeight="200"
+                                ItemTemplate="{StaticResource GridviewTemplete}"
+                                OneRowModeEnabled="False"
+                                SelectionMode="Single" />
 
 
 
-                        <!--<GridView  animations:ReorderGridAnimation.Duration="450"  Name="Pictureada" HorizontalAlignment="Stretch"  VerticalAlignment="Top">
+                            <!--<GridView  animations:ReorderGridAnimation.Duration="450"  Name="Pictureada" HorizontalAlignment="Stretch"  VerticalAlignment="Top">
                             <GridView.ItemTemplate>
                                 <DataTemplate  >
                                     <Grid
@@ -172,53 +221,49 @@
                                 </DataTemplate>
                             </GridView.ItemTemplate>
                         </GridView>-->
-                    </Grid>
-                </StackPanel>
-            </ScrollViewer>
-            <Grid
-                Height="50"
-                VerticalAlignment="Top"
-                Background="Black">
-                <Border Background="#FFDDDDDD" />
-                <StackPanel Orientation="Horizontal">
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+                <Grid
+                    Height="50"
+                    VerticalAlignment="Top"
+                    Background="Black">
+                    <Border Background="#FFDDDDDD" />
+                    <StackPanel Orientation="Horizontal">
+                        <AppBarButton
+                            Width="50"
+                            Height="50"
+                            Click="MenuButton_Click">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontFamily="Segoe MDL2 Assets"
+                                Text="&#xE700;" />
+                        </AppBarButton>
+                        <TextBlock
+                            Margin="5"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            Text="首页" />
+                    </StackPanel>
                     <AppBarButton
-                        Width="50"
-                        Height="50"
-                        Click="MenuButton_Click">
+                        Name="Searchbutton"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Click="Searchbutton_Click">
                         <TextBlock
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontFamily="Segoe MDL2 Assets"
-                            Text="&#xE700;" />
+                            Text="&#xE1A3;" />
                     </AppBarButton>
-                    <TextBlock
-                        Margin="5"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        FontSize="18"
-                        Text="首页" />
-                </StackPanel>
-                <AppBarButton
-                    Name="Searchbutton"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    Click="Searchbutton_Click">
-                    <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontFamily="Segoe MDL2 Assets"
-                        Text="&#xE1A3;" />
-                </AppBarButton>
+                </Grid>
+
+                <Frame Name="Mainframe" />
             </Grid>
 
-            <!--<SplitView
-            IsPaneOpen="False"
-            Name="Mymenu"
-            DisplayMode="Overlay"
-            Width="250"
-            HorizontalAlignment="Left">
-            </SplitView>-->
-        </Grid>
+        </SplitView>
 
-    </SplitView>
+    </Grid>
 </Page>

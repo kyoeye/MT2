@@ -38,7 +38,7 @@
                     <Image
                         Width="80"
                         Height="80"
-                        Source="ms-appx:///Assets/StoreLogo.png" />
+                        Source="ms-appx:///Assets/Square310x310Logo.png" />
                     <TextBlock
                         HorizontalAlignment="Center"
                         Foreground="Black"
@@ -86,21 +86,36 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
                             <TextBlock
                                 Margin="15,15,15,15"
                                 FontSize="17"
                                 Text="启动密码" />
+                            <TextBlock
+                                Name="Nowpassword"
+                                Grid.Column="1"
+                                Margin="10"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                FontSize="14"
+                                Foreground="#FF7A7A7A"
+                                Text="当前没有密码"
+                                Visibility="Visible" />
+
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
                             <PasswordBox
                                 Name="loagingpassword"
-                                Grid.Column="1"
                                 Margin="10,10,0,10"
-                                HorizontalAlignment="Right"
+                                PasswordChanged="loagingpassword_PasswordChanged"
                                 PlaceholderText="没有输入则不需要密码" />
                             <Button
                                 Name="PasswordClick"
-                                Grid.Column="2"
+                                Grid.Column="1"
                                 Width="50"
                                 Margin="0,10,15,10"
                                 VerticalAlignment="stretch"
@@ -110,13 +125,7 @@
                                 FontFamily="segoe mdl2 assets" />
 
                         </Grid>
-                        <TextBlock
-                            Name="Nowpassword"
-                            Grid.Row="1"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            FontSize="14"
-                            Visibility="Collapsed" />
+
                     </Grid>
                     <Grid Grid.Row="2" BorderBrush="#ffd7d7d7">
                         <Grid.ColumnDefinitions>
@@ -135,11 +144,12 @@
                             Grid.Row="0"
                             Grid.Column="1"
                             MaxWidth="300"
-                            Margin="5,5,15,5">
+                            Margin="5,5,15,5"
+                            HorizontalAlignment="Right">
                             <TextBlock
                                 VerticalAlignment="center"
                                 FontSize="13"
-                                Foreground="#ff424242"
+                                Foreground="#FF7A7A7A"
                                 Text="（以确保你不会在公共场合看到不该看的内容）" />
                         </Viewbox>
                         <StackPanel
@@ -195,7 +205,7 @@
                             Margin="15,0,15,15">
                             <TextBlock
                                 FontSize="13"
-                                Foreground="#ff595959"
+                                Foreground="#FF7A7A7A"
                                 Text="（注意：这个值在安全模式下实际显示图片会存在数量偏差，最低15，最高100）" />
                         </Viewbox>
                     </Grid>

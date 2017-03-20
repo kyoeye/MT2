@@ -44,9 +44,9 @@ namespace MT2.page
         {
             var seachitems = new List<Seachitem>();
             seachitems.Add(new page.Seachitem { Seachstring = "loli" });
-            seachitems.Add(new page.Seachitem { Seachstring = "loli" });
-            seachitems.Add(new page.Seachitem { Seachstring = "loli" });
-            seachitems.Add(new page.Seachitem { Seachstring = "loli" });
+            seachitems.Add(new page.Seachitem { Seachstring = "人渣的本愿" });
+            seachitems.Add(new page.Seachitem { Seachstring = "小林家的龙女仆" });
+            seachitems.Add(new page.Seachitem { Seachstring = "巨乳" });
             seachitems.Add(new page.Seachitem { Seachstring = "loli" });
             seachitems.Add(new page.Seachitem { Seachstring = "loli" });
             seachitems.Add(new page.Seachitem { Seachstring = "loli" });
