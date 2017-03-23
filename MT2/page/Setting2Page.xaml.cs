@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -34,6 +35,8 @@ namespace MT2.page
             //Logobackground.Source =  mainpage.Homehoturl;
             
             this.InitializeComponent();
+            //CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            //coreTitleBar.ExtendViewIntoTitleBar = false ;
             themeColors = ThemeColorsAdd.GetThemeColors(); //返回主题数据
             falclass.FallsHub = (int)listslider.Value;
             if (localsettings.Values["password"] != null)
@@ -70,9 +73,17 @@ namespace MT2.page
             Frame.Navigate(typeof(AboutPage));
         }
 
-        private void loagingpassword_PasswordChanged(object sender, RoutedEventArgs e)
-        {
+        //private void loagingpassword_PasswordChanged(object sender, RoutedEventArgs e)
+        //{
+           
+        //}
 
+        private void SettingGoback_Click(object sender, RoutedEventArgs e)
+        {
+            if (Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
         }
     }
 }

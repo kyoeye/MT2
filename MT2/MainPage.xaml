@@ -16,43 +16,30 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid
-            Name="MyTitleBar"
-            Height="30"
-            Background="#FFDDDDDD">
-            <Image
-                Width="55"
-                Height="30"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                Source="Assets/Wide310x150Logo.png" />
-            <TextBlock
-                Margin="55,0,0,0"
-                VerticalAlignment="Center"
-                Text="欢迎来到MTACG" />
-        </Grid>
         <SplitView
             Name="Mymenu"
-            Grid.Row="1"
-            OpenPaneLength="250">
-            <SplitView.Pane>
+            Grid.RowSpan="2"
+            OpenPaneLength="200">
+            <SplitView.Pane >
+               
                 <Grid HorizontalAlignment="Left">
-                    <Grid.Background>
-                        <ImageBrush
-                            x:Name="MenuBlur"
-                            ImageSource="{Binding ElementName=HomeHot, Path=Source, Mode=TwoWay}"
-                            Stretch="UniformToFill" />
-                    </Grid.Background>
+                    <Image
+                        x:Name="MenuBlur"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Source="{Binding ElementName=HomeHot, Path=Source, Mode=TwoWay}"
+                        Stretch="UniformToFill" />
                     <ListBox
+                         Margin="0,30,0,0" 
                         HorizontalAlignment="Left"
                         Background="{x:Null}"
                         SelectionChanged="MenuListboxitem_SelectionChanged">
-                        <ListBoxItem
-                            Height="250"
-                            Padding="0"
-                            Background="#FFD6D6D6">
+                        <ListBoxItem Height="50" Padding="0">
+                            <ListBoxItem.Background>
+                                <SolidColorBrush Opacity="0.2" Color="#FFDDDDDD" />
+                            </ListBoxItem.Background>
                             <Grid Width="250" Height="250">
-                                <Image Source="{Binding ElementName=HomeHot, Path=Source, Mode=TwoWay}" Stretch="UniformToFill" />
+                                <!--<Image Source="{Binding ElementName=HomeHot, Path=Source, Mode=TwoWay}" Stretch="UniformToFill" />-->
                                 <AppBarButton
                                     Width="50"
                                     Height="50"
@@ -107,9 +94,11 @@
                         </Grid.ColumnDefinitions>
                         <AppBarButton
                             Name="SettingButton"
-                            Grid.Column="2"
+                            Grid.ColumnSpan="3"
+                            Width="{Binding ElementName=Mymenu, Path=OpenPaneLength, Mode=OneWay}"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
+                            HorizontalContentAlignment="Stretch"
                             Click="Setting_Click">
                             <TextBlock
                                 HorizontalAlignment="Center"
@@ -126,8 +115,12 @@
                 <Grid.Background>
                     <SolidColorBrush Color="White" />
                 </Grid.Background>
-
-                <ScrollViewer>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <ScrollViewer Grid.RowSpan="3">
                     <StackPanel>
                         <Grid
                             Height="400"
@@ -202,6 +195,7 @@
                                 ItemHeight="200"
                                 ItemTemplate="{StaticResource GridviewTemplete}"
                                 OneRowModeEnabled="False"
+                                ScrollViewer.VerticalScrollBarVisibility="Hidden"
                                 SelectionMode="Single" />
 
 
@@ -224,11 +218,26 @@
                         </Grid>
                     </StackPanel>
                 </ScrollViewer>
-                <Grid
-                    Height="50"
+                <Image
+                    x:Name="TopBlur"
+                    Grid.RowSpan="2"
+                    Height="80"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Source="{Binding ElementName=HomeHot, Path=Source, Mode=TwoWay}"
+                    Stretch="UniformToFill" />
+
+                <Border
+                    Grid.Row="0"
+                    Height="{Binding ElementName=MyTitleBar, Path=Height, Mode=TwoWay}"
                     VerticalAlignment="Top"
-                    Background="Black">
-                    <Border Background="#FFDDDDDD" />
+                    Background="#FFDDDDDD"
+                    Opacity="0.3" />
+                <Grid
+                    Grid.Row="1"
+                    Height="50"
+                    VerticalAlignment="Top">
+                    <Border Background="#FFDDDDDD" Opacity="0.3" />
                     <StackPanel Orientation="Horizontal">
                         <AppBarButton
                             Width="50"
@@ -259,11 +268,31 @@
                             Text="&#xE1A3;" />
                     </AppBarButton>
                 </Grid>
-
-                <Frame Name="Mainframe" />
             </Grid>
 
         </SplitView>
+        <Grid Name="MyTitleBar" Height="30">
+            <!--<Image
+                Width="55"
+                Height="30"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Source="Assets/Wide310x150Logo.png" />-->
+            <AppBarButton Width="50" Height="30">
+                <TextBlock
+                    Margin="16,-9,15,9"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontFamily="Segoe MDL2 Assets"
+                    Foreground="Black"
+                    Text="&#xE1CD;" />
+            </AppBarButton>
+            <TextBlock
+                Margin="55,0,0,0"
+                VerticalAlignment="Center"
+                Text="欢迎来到MTACG" />
+        </Grid>
+        <Frame Name="Mainframe" Grid.Row="1" />
 
     </Grid>
 </Page>

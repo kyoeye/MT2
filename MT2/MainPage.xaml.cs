@@ -1,4 +1,5 @@
-﻿using MT2.CS;
+﻿using Microsoft.Toolkit.Uwp.UI.Animations;
+using MT2.CS;
 using MT2.page;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.ApplicationModel.Core;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -33,12 +36,14 @@ namespace MT2
         {
             //需要判断运行环境是否为手机（如果是则需要隐藏MyTitleBar)，建议在启动的时候判断，以免影响首页加载速度
             this.InitializeComponent();
+            UiLoading();
+
+
             CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;
-
+      
             Topprogress.Visibility = Visibility.Visible;
             getxmltext();
-
             NavigationCacheMode = NavigationCacheMode.Enabled;
         }
         ItemGET MainItemget = new CS.ItemGET();
@@ -49,18 +54,33 @@ namespace MT2
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            
+        }
+        #region 对ui元素的处理
+        public async void UiLoading()
+        {
+            await MenuBlur.Blur(value: 10, duration: 3, delay: 0).StartAsync();
+            await TopBlur.Blur(value: 10, duration: 3, delay: 0).StartAsync();
+            var coreTileBarButton = ApplicationView.GetForCurrentView();
+            var titlebar = coreTileBarButton.TitleBar;
+            titlebar.ButtonBackgroundColor = Color.FromArgb(0, 0, 0, 0);
+            titlebar.ButtonForegroundColor = Colors.Black;
 
         }
+        #endregion
 
         public async void getxmltext()
      {
+
             Progresstext.Text = "正在下载瀑布流数据……";
             xmltext = await getxml.GetWebString(Mainapiuri);
             MainItemget.Toitem(xmltext);
-            MainItemget.getlistitems(true);
-            Pictureada.ItemsSource = MainItemget.Listapiitems;
-            await GetHotimage();
-
+            if(MainItemget.NetworkIsOK != false ) //如果网络判断不为false则继续执行
+            {
+                MainItemget.getlistitems(true);
+                Pictureada.ItemsSource = MainItemget.Listapiitems;
+                await GetHotimage();
+            }
             //progressrin.IsActive = false;
         }
         //HotimageHub hih = new HotimageHub();

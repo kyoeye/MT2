@@ -47,6 +47,44 @@ namespace MT2.CS
         {
 
         }
+        #region 加载更多
+        public void Loadinglistitems()
+        {
+            var listcount = Listapiitems.Count;
+            for(int a = listcount; a<listcount +100; a ++)
+            {
+                if (listclass.ratings[listclass.a] != "q")
+                {
+                    if (listclass.ratings[listclass.a] != "e")
+                    {
+                        Listapiitems.Add(new listsave
+                        {
+                            _name = "作者：" + listclass.authorname[listclass.a],
+                            rating = listclass.ratings[listclass.a],
+                            preview_url = listclass.previewurl[listclass.a],
+                            sample_url = listclass.sampleurl[listclass.a],
+                            _a = listclass.a,
+                            id = listclass.id[listclass.a]
+                        });
+                    }
+                    else
+                    {
+                        listclass.a++;
+                        continue;
+                    }
+                }
+                else
+                {
+                    listclass.a++;
+                    continue;
+                }
+                listclass.a++;
+            }
+        }
+
+        #endregion
+
+
 
         public void getlistitems(bool IsCommon)
         {
@@ -120,44 +158,54 @@ namespace MT2.CS
             
 
         }
-        public void Toitem(string _mystring)
+        public void   Toitem(string _mystring)
         {
 
-            //listclass = new CS.listClass();
-            XElement xelement = XElement.Parse(_mystring);
-            IEnumerable<XElement> elements = xelement.Elements();
-            foreach (var element in elements)
+            try
             {
-                if (element.Name == "post")
+                XElement xelement = XElement.Parse(_mystring);
+                IEnumerable<XElement> elements = xelement.Elements();
+                foreach (var element in elements)
                 {
-                    IEnumerable<XAttribute> Items = element.Attributes();
-                    foreach (var item in Items)
+                    if (element.Name == "post")
                     {
-                        switch (item.Name.ToString())
+                        IEnumerable<XAttribute> Items = element.Attributes();
+                        foreach (var item in Items)
                         {
-                            case "id":
-                                listclass.id.Add((string)item);
-                                break;
-                            case "preview_url":
-                                listclass.previewurl.Add((string)item);
-                                break;
-                            case "author":
-                                listclass.authorname.Add((string)item);
-                                break;
-                            case "sample_url":
-                                listclass.sampleurl.Add((string)item);
-                                break;
-                            case "jpeg_url":
-                                listclass.jpegurl.Add((string)item);
-                                break;
-                            case "rating":
-                                listclass.ratings.Add((string)item);
-                                break;
+                            switch (item.Name.ToString())
+                            {
+                                case "id":
+                                    listclass.id.Add((string)item);
+                                    break;
+                                case "preview_url":
+                                    listclass.previewurl.Add((string)item);
+                                    break;
+                                case "author":
+                                    listclass.authorname.Add((string)item);
+                                    break;
+                                case "sample_url":
+                                    listclass.sampleurl.Add((string)item);
+                                    break;
+                                case "jpeg_url":
+                                    listclass.jpegurl.Add((string)item);
+                                    break;
+                                case "rating":
+                                    listclass.ratings.Add((string)item);
+                                    break;
+                            }
                         }
                     }
                 }
             }
+            catch 
+            {
+                NetworkIsOK = false;
+            }
+            //listclass = new CS.listClass();
+           
         }
+        private bool networkisok = true;
+        public bool NetworkIsOK { get { return networkisok; } set { networkisok = value; } }
     }
 }
 
