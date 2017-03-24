@@ -40,7 +40,7 @@
                     <Image
                         Width="80"
                         Height="80"
-                        Source="ms-appx:///Assets/Square310x310Logo.png" />
+                        Source="ms-appx:///Assets/Square44x44Logo.altform-unplated_targetsize-256.png" />
                     <TextBlock
                         HorizontalAlignment="Center"
                         Foreground="Black"
@@ -169,7 +169,6 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
                     <TextBlock
                         Grid.Row="0"
@@ -179,10 +178,46 @@
                         FontWeight="Bold"
                         Foreground="#ff4b4b4b"
                         Text="御坂网络中枢" />
-                    <Grid Grid.Row="1" Visibility="Collapsed">
-                        <Grid BorderBrush="#ffd7d7d7" BorderThickness="0,2,0,0">
+                    <StackPanel
+                        Grid.Row="1"
+                        BorderBrush="#ffd7d7d7"
+                        BorderThickness="0,2,0,0">
+                        <Grid Visibility="Collapsed">
+                            <Grid BorderBrush="#ffd7d7d7" BorderThickness="0,2,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <TextBlock
+                                    Margin="15,5,15,5"
+                                    HorizontalAlignment="left"
+                                    VerticalAlignment="center"
+                                    FontSize="17"
+                                    Text="瀑布流单次加载图片数量" />
+                                <TextBlock
+                                    Margin="15,0,15,0"
+                                    HorizontalAlignment="right"
+                                    VerticalAlignment="center"
+                                    Text="{Binding Value, ElementName=listslider, Mode=TwoWay}" />
+                                <Slider
+                                    Name="listslider"
+                                    Grid.Row="1"
+                                    Margin="15,5,15,10"
+                                    Minimum=" 15" />
+                                <Viewbox
+                                    Grid.Row="2"
+                                    MaxWidth="500"
+                                    Margin="15,0,15,15">
+                                    <TextBlock
+                                        FontSize="13"
+                                        Foreground="#FF7A7A7A"
+                                        Text="（注意：这个值在安全模式下实际显示图片会存在数量偏差，最低15，最高100）" />
+                                </Viewbox>
+                            </Grid>
+                        </Grid>
+                        <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="auto" />
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="auto" />
                             </Grid.RowDefinitions>
@@ -191,60 +226,33 @@
                                 HorizontalAlignment="left"
                                 VerticalAlignment="center"
                                 FontSize="17"
-                                Text="瀑布流单次加载图片数量" />
-                            <TextBlock
-                                Margin="15,0,15,0"
-                                HorizontalAlignment="right"
-                                VerticalAlignment="center"
-                                Text="{Binding Value, ElementName=listslider, Mode=TwoWay}" />
-                            <Slider
-                                Name="listslider"
-                                Grid.Row="1"
-                                Margin="15,5,15,10"
-                                Minimum=" 15" />
-                            <Viewbox
-                                Grid.Row="2"
-                                MaxWidth="500"
-                                Margin="15,0,15,15">
-                                <TextBlock
-                                    FontSize="13"
-                                    Foreground="#FF7A7A7A"
-                                    Text="（注意：这个值在安全模式下实际显示图片会存在数量偏差，最低15，最高100）" />
-                            </Viewbox>
-                        </Grid>
-                    </Grid>
-                    <Grid Grid.Row="2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                        </Grid.RowDefinitions>
-                        <TextBlock
-                            Margin="15,5,15,5"
-                            HorizontalAlignment="left"
-                            VerticalAlignment="center"
-                            FontSize="17"
-                            Text="下载文件保存地址" />
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="auto" />
-                            </Grid.ColumnDefinitions>
-                            <TextBox
-                                Name="FileUri"
-                                Height="15"
-                                Margin="10,10,0,10"
-                                PlaceholderText="占位" />
-                            <Button
-                                Grid.Column="1"
-                                Width="50"
-                                Margin="0,10,15,10"
-                                VerticalAlignment="stretch"
-                                Background="#ffcdcdcd"
-                                Content="&#xE712;"
-                                FontFamily="segoe mdl2 assets" />
+                                Text="下载文件保存地址" />
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBox
+                                    Name="FileUri"
+                                    Height="15"
+                                    Margin="10,10,0,10"
+                                    PlaceholderText="将默认保存在系统相册目录" />
+                                <Button
+                                    Grid.Column="1"
+                                    Width="50"
+                                    Margin="0,10,15,10"
+                                    VerticalAlignment="stretch"
+                                    Background="#ffcdcdcd"
+                                    Content="&#xE712;"
+                                    FontFamily="segoe mdl2 assets" />
 
+                            </Grid>
                         </Grid>
-                    </Grid>
+                        <Grid Margin="15,5,15,5">
+                            <CheckBox Content="每次保存总是询问保存位置 (将禁用保存地址）" />
+                        </Grid>
+                    </StackPanel>
+
                 </Grid>
                 <Grid Margin="4" Background="{ThemeResource AppBarBorderThemeBrush}">
                     <Grid.RowDefinitions>

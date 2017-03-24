@@ -20,8 +20,8 @@
             Name="Mymenu"
             Grid.RowSpan="2"
             OpenPaneLength="200">
-            <SplitView.Pane >
-               
+            <SplitView.Pane>
+
                 <Grid HorizontalAlignment="Left">
                     <Image
                         x:Name="MenuBlur"
@@ -30,7 +30,7 @@
                         Source="{Binding ElementName=HomeHot, Path=Source, Mode=TwoWay}"
                         Stretch="UniformToFill" />
                     <ListBox
-                         Margin="0,30,0,0" 
+                        Margin="0,30,0,0"
                         HorizontalAlignment="Left"
                         Background="{x:Null}"
                         SelectionChanged="MenuListboxitem_SelectionChanged">

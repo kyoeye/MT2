@@ -264,48 +264,63 @@
                         VerticalAlignment="Top"
                         Foreground="#FF0078D7" />
                     <Image Name="SeeImage" Stretch="Uniform" />
+                    <Grid Height="80" VerticalAlignment="Bottom">
+                        <Image
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Opacity="0.3"
+                            Source="{Binding ElementName=SeeImage, Path=Source, Mode=OneTime}"
+                            Stretch="UniformToFill" />
+                        <Button
+                            Name="AppBarButton"
+                            Width="100"
+                            Margin="10"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Background="{x:Null}"
+                            BorderBrush="{x:Null}"
+                            PointerEntered="AppBarButton_PointerEntered"
+                            PointerExited="AppBarButton_PointerExited_1">
 
-                    <Button
-                        Name="AppBarButton"
-                        Width="100"
-                        Margin="10"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Bottom"
-                        Background="{x:Null}"
-                        BorderBrush="{x:Null}"
-                        PointerEntered="AppBarButton_PointerEntered"
-                        PointerExited="AppBarButton_PointerExited_1">
-
-                        <Button.Content>
-                            <Grid>
-                                <Viewbox>
-                                    <Grid>
-                                        <Rectangle
-                                            Name="Buttonrectangle"
-                                            Width="150"
-                                            Height="90"
-                                            HorizontalAlignment="Center"
-                                            RadiusX="40"
-                                            RadiusY="40"
-                                            Stroke="#FF2291DE"
-                                            StrokeThickness="2">
-                                            <Rectangle.Fill>
-                                                <SolidColorBrush Opacity="0.699999988079071" Color="#FF383838" />
-                                            </Rectangle.Fill>
-                                        </Rectangle>
-                                        <TextBlock
-                                            Margin="70,25"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            FontFamily="Segoe MDL2 Assets"
-                                            FontSize="40"
-                                            Foreground="#FFCFCFCF"
-                                            Text="&#xE8A3;" />
-                                    </Grid>
-                                </Viewbox>
-                            </Grid>
-                        </Button.Content>
-                    </Button>
+                            <Button.Content>
+                                <Grid>
+                                    <Viewbox>
+                                        <Grid>
+                                            <Rectangle
+                                                Name="Buttonrectangle"
+                                                Width="150"
+                                                Height="90"
+                                                HorizontalAlignment="Center"
+                                                RadiusX="40"
+                                                RadiusY="40"
+                                                Stroke="#FF2291DE"
+                                                StrokeThickness="2">
+                                                <Rectangle.Fill>
+                                                    <SolidColorBrush Opacity="0.699999988079071" Color="#FF383838" />
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                            <TextBlock
+                                                Margin="70,25"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                FontFamily="Segoe MDL2 Assets"
+                                                FontSize="40"
+                                                Foreground="#FFCFCFCF"
+                                                Text="&#xE8A3;" />
+                                        </Grid>
+                                    </Viewbox>
+                                </Grid>
+                            </Button.Content>
+                        </Button>
+                        <TextBlock
+                            Name="ImageID"
+                            Margin="10"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            Foreground="White"
+                            Text="ID:占位占位poi~" />
+                    </Grid>
                     <!--<Popup Name="Mypopup">
                         <local:MyToastControl
                             x:Name="Toastpopup"
@@ -318,44 +333,65 @@
 
                 </Grid>
                 <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+
                     <Grid.Background>
                         <SolidColorBrush Color="{ThemeResource SystemChromeMediumLowColor}" />
                     </Grid.Background>
-                    <AppBarButton
-                        Name="DownloadButton"
-                        Grid.Column="0"
-                        HorizontalAlignment="Center"
+                    <StackPanel
+                        HorizontalAlignment="Right"
                         VerticalAlignment="Center"
-                        Click="DownloadButton_Click"
-                        Icon="Download"
-                        Label="下载" />
-                    <AppBarButton
-                        Grid.Column="1"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Icon="OutlineStar"
-                        Label="收藏" />
-                    <AppBarButton
-                        Grid.Column="2"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Center"
-                        Label="分享">
-                        <AppBarButton.Icon>
-                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72D;" />
-                        </AppBarButton.Icon>
-                    </AppBarButton>
-                    <AppBarButton
-                        Grid.Column="3"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Icon="World"
-                        Label="pixiv" />
+                        Orientation="Horizontal">
+                        <AppBarButton
+                            Name="DownloadButton"
+                            Width="80"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Click="DownloadButton_Click"
+                            Icon="Download"
+                            Label="下载" />
+                        <AppBarButton
+                            Width="80"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Icon="OutlineStar"
+                            Label="收藏" />
+                        <AppBarButton
+                            Width="80"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            Label="分享">
+                            <AppBarButton.Icon>
+                                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72D;" />
+                            </AppBarButton.Icon>
+                        </AppBarButton>
+                        <AppBarButton
+                            Width="80"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Label="设为">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontFamily="Segoe MDL2 Assets"
+                                FontSize="20"
+                                Text="" />
+                            <!--<AppBarButton.ContextFlyout>
+                                <MenuFlyout Placement="Bottom">
+                                    <MenuFlyoutItem
+                                        Width="200"
+                                        Height="60"
+                                        HorizontalContentAlignment="Center"
+                                        Text="设置为背景" />
+                                    <MenuFlyoutItem
+                                        Width="200"
+                                        Height="60"
+                                        HorizontalAlignment="Center"
+                                        HorizontalContentAlignment="Center"
+                                        Text="设置为锁屏" />
+                                </MenuFlyout>
+                            </AppBarButton.ContextFlyout>-->
+                        </AppBarButton>
+                    </StackPanel>
                 </Grid>
                 <Grid Grid.Row="2">
                     <Border

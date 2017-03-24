@@ -58,6 +58,9 @@ namespace MT2.page
             BitmapImage bitmapimage = new BitmapImage(new Uri(lookit2.sample_url));
             SeeImage.Source = bitmapimage;
             bitmapimage.DownloadProgress += Bitmapimage_DownloadProgress;
+            imguri = lookit2.sample_url ;
+             ImageID.Text  =  lookit2.id;
+            imgid =int.Parse ( lookit2.id);
             #region 旧的
             //try
             //{
@@ -178,6 +181,7 @@ namespace MT2.page
 
         }
         #endregion
+        #region 动画事件
         private void AppBarButton_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
             storyboard1.Begin();
@@ -186,6 +190,8 @@ namespace MT2.page
         {
             storyboard2.Begin();
         }
+
+        #endregion
     }
     //弹窗
     public class TosatModel : INotifyPropertyChanged
