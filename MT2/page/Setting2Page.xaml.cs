@@ -35,6 +35,8 @@ namespace MT2.page
             //Logobackground.Source =  mainpage.Homehoturl;
             
             this.InitializeComponent();
+             
+
             //CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             //coreTitleBar.ExtendViewIntoTitleBar = false ;
             themeColors = ThemeColorsAdd.GetThemeColors(); //返回主题数据

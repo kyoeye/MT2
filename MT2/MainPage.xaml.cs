@@ -1,4 +1,5 @@
-﻿using Microsoft.Toolkit.Uwp.UI.Animations;
+﻿using Microsoft.Toolkit.Uwp;
+using Microsoft.Toolkit.Uwp.UI.Animations;
 using MT2.CS;
 using MT2.page;
 using System;
@@ -8,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.ApplicationModel.Core;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -30,22 +32,70 @@ namespace MT2
 
         string Mainapiuri = "https://yande.re/post.xml?limit=100";
         string xmltext;
-        int page;
+        int page = 1;
         //string hotimg;
         public MainPage()
         {
             //需要判断运行环境是否为手机（如果是则需要隐藏MyTitleBar)，建议在启动的时候判断，以免影响首页加载速度
             this.InitializeComponent();
-            UiLoading();
+            #region 网络判断
+            //switch (ConnectionHelper.ConnectionType)
+            //{
+            //    case ConnectionType.Ethernet:
+            //        // Ethernet
+            //        break;
+            //    case ConnectionType.WiFi:
+            //        // WiFi
+            //        break;
+            //    case ConnectionType.Data:
+            //        // Data
+            //        break;
+            //    case ConnectionType.Unknown:
+            //        // Unknown
+            //        break;
+            //}
 
+            #endregion
+            ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
 
             CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            coreTitleBar.ExtendViewIntoTitleBar = true;
-      
+            #region 开发者模式
+            //string ao = localsettings.Values["AdminIsOpen"].ToString(); //开发者模式，这个设置不能为空
+            //if ( ao != "NO" )
+            //{
+            //    var ds = Window.Current;
+            //    ds.SizeChanged += Ds_SizeChanged;
+            //}
+
+            #endregion
+
+            if (  coreTitleBar.IsVisible == false )//失败，需要获取系统平台了
+            {
+                coreTitleBar.ExtendViewIntoTitleBar = true;
+                UiLoading();
+
+            }
+            else
+            {
+                MyTitleBar.Visibility = Visibility.Collapsed;
+            }
+
             Topprogress.Visibility = Visibility.Visible;
             getxmltext();
             NavigationCacheMode = NavigationCacheMode.Enabled;
         }
+        #region 开发者模式
+        //测量窗口大小
+        private void Ds_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
+        {
+            //throw new NotImplementedException();
+            string a = e.Size.ToString();
+
+            betatext.Text = "已改变窗口" + "  大小：" + a;
+        }
+
+        #endregion
+
         ItemGET MainItemget = new CS.ItemGET();
         ItemGET Hotitemget = new ItemGET();
         GetXml getxml = new CS.GetXml(); // 拓展加载更多，getxml共用
@@ -54,7 +104,7 @@ namespace MT2
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            
+
         }
         #region 对ui元素的处理
         public async void UiLoading()
@@ -70,12 +120,12 @@ namespace MT2
         #endregion
 
         public async void getxmltext()
-     {
+        {
 
             Progresstext.Text = "正在下载瀑布流数据……";
             xmltext = await getxml.GetWebString(Mainapiuri);
             MainItemget.Toitem(xmltext);
-            if(MainItemget.NetworkIsOK != false ) //如果网络判断不为false则继续执行
+            if (MainItemget.NetworkIsOK != false) //如果网络判断不为false则继续执行
             {
                 MainItemget.getlistitems(true);
                 Pictureada.ItemsSource = MainItemget.Listapiitems;
@@ -88,7 +138,7 @@ namespace MT2
         string homehoturl;
         public string Homehoturl { get { return homehoturl; } set { homehoturl = value; } }
 
-        public async Task  GetHotimage() //按照获取首页瀑布流的方法获取热榜瀑布流数据，热榜直接继承这个类
+        public async Task GetHotimage() //按照获取首页瀑布流的方法获取热榜瀑布流数据，热榜直接继承这个类
         {
             GetXml gethotxml = new GetXml();
             Progresstext.Text = "正在下载TOP数据……";
@@ -110,16 +160,16 @@ namespace MT2
 
             }
 
-         //    try
-         //   {
-         //       //hih.Gethotxml();
-         //       hih.Gethotimg();
-         //       hotimg = hih.Tophotimg;
-         //       BitmapImage bit = new BitmapImage(new Uri(hotimg));
-         //       HomeHot.Source = bit;
-         //   }
-         //catch
-         //   {
+            //    try
+            //   {
+            //       //hih.Gethotxml();
+            //       hih.Gethotimg();
+            //       hotimg = hih.Tophotimg;
+            //       BitmapImage bit = new BitmapImage(new Uri(hotimg));
+            //       HomeHot.Source = bit;
+            //   }
+            //catch
+            //   {
 
             //   }
         }
@@ -173,13 +223,14 @@ namespace MT2
         {
             LoadingfuctionAsync();
         }
-        private async void  LoadingfuctionAsync()
+        private async void LoadingfuctionAsync()
         {
+
             page++;
 
             xmltext = await getxml.GetWebString(Mainapiuri + "&page=" + page);
             MainItemget.Toitem(xmltext);
-            MainItemget.getlistitems(true);
+            MainItemget.Loadinglistitems();
 
 
 

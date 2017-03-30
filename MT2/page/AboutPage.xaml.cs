@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -33,6 +34,14 @@ namespace MT2.page
             {
                 Frame.GoBack();
             }
+        }
+        ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
+        private void Objectadmin_Click(object sender, RoutedEventArgs e)
+        {
+        
+            localsettings.Values["AdminIsOpen"]=  "YES";
+            
         }
     }
 }

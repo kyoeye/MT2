@@ -47,42 +47,6 @@ namespace MT2.CS
         {
 
         }
-        #region 加载更多
-        public void Loadinglistitems()
-        {
-            var listcount = Listapiitems.Count;
-            for(int a = listcount; a<listcount +100; a ++)
-            {
-                if (listclass.ratings[listclass.a] != "q")
-                {
-                    if (listclass.ratings[listclass.a] != "e")
-                    {
-                        Listapiitems.Add(new listsave
-                        {
-                            _name = "作者：" + listclass.authorname[listclass.a],
-                            rating = listclass.ratings[listclass.a],
-                            preview_url = listclass.previewurl[listclass.a],
-                            sample_url = listclass.sampleurl[listclass.a],
-                            _a = listclass.a,
-                            id = listclass.id[listclass.a]
-                        });
-                    }
-                    else
-                    {
-                        listclass.a++;
-                        continue;
-                    }
-                }
-                else
-                {
-                    listclass.a++;
-                    continue;
-                }
-                listclass.a++;
-            }
-        }
-
-        #endregion
 
 
 
@@ -158,6 +122,44 @@ namespace MT2.CS
             
 
         }
+
+        #region 加载更多
+        public void Loadinglistitems()
+        {
+            var listcount = Listapiitems.Count;
+            for(int a = listcount; a<listcount +100; a ++)
+            {
+                if (listclass.ratings[listclass.a] != "q")
+                {
+                    if (listclass.ratings[listclass.a] != "e")
+                    {
+                        Listapiitems.Add(new listsave
+                        {
+                            _name = "作者：" + listclass.authorname[listclass.a],
+                            rating = listclass.ratings[listclass.a],
+                            preview_url = listclass.previewurl[listclass.a],
+                            sample_url = listclass.sampleurl[listclass.a],
+                            _a = listclass.a,
+                            id = listclass.id[listclass.a]
+                        });
+                    }
+                    else
+                    {
+                        listclass.a++;
+                        continue;
+                    }
+                }
+                else
+                {
+                    listclass.a++;
+                    continue;
+                }
+                listclass.a++;
+            }
+        }
+
+        #endregion
+
         public void   Toitem(string _mystring)
         {
 

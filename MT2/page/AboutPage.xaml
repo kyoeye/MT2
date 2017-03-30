@@ -119,6 +119,18 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Content="邮箱：ghhhgvchbvc55667@outlook.com" />
+                <TextBlock
+                    Margin="5,15,5,5"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Text="开发者模式" />
+                <Button
+                    Name="Objectadmin"
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Click="Objectadmin_Click"
+                    Content="只有帅的人才看到的" />
 
             </StackPanel>
 

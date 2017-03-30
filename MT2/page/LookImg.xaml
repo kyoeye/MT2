@@ -229,6 +229,7 @@
         </Style>
         <Storyboard x:Name="storyboard1">
             <ColorAnimation
+                EnableDependentAnimation="True"
                 Storyboard.TargetName="Buttonrectangle"
                 Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
                 From="#FF383838"
@@ -237,11 +238,38 @@
         </Storyboard>
         <Storyboard x:Name="storyboard2">
             <ColorAnimation
+                EnableDependentAnimation="True"
                 Storyboard.TargetName="Buttonrectangle"
                 Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
                 From="#FF0074B6"
                 To="#FF383838"
                 Duration="0:0:0.6" />
+        </Storyboard>
+        <Storyboard x:Name="OpenSit">
+            <DoubleAnimation
+                EnableDependentAnimation="True"
+                Storyboard.TargetName="Setitmenu"
+                Storyboard.TargetProperty="Width"
+                From="0"
+                To="160"
+                Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="OpenSitEnd">
+            <DoubleAnimation
+                EnableDependentAnimation="True"
+                Storyboard.TargetName="Setitmenu"
+                Storyboard.TargetProperty="Width"
+                From="160"
+                To="0"
+                Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
         </Storyboard>
 
     </Page.Resources>
@@ -266,6 +294,7 @@
                     <Image Name="SeeImage" Stretch="Uniform" />
                     <Grid Height="80" VerticalAlignment="Bottom">
                         <Image
+                            Name="Blurborder"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Opacity="0.3"
@@ -350,24 +379,30 @@
                             Icon="Download"
                             Label="下载" />
                         <AppBarButton
+                            Name="Copybutton"
                             Width="80"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Icon="OutlineStar"
-                            Label="收藏" />
+                            Click="Copybutton_Click"
+                            Icon="Paste"
+                            Label="复制uri" />
                         <AppBarButton
+                            Name="Share"
                             Width="80"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Center"
+                            Click="Share_Click"
                             Label="分享">
                             <AppBarButton.Icon>
                                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72D;" />
                             </AppBarButton.Icon>
                         </AppBarButton>
                         <AppBarButton
+                            Name="Setit"
                             Width="80"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
+                            Click="Setit_Click"
                             Label="设为">
                             <TextBlock
                                 HorizontalAlignment="Center"
@@ -391,6 +426,43 @@
                                 </MenuFlyout>
                             </AppBarButton.ContextFlyout>-->
                         </AppBarButton>
+                        <Grid x:Name="Setitmenu" Width="0">
+                            <Grid Background="#FFE0E0E0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <AppBarButton
+                                    Name="StartBackground"
+                                    Width="80"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Center"
+                                    Click="StartBackground_Click"
+                                    Label="开始壁纸">
+                                    <AppBarButton.Icon>
+                                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xECA5;" />
+                                    </AppBarButton.Icon>
+                                </AppBarButton>
+                                <AppBarButton
+                                    Name="LockBackground"
+                                    Grid.Column="1"
+                                    Width="80"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Click="LockBackground_Click"
+                                    Label="锁屏壁纸">
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontFamily="Segoe MDL2 Assets"
+                                        FontSize="20"
+                                        Text="&#xE25A;" />
+
+                                </AppBarButton>
+                            </Grid>
+
+                        </Grid>
+
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="2">

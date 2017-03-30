@@ -129,6 +129,8 @@
                             <Image
                                 Name="HomeHot"
                                 Height="410"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
                                 Stretch="UniformToFill" />
                             <TextBlock
                                 Margin="10"
@@ -291,6 +293,7 @@
                 Margin="55,0,0,0"
                 VerticalAlignment="Center"
                 Text="欢迎来到MTACG" />
+            <TextBlock Name="betatext" HorizontalAlignment="Center" />
         </Grid>
         <Frame Name="Mainframe" Grid.Row="1" />
 
