@@ -23,6 +23,13 @@ namespace MT2.Control
         {
             this.InitializeComponent();
            this.tbNotify.DataContext = this;
+
+            this.Loaded += MyToasstControl_Loaded;
+        }
+
+        private void MyToasstControl_Loaded(object sender, RoutedEventArgs e)
+        {
+             
         }
 
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register("textData", typeof(Entity), typeof(MyToastControl), new PropertyMetadata(null));

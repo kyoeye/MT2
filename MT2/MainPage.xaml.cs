@@ -122,7 +122,7 @@ namespace MT2
         public async void getxmltext()
         {
 
-            Progresstext.Text = "正在下载瀑布流数据……";
+            Progresstext.Text = "正在下载瀑布流数据,这个过程会有点久……";
             xmltext = await getxml.GetWebString(Mainapiuri);
             MainItemget.Toitem(xmltext);
             if (MainItemget.NetworkIsOK != false) //如果网络判断不为false则继续执行

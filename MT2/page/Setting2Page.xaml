@@ -221,6 +221,38 @@
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="auto" />
                             </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                                    Margin="15,5,15,5"
+                                    HorizontalAlignment="left"
+                                    VerticalAlignment="center"
+                                    FontSize="17"
+                                    Text="数据下载格式" />
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="Gray"
+                                    Text="(当无法正常加载数据时可以尝试切换）" />
+                            </StackPanel>
+                            <Grid Grid.Row="1">
+                                <StackPanel
+                                    Grid.Row="1"
+                                    Grid.ColumnSpan="3"
+                                    Margin="15,5,15,5"
+                                    Orientation="horizontal">
+                                    <CheckBox Name="XML_Check" Content="XML格式（默认）" />
+                                    <CheckBox Name="JS_Check" Content="JS格式" />
+
+                                </StackPanel>
+
+                            </Grid>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
                             <TextBlock
                                 Margin="15,5,15,5"
                                 HorizontalAlignment="left"

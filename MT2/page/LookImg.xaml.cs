@@ -59,7 +59,6 @@ namespace MT2.page
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            BlurUiAsync();
             ItemGET.listsave lookit2 = (ItemGET.listsave)e.Parameter;
             BitmapImage bitmapimage = new BitmapImage(new Uri(lookit2.sample_url));
             SeeImage.Source = bitmapimage;
@@ -93,7 +92,7 @@ namespace MT2.page
         #region 对UI绘制
         public async void BlurUiAsync()
         {
-            await Blurborder.Blur(value: 10, duration: 3, delay: 1).StartAsync();
+            await Backgroundimg.Blur(value: 10, duration: 3, delay: 1).StartAsync();
         }
         #endregion
         private void Bitmapimage_DownloadProgress(object sender, DownloadProgressEventArgs e)
@@ -102,6 +101,7 @@ namespace MT2.page
             if (Myprogressbar .Value == 100)
             {
                 Myprogressbar.Visibility = Visibility.Collapsed;
+                BlurUiAsync();
 
             }
         }
@@ -126,23 +126,35 @@ namespace MT2.page
         }
 
         #region 后台下载方法
-        private void DownloadButton_Click(object sender, RoutedEventArgs e)
+        private string DownloadToastText { get; set; }
+
+        private    void DownloadButton_Click(object sender, RoutedEventArgs e)
         {         
             //下载
             Savefile();
+
         }
         public StorageFile storagefile;
         public async void Savefile()
         {
             FileSavePicker savefile = new FileSavePicker();
+
+            
+
             savefile.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
             string f = "保存文件类型";
             savefile.FileTypeChoices.Add(f, new List<string>() { ".jpg", ".png", ".bmp" });
             savefile.SuggestedFileName = imgname + "ID" + imgid;
             storagefile = await savefile.PickSaveFileAsync();
+            var a = new ToastDialog();
 
             if (storagefile != null)
             {
+                DownloadToastText = "正在后台下载……";
+                a.Label = DownloadToastText;
+
+                await a.Show();
+
                 CachedFileManager.DeferUpdates(storagefile);
 
                 string Filename = imgname + imgid;
@@ -161,6 +173,8 @@ namespace MT2.page
                 DownloadOperation downloader = backgrounddownloader.CreateDownload(transferUri, storagefile);
                 await downloader.StartAsync();
                 tosalmodel.Info = new Entity() { name = "正在后台下载……" };
+                a.Label = "下载完成";
+                await a.Show();
                 //Mypopup.IsOpen = true;
             }
         }

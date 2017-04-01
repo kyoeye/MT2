@@ -286,6 +286,10 @@
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <Grid Name="betaborder" Background="Black">
+                    <Image
+                        Name="Backgroundimg"
+                        Source="{Binding ElementName=SeeImage, Path=Source, Mode=OneTime}"
+                        Stretch="UniformToFill" />
                     <ProgressBar
                         Name="Myprogressbar"
                         Height="10"
@@ -293,13 +297,13 @@
                         Foreground="#FF0078D7" />
                     <Image Name="SeeImage" Stretch="Uniform" />
                     <Grid Height="80" VerticalAlignment="Bottom">
-                        <Image
+                        <!--<Image
                             Name="Blurborder"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Opacity="0.3"
                             Source="{Binding ElementName=SeeImage, Path=Source, Mode=OneTime}"
-                            Stretch="UniformToFill" />
+                            Stretch="UniformToFill" />-->
                         <Button
                             Name="AppBarButton"
                             Width="100"
@@ -491,5 +495,14 @@
             </Grid>
 
         </ScrollViewer>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <local:ToastDialog
+                x:Name="DownTost"
+                Width="300"
+                Height="100"
+                HorizontalAlignment="Center"
+                FontSize="18"
+                Label="{x:Bind DownloadToastText, Mode=OneTime}" />
+        </Grid>
     </Grid>
 </Page>

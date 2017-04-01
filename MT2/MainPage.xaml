@@ -190,7 +190,7 @@
 
                             <controls:AdaptiveGridView
                                 x:Name="Pictureada"
-                                animations:ReorderGridAnimation.Duration="450"
+                                animations:ReorderGridAnimation.Duration="204"
                                 Control.Template="{StaticResource Controltemplate}"
                                 DesiredWidth="140"
                                 IsItemClickEnabled="True"
@@ -273,7 +273,11 @@
             </Grid>
 
         </SplitView>
-        <Grid Name="MyTitleBar" Height="30">
+        <Grid
+            Name="MyTitleBar"
+            Height="31"
+            VerticalAlignment="Top">
+
             <!--<Image
                 Width="55"
                 Height="30"
