@@ -41,7 +41,7 @@ namespace MT2
         /// <param name="e">有关启动请求和过程的详细信息。</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            
+
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
@@ -49,7 +49,8 @@ namespace MT2
             }
 #endif
             //Frame rootframe = Window.Current.Content as MainFrame;
-            Frame rootFrame = Window.Current.Content as Frame  ;
+           
+            Frame rootFrame = Window.Current.Content as Frame;
 
             // 不要在窗口已包含内容时重复应用程序初始化，
             // 只需确保窗口处于活动状态

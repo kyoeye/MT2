@@ -159,9 +159,12 @@
                             Grid.ColumnSpan="3"
                             Margin="15,5,15,5"
                             Orientation="horizontal">
-                            <CheckBox Content="安全的" />
+                            <CheckBox
+                                Name="NoH_Check"
+                                Content="安全的"
+                                IsChecked="True" />
                             <CheckBox Content="隐晦的" />
-                            <CheckBox Content="里区" />
+                            <CheckBox Name="H_Check" Content="里区" />
                         </StackPanel>
                     </Grid>
                 </Grid>
@@ -240,7 +243,10 @@
                                     Grid.ColumnSpan="3"
                                     Margin="15,5,15,5"
                                     Orientation="horizontal">
-                                    <CheckBox Name="XML_Check" Content="XML格式（默认）" />
+                                    <CheckBox
+                                        Name="XML_Check"
+                                        Content="XML格式（默认）"
+                                        IsChecked="True" />
                                     <CheckBox Name="JS_Check" Content="JS格式" />
 
                                 </StackPanel>

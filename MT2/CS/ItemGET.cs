@@ -21,6 +21,7 @@ namespace MT2.CS
         public List<string> ratings = new List<string>();
         public List<string> jpegurl = new List<string>();
         public List<string> thisname = new List<string>();
+        public List<string[]> tags = new List<string[]>();
     }
 
     public class ItemGET:Fallsclass 
@@ -37,6 +38,7 @@ namespace MT2.CS
             public string approver_id { get; set; }//审核人
             public string sample_url { get; set; }//二级预览
             public string rating { get; set; }//安全等级
+            public List<string > tag { get; set; } //标签
 
         }
 
@@ -59,7 +61,7 @@ namespace MT2.CS
               
                 for (int i = 0; i < 100 ; i++)
                 {
-                    if (listclass.ratings[listclass.a] != "q")
+                    if (listclass.ratings[listclass.a] != "q" )
                     {
                         if (listclass.ratings[listclass.a] != "e")
                         {
@@ -70,7 +72,8 @@ namespace MT2.CS
                                 preview_url = listclass.previewurl[listclass.a],
                                 sample_url = listclass.sampleurl[listclass.a],
                                 _a = listclass.a,
-                                id = listclass.id[listclass.a]
+                                id = listclass.id[listclass.a],
+                               tag = new List<string>(listclass.tags[listclass.a])
                             });
                         }
                         else
@@ -102,7 +105,9 @@ namespace MT2.CS
                                 preview_url = listclass.previewurl[listclass.a],
                                 sample_url = listclass.sampleurl[listclass.a],
                                 _a = listclass.a,
-                                id = listclass.id[listclass.a]
+                                id = listclass.id[listclass.a],
+                               tag = new List<string>(listclass.tags[listclass.a])
+
                             });
                         }
                         else
@@ -140,7 +145,9 @@ namespace MT2.CS
                             preview_url = listclass.previewurl[listclass.a],
                             sample_url = listclass.sampleurl[listclass.a],
                             _a = listclass.a,
-                            id = listclass.id[listclass.a]
+                            id = listclass.id[listclass.a],
+                               tag = new List<string>(listclass.tags[listclass.a])
+
                         });
                     }
                     else
@@ -194,6 +201,12 @@ namespace MT2.CS
                                 case "rating":
                                     listclass.ratings.Add((string)item);
                                     break;
+                                case "tags":
+                                    string a = item.ToString();
+                                   string[] tagSplit = a.Split( );
+                                    listclass.tags.Add(tagSplit);//存入数组
+                                    break;
+
                             }
                         }
                     }

@@ -89,10 +89,11 @@ namespace MT2.page
             //}
 #endregion
         }
+ 
         #region 对UI绘制
         public async void BlurUiAsync()
         {
-            await Backgroundimg.Blur(value: 10, duration: 3, delay: 1).StartAsync();
+            await Backgroundimg.Blur(value: 10, duration:1076, delay: 1).StartAsync();
         }
         #endregion
         private void Bitmapimage_DownloadProgress(object sender, DownloadProgressEventArgs e)
@@ -146,14 +147,15 @@ namespace MT2.page
             savefile.FileTypeChoices.Add(f, new List<string>() { ".jpg", ".png", ".bmp" });
             savefile.SuggestedFileName = imgname + "ID" + imgid;
             storagefile = await savefile.PickSaveFileAsync();
-            var a = new ToastDialog();
+            //var a = new ToastDialog();
 
             if (storagefile != null)
             {
-                DownloadToastText = "正在后台下载……";
-                a.Label = DownloadToastText;
+                //DownloadToastText = "正在后台下载……";
+                //a.Label = DownloadToastText;
 
-                await a.Show();
+                //await a.Show();
+              
 
                 CachedFileManager.DeferUpdates(storagefile);
 
@@ -173,8 +175,8 @@ namespace MT2.page
                 DownloadOperation downloader = backgrounddownloader.CreateDownload(transferUri, storagefile);
                 await downloader.StartAsync();
                 tosalmodel.Info = new Entity() { name = "正在后台下载……" };
-                a.Label = "下载完成";
-                await a.Show();
+                //a.Label = "下载完成";
+                //await a.Show();
                 //Mypopup.IsOpen = true;
             }
         }

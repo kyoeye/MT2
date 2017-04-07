@@ -5,12 +5,14 @@ using MT2.page;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -56,6 +58,8 @@ namespace MT2
             //}
 
             #endregion
+
+
             ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
 
             CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
@@ -69,7 +73,7 @@ namespace MT2
 
             #endregion
 
-            if (  coreTitleBar.IsVisible == false )//失败，需要获取系统平台了
+            if (coreTitleBar.IsVisible == false)//失败，需要获取系统平台了
             {
                 coreTitleBar.ExtendViewIntoTitleBar = true;
                 UiLoading();
@@ -84,6 +88,7 @@ namespace MT2
             getxmltext();
             NavigationCacheMode = NavigationCacheMode.Enabled;
         }
+
         #region 开发者模式
         //测量窗口大小
         private void Ds_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
@@ -106,11 +111,25 @@ namespace MT2
             base.OnNavigatedTo(e);
 
         }
+
+
+        //#region 导航处理
+        //// 每次完成导航 确定下是否显示系统后退按钮  
+        //private void RootFrame_Navigated(object sender, NavigationEventArgs e)
+        //{
+
+        //    // ReSharper disable once PossibleNullReferenceException  
+        //    SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+        //        (Window.Current.Content as Frame).BackStack.Any()
+        //        ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+        //}
+        //#endregion
+
         #region 对ui元素的处理
         public async void UiLoading()
         {
-            await MenuBlur.Blur(value: 10, duration: 3, delay: 0).StartAsync();
-            await TopBlur.Blur(value: 10, duration: 3, delay: 0).StartAsync();
+            await MenuBlur.Blur(value: 10, duration: 1076, delay: 0).StartAsync();
+            await TopBlur.Blur(value: 10, duration: 1076, delay: 0).StartAsync();
             var coreTileBarButton = ApplicationView.GetForCurrentView();
             var titlebar = coreTileBarButton.TitleBar;
             titlebar.ButtonBackgroundColor = Color.FromArgb(0, 0, 0, 0);
@@ -201,6 +220,12 @@ namespace MT2
                 else if (item == hotitem)
                 {
                     Frame.Navigate(typeof(hotitempage));
+                    Mymenu.IsPaneOpen = false;
+
+                }
+                else if (item == downitem)
+                {
+                    Frame.Navigate(typeof(DownloadPage));
                     Mymenu.IsPaneOpen = false;
 
                 }

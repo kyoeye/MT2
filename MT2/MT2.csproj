@@ -121,6 +121,7 @@
     <Compile Include="CS\SETall.cs" />
     <Compile Include="CS\SettingHub.cs" />
     <Compile Include="CS\ThemeColors.cs" />
+    <Compile Include="CS\TransferModel.cs" />
     <Compile Include="CS\XmlHelper.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
