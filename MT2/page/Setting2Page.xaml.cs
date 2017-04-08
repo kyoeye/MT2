@@ -8,6 +8,7 @@ using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,15 +31,16 @@ namespace MT2.page
         Fallsclass falclass = new Fallsclass();
         //public int fallshub { get { return falclass.FallsHub; } set { falclass.FallsHub = value; } }
         //MainPage mainpage;
+        CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+
         public Setting2Page()
         {
             //Logobackground.Source =  mainpage.Homehoturl;
-            
-            this.InitializeComponent();
-             
 
-            //CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            //coreTitleBar.ExtendViewIntoTitleBar = false ;
+            this.InitializeComponent();
+
+            coreTitleBar.ExtendViewIntoTitleBar = false;
+
             themeColors = ThemeColorsAdd.GetThemeColors(); //返回主题数据
             falclass.FallsHub = (int)listslider.Value;
             if (localsettings.Values["password"] != null)
@@ -51,6 +53,15 @@ namespace MT2.page
                 Nowpassword.Visibility = Visibility.Collapsed;
             }
 
+        }
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            coreTitleBar.ExtendViewIntoTitleBar = true;
+        }
+
+        private void App_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            Frame.GoBack();
         }
 
         private void PasswordClick_Click(object sender, RoutedEventArgs e)
@@ -77,11 +88,13 @@ namespace MT2.page
 
         //private void loagingpassword_PasswordChanged(object sender, RoutedEventArgs e)
         //{
-           
+
         //}
 
         private void SettingGoback_Click(object sender, RoutedEventArgs e)
         {
+
+
             if (Frame.CanGoBack)
             {
                 Frame.GoBack();

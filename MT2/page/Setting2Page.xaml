@@ -230,12 +230,12 @@
                                     HorizontalAlignment="left"
                                     VerticalAlignment="center"
                                     FontSize="17"
-                                    Text="数据下载格式" />
+                                    Text="数据优化" />
                                 <TextBlock
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     Foreground="Gray"
-                                    Text="(当无法正常加载数据时可以尝试切换）" />
+                                    Text="(当无法正常加载数据时可以尝试开启）" />
                             </StackPanel>
                             <Grid Grid.Row="1">
                                 <StackPanel
@@ -243,12 +243,7 @@
                                     Grid.ColumnSpan="3"
                                     Margin="15,5,15,5"
                                     Orientation="horizontal">
-                                    <CheckBox
-                                        Name="XML_Check"
-                                        Content="XML格式（默认）"
-                                        IsChecked="True" />
-                                    <CheckBox Name="JS_Check" Content="JS格式" />
-
+                                    <ToggleSwitch />
                                 </StackPanel>
 
                             </Grid>

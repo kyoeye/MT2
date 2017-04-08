@@ -28,6 +28,9 @@ using static MT2.MainPage;
 using Windows.UI.Popups;
 using Windows.Storage.Streams;
 using Edi.UWP.Helpers;
+using Windows.UI.ViewManagement;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
 
@@ -301,6 +304,32 @@ namespace MT2.page
 
         }
 
+        #endregion
+        #region 画中画
+        private async void Compact_Click(object sender, RoutedEventArgs e)
+        {
+            //bool modeSwitched = await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay);
+            //if (modeSwitched = true)
+            //{
+
+            //}
+            ShowCompactView();
+
+        }
+        int compactViewId;
+        private async void ShowCompactView()
+        {
+            await CoreApplication.CreateNewView().Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                var frame = new Frame();
+                compactViewId = ApplicationView.GetForCurrentView().Id;
+                frame.Navigate(typeof(ShowCompactPage),imguri);
+                Window.Current.Content = frame;
+                Window.Current.Activate();
+                ApplicationView.GetForCurrentView().Title = "CompactOverlay Window";
+            });
+            bool viewShown = await ApplicationViewSwitcher.TryShowAsViewModeAsync(compactViewId, ApplicationViewMode.CompactOverlay);
+        }
         #endregion
     }
     //弹窗

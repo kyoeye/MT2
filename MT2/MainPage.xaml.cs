@@ -202,7 +202,7 @@ namespace MT2
         private void Setting_Click(object sender, RoutedEventArgs e)
         {
             //this.Frame.Navigate(typeof(Setting2Page));
-            Mainframe.Navigate(typeof(Setting2Page));
+            Frame.Navigate(typeof(Setting2Page));
 
             Mymenu.IsPaneOpen = false;
 

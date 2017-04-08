@@ -382,14 +382,22 @@
                             Click="DownloadButton_Click"
                             Icon="Download"
                             Label="下载" />
-                        <AppBarButton
+                        <!--<AppBarButton
                             Name="Copybutton"
                             Width="80"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Click="Copybutton_Click"
                             Icon="Paste"
-                            Label="复制uri" />
+                            Label="复制uri" />-->
+                        <AppBarButton
+                            Name="Compact"
+                            Width="80"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Click="Compact_Click"
+                            Icon="Pictures"
+                            Label="画中画" />
                         <AppBarButton
                             Name="Share"
                             Width="80"
@@ -484,6 +492,16 @@
                                 VerticalAlignment="Center"
                                 Foreground="#FF4B4B4B"
                                 Text="标签" />
+                            <GridView >
+                                <GridView.ItemTemplate>
+                                    <DataTemplate >
+                                        <Border Background="#FFF2F2F2">
+                                            <TextBlock Text="" Foreground="#FFA8A8A8"  Margin="5" />
+                                        </Border>
+                                    </DataTemplate>
+
+                                </GridView.ItemTemplate>
+                            </GridView>
                         </StackPanel>
                     </Border>
                 </Grid>
@@ -502,7 +520,7 @@
                 Height="100"
                 HorizontalAlignment="Center"
                 FontSize="18"
-                Label="{x:Bind DownloadToastText, Mode=OneTime}" />
+                Label="{x:Bind DownloadToastText, Mode=OneTime}" VerticalAlignment="Center" />
         </Grid>
     </Grid>
 </Page>
