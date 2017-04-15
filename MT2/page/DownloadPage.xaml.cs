@@ -116,7 +116,7 @@ namespace MT2.page
                 transfer.BytesReceived = download.Progress.BytesReceived;
                 transfer.TotalBytesToReceive = download.Progress.TotalBytesToReceive;
             }
-            catch (Exception ex)
+            catch 
             {
                 //await new MessageDialog("更新进度异常").ShowAsync();
             }

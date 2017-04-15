@@ -31,9 +31,11 @@ namespace MT2
     /// </summary>
     public sealed partial class MainPage : Page
     {
-
+        ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            int appOpennum ;
         string Mainapiuri = "https://yande.re/post.xml?limit=100";
         string xmltext;
+        
         int page = 1;
         //string hotimg;
         public MainPage()
@@ -58,11 +60,14 @@ namespace MT2
             //}
 
             #endregion
+            //开始计算启动次数
+            TheAppOpenNum();
+            if (localsettings.Values["_AppOpenNum"].ToString () =="1")
+            {
+                one_SaveFileUri();
+            }
 
-
-            ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-
-            CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+                CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             #region 开发者模式
             //string ao = localsettings.Values["AdminIsOpen"].ToString(); //开发者模式，这个设置不能为空
             //if ( ao != "NO" )
@@ -88,7 +93,12 @@ namespace MT2
             getxmltext();
             NavigationCacheMode = NavigationCacheMode.Enabled;
         }
-
+        #region 获取保存地址
+        //public void SaveFileUri()
+        //{
+        //    var picuri = KnownFolderId.SavedPictures;
+        //}
+        #endregion
         #region 开发者模式
         //测量窗口大小
         private void Ds_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
@@ -112,6 +122,37 @@ namespace MT2
 
         }
 
+    #region 判断应用打开次数以管理整个应用&符合第一次打开应用执行的方法
+        public   void TheAppOpenNum()
+        {
+           if ( localsettings.Values["_AppOpenNum"] == null)
+            {
+                appOpennum++;
+                localsettings.Values["_AppOpenNum"] = appOpennum;
+                 Show_OneTextDialog();
+                localsettings.Values["_FileAllOpen"] = "false"; //默认关闭：每次保存文件都询问保存地址
+            }
+           else
+            {
+                appOpennum = int.Parse(localsettings.Values["_AppOpenNum"].ToString ());
+                appOpennum++;
+                localsettings.Values["_AppOpenNum"] = appOpennum;
+            }
+        
+        }
+
+        private void  Show_OneTextDialog()
+        {
+
+        }
+
+        //如果应用第一次启动，保存路径将指向系统默认相册
+        private void one_SaveFileUri ()
+        {
+            StorageFolder picuri = KnownFolders.SavedPictures;
+            localsettings.Values["_Fileuri"] = picuri.Path.ToString();
+        }
+     #endregion
 
         //#region 导航处理
         //// 每次完成导航 确定下是否显示系统后退按钮  

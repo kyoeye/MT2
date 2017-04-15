@@ -278,6 +278,7 @@
         <Grid.Background>
             <SolidColorBrush Color="Black" />
         </Grid.Background>
+
         <ScrollViewer Background="#FFFCFCFC">
             <Grid>
                 <Grid.RowDefinitions>
@@ -492,11 +493,14 @@
                                 VerticalAlignment="Center"
                                 Foreground="#FF4B4B4B"
                                 Text="标签" />
-                            <GridView >
+                            <GridView>
                                 <GridView.ItemTemplate>
-                                    <DataTemplate >
+                                    <DataTemplate>
                                         <Border Background="#FFF2F2F2">
-                                            <TextBlock Text="" Foreground="#FFA8A8A8"  Margin="5" />
+                                            <TextBlock
+                                                Margin="5"
+                                                Foreground="#FFA8A8A8"
+                                                Text="" />
                                         </Border>
                                     </DataTemplate>
 
@@ -513,14 +517,15 @@
             </Grid>
 
         </ScrollViewer>
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-            <local:ToastDialog
-                x:Name="DownTost"
-                Width="300"
-                Height="100"
-                HorizontalAlignment="Center"
-                FontSize="18"
-                Label="{x:Bind DownloadToastText, Mode=OneTime}" VerticalAlignment="Center" />
-        </Grid>
+
+        <local:ToastDialog
+            x:Name="DownTost"
+            Width="300"
+            Height="100"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="18"
+            Label="{x:Bind DownloadToastText, Mode=OneTime}" />
+
     </Grid>
 </Page>

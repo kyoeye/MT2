@@ -21,7 +21,6 @@
             Grid.RowSpan="2"
             OpenPaneLength="200">
             <SplitView.Pane>
-
                 <Grid HorizontalAlignment="Left">
                     <Image
                         x:Name="MenuBlur"
@@ -63,9 +62,10 @@
                                     FontSize="18"
                                     Text="&#xE10F;" />
                                 <TextBlock
+                                    Margin="15,0,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    FontSize="18"
+                                    FontSize="15"
                                     Text="首页" />
                             </StackPanel>
                         </ListBoxItem>
@@ -79,9 +79,10 @@
                                     FontSize="18"
                                     Text="&#xE8E1;" />
                                 <TextBlock
+                                    Margin="15,0,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    FontSize="18"
+                                    FontSize="15"
                                     Text="热榜" />
                             </StackPanel>
                         </ListBoxItem>
@@ -95,9 +96,10 @@
                                     FontSize="18"
                                     Text="&#xE118;" />
                                 <TextBlock
+                                    Margin="15,0,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    FontSize="18"
+                                    FontSize="15"
                                     Text="下载" />
                             </StackPanel>
                         </ListBoxItem>
@@ -156,7 +158,7 @@
                                 FontSize="30"
                                 FontWeight="Bold"
                                 Foreground="#FF606060"
-                                Text="TOP1" />
+                                Text="TOP" />
                             <StackPanel
                                 Name="Topprogress"
                                 HorizontalAlignment="Center"

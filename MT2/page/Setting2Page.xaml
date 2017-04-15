@@ -6,10 +6,43 @@
     xmlns:data="using:MT2.CS"
     xmlns:local="using:MT2.page"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="#FF0074B6"
     mc:Ignorable="d">
+    <Page.Resources>
+        <Storyboard x:Name="OpenGrid">
+            <DoubleAnimation
+                EnableDependentAnimation="True"
+                Storyboard.TargetName="TopGrid"
+                Storyboard.TargetProperty="Height"
+                From="0"
+                To="250"
+                Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="OpenGridEnd">
+            <DoubleAnimation
+                EnableDependentAnimation="True"
+                Storyboard.TargetName="TopGrid"
+                Storyboard.TargetProperty="Height"
+                From="250"
+                To="0"
+                Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+    </Page.Resources>
     <ScrollViewer Name="myScrollviewer">
         <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <Grid Height="250" Background="{ThemeResource AppBarBackground}">
+            <Grid
+                x:Name="TopGrid"
+                Height="250"
+                Background="#FF0074B6">
                 <!--<Image Name="Logobackground"  Source="{ x:Bind Mode=TwoWay ,Path=mainpage.Homehoturl }" />-->
                 <StackPanel
                     Height="50"
@@ -63,6 +96,34 @@
                 </Grid>
             </Grid>
             <StackPanel>
+                <Grid Margin="4" Background="{ThemeResource AppBarBorderThemeBrush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                        Margin="10"
+                        HorizontalAlignment="left"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="#ff4b4b4b"
+                        Text="作者测试" />
+                    <StackPanel Grid.Row="1">
+                        <TextBlock Name="opennum" />
+
+                        <Button
+                            Name="beta2button"
+                            Click="beta2button_Click"
+                            Content="拉取文件选择器选择文件夹" />
+
+                        <Button
+                            Name="beta1button"
+                            Click="beta1button_Click"
+                            Content="在保存相片文件夹创建一个文件" />
+                    </StackPanel>
+                </Grid>
+
                 <Grid Margin="4" Background="{ThemeResource AppBarBorderThemeBrush}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
@@ -159,12 +220,11 @@
                             Grid.ColumnSpan="3"
                             Margin="15,5,15,5"
                             Orientation="horizontal">
-                            <CheckBox
+                            <ToggleSwitch
                                 Name="NoH_Check"
-                                Content="安全的"
-                                IsChecked="True" />
-                            <CheckBox Content="隐晦的" />
-                            <CheckBox Name="H_Check" Content="里区" />
+                                OffContent="表世界"
+                                OnContent="里区" />
+
                         </StackPanel>
                     </Grid>
                 </Grid>
@@ -249,45 +309,55 @@
                             </Grid>
                         </Grid>
 
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
-                            </Grid.RowDefinitions>
+                        <StackPanel>
+
                             <TextBlock
                                 Margin="15,5,15,5"
                                 HorizontalAlignment="left"
                                 VerticalAlignment="center"
                                 FontSize="17"
-                                Text="下载文件保存地址" />
-                            <Grid Grid.Row="1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="auto" />
-                                </Grid.ColumnDefinitions>
-                                <TextBox
-                                    Name="FileUri"
-                                    Height="15"
-                                    Margin="10,10,0,10"
-                                    PlaceholderText="将默认保存在系统相册目录" />
+                                Text="更改保存位置" />
+
+                            <CheckBox
+                                Name="DefualtFilebutton"
+                                Margin="15,5,15,5"
+                                Checked="DefualtFilebutton_Checked"
+                                Unchecked="DefualtFilebutton_Unchecked" />
+
+                            <StackPanel Orientation="Horizontal">
+
                                 <Button
-                                    Grid.Column="1"
-                                    Width="50"
-                                    Margin="0,10,15,10"
+                                    Name="Picksacefile"
+                                    Margin="15,10,15,10"
                                     VerticalAlignment="stretch"
                                     Background="#ffcdcdcd"
-                                    Content="&#xE712;"
-                                    FontFamily="segoe mdl2 assets" />
+                                    Click="Picksacefile_Click"
+                                    Content="更改保存路径" />
 
-                            </Grid>
-                        </Grid>
-                        <Grid Margin="15,5,15,5">
-                            <CheckBox Content="每次保存总是询问保存位置 (将禁用保存地址）" />
-                        </Grid>
+                                <TextBlock
+                                    Name="FileUri"
+                                    Margin="10,10,0,10"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    TextWrapping="Wrap" />
+
+                            </StackPanel>
+                        </StackPanel>
+
+                        <CheckBox
+                            Name="FileAllOpen"
+                            Margin="15,5,15,5"
+                            Checked="FileAllOpen_Checked"
+                            Content="每次保存总是询问保存位置 (将禁用保存地址）"
+                            Unchecked="FileAllOpen_Unchecked" />
+
                     </StackPanel>
 
                 </Grid>
-                <Grid Margin="4" Background="{ThemeResource AppBarBorderThemeBrush}">
+                <Grid
+                    Margin="4"
+                    Background="{ThemeResource AppBarBorderThemeBrush}"
+                    Visibility="Collapsed">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
