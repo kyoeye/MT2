@@ -202,6 +202,12 @@ namespace MT2.page
                 {
                     CachedFileManager.DeferUpdates(storagefile);
 
+                    var a = new ToastDialog();
+                    DownloadToastText = "正在后台下载……";
+                    a.Label = DownloadToastText;
+
+                    await a.Show();
+
                     string Filename = imgname + imgid;
                     string _transferUri = jpguri;
                     Uri transferUri;
@@ -274,6 +280,9 @@ namespace MT2.page
         }
         private void LockBackground_Click(object sender, RoutedEventArgs e)
         {
+
+            
+
             //StorageFile file = await StorageFile.GetFileFromApplicationUriAsync();//需要将下载的目录拿到
 
             UserProfilePersonalizationSettings locksetting = UserProfilePersonalizationSettings.Current;

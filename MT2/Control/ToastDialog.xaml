@@ -28,10 +28,7 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </UserControl.Resources>
-    <Popup
-        x:Name="Toast"
-        HorizontalAlignment="Center"
-        VerticalAlignment="Center">
+    <Popup x:Name="Toast">
         <Grid
             Height="50"
             HorizontalAlignment="Center"

@@ -16,11 +16,11 @@ namespace MT2.CS
     {
 
         //private CancellationTokenSource cts = new CancellationTokenSource();
-
+        string RequestUri;
 
         public   async Task<string> GetWebString(string url ) //删除静态关键字
         {
-            string RequestUri = url;
+               RequestUri = url;
 
 
             string result;
@@ -44,13 +44,25 @@ namespace MT2.CS
             {
 
                 var s = ec.Message.ToString();
-                await new MessageDialog(s).ShowAsync();
+                var messagedialog = new MessageDialog(s);
+                messagedialog.Commands.Add(new UICommand("重试", cmd =>{ },commandId:0));
+                messagedialog.DefaultCommandIndex = 0;
+               var a= await messagedialog.ShowAsync();
+               
+                a.Invoked += await chonshi();
                 result = null;
 
             }
             return result;
             
         }
+        //重试
+        private async Task< UICommandInvokedHandler> chonshi()
+        {
+            await GetWebString(RequestUri);
+            return null;
+        }
+
         //public static async Task<string> GetWebString(string url, string a)
         //{
         //    Windows.Web.Http.HttpStatusCode statecode = new Windows.Web.Http.HttpStatusCode();

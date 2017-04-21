@@ -1,4 +1,5 @@
-﻿using Microsoft.Toolkit.Uwp;
+﻿using Microsoft.Graphics.Canvas.Effects;
+using Microsoft.Toolkit.Uwp;
 using Microsoft.Toolkit.Uwp.UI.Animations;
 using MT2.CS;
 using MT2.page;
@@ -12,10 +13,12 @@ using System.Xml.Linq;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
 using Windows.UI;
+using Windows.UI.Composition;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
@@ -62,12 +65,14 @@ namespace MT2
             #endregion
             //开始计算启动次数
             TheAppOpenNum();
-            if (localsettings.Values["_AppOpenNum"].ToString () =="1")
+            BlurGlass(BlurListBox);
+
+            if (localsettings.Values["_AppOpenNum"].ToString() == "1")
             {
                 one_SaveFileUri();
             }
 
-                CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             #region 开发者模式
             //string ao = localsettings.Values["AdminIsOpen"].ToString(); //开发者模式，这个设置不能为空
             //if ( ao != "NO" )
@@ -90,8 +95,16 @@ namespace MT2
             }
 
             Topprogress.Visibility = Visibility.Visible;
-            getxmltext();
+
+            GetxmltextAsync();
+
             NavigationCacheMode = NavigationCacheMode.Enabled;
+        }
+        //扔异步处理下载瀑布流数据
+        private async void GetxmltextAsync()
+        {
+            await getxmltext();
+      
         }
         #region 获取保存地址
         //public void SaveFileUri()
@@ -169,24 +182,55 @@ namespace MT2
         #region 对ui元素的处理
         public async void UiLoading()
         {
-            await MenuBlur.Blur(value: 10, duration: 1076, delay: 0).StartAsync();
-            await TopBlur.Blur(value: 10, duration: 1076, delay: 0).StartAsync();
             var coreTileBarButton = ApplicationView.GetForCurrentView();
             var titlebar = coreTileBarButton.TitleBar;
             titlebar.ButtonBackgroundColor = Color.FromArgb(0, 0, 0, 0);
             titlebar.ButtonForegroundColor = Colors.Black;
-
+            //await MenuBlur.Blur(value: 10, duration: 1076, delay: 0).StartAsync();
+            await TopBlur.Blur(value: 10, duration: 1076, delay: 0).StartAsync();         
         }
-        #endregion
-
-        public async void getxmltext()
+        private void BlurGlass(UIElement BlurUI)
         {
+            Visual hostVisual = ElementCompositionPreview.GetElementVisual(BlurUI);
+            Compositor compositor = hostVisual.Compositor;
+            var glassEffect = new GaussianBlurEffect
+            {
+                BlurAmount = 15.0f,
+                BorderMode = EffectBorderMode.Hard,
+                Source = new ArithmeticCompositeEffect
+                {
+                    MultiplyAmount =0,
+                    Source1Amount = 0.5f,
+                    Source2Amount = 0.5f,
+                    Source1 = new CompositionEffectSourceParameter ("backdropBrush"),
+                    Source2 = new ColorSourceEffect { Color = Color.FromArgb(255,245,245,245)}
 
-            Progresstext.Text = "正在下载瀑布流数据,这个过程会有点久……";
+                }
+            };
+
+            var effectFactory = compositor.CreateEffectFactory(glassEffect);
+            var backdropBrush = compositor.CreateBackdropBrush();
+            var effectBrush = effectFactory.CreateBrush();
+
+            effectBrush.SetSourceParameter("backdropBrush", backdropBrush);
+            var glassVisual = compositor.CreateSpriteVisual();
+            glassVisual.Brush = effectBrush;
+            ElementCompositionPreview.SetElementChildVisual(BlurUI, glassVisual);
+            var bindSizeAnimation = compositor.CreateExpressionAnimation("hostVisual.Size");
+            bindSizeAnimation.SetReferenceParameter("hostVisual", hostVisual);
+            glassVisual.StartAnimation("Size", bindSizeAnimation);
+        }
+
+        #endregion
+        
+        public async Task getxmltext()
+        {
+            Progresstext.Text = "正在和绿坝娘达成交易……";
             xmltext = await getxml.GetWebString(Mainapiuri);
             MainItemget.Toitem(xmltext);
             if (MainItemget.NetworkIsOK != false) //如果网络判断不为false则继续执行
             {
+                Progresstext.Text = "正在排列一些奇怪的东西……";
                 MainItemget.getlistitems(true);
                 Pictureada.ItemsSource = MainItemget.Listapiitems;
                 await GetHotimage();
@@ -209,7 +253,9 @@ namespace MT2
                 Hotitemget.Toitem(hotxmltext);
                 Hotitemget.getlistitems(false);
                 var HotitemList = Hotitemget.Listapiitems;
-                Homehoturl = HotitemList[1].sample_url;
+                Progresstext.Text = "请坐和放宽……";
+                Homehoturl = HotitemList.First().sample_url;
+                //Homehoturl = HotitemList[1].sample_url;
                 BitmapImage bit = new BitmapImage(new Uri(Homehoturl));
                 HomeHot.Source = bit;
                 Topprogress.Visibility = Visibility.Collapsed;

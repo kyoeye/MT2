@@ -13,21 +13,23 @@
     <!--  xmlns:local="using:MT2.pubuliu"  -->
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="32" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <SplitView
             Name="Mymenu"
             Grid.RowSpan="2"
-            OpenPaneLength="200">
+            OpenPaneLength="200"
+            PaneBackground="{x:Null}">
             <SplitView.Pane>
-                <Grid HorizontalAlignment="Left">
-                    <Image
+                <Grid HorizontalAlignment="Left" Background="{x:Null}">
+                    <Grid x:Name="BlurListBox" />
+                    <!--<Image
                         x:Name="MenuBlur"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Source="{Binding ElementName=HomeHot, Path=Source, Mode=TwoWay}"
-                        Stretch="UniformToFill" />
+                        Stretch="UniformToFill" />-->
                     <ListBox
                         Margin="0,30,0,0"
                         HorizontalAlignment="Left"
@@ -294,7 +296,7 @@
         </SplitView>
         <Grid
             Name="MyTitleBar"
-            Height="31"
+            Height="32"
             VerticalAlignment="Top">
 
             <!--<Image
@@ -305,7 +307,7 @@
                 Source="Assets/Wide310x150Logo.png" />-->
             <AppBarButton
                 Width="50"
-                Height="30"
+                Height="32"
                 Visibility="Collapsed">
                 <TextBlock
                     Margin="16,-9,15,9"
