@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="5758613C2F966.uwp-Beta" Publisher="CN=9D42EBA3-43E5-47AA-B257-4FD8FB569F35" Version="2.1.15.0" />
+  <Identity Name="5758613C2F966.uwp-Beta" Publisher="CN=画渣针眼" Version="2.1.20.0" />
   <mp:PhoneIdentity PhoneProductId="f5f3516c-6ed8-4d92-8232-2ff56ab2ca98" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>MTACG</DisplayName>

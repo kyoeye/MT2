@@ -244,9 +244,9 @@
                 <Image
                     x:Name="TopBlur"
                     Grid.RowSpan="2"
-                    Height="80"
+                    Height="82"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Top"
                     Source="{Binding ElementName=HomeHot, Path=Source, Mode=TwoWay}"
                     Stretch="UniformToFill" />
 

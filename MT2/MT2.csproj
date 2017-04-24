@@ -16,12 +16,12 @@
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>MT2_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>MT2_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxPackageDir>C:\Users\ghhhg\Desktop\</AppxPackageDir>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>6B86DB7903D7A864084A7DF12A1BCA371DA285D6</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>B2EFF2FFFABC4412EE561EEF6A0CB75EF535FFAD</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -128,6 +128,7 @@
     </Compile>
     <Compile Include="Model\HomePageItem.cs" />
     <Compile Include="Model\TransferModel.cs" />
+    <Compile Include="Model\Yande_post_json.cs" />
     <Compile Include="page\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
