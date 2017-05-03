@@ -251,6 +251,7 @@
                     Stretch="UniformToFill" />
 
                 <Border
+                    Name="TitleBar2"
                     Grid.Row="0"
                     Height="{Binding ElementName=MyTitleBar, Path=Height, Mode=TwoWay}"
                     VerticalAlignment="Top"
@@ -298,32 +299,32 @@
             Name="MyTitleBar"
             Height="32"
             VerticalAlignment="Top">
-
-            <!--<Image
-                Width="55"
-                Height="30"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                Source="Assets/Wide310x150Logo.png" />-->
-            <AppBarButton
-                Width="50"
-                Height="32"
-                Visibility="Collapsed">
+            <Grid>
+                <!--<Border Background="Black" Opacity="0.1" />-->
                 <TextBlock
-                    Margin="16,-9,15,9"
+                    Margin="0,0,0,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    FontFamily="Segoe MDL2 Assets"
-                    Foreground="Black"
-                    Text="&#xE1CD;" />
-            </AppBarButton>
-            <TextBlock
-                Margin="0,0,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="13"
-                Text="MTACG" />
-            <TextBlock Name="betatext" HorizontalAlignment="Center" />
+                    FontSize="13"
+                    Text="MTACG" />
+
+            </Grid>
+            <Grid>
+                <AppBarButton
+                    Width="50"
+                    Height="32"
+                    Visibility="Visible">
+                    <TextBlock
+                        Margin="16,-9,15,9"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontFamily="Segoe MDL2 Assets"
+                        Foreground="Black"
+                        Text="&#xE1CD;" />
+                </AppBarButton>
+
+                <TextBlock Name="betatext" HorizontalAlignment="Center" />
+            </Grid>
         </Grid>
         <Frame Name="Mainframe" Grid.Row="1" />
 

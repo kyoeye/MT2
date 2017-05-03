@@ -86,6 +86,7 @@ namespace MT2
             if (coreTitleBar.IsVisible == false)//失败，需要获取系统平台了
             {
                 coreTitleBar.ExtendViewIntoTitleBar = true;
+                Window.Current.SetTitleBar(TitleBar2);
                 UiLoading();
 
             }
@@ -186,6 +187,7 @@ namespace MT2
             var titlebar = coreTileBarButton.TitleBar;
             titlebar.ButtonBackgroundColor = Color.FromArgb(0, 0, 0, 0);
             titlebar.ButtonForegroundColor = Colors.Black;
+            
             //await MenuBlur.Blur(value: 10, duration: 1076, delay: 0).StartAsync();
             await TopBlur.Blur(value: 10, duration: 1076, delay: 0).StartAsync();         
         }
@@ -306,9 +308,8 @@ namespace MT2
                 }
                 else if (item == hotitem)
                 {
-                    Frame.Navigate(typeof(hotitempage));
+                    Mainframe.Navigate(typeof(hotitempage));
                     Mymenu.IsPaneOpen = false;
-
                 }
                 else if (item == downitem)
                 {

@@ -196,8 +196,8 @@ namespace MT2.page
                 StorageFolder storagefolder = await StorageFolder.GetFolderFromPathAsync(fileuri);
                 //StorageFolder fd = await ApplicationData.Current.LocalFolder.CreateFolderAsync("string", CreationCollisionOption.OpenIfExists);
                 //StorageFolder fd2 = await fd.CreateFolderAsync("dd");
-
-                storagefile = await storagefolder.CreateFileAsync(imgname + "ID" + imgid, CreationCollisionOption.OpenIfExists);
+                storagefile = await storagefolder.CreateFileAsync(imgname + "ID" + imgid+".jpg", CreationCollisionOption.OpenIfExists);
+             
                 if (storagefile != null)
                 {
                     CachedFileManager.DeferUpdates(storagefile);
