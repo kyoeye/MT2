@@ -61,6 +61,7 @@ namespace MT2.page
         public string imgname;
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            Window.Current.SetTitleBar(MyTitleBar);
             base.OnNavigatedTo(e);
             ItemGET.listsave lookit2 = (ItemGET.listsave)e.Parameter;
             BitmapImage bitmapimage = new BitmapImage(new Uri(lookit2.sample_url));
@@ -358,6 +359,12 @@ namespace MT2.page
             bool viewShown = await ApplicationViewSwitcher.TryShowAsViewModeAsync(compactViewId, ApplicationViewMode.CompactOverlay);
         }
         #endregion
+
+        private void GobackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Frame.CanGoBack)
+                Frame.GoBack();
+        }
     }
     //弹窗
     public class TosatModel : INotifyPropertyChanged

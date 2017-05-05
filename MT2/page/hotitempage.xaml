@@ -8,105 +8,448 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="#FF0074B6"
     mc:Ignorable="d">
+    <Page.Resources />
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid Height="50" Background="#FF0074B6">
-            <TextBlock
-                Margin="10,0,10,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                FontSize="25"
-                Foreground="White"
-                Text="热榜" />
-        </Grid>
-        <Grid Grid.Row="1">
-            <GridView x:Name="Mygridview" SelectionMode="Single">
-                <GridView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <local:WaterfallPanel x:Name="waterfallpanel" ColumnNum="3" />
-                    </ItemsPanelTemplate>
-                </GridView.ItemsPanel>
-                <GridView.Template>
-                    <ControlTemplate>
-                        <ScrollViewer>
-                            <StackPanel>
-                                <ItemsPresenter />
-                                <!--<Button
+        <StackPanel>
+            <Grid>
+                <Grid
+                    Name="MyTitleBar"
+                    Grid.Row="0"
+                    Height="32"
+                    Style="{StaticResource GridBackgroud}" />
+                <Grid Height="32" VerticalAlignment="Top">
+                    <StackPanel Orientation="Horizontal">
+                        <AppBarButton
+                            Name="GobackButton"
+                            Width="50"
+                            Height="32"
+                            Click="GobackButton_Click"
+                            Visibility="Visible">
+                            <TextBlock
+                                Margin="16,-9,15,9"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontFamily="Segoe MDL2 Assets"
+                                Foreground="Black"
+                                Style="{StaticResource TitleButtontext}"
+                                Text="&#xE096;" />
+                        </AppBarButton>
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontSize="13"
+                            Style="{StaticResource TextblockForeground}" />
+                    </StackPanel>
+
+
+                </Grid>
+            </Grid>
+            <Grid Height="50" Style="{StaticResource GridBackgroud}">
+                <TextBlock
+                    Margin="10,0,10,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="25"
+                    Style="{StaticResource TextblockForeground}"
+                    Text="热榜" />
+                <StackPanel
+                    Margin="10"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Button
+                        Name="B0"
+                        Background="{x:Null}"
+                        Click="B0_Click"
+                        Content="每日"
+                        FontSize="15"
+                        Foreground="Black"
+                        Style="{StaticResource ButtonStyle1}" />
+                    <Button
+                        Name="B1"
+                        Background="{x:Null}"
+                        Click="B1_Click"
+                        Content="每周"
+                        FontSize="15"
+                        Foreground="Black" />
+                    <Button
+                        Name="B2"
+                        Background="{x:Null}"
+                        Click="B2_Click"
+                        Content="每月"
+                        FontSize="15"
+                        Foreground="Black" />
+                    <Button
+                        Name="B3"
+                        Background="{x:Null}"
+                        Click="B3_Click"
+                        Content="每年"
+                        FontSize="15"
+                        Foreground="Black" />
+
+                </StackPanel>
+            </Grid>
+
+        </StackPanel>
+        <Pivot
+            Name="pivot"
+            Grid.Row="1"
+            Padding="0"
+            SelectionChanged="Pivot_SelectionChanged"
+            Style="{StaticResource PivotStyle1}">
+            <PivotItem Margin="0" Header="{x:Null}">
+                <Grid>
+                    <GridView x:Name="Mygridview" SelectionMode="Single">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <local:WaterfallPanel x:Name="waterfallpanel" ColumnNum="3" />
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.Template>
+                            <ControlTemplate>
+                                <ScrollViewer>
+                                    <StackPanel>
+                                        <ItemsPresenter />
+                                        <!--<Button
                                     Name="Loadingbutton"
                                     Margin="12"
                                     HorizontalAlignment="Center"
                                     Click="Loadingbutton_Click"
                                     Content="加载更多(｡･∀･)ﾉﾞ" />-->
-                            </StackPanel>
-                        </ScrollViewer>
-                    </ControlTemplate>
-                </GridView.Template>
-                <GridView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Margin="2">
-                            <!--<Grid.ChildrenTransitions>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </ControlTemplate>
+                        </GridView.Template>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="2">
+                                    <!--<Grid.ChildrenTransitions>
                                         <TransitionCollection>
                                             <EntranceThemeTransition />
                                         </TransitionCollection>
                                     </Grid.ChildrenTransitions>-->
 
-                            <!--<Border
+                                    <!--<Border
                                             Padding="2"
                                             Background="White"
                                             CornerRadius="0,0,3,3" />-->
 
 
-                            <StackPanel
-                                Name="gridstackpanel"
-                                Margin="1"
-                                Tapped="gridstackpanel_Tapped">
-                                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Grid.ChildrenTransitions>
-                                        <TransitionCollection>
-                                            <EntranceThemeTransition />
-                                        </TransitionCollection>
-                                    </Grid.ChildrenTransitions>
+                                    <StackPanel
+                                        Name="gridstackpanel"
+                                        Margin="1"
+                                        Tapped="gridstackpanel_Tapped">
+                                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Grid.ChildrenTransitions>
+                                                <TransitionCollection>
+                                                    <EntranceThemeTransition />
+                                                </TransitionCollection>
+                                            </Grid.ChildrenTransitions>
 
-                                    <Image
-                                        Name="Gridimage"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        Source="{Binding preview_url}" />
-                                </Grid>
-                                <Grid
-                                    HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Bottom"
-                                    Visibility="Collapsed">
-                                    <!--<Rectangle
+                                            <Image
+                                                Name="Gridimage"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Source="{Binding preview_url}" />
+                                        </Grid>
+                                        <Grid
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Bottom"
+                                            Visibility="Collapsed">
+                                            <!--<Rectangle
                                             Width="{Binding ElementName=gridstackpanel, Path=Width, Mode=TwoWay}"
                                             Height="{Binding ElementName=gridstackpanel, Path=Height, Mode=TwoWay}"
                                             Fill="White"
                                             Opacity="0.3" />-->
-                                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                                        <TextBlock
-                                            Name="Imagetext"
-                                            Margin="2,0,0,0"
-                                            Foreground="Black"
-                                            Text="{Binding name}"
-                                            TextWrapping="Wrap" />
-                                        <TextBlock
-                                            Name="imageurl"
-                                            Margin="2,1,1,0"
-                                            Foreground="#FF9B9B9B"
-                                            Text="{Binding rating}" />
+                                            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                                <TextBlock
+                                                    Name="Imagetext"
+                                                    Margin="2,0,0,0"
+                                                    Foreground="Black"
+                                                    Text="{Binding name}"
+                                                    TextWrapping="Wrap" />
+                                                <TextBlock
+                                                    Name="imageurl"
+                                                    Margin="2,1,1,0"
+                                                    Foreground="#FF9B9B9B"
+                                                    Text="{Binding rating}" />
+                                            </StackPanel>
+                                        </Grid>
+
                                     </StackPanel>
                                 </Grid>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+                </Grid>
+            </PivotItem>
+            <PivotItem Margin="0" Header="{x:Null}">
+                <Grid>
+                    <GridView x:Name="Mygridview2" SelectionMode="Single">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <local:WaterfallPanel x:Name="waterfallpanel2" ColumnNum="3" />
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.Template>
+                            <ControlTemplate>
+                                <ScrollViewer>
+                                    <StackPanel>
+                                        <ItemsPresenter />
+                                        <!--<Button
+                                    Name="Loadingbutton"
+                                    Margin="12"
+                                    HorizontalAlignment="Center"
+                                    Click="Loadingbutton_Click"
+                                    Content="加载更多(｡･∀･)ﾉﾞ" />-->
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </ControlTemplate>
+                        </GridView.Template>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="2">
+                                    <!--<Grid.ChildrenTransitions>
+                                        <TransitionCollection>
+                                            <EntranceThemeTransition />
+                                        </TransitionCollection>
+                                    </Grid.ChildrenTransitions>-->
 
-                            </StackPanel>
-                        </Grid>
-                    </DataTemplate>
-                </GridView.ItemTemplate>
-            </GridView>
-        </Grid>
+                                    <!--<Border
+                                            Padding="2"
+                                            Background="White"
+                                            CornerRadius="0,0,3,3" />-->
+
+
+                                    <StackPanel
+                                        Name="gridstackpanel"
+                                        Margin="1"
+                                        Tapped="gridstackpanel_Tapped">
+                                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Grid.ChildrenTransitions>
+                                                <TransitionCollection>
+                                                    <EntranceThemeTransition />
+                                                </TransitionCollection>
+                                            </Grid.ChildrenTransitions>
+
+                                            <Image
+                                                Name="Gridimage"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Source="{Binding preview_url}" />
+                                        </Grid>
+                                        <Grid
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Bottom"
+                                            Visibility="Collapsed">
+                                            <!--<Rectangle
+                                            Width="{Binding ElementName=gridstackpanel, Path=Width, Mode=TwoWay}"
+                                            Height="{Binding ElementName=gridstackpanel, Path=Height, Mode=TwoWay}"
+                                            Fill="White"
+                                            Opacity="0.3" />-->
+                                            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                                <TextBlock
+                                                    Name="Imagetext"
+                                                    Margin="2,0,0,0"
+                                                    Foreground="Black"
+                                                    Text="{Binding name}"
+                                                    TextWrapping="Wrap" />
+                                                <TextBlock
+                                                    Name="imageurl"
+                                                    Margin="2,1,1,0"
+                                                    Foreground="#FF9B9B9B"
+                                                    Text="{Binding rating}" />
+                                            </StackPanel>
+                                        </Grid>
+
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+                </Grid>
+            </PivotItem>
+            <PivotItem Margin="0" Header="{x:Null}">
+                <Grid>
+                    <GridView x:Name="Mygridview3" SelectionMode="Single">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <local:WaterfallPanel x:Name="waterfallpanel2" ColumnNum="3" />
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.Template>
+                            <ControlTemplate>
+                                <ScrollViewer>
+                                    <StackPanel>
+                                        <ItemsPresenter />
+                                        <!--<Button
+                                    Name="Loadingbutton"
+                                    Margin="12"
+                                    HorizontalAlignment="Center"
+                                    Click="Loadingbutton_Click"
+                                    Content="加载更多(｡･∀･)ﾉﾞ" />-->
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </ControlTemplate>
+                        </GridView.Template>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="2">
+                                    <!--<Grid.ChildrenTransitions>
+                                        <TransitionCollection>
+                                            <EntranceThemeTransition />
+                                        </TransitionCollection>
+                                    </Grid.ChildrenTransitions>-->
+
+                                    <!--<Border
+                                            Padding="2"
+                                            Background="White"
+                                            CornerRadius="0,0,3,3" />-->
+
+
+                                    <StackPanel
+                                        Name="gridstackpanel"
+                                        Margin="1"
+                                        Tapped="gridstackpanel_Tapped">
+                                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Grid.ChildrenTransitions>
+                                                <TransitionCollection>
+                                                    <EntranceThemeTransition />
+                                                </TransitionCollection>
+                                            </Grid.ChildrenTransitions>
+
+                                            <Image
+                                                Name="Gridimage"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Source="{Binding preview_url}" />
+                                        </Grid>
+                                        <Grid
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Bottom"
+                                            Visibility="Collapsed">
+                                            <!--<Rectangle
+                                            Width="{Binding ElementName=gridstackpanel, Path=Width, Mode=TwoWay}"
+                                            Height="{Binding ElementName=gridstackpanel, Path=Height, Mode=TwoWay}"
+                                            Fill="White"
+                                            Opacity="0.3" />-->
+                                            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                                <TextBlock
+                                                    Name="Imagetext"
+                                                    Margin="2,0,0,0"
+                                                    Foreground="Black"
+                                                    Text="{Binding name}"
+                                                    TextWrapping="Wrap" />
+                                                <TextBlock
+                                                    Name="imageurl"
+                                                    Margin="2,1,1,0"
+                                                    Foreground="#FF9B9B9B"
+                                                    Text="{Binding rating}" />
+                                            </StackPanel>
+                                        </Grid>
+
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+                </Grid>
+            </PivotItem>
+            <PivotItem Margin="0" Header="{x:Null}">
+                <Grid>
+                    <GridView x:Name="Mygridview4" SelectionMode="Single">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <local:WaterfallPanel x:Name="waterfallpanel2" ColumnNum="3" />
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.Template>
+                            <ControlTemplate>
+                                <ScrollViewer>
+                                    <StackPanel>
+                                        <ItemsPresenter />
+                                        <!--<Button
+                                    Name="Loadingbutton"
+                                    Margin="12"
+                                    HorizontalAlignment="Center"
+                                    Click="Loadingbutton_Click"
+                                    Content="加载更多(｡･∀･)ﾉﾞ" />-->
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </ControlTemplate>
+                        </GridView.Template>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="2">
+                                    <!--<Grid.ChildrenTransitions>
+                                        <TransitionCollection>
+                                            <EntranceThemeTransition />
+                                        </TransitionCollection>
+                                    </Grid.ChildrenTransitions>-->
+
+                                    <!--<Border
+                                            Padding="2"
+                                            Background="White"
+                                            CornerRadius="0,0,3,3" />-->
+
+
+                                    <StackPanel
+                                        Name="gridstackpanel"
+                                        Margin="1"
+                                        Tapped="gridstackpanel_Tapped">
+                                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Grid.ChildrenTransitions>
+                                                <TransitionCollection>
+                                                    <EntranceThemeTransition />
+                                                </TransitionCollection>
+                                            </Grid.ChildrenTransitions>
+
+                                            <Image
+                                                Name="Gridimage"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Source="{Binding preview_url}" />
+                                        </Grid>
+                                        <Grid
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Bottom"
+                                            Visibility="Collapsed">
+                                            <!--<Rectangle
+                                            Width="{Binding ElementName=gridstackpanel, Path=Width, Mode=TwoWay}"
+                                            Height="{Binding ElementName=gridstackpanel, Path=Height, Mode=TwoWay}"
+                                            Fill="White"
+                                            Opacity="0.3" />-->
+                                            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                                <TextBlock
+                                                    Name="Imagetext"
+                                                    Margin="2,0,0,0"
+                                                    Foreground="Black"
+                                                    Text="{Binding name}"
+                                                    TextWrapping="Wrap" />
+                                                <TextBlock
+                                                    Name="imageurl"
+                                                    Margin="2,1,1,0"
+                                                    Foreground="#FF9B9B9B"
+                                                    Text="{Binding rating}" />
+                                            </StackPanel>
+                                        </Grid>
+
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+                </Grid>
+            </PivotItem>
+
+        </Pivot>
+
         <ProgressRing
             Name="progressrin"
             Grid.Row="1"

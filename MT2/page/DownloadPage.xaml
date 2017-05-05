@@ -7,23 +7,80 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="#FF0074B6"
     mc:Ignorable="d">
-
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <ContinuumNavigationTransitionInfo />
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid
-            Grid.Row="0"
-            Height="50"
-            Background="{ThemeResource AppBarBorderThemeBrush}">
-            <TextBlock
-                Margin="10"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                Text="下载管理(beta)" />
-        </Grid>
-        <Pivot Grid.Row="1">
+        <StackPanel>
+            <Grid>
+                <Grid
+                    Name="MyTitleBar"
+                    Grid.Row="0"
+                    Height="32"
+                    Style="{StaticResource GridBackgroud}" />
+                <Grid Height="32" VerticalAlignment="Top">
+                    <StackPanel Orientation="Horizontal">
+                        <AppBarButton
+                            Name="GobackButton"
+                            Width="50"
+                            Height="32"
+                            Click="GobackButton_Click"
+                            Visibility="Visible">
+                            <TextBlock
+                                Margin="16,-9,15,9"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontFamily="Segoe MDL2 Assets"
+                                Foreground="Black"
+                                Style="{StaticResource TitleButtontext}"
+                                Text="&#xE096;" />
+                        </AppBarButton>
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontSize="13"
+                            Style="{StaticResource TextblockForeground}"
+                            Text="下载管理(beta)" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <Grid Height="50" Style="{StaticResource GridBackgroud}">
+                <TextBlock
+                    Margin="10,0,10,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="25"
+                    Style="{StaticResource TextblockForeground}"
+                    Text="下载管理" />
+                <StackPanel
+                    Margin="10"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Button
+                        Background="{x:Null}"
+                        Content="正在下载"
+                        Foreground="Black" />
+                    <Button
+                        Background="{x:Null}"
+                        Content="已完成"
+                        Foreground="Black" />
+                </StackPanel>
+            </Grid>
+
+        </StackPanel>
+        <Pivot Grid.Row="1" Style="{StaticResource PivotStyle1}">
             <PivotItem
                 Name="Nowdownload"
                 Margin="0"

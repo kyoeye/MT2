@@ -131,8 +131,6 @@ namespace MT2.page
 
         private void SettingGoback_Click(object sender, RoutedEventArgs e)
         {
-
-
             if (Frame.CanGoBack)
             {
                 Frame.GoBack();

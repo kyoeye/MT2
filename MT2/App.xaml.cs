@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MT2.page;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -33,7 +34,6 @@ namespace MT2
             this.Suspending += OnSuspending;
         }
 
-        public MainPage b;
         /// <summary>
         /// 在应用程序由最终用户正常启动时进行调用。
         /// 将在启动应用程序以打开特定文件等情况下使用。
@@ -41,15 +41,6 @@ namespace MT2
         /// <param name="e">有关启动请求和过程的详细信息。</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-
-#if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
-                this.DebugSettings.EnableFrameRateCounter = true;
-            }
-#endif
-            //Frame rootframe = Window.Current.Content as MainFrame;
-           
             Frame rootFrame = Window.Current.Content as Frame;
 
             // 不要在窗口已包含内容时重复应用程序初始化，
@@ -58,12 +49,10 @@ namespace MT2
             {
                 // 创建要充当导航上下文的框架，并导航到第一页
                 rootFrame = new Frame();
-                //订阅后退导航事件
-                SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated) 
                 {
                     //TODO: 从之前挂起的应用程序加载状态
                 }
@@ -79,53 +68,13 @@ namespace MT2
                     // 当导航堆栈尚未还原时，导航到第一页，
                     // 并通过将所需信息作为导航参数传入来配置
                     // 参数
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
-
+                    rootFrame.Navigate(typeof(Rootpage), e.Arguments);
                 }
-                rootFrame.Navigated += RootFrame_Navigated;
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
             }
         }
 
-        // 每次完成导航 确定下是否显示系统后退按钮  
-        private void RootFrame_Navigated(object sender, NavigationEventArgs e)
-        {
-
-            // ReSharper disable once PossibleNullReferenceException  
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                (Window.Current.Content as Frame).BackStack.Any()
-                ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
-        }
-        //响应后退事件
-        private async void App_BackRequested(object sender, BackRequestedEventArgs e)
-        {
-            // 这里面可以任意选择控制哪个Frame   
-            // 如果MainPage.xaml中使用了另外的Frame标签进2行导航 可在此处获取需要GoBack的Frame  
-            var rootFrame = Window.Current.Content as Frame;         
-            if (rootFrame.CanGoBack)
-            {
-                rootFrame.GoBack();
-                e.Handled = true;
-            }
-            // ReSharper disable once PossibleNullReferenceException  
-            else if (!rootFrame.CanGoBack)
-            {
-                e.Handled = true;
-                //  rootFrame.GoBack();
-                var dialog = new ContentDialog()
-                {
-                    Title = "真的。。真的就不再逛逛嘛O_O",
-                    Content = "/(ㄒoㄒ)/~~",
-                    PrimaryButtonText = "滚",
-                    FullSizeDesired = false,
-                };
-                dialog.PrimaryButtonClick += (_s, _e) => { Current.Exit(); };
-                await dialog.ShowAsync();
-
-            }
-
-        }
         /// <summary>
         /// 导航到特定页失败时调用
         /// </summary>

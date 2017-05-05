@@ -42,6 +42,8 @@ namespace MT2.page
         protected async  override void OnNavigatedTo(NavigationEventArgs e)
         {
             TransferList.ItemsSource = transfers;
+            Window.Current.SetTitleBar(MyTitleBar);
+
             //StorageFolder sf1 = await ApplicationData.Current.LocalFolder.CreateFileAsync() //获取下载位置已读取已下载的信息
             await DiscoverActiveDownloadsAsync(); //获取正在下载的任务信息
 
@@ -122,6 +124,10 @@ namespace MT2.page
             }
         }
 
-
+        private void GobackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Frame.CanGoBack)
+                Frame.GoBack();
+        }
     }
 }

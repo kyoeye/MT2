@@ -10,6 +10,15 @@
     Background="#FF0074B6"
     RequestedTheme="Light"
     mc:Ignorable="d">
+    <!--<Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <CommonNavigationTransitionInfo />
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>-->
     <!--  xmlns:local="using:MT2.pubuliu"  -->
     <Grid>
         <Grid.RowDefinitions>
@@ -31,16 +40,18 @@
                         Source="{Binding ElementName=HomeHot, Path=Source, Mode=TwoWay}"
                         Stretch="UniformToFill" />-->
                     <ListBox
-                        Margin="0,30,0,0"
+                        Margin="0,32,0,0"
                         HorizontalAlignment="Left"
                         Background="{x:Null}"
                         SelectionChanged="MenuListboxitem_SelectionChanged">
-                        <ListBoxItem Height="50" Padding="0">
+                        <!--<ListBoxItem Height="50" Padding="0">
                             <ListBoxItem.Background>
                                 <SolidColorBrush Opacity="0.2" Color="#FFDDDDDD" />
                             </ListBoxItem.Background>
                             <Grid Width="250" Height="250">
-                                <!--<Image Source="{Binding ElementName=HomeHot, Path=Source, Mode=TwoWay}" Stretch="UniformToFill" />-->
+                        -->
+                        <!--<Image Source="{Binding ElementName=HomeHot, Path=Source, Mode=TwoWay}" Stretch="UniformToFill" />-->
+                        <!--
                                 <AppBarButton
                                     Width="50"
                                     Height="50"
@@ -53,7 +64,7 @@
                                         Text="&#xE09A;" />
                                 </AppBarButton>
                             </Grid>
-                        </ListBoxItem>
+                        </ListBoxItem>-->
                         <ListBoxItem Name="homepage">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock
@@ -88,6 +99,7 @@
                                     Text="热榜" />
                             </StackPanel>
                         </ListBoxItem>
+
                         <ListBoxItem Name="downitem">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock
@@ -271,6 +283,7 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 FontFamily="Segoe MDL2 Assets"
+                                Style="{StaticResource TextblockForeground}"
                                 Text="&#xE700;" />
                         </AppBarButton>
                         <TextBlock
@@ -278,6 +291,8 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             FontSize="18"
+                            SelectionChanged="TextBlock_SelectionChanged"
+                            Style="{StaticResource TextblockForeground}"
                             Text="首页" />
                     </StackPanel>
                     <AppBarButton
@@ -289,6 +304,7 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontFamily="Segoe MDL2 Assets"
+                            Style="{StaticResource TextblockForeground}"
                             Text="&#xE1A3;" />
                     </AppBarButton>
                 </Grid>
@@ -300,16 +316,31 @@
             Height="32"
             VerticalAlignment="Top">
             <Grid>
-                <!--<Border Background="Black" Opacity="0.1" />-->
                 <TextBlock
                     Margin="0,0,0,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="13"
+                    Style="{StaticResource TextblockForeground}"
                     Text="MTACG" />
 
             </Grid>
-            <Grid>
+            <StackPanel Orientation="Horizontal">
+                <AppBarButton
+                    Name="GobackButton"
+                    Width="50"
+                    Height="32"
+                    Click="GobackButton_Click"
+                    Visibility="Visible">
+                    <TextBlock
+                        Margin="16,-9,15,9"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontFamily="Segoe MDL2 Assets"
+                        Foreground="Black"
+                        Style="{StaticResource TitleButtontext}"
+                        Text="&#xE096;" />
+                </AppBarButton>
                 <AppBarButton
                     Width="50"
                     Height="32"
@@ -320,13 +351,14 @@
                         VerticalAlignment="Center"
                         FontFamily="Segoe MDL2 Assets"
                         Foreground="Black"
+                        Style="{StaticResource TitleButtontext}"
                         Text="&#xE1CD;" />
                 </AppBarButton>
 
                 <TextBlock Name="betatext" HorizontalAlignment="Center" />
-            </Grid>
+            </StackPanel>
         </Grid>
-        <Frame Name="Mainframe" Grid.Row="1" />
+        <!--<Frame Name="Mainframe" Grid.Row="1" />-->
 
     </Grid>
 </Page>

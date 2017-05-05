@@ -86,7 +86,7 @@ namespace MT2
             if (coreTitleBar.IsVisible == false)//失败，需要获取系统平台了
             {
                 coreTitleBar.ExtendViewIntoTitleBar = true;
-                Window.Current.SetTitleBar(TitleBar2);
+               
                 UiLoading();
 
             }
@@ -132,11 +132,13 @@ namespace MT2
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            Window.Current.SetTitleBar(TitleBar2);
             base.OnNavigatedTo(e);
 
-        }
+        } 
+       
 
-    #region 判断应用打开次数以管理整个应用&符合第一次打开应用执行的方法
+        #region 判断应用打开次数以管理整个应用&符合第一次打开应用执行的方法
         public   void TheAppOpenNum()
         {
            if ( localsettings.Values["_AppOpenNum"] == null)
@@ -291,12 +293,12 @@ namespace MT2
         private void Setting_Click(object sender, RoutedEventArgs e)
         {
             //this.Frame.Navigate(typeof(Setting2Page));
-            Frame.Navigate(typeof(Setting2Page));
+            Frame .Navigate(typeof(Setting2Page));
 
             Mymenu.IsPaneOpen = false;
 
         }
-
+        #region 汉堡菜单
         private void MenuListboxitem_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             foreach (var item in e.AddedItems)
@@ -308,7 +310,7 @@ namespace MT2
                 }
                 else if (item == hotitem)
                 {
-                    Mainframe.Navigate(typeof(hotitempage));
+                    Frame.Navigate(typeof(hotitempage));
                     Mymenu.IsPaneOpen = false;
                 }
                 else if (item == downitem)
@@ -319,6 +321,8 @@ namespace MT2
                 }
             }
         }
+
+        #endregion
 
         private void Picturegrid_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -349,5 +353,20 @@ namespace MT2
 
         }
         #endregion
+
+        private void GobackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Frame .CanGoBack)
+            {
+                Frame .GoBack();
+            }
+            if (Mymenu.IsPaneOpen)
+                Mymenu.IsPaneOpen = false;
+        }
+
+        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
