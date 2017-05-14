@@ -127,7 +127,7 @@ namespace MT2
 
         ItemGET MainItemget = new CS.ItemGET();
         ItemGET Hotitemget = new ItemGET();
-        GetXml getxml = new CS.GetXml(); // 拓展加载更多，getxml共用
+        GetAPIstring getxml = new CS.GetAPIstring(); // 拓展加载更多，getxml共用
 
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -248,7 +248,7 @@ namespace MT2
 
         public async Task GetHotimage() //按照获取首页瀑布流的方法获取热榜瀑布流数据，热榜直接继承这个类
         {
-            GetXml gethotxml = new GetXml();
+            GetAPIstring gethotxml = new GetAPIstring();
             Progresstext.Text = "正在下载TOP数据……";
 
             try
@@ -293,8 +293,8 @@ namespace MT2
         private void Setting_Click(object sender, RoutedEventArgs e)
         {
             //this.Frame.Navigate(typeof(Setting2Page));
-            Frame .Navigate(typeof(Setting2Page));
-
+            //Frame .Navigate(typeof(Setting2Page));
+            Frame.Navigate(typeof(Setting2Page));
             Mymenu.IsPaneOpen = false;
 
         }
@@ -320,6 +320,7 @@ namespace MT2
 
                 }
             }
+            
         }
 
         #endregion
@@ -356,17 +357,14 @@ namespace MT2
 
         private void GobackButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Frame .CanGoBack)
-            {
-                Frame .GoBack();
-            }
+            //if (Frame .CanGoBack)
+            //{
+            //    Frame .GoBack();
+            //}
             if (Mymenu.IsPaneOpen)
                 Mymenu.IsPaneOpen = false;
         }
 
-        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
-        {
 
-        }
     }
 }

@@ -96,7 +96,10 @@
                 </Grid>
             </Grid>
             <StackPanel>
-                <Grid Margin="4" Background="{ThemeResource AppBarBorderThemeBrush}">
+                <Grid
+                    Margin="4"
+                    Background="{ThemeResource AppBarBorderThemeBrush}"
+                    Visibility="Collapsed">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
@@ -295,7 +298,7 @@
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     Foreground="Gray"
-                                    Text="(当无法正常加载数据时可以尝试开启）" />
+                                    Text="(当数据加载过慢时可尝试开启）" />
                             </StackPanel>
                             <Grid Grid.Row="1">
                                 <StackPanel
@@ -303,7 +306,7 @@
                                     Grid.ColumnSpan="3"
                                     Margin="15,5,15,5"
                                     Orientation="horizontal">
-                                    <ToggleSwitch />
+                                    <ToggleSwitch Name="TackToJS" Toggled="TackToJS_Toggled" />
                                 </StackPanel>
 
                             </Grid>

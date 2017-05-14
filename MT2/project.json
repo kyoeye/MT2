@@ -4,6 +4,7 @@
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3",
     "Microsoft.Toolkit.Uwp.UI.Animations": "1.4.0",
     "Microsoft.Toolkit.Uwp.UI.Controls": "1.4.0",
+    "Newtonsoft.Json": "10.0.2",
     "System.Linq.Expressions": "4.1.1",
     "Win2D.uwp": "1.20.0"
   },

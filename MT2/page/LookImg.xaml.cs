@@ -31,6 +31,7 @@ using Edi.UWP.Helpers;
 using Windows.UI.ViewManagement;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
+using MT2.Model;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
 
@@ -63,13 +64,33 @@ namespace MT2.page
         {
             Window.Current.SetTitleBar(MyTitleBar);
             base.OnNavigatedTo(e);
-            ItemGET.listsave lookit2 = (ItemGET.listsave)e.Parameter;
-            BitmapImage bitmapimage = new BitmapImage(new Uri(lookit2.sample_url));
-            SeeImage.Source = bitmapimage;
-            bitmapimage.DownloadProgress += Bitmapimage_DownloadProgress;
-            imguri = lookit2.sample_url;
-            ImageID.Text = lookit2.id;
-            imgid = int.Parse(lookit2.id);
+
+
+            #region new
+            var type = e.Parameter.GetType();
+            if (type.Name == "Yande_post_json")
+            {
+                var gg = (Yande_post_json)e.Parameter;
+                BitmapImage bitmapimage = new BitmapImage(new Uri(gg.sample_url));
+                SeeImage.Source = bitmapimage;
+                bitmapimage.DownloadProgress += Bitmapimage_DownloadProgress;
+                imguri = gg.sample_url;
+                ImageID.Text = gg.id.ToString();
+                imgid = int.Parse(gg.id.ToString());
+            }
+          else
+            {
+                #region 旧的
+                ItemGET.listsave lookit2 = (ItemGET.listsave)e.Parameter;
+                BitmapImage bitmapimage = new BitmapImage(new Uri(lookit2.sample_url));
+                SeeImage.Source = bitmapimage;
+                bitmapimage.DownloadProgress += Bitmapimage_DownloadProgress;
+                imguri = lookit2.sample_url;
+                ImageID.Text = lookit2.id;
+                imgid = int.Parse(lookit2.id);
+                #endregion
+            }
+            #endregion
             #region 旧的
             //try
             //{

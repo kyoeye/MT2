@@ -23,7 +23,7 @@ namespace MT2.CS
 
         public  async void Gethotxml()
         {
-            GetXml getxml2 = new GetXml();
+            GetAPIstring getxml2 = new GetAPIstring();
             xmltext = await getxml2.GetWebString(@"https://yande.re/post/popular_recent.xml");
             Gethotimg();
 

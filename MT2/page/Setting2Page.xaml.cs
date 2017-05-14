@@ -43,7 +43,7 @@ namespace MT2.page
 
             opennum.Text = localsettings.Values["_AppOpenNum"].ToString();
 
-            if (localsettings.Values["_Fileuri"].ToString () != a.Path)
+            if (localsettings.Values["_Fileuri"].ToString() != a.Path)
             {
                 DefualtFilebutton.IsChecked = true;
 
@@ -59,34 +59,56 @@ namespace MT2.page
                 Nowpassword.Visibility = Visibility.Collapsed;
             }
 
-    
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            if (localsettings.Values["_Fileuri"].ToString () == a.Path )
+            try
             {
-                DefualtFilebutton.Content = "勾选以启用自定义路径";
-                Picksacefile.IsEnabled = false;
-                FileUri.Text = @"系统“保存的图片”文件夹" + localsettings.Values["_Fileuri"].ToString();
-            }
-            else
-            {
-                DefualtFilebutton.Content = "取消勾选以恢复默认保存路径";
-                Picksacefile.IsEnabled = true ;
-                //DefualtFilebutton.Content  = localsettings.Values["_Fileuri"].ToString();
-                FileUri.Text = "当前保存的文件夹" + localsettings.Values["_Fileuri"].ToString();
-            }
-            if (localsettings.Values["_FileAllOpen"].ToString() == "true")
-            {
-                FileAllOpen.IsChecked = true;
-            }
-            else
-            {
-                FileAllOpen.IsChecked = false;
-            }
 
+
+                //修改保存路径
+                if (localsettings.Values["_Fileuri"].ToString() == a.Path)
+                {
+                    DefualtFilebutton.Content = "勾选以启用自定义路径";
+                    Picksacefile.IsEnabled = false;
+                    FileUri.Text = @"系统“保存的图片”文件夹" + localsettings.Values["_Fileuri"].ToString();
+                }
+                else
+                {
+                    DefualtFilebutton.Content = "取消勾选以恢复默认保存路径";
+                    Picksacefile.IsEnabled = true;
+                    //DefualtFilebutton.Content  = localsettings.Values["_Fileuri"].ToString();
+                    FileUri.Text = "当前保存的文件夹" + localsettings.Values["_Fileuri"].ToString();
+                }
+
+                //是否使用js获取数据
+                if ((bool)localsettings.Values["_TackToJS"] == true)
+                {
+                    TackToJS.IsOn = true;
+                }
+                else
+                {
+                    TackToJS.IsOn = false;
+                    //localsettings.Values["_TackToJS"] = false;
+                }
+
+                //总是拉取文件选取器
+                if (localsettings.Values["_FileAllOpen"].ToString() == "true")
+                {
+                    FileAllOpen.IsChecked = true;
+                }
+                else
+                {
+                    FileAllOpen.IsChecked = false;
+                }
+            }
+            catch
+            {
+
+            }
         }
         #region Ui状态
 
@@ -104,7 +126,8 @@ namespace MT2.page
 
         private void PasswordClick_Click(object sender, RoutedEventArgs e)
         {
-            if (loagingpassword != null)
+
+            if (loagingpassword.Password.Length != 0)
             {
                 localsettings.Values["_password"] = loagingpassword.Password;
                 Nowpassword.Text = "当前密码是：" + localsettings.Values["_password"].ToString();
@@ -115,7 +138,6 @@ namespace MT2.page
             {
                 localsettings.Values["_password"] = null;
                 Nowpassword.Visibility = Visibility.Collapsed;
-
             }
         }
 
@@ -140,7 +162,7 @@ namespace MT2.page
         private async void beta1button_Click(object sender, RoutedEventArgs e)
         {
             try
-            {            
+            {
                 var file = await a.CreateFileAsync("萌豚保存目录（测试）");
             }
             catch
@@ -164,7 +186,7 @@ namespace MT2.page
         }
 
 
-        private async  void Picksacefile_Click(object sender, RoutedEventArgs e)
+        private async void Picksacefile_Click(object sender, RoutedEventArgs e)
         {
 
             try
@@ -176,7 +198,7 @@ namespace MT2.page
                 var f = await fop.PickSingleFolderAsync();
                 localsettings.Values["_Fileuri"] = f.Path;
                 DefualtFilebutton.Content = "取消勾选以恢复默认保存路径";
-                FileUri.Text =   "当前保存的文件夹"+localsettings.Values["_Fileuri"].ToString();
+                FileUri.Text = "当前保存的文件夹" + localsettings.Values["_Fileuri"].ToString();
                 //DefualtFilebutton.Content = localsettings.Values["_Fileuri"].ToString();
             }
             //catch  (Exception ex)
@@ -184,7 +206,7 @@ namespace MT2.page
             //    await new MessageDialog("抓到异常~"+ex).ShowAsync();
 
             //}
-            catch 
+            catch
             {
                 await new MessageDialog("您没有选择文件路径哦~").ShowAsync();
                 if (localsettings.Values["_Fileuri"].ToString() == a.Path)
@@ -235,10 +257,10 @@ namespace MT2.page
                 Picksacefile.IsEnabled = true;
                 Picksacefile_Click(null, null);
             }
-       
-        //Picksacefile.IsEnabled = false;
-        //DefualtFilebutton.Content = @"图片默认保存在”保存图片“";
-    }
+
+            //Picksacefile.IsEnabled = false;
+            //DefualtFilebutton.Content = @"图片默认保存在”保存图片“";
+        }
         #endregion
 
         private void DefualtFilebutton_Unchecked(object sender, RoutedEventArgs e)
@@ -260,5 +282,18 @@ namespace MT2.page
         }
 
         #endregion
+
+        private void TackToJS_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (TackToJS.IsOn == true)
+            {
+                localsettings.Values["_TackToJS"] = true;
+            }
+            else
+            {
+                localsettings.Values["_TackToJS"] = false;
+
+            }
+        }
     }
 }

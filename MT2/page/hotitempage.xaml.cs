@@ -1,10 +1,12 @@
 ﻿using MT2.CS;
+using MT2.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
@@ -27,7 +29,7 @@ namespace MT2.page
     {
         #region apis
         string hotapiuri = "https://yande.re/post/popular_recent.xml";
-        string w_hotapiuri = "https://yande.re/post/popular_recent.xml?period=1w";
+        string w_hotapiuri = "https://yande.re/post/popular_recent.json?period=1w";
         string m_hotapiuri = "https://yande.re/post/popular_recent.xml?period=1m";
         string y_hotapiuri = "https://yande.re/post/popular_recent.xml?period=1y";
         #endregion
@@ -53,7 +55,7 @@ namespace MT2.page
 
         public async void getxmltext()
         {
-            GetXml getxml = new GetXml();
+            GetAPIstring getxml = new GetAPIstring();
             XmlText  = await getxml.GetWebString(hotapiuri );
            
             itemssoureGet();
@@ -69,9 +71,13 @@ namespace MT2.page
         private void gridstackpanel_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var boxs = sender as StackPanel;
-            var box = boxs.DataContext as ItemGET.listsave;
-            string lookuri = box.sample_url;
-            Frame.Navigate(typeof(LookImg), box);
+            //var box = boxs.DataContext as ItemGET.listsave;
+            //string lookuri = box.sample_url;
+            //Frame.Navigate(typeof(LookImg), box);
+
+            var boxx = boxs.DataContext as Yande_post_json;
+            string lookurii = boxx.sample_url;
+            Frame.Navigate(typeof(LookImg), boxx);
         }
 
         private void GobackButton_Click(object sender, RoutedEventArgs e)
@@ -80,7 +86,22 @@ namespace MT2.page
                 Frame.GoBack();
         }
         #region json接口测试by一周
+        string jsontext;
+        private async void Getjsonstring()
+        {
+            GetAPIstring getjson = new GetAPIstring();
+            jsontext = await getjson.GetWebString(w_hotapiuri);
 
+            Setjsonstring();            
+        }
+        GetJson getjson = new GetJson();
+        private void Setjsonstring()
+        {
+            //使用Savejson方法将json数据反序列化到存储
+           var source = getjson.SaveJson(jsontext);
+            Mygridview2.ItemsSource = source;
+        
+        }
         #endregion
 
         #region Pivot导航
@@ -139,6 +160,7 @@ namespace MT2.page
         {
             pivot.SelectedIndex = 1;
             pivot.SelectedItem = pivot.Items[1];
+            Getjsonstring();
         }
 
         private void B2_Click(object sender, RoutedEventArgs e)

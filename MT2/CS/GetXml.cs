@@ -12,7 +12,10 @@ using Windows.UI.Popups;
 
 namespace MT2.CS
 {
-    class GetXml
+
+
+
+    class GetAPIstring
     {
 
         //private CancellationTokenSource cts = new CancellationTokenSource();

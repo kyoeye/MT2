@@ -9,7 +9,7 @@ namespace MT2.CS
 {
     class XmlHelper
     {
-        GetXml getxml = new GetXml();
+        GetAPIstring getxml = new GetAPIstring();
 
         string[] id = new string[30];
         string[] uri = new string[30];

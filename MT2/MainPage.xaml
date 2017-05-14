@@ -291,7 +291,6 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             FontSize="18"
-                            SelectionChanged="TextBlock_SelectionChanged"
                             Style="{StaticResource TextblockForeground}"
                             Text="首页" />
                     </StackPanel>

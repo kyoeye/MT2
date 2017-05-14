@@ -1,10 +1,12 @@
-﻿using System;
+﻿using MT2.CS;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,16 +24,28 @@ namespace MT2.page
     /// </summary>
     public sealed partial class Rootpage : Page
     {
+        ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
         public Rootpage()
         {
             this.InitializeComponent();
+           var thisDevice =  Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily;
+
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             //this.InitialBackButton();
             if (e.NavigationMode == NavigationMode.New)
             {
-                Mainframe.Navigate(typeof(MainPage));
+                if (localsettings.Values["_password"] != null)
+                {
+                    Mainframe.Navigate(typeof(LockedPage));
+                }
+                else
+                {
+                    Mainframe.Navigate(typeof(MainPage));
+                }
+
             }
             base.OnNavigatedTo(e);
         }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,9 +23,28 @@ namespace MT2.CS
     /// </summary>
     public sealed partial class LockedPage : Page
     {
+        ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
         public LockedPage()
         {
             this.InitializeComponent();
+        }
+
+        private void GoingButton_Click(object sender, RoutedEventArgs e)
+        {
+            if ( localsettings.Values["_password"].ToString() == UnlockPassword.Password)
+                {
+                    Frame.Navigate(typeof(MainPage));
+                }
+           else
+               {
+                   mytext.Text = "输入错误XD 输入错误XD 输入错误XD输入错误XD";
+                }
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);    
         }
     }
 }

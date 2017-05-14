@@ -112,10 +112,11 @@
     </Compile>
     <Compile Include="CS\apiset\Listapiset.cs" />
     <Compile Include="CS\ArraryHelp.cs" />
+    <Compile Include="CS\GetJson.cs" />
     <Compile Include="CS\GetXml.cs" />
     <Compile Include="CS\HotimageHub.cs" />
     <Compile Include="CS\ItemGET.cs" />
-    <Compile Include="CS\LockedPage.xaml.cs">
+    <Compile Include="page\LockedPage.xaml.cs">
       <DependentUpon>LockedPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="CS\SETall.cs" />
@@ -149,6 +150,9 @@
     </Compile>
     <Compile Include="page\Setting2Page.xaml.cs">
       <DependentUpon>Setting2Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\SettingPage.xaml.cs">
+      <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="page\ShowCompactPage.xaml.cs">
       <DependentUpon>ShowCompactPage.xaml</DependentUpon>
@@ -229,7 +233,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CS\LockedPage.xaml">
+    <Page Include="page\LockedPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -262,6 +266,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="page\Setting2Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\SettingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
