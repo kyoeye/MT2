@@ -25,26 +25,67 @@ namespace MT2.page
     public sealed partial class Rootpage : Page
     {
         ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-
+        int appOpennum;
         public Rootpage()
         {
             this.InitializeComponent();
-           var thisDevice =  Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily;
 
+            try
+            {
+                if (localsettings.Values["_AppOpenNum"] == null)
+                {
+                    appOpennum++;
+                    localsettings.Values["_AppOpenNum"] = appOpennum;
+                    localsettings.Values["_FileAllOpen"] = "false"; //默认关闭：每次保存文件都询问保存地址
+                }
+                else
+                {
+                    appOpennum = int.Parse(localsettings.Values["_AppOpenNum"].ToString());
+                    appOpennum++;
+                    localsettings.Values["_AppOpenNum"] = appOpennum;
+                }
+                if (localsettings.Values["_AppOpenNum"].ToString() == "1")
+                {
+                    var thisDevice = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily;
+
+                    if (thisDevice == "Windows.Desktop")
+                    {
+                        localsettings.Values["_ThisDeviceis"] = "Desktop";
+                    }
+                    else if (thisDevice == "Windows.Mobile")
+                    {
+                        localsettings.Values["_ThisDeviceis"] = "Mobile";
+
+                    }
+                }
+
+            }
+            catch
+            {
+
+            }
+         
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             //this.InitialBackButton();
-            if (e.NavigationMode == NavigationMode.New)
+            try
             {
-                if (localsettings.Values["_password"] != null)
+                if (e.NavigationMode == NavigationMode.New)
                 {
-                    Mainframe.Navigate(typeof(LockedPage));
+                    if (localsettings.Values["_password"] != null)
+                    {
+                        Mainframe.Navigate(typeof(LockedPage));
+                    }
+                    else
+                    {
+                        Mainframe.Navigate(typeof(MainPage));
+                    }
+
                 }
-                else
-                {
-                    Mainframe.Navigate(typeof(MainPage));
-                }
+            }
+            catch
+            {
 
             }
             base.OnNavigatedTo(e);
@@ -52,4 +93,6 @@ namespace MT2.page
 
 
     }
+
+    
 }

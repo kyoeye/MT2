@@ -64,7 +64,7 @@ namespace MT2
 
             #endregion
             //开始计算启动次数
-            TheAppOpenNum();
+            //TheAppOpenNum();
             BlurGlass(BlurListBox);
 
             if (localsettings.Values["_AppOpenNum"].ToString() == "1")
@@ -145,6 +145,7 @@ namespace MT2
             {
                 appOpennum++;
                 localsettings.Values["_AppOpenNum"] = appOpennum;
+                //第一次启动调用弹窗
                  Show_OneTextDialog();
                 localsettings.Values["_FileAllOpen"] = "false"; //默认关闭：每次保存文件都询问保存地址
             }
