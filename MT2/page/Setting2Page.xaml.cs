@@ -110,6 +110,12 @@ namespace MT2.page
 
             }
         }
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            localsettings.Values["_listslider"] = (int)listslider.Value;
+        }
+     
         #region Ui状态
 
         #endregion

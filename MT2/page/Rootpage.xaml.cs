@@ -7,6 +7,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -46,26 +47,42 @@ namespace MT2.page
                 }
                 if (localsettings.Values["_AppOpenNum"].ToString() == "1")
                 {
-                    var thisDevice = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily;
-
-                    if (thisDevice == "Windows.Desktop")
-                    {
-                        localsettings.Values["_ThisDeviceis"] = "Desktop";
-                    }
-                    else if (thisDevice == "Windows.Mobile")
-                    {
-                        localsettings.Values["_ThisDeviceis"] = "Mobile";
-
-                    }
+                    ONETimeAsync();
                 }
-
             }
-            catch
+            catch 
             {
-
+              
             }
-         
         }
+
+        #region 初始化操作
+        private async void ONETimeAsync()
+        {
+            try
+            {
+                #region 判断系统平台
+                var thisDevice = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily;
+
+                if (thisDevice == "Windows.Desktop")
+                {
+                    localsettings.Values["_ThisDeviceis"] = "Desktop";
+                }
+                else if (thisDevice == "Windows.Mobile")
+                {
+                    localsettings.Values["_ThisDeviceis"] = "Mobile";
+
+                }
+                #endregion
+                localsettings.Values["_listslider"] = 25;
+          
+            }
+            catch (Exception ex)
+            {
+                await new MessageDialog("初始化异常" + ex).ShowAsync();
+            }
+        }
+        #endregion
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             //this.InitialBackButton();

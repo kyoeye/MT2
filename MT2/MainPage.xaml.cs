@@ -37,6 +37,7 @@ namespace MT2
         ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             int appOpennum ;
         string Mainapiuri = "https://yande.re/post.xml?limit=100";
+        int limit;//列表总数
         string xmltext;
         
         int page = 1;
@@ -104,7 +105,7 @@ namespace MT2
         //扔异步处理下载瀑布流数据
         private async void GetxmltextAsync()
         {
-            await getxmltext();
+            await Getxmltext();
       
         }
         #region 获取保存地址
@@ -134,7 +135,7 @@ namespace MT2
         {
             Window.Current.SetTitleBar(TitleBar2);
             base.OnNavigatedTo(e);
-
+            limit = (int ) localsettings.Values["_listslider"];
         } 
        
 
@@ -228,7 +229,7 @@ namespace MT2
 
         #endregion
         
-        public async Task getxmltext()
+        public async Task Getxmltext()
         {
             Progresstext.Text = "正在和绿坝娘达成交易……";
             xmltext = await getxml.GetWebString(Mainapiuri);

@@ -248,7 +248,7 @@
                         Grid.Row="1"
                         BorderBrush="#ffd7d7d7"
                         BorderThickness="0,2,0,0">
-                        <Grid Visibility="Collapsed">
+                        <Grid Visibility="Visible">
                             <Grid BorderBrush="#ffd7d7d7" BorderThickness="0,2,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto" />
@@ -270,7 +270,8 @@
                                     Name="listslider"
                                     Grid.Row="1"
                                     Margin="15,5,15,10"
-                                    Minimum=" 15" />
+                                    Minimum="25"
+                                    StepFrequency="5" />
                                 <Viewbox
                                     Grid.Row="2"
                                     MaxWidth="500"

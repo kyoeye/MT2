@@ -45,6 +45,10 @@ namespace MT2.page
             getxmltext();
             
             NavigationCacheMode = NavigationCacheMode.Enabled;
+
+            #region 理论上依次加载日，周，月，年
+              //Getjsonstring();
+            #endregion
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -86,16 +90,16 @@ namespace MT2.page
                 Frame.GoBack();
         }
         #region json接口测试by一周
-        string jsontext;
+        //string jsontext;
         private async void Getjsonstring()
         {
             GetAPIstring getjson = new GetAPIstring();
-            jsontext = await getjson.GetWebString(w_hotapiuri);
+          string  jsontext = await getjson.GetWebString(w_hotapiuri);
 
-            Setjsonstring();            
+            Setjsonstring(jsontext );            
         }
         GetJson getjson = new GetJson();
-        private void Setjsonstring()
+        private void Setjsonstring(string jsontext)
         {
             //使用Savejson方法将json数据反序列化到存储
            var source = getjson.SaveJson(jsontext);
@@ -138,6 +142,7 @@ namespace MT2.page
                 case 1:
                     B1.FontFamily = new FontFamily("Segoe UI Black");
                     B1.Opacity = 1;
+                    Getjsonstring();
                     break;
                 case 2:
                     B2.FontFamily = new FontFamily("Segoe UI Black");
