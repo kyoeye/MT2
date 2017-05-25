@@ -33,7 +33,7 @@ namespace MT2.page
         string m_hotapiuri = "https://yande.re/post/popular_recent.xml?period=1m";
         string y_hotapiuri = "https://yande.re/post/popular_recent.xml?period=1y";
         #endregion
-
+      
         string xmltext;
         public string  XmlText { get { return xmltext; }set { xmltext = value; } } 
         ItemGET itemget = new ItemGET();
@@ -42,8 +42,16 @@ namespace MT2.page
         {
             this.InitializeComponent();
             progressrin.IsActive = true;
-            getxmltext();
-            
+          
+          if (MTHub.Hotitemvalue != null )
+            {
+                Mygridview.ItemsSource = MTHub.Hotitemvalue;
+                progressrin.IsActive = false;
+            }
+            else
+            {
+                getxmltext();
+            }
             NavigationCacheMode = NavigationCacheMode.Enabled;
 
             #region 理论上依次加载日，周，月，年

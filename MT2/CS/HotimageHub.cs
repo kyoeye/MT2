@@ -38,4 +38,5 @@ namespace MT2.CS
 
         public string Tophotimg { get { return tohotimg; } set {  tohotimg = value ; } }
     }
+  
 }

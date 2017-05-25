@@ -1,20 +1,15 @@
 ﻿using Microsoft.Graphics.Canvas.Effects;
-using Microsoft.Toolkit.Uwp;
 using Microsoft.Toolkit.Uwp.UI.Animations;
 using MT2.CS;
+using MT2.Model;
 using MT2.page;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Composition;
-using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -22,8 +17,6 @@ using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-using Windows.Web.Http;
-using static MT2.CS.ItemGET;
 
 //“空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 上有介绍
 
@@ -35,12 +28,19 @@ namespace MT2
     public sealed partial class MainPage : Page
     {
         ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            int appOpennum ;
-        string Mainapiuri = "https://yande.re/post.xml?limit=100";
+        #region 存了点变量poi~
+        int appOpennum;
+        string Mainapiuri = "https://yande.re/post"; // Mainapiuri+ ".xml?limit=" + limit 和 Mainapiuri+ ".json?limit=" + limit
+        string hotapiuri = "https://yande.re/post/popular_recent.json";
+        //string apitype;
         int limit;//列表总数
-        string xmltext;
-        
         int page = 1;
+
+        string xmltext;
+        string jsontext;
+
+        #endregion
+
         //string hotimg;
         public MainPage()
         {
@@ -98,15 +98,17 @@ namespace MT2
 
             Topprogress.Visibility = Visibility.Visible;
 
-            GetxmltextAsync();
+            limit = (int)localsettings.Values["_listslider"];
+            GetimgvalueAsync();
 
             NavigationCacheMode = NavigationCacheMode.Enabled;
+            //订阅窗口大小变化
+            Window.Current.SizeChanged += Ds_SizeChanged;
         }
         //扔异步处理下载瀑布流数据
-        private async void GetxmltextAsync()
+        private async void GetimgvalueAsync()
         {
-            await Getxmltext();
-      
+            await Getimgvalue();
         }
         #region 获取保存地址
         //public void SaveFileUri()
@@ -120,15 +122,24 @@ namespace MT2
         {
             //throw new NotImplementedException();
             string a = e.Size.ToString();
-
-            betatext.Text = "已改变窗口" + "  大小：" + a;
+            if (e.Size.Width <600)
+            {
+                BlurListBox.Visibility = Visibility.Visible;
+                MenuBlurGrid.Visibility = Visibility.Collapsed;
+            }
+            if (e.Size.Width >600)
+            {
+                BlurListBox.Visibility = Visibility.Collapsed;
+                MenuBlurGrid.Visibility = Visibility.Visible;
+            }
+            //betatext.Text = "已改变窗口" + "  大小：" + a;
         }
 
         #endregion
 
         ItemGET MainItemget = new CS.ItemGET();
         ItemGET Hotitemget = new ItemGET();
-        GetAPIstring getxml = new CS.GetAPIstring(); // 拓展加载更多，getxml共用
+        GetAPIstring getapistring = new CS.GetAPIstring(); // 拓展加载更多，getxml共用
 
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -191,8 +202,8 @@ namespace MT2
             var titlebar = coreTileBarButton.TitleBar;
             titlebar.ButtonBackgroundColor = Color.FromArgb(0, 0, 0, 0);
             titlebar.ButtonForegroundColor = Colors.Black;
-            
-            //await MenuBlur.Blur(value: 10, duration: 1076, delay: 0).StartAsync();
+
+            await MenuBlur.Blur(value: 10, duration: 1076, delay: 0).StartAsync();
             await TopBlur.Blur(value: 10, duration: 1076, delay: 0).StartAsync();         
         }
         private void BlurGlass(UIElement BlurUI)
@@ -229,20 +240,40 @@ namespace MT2
 
         #endregion
         
-        public async Task Getxmltext()
+        public async Task Getimgvalue()
         {
             Progresstext.Text = "正在和绿坝娘达成交易……";
-            xmltext = await getxml.GetWebString(Mainapiuri);
-            MainItemget.Toitem(xmltext);
-            if (MainItemget.NetworkIsOK != false) //如果网络判断不为false则继续执行
+            if((bool)localsettings.Values["_TackToJS"] == true)
             {
-                Progresstext.Text = "正在排列一些奇怪的东西……";
-                MainItemget.getlistitems(true);
-                Pictureada.ItemsSource = MainItemget.Listapiitems;
-                await GetHotimage();
+                GetAPIstring getjson = new GetAPIstring();
+                string jsontext = await getjson.GetWebString(Mainapiuri + ".json?limit=" + limit);
+
+                SetjsonstringAsync(jsontext);
             }
+            else
+            {
+                xmltext = await getapistring.GetWebString(Mainapiuri+ ".xml?limit=" + limit);
+                MainItemget.Toitem(xmltext);        
+                    Progresstext.Text = "正在排列一些奇怪的东西……";
+                    MainItemget.getlistitems(true);
+                    Pictureada.ItemsSource = MainItemget.Listapiitems;
+                    await GetHotimage();
+            
+            }
+          
             //progressrin.IsActive = false;
         }
+
+        GetJson getjson = new GetJson();
+        private async void SetjsonstringAsync(string jsontext)
+        {
+           
+            Progresstext.Text = "正在排列一些奇怪的东西……";
+            var source = getjson.SaveJson(jsontext);
+            Pictureada.ItemsSource = source;
+            await newGetHotimageAsync();
+        }
+
         //HotimageHub hih = new HotimageHub();
 
         string homehoturl;
@@ -269,23 +300,22 @@ namespace MT2
             }
             catch
             {
-
             }
-
-            //    try
-            //   {
-            //       //hih.Gethotxml();
-            //       hih.Gethotimg();
-            //       hotimg = hih.Tophotimg;
-            //       BitmapImage bit = new BitmapImage(new Uri(hotimg));
-            //       HomeHot.Source = bit;
-            //   }
-            //catch
-            //   {
-
-            //   }
         }
-
+        public async Task newGetHotimageAsync()
+        {
+            getapistring = new GetAPIstring();
+            Progresstext.Text = "正在下载TOP数据……";
+            var Hotjsonvalue = await getapistring.GetWebString(hotapiuri);
+            GetJson gethotjson = new GetJson();
+            var savejsonreturn = gethotjson.SaveJson(Hotjsonvalue);
+            Homehoturl = savejsonreturn.First().sample_url;
+            BitmapImage bit = new BitmapImage(new Uri(Homehoturl));
+            HomeHot.Source = bit;
+            Topprogress.Visibility = Visibility.Collapsed;
+            //江+1s热榜瀑布流传递给热榜页面
+            MTHub.Hotitemvalue = savejsonreturn;
+        }
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
         {
@@ -329,9 +359,19 @@ namespace MT2
 
         private void Picturegrid_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            var boxs = sender as Grid;
-            var box = boxs.DataContext as ItemGET.listsave;
-            Frame.Navigate(typeof(LookImg), box);
+            if ((bool)localsettings.Values["_TackToJS"] == true)
+            {
+                var boxs = sender as Grid;
+                var box = boxs.DataContext as Yande_post_json;
+                Frame.Navigate(typeof(LookImg), box);
+            }
+            else
+            {
+                var boxs = sender as Grid;
+                var box = boxs.DataContext as ItemGET.listsave;
+                Frame.Navigate(typeof(LookImg), box);
+            }
+          
         }
 
         private void Searchbutton_Click(object sender, RoutedEventArgs e)
@@ -345,12 +385,21 @@ namespace MT2
         }
         private async void LoadingfuctionAsync()
         {
-
+            //当数据更改后暂时让用户强退应用以免出现问题
             page++;
+            if ((bool)localsettings.Values["_TackToJS"] == true)
+            {
+                jsontext = await getapistring.GetWebString(Mainapiuri + ".json?limit=" + limit + "&page=" + page);
+                getjson.Loadingitem(jsontext,limit);
 
-            xmltext = await getxml.GetWebString(Mainapiuri + "&page=" + page);
-            MainItemget.Toitem(xmltext);
-            MainItemget.Loadinglistitems();
+            }
+            else
+            {
+                xmltext = await getapistring.GetWebString(Mainapiuri + ".xml?limit=" + limit + "&page=" + page);
+                MainItemget.Toitem(xmltext);
+                MainItemget.Loadinglistitems();
+            }
+         
 
 
 

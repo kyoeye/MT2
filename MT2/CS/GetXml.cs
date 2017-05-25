@@ -21,7 +21,7 @@ namespace MT2.CS
         //private CancellationTokenSource cts = new CancellationTokenSource();
         string RequestUri;
 
-        public   async Task<string> GetWebString(string url ) //删除静态关键字
+        public   async Task<string> GetWebString(string url ) 
         {
                RequestUri = url;
 

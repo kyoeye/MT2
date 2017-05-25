@@ -25,20 +25,26 @@
             <RowDefinition Height="32" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
         <SplitView
-            Name="Mymenu"
+            x:Name="Mymenu"
             Grid.RowSpan="2"
+            CompactPaneLength="50"
             OpenPaneLength="200"
             PaneBackground="{x:Null}">
             <SplitView.Pane>
                 <Grid HorizontalAlignment="Left" Background="{x:Null}">
                     <Grid x:Name="BlurListBox" />
-                    <!--<Image
-                        x:Name="MenuBlur"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Source="{Binding ElementName=HomeHot, Path=Source, Mode=TwoWay}"
-                        Stretch="UniformToFill" />-->
+                    <Grid x:Name="MenuBlurGrid">
+
+                        <Image
+                            x:Name="MenuBlur"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Source="{Binding ElementName=HomeHot, Path=Source, Mode=TwoWay}"
+                            Stretch="UniformToFill" />
+                        <Rectangle Fill="White" Opacity="0.5" />
+                    </Grid>
                     <ListBox
                         Margin="0,32,0,0"
                         HorizontalAlignment="Left"
@@ -115,6 +121,24 @@
                                     VerticalAlignment="Center"
                                     FontSize="15"
                                     Text="下载" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Name="picinpciitem">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon
+                                    Margin="5"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    FontSize="18"
+                                    Glyph="&#xF16E;" />
+
+                                <TextBlock
+                                    Margin="15,0,0,0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="15"
+                                    Text="画中画" />
                             </StackPanel>
                         </ListBoxItem>
 
@@ -358,6 +382,65 @@
             </StackPanel>
         </Grid>
         <!--<Frame Name="Mainframe" Grid.Row="1" />-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="ms">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Mymenu.DisplayMode" Value="Overlay" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="ms2">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Mymenu.DisplayMode" Value="CompactInline" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="ms3">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Mymenu.DisplayMode" Value="CompactInline" />
+                        <Setter Target="Mymenu.IsPaneOpen" Value="true" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+            <!--<VisualStateGroup>
+                <VisualState x:Name="vs">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MenuBlur.Visibility" Value="Collapsed" />
+                        <Setter Target="BlurListBox.Visibility" Value="Visibility" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="vs2">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MenuBlur.Visibility" Value="Visibility" />
+                        <Setter Target="BlurListBox.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="vs3">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MenuBlur.Visibility" Value="Visibility" />
+                        <Setter Target="BlurListBox.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
 
+            </VisualStateGroup>-->
+        </VisualStateManager.VisualStateGroups>
     </Grid>
+
 </Page>

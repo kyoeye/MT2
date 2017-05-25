@@ -31,6 +31,7 @@ namespace MT2.page
         {
             this.InitializeComponent();
 
+            //Setting2Page set = new Setting2Page();
             try
             {
                 if (localsettings.Values["_AppOpenNum"] == null)
@@ -49,6 +50,28 @@ namespace MT2.page
                 {
                     ONETimeAsync();
                 }
+                else
+                {
+                    try
+                    {
+                        var ss = (int)localsettings.Values["_listslider"];
+
+                        if ((int)localsettings.Values["_listslider"]==0)
+                        {
+                            localsettings.Values["_listslider"] = 25;
+                            localsettings.Values["_TackToJS"] = false;
+                        }
+                    }
+                    catch
+                    {
+                        //利用catch报错来初始化
+                        localsettings.Values["_listslider"] = 25;
+                        localsettings.Values["_TackToJS"] = false;
+
+                    }
+                }
+
+        
             }
             catch 
             {
@@ -75,7 +98,7 @@ namespace MT2.page
                 }
                 #endregion
                 localsettings.Values["_listslider"] = 25;
-          
+                localsettings.Values["_TackToJS"] = false ;
             }
             catch (Exception ex)
             {

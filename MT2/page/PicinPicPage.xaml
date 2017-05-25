@@ -1,0 +1,87 @@
+﻿<Page
+    x:Class="MT2.page.PicinPicPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:MT2.page"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height=" auto" />
+            <RowDefinition Height=" *" />
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <Grid>
+                <Grid
+                    Name="MyTitleBar"
+                    Grid.Row="0"
+                    Height="32"
+                    Style="{StaticResource GridBackgroud}" />
+                <Grid Height="32" VerticalAlignment="Top">
+                    <StackPanel Orientation="Horizontal">
+                        <AppBarButton
+                            Name="GobackButton"
+                            Width="50"
+                            Height="32"
+                            Click="GobackButton_Click"
+                            Visibility="Visible">
+                            <TextBlock
+                                Margin="16,-9,15,9"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontFamily="Segoe MDL2 Assets"
+                                Foreground="Black"
+                                Style="{StaticResource TitleButtontext}"
+                                Text="&#xE096;" />
+                        </AppBarButton>
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontSize="13"
+                            Style="{StaticResource TextblockForeground}" />
+                    </StackPanel>
+
+
+                </Grid>
+            </Grid>
+
+            <Grid Height="50" Style="{StaticResource GridBackgroud}">
+                <TextBlock
+                    Margin="10,0,10,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="25"
+                    Style="{StaticResource TextblockForeground}"
+                    Text="画中画" />
+                <TextBlock
+                    Margin="10"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontSize="12"
+                    Style="{StaticResource Textblock_prompt}"
+                    Text="（该功能仅适用15063（1703）的PC )" />
+            </Grid>
+
+        </StackPanel>
+        <Grid Grid.Row=" 1">
+            <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Style="{StaticResource Textblock_prompt}"
+                Text="请选择一张图片" />
+            <CommandBar VerticalAlignment="Bottom" ClosedDisplayMode="Compact">
+                <AppBarButton
+                    Name="Addclick"
+                    HorizontalAlignment="Right"
+                    Click="Addclick_ClickAsync"
+                    Icon="Add"
+                    Label="添加" />
+            </CommandBar>
+        </Grid>
+
+    </Grid>
+
+</Page>

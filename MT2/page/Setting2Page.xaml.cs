@@ -9,6 +9,7 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using System.Threading.Tasks;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
 
@@ -22,6 +23,7 @@ namespace MT2.page
         ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
         public List<ThemeColors> themeColors;
         Fallsclass falclass = new Fallsclass();
+        public bool TackToJS_bool;
         StorageFolder a = KnownFolders.SavedPictures;//获取图片保存目录
         //public int fallshub { get { return falclass.FallsHub; } set { falclass.FallsHub = value; } }
         //MainPage mainpage;
@@ -32,6 +34,8 @@ namespace MT2.page
             //Logobackground.Source =  mainpage.Homehoturl;
 
             this.InitializeComponent();
+
+           Listslider = (int)listslider.Value;
 
             //coreTitleBar.ExtendViewIntoTitleBar = false;
             //DefualtFilebutton.Content = @"默认保存至系统目录的”保存的图片“";
@@ -87,10 +91,12 @@ namespace MT2.page
                 //是否使用js获取数据
                 if ((bool)localsettings.Values["_TackToJS"] == true)
                 {
+                    TackToJS_bool = true ;
                     TackToJS.IsOn = true;
                 }
                 else
                 {
+                    TackToJS_bool = false;
                     TackToJS.IsOn = false;
                     //localsettings.Values["_TackToJS"] = false;
                 }
@@ -114,8 +120,14 @@ namespace MT2.page
         {
             base.OnNavigatedFrom(e);
             localsettings.Values["_listslider"] = (int)listslider.Value;
+           
         }
-     
+        #region 访问器们\(￣︶￣*\))
+        int _listslider;
+
+        public int Listslider { get => _listslider; set => _listslider = value; }
+
+        #endregion
         #region Ui状态
 
         #endregion
@@ -291,6 +303,8 @@ namespace MT2.page
 
         private void TackToJS_Toggled(object sender, RoutedEventArgs e)
         {
+           
+           
             if (TackToJS.IsOn == true)
             {
                 localsettings.Values["_TackToJS"] = true;
@@ -300,6 +314,35 @@ namespace MT2.page
                 localsettings.Values["_TackToJS"] = false;
 
             }
+            if ((bool)localsettings.Values["_TackToJS"] != TackToJS_bool)
+            {
+                showmessAsync();
+
+            }
+
+
+        }
+        private async void  showmessAsync()
+        {
+            try
+            {
+                var messagedialog = new MessageDialog("数据发生更改，您需要手动重启下应用");
+                messagedialog.Commands.Add(new UICommand("关闭", cmd => { }, commandId: 0));
+                messagedialog.DefaultCommandIndex = 0;
+                var a = await messagedialog.ShowAsync();
+
+                a.Invoked += await chonshi();
+            }
+            catch
+            {
+
+            }
+        }
+
+        private Task<UICommandInvokedHandler> chonshi()
+        {
+            App.Current.Exit();
+            return null;
         }
     }
 }

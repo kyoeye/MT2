@@ -13,7 +13,7 @@ namespace MT2.Model
         public string tags { get; set; }
         public int created_at { get; set; }
         public int updated_at { get; set; }
-        public int creator_id { get; set; }
+        public string   creator_id { get ; set ; }
         public object approver_id { get; set; }
         public string author { get; set; }
         public int change { get; set; }
@@ -24,16 +24,16 @@ namespace MT2.Model
         public string file_ext { get; set; }
         public string file_url { get; set; }
         public bool is_shown_in_index { get; set; }
-        public string preview_url { get; set; }
+        public string preview_url { get; set; }//预览的url
         public int preview_width { get; set; }
         public int preview_height { get; set; }
         public int actual_preview_width { get; set; }
         public int actual_preview_height { get; set; }
-        public string sample_url { get; set; }
+        public string sample_url { get; set; }//样品的url
         public int sample_width { get; set; }
         public int sample_height { get; set; }
         public int sample_file_size { get; set; }
-        public string jpeg_url { get; set; }
+        public string jpeg_url { get; set; } //原图的url
         public int jpeg_width { get; set; }
         public int jpeg_height { get; set; }
         public int jpeg_file_size { get; set; }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading .Tasks;
 using System.Xml.Linq;
+using Windows.Storage;
 
 namespace MT2.CS
 {
@@ -26,6 +27,8 @@ namespace MT2.CS
 
     public class ItemGET:Fallsclass 
     {
+        ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
         public class listsave
         {
             public int _a { get; set; }
@@ -58,8 +61,8 @@ namespace MT2.CS
 
             if (IsCommon == true )
             {
-              
-                for (int i = 0; i < 100 ; i++)
+              var a =  (int ) localsettings.Values["_listslider"];
+                for (int i = 0; i < a ; i++)
                 {
                     if (listclass.ratings[listclass.a] != "q" )
                     {
@@ -128,11 +131,27 @@ namespace MT2.CS
 
         }
 
-        #region 加载更多
+        #region 加载更多 //有空再改。。。
         public void Loadinglistitems()
         {
-            var listcount = Listapiitems.Count;
-            for(int a = listcount; a<listcount +100; a ++)
+            int listcount;
+            try
+            {
+               listcount = Listapiitems.Count;
+                Loadinglistitems2(listcount);
+
+            }
+            catch
+            {
+                listcount = 0;
+                Loadinglistitems2(listcount);
+
+            }
+        }
+       private void Loadinglistitems2( int listcount )
+        {
+            var b = (int)localsettings.Values["_listslider"];
+            for (int a = listcount; a < listcount + b; a++)
             {
                 if (listclass.ratings[listclass.a] != "q")
                 {
@@ -146,7 +165,7 @@ namespace MT2.CS
                             sample_url = listclass.sampleurl[listclass.a],
                             _a = listclass.a,
                             id = listclass.id[listclass.a],
-                               tag = new List<string>(listclass.tags[listclass.a])
+                            tag = new List<string>(listclass.tags[listclass.a])
 
                         });
                     }
@@ -164,7 +183,6 @@ namespace MT2.CS
                 listclass.a++;
             }
         }
-
         #endregion
 
         public void   Toitem(string _mystring)
