@@ -8,7 +8,11 @@ namespace MT2.CS.apiset
 {
     class apiurisave
     {
-        //艺术家推荐
+
+     
+        ///<summary >
+        ///艺术家推荐
+        /// </summary>
         public static string artist_api = " https://yande.re/artist.json";
     }
 }

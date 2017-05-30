@@ -10,6 +10,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
 
@@ -28,15 +29,18 @@ namespace MT2.page
         //public int fallshub { get { return falclass.FallsHub; } set { falclass.FallsHub = value; } }
         //MainPage mainpage;
         CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-
+        //彩蛋
+        private TranslateTransform tt;
         public Setting2Page()
         {
             //Logobackground.Source =  mainpage.Homehoturl;
 
             this.InitializeComponent();
-
-           Listslider = (int)listslider.Value;
-
+            tt = new TranslateTransform();
+            logo.RenderTransform = tt;
+            logo.ManipulationMode = Windows.UI.Xaml.Input.ManipulationModes.System;
+            Window.Current.SetTitleBar(MyTitleBar);
+            Listslider = (int)listslider.Value;
             //coreTitleBar.ExtendViewIntoTitleBar = false;
             //DefualtFilebutton.Content = @"默认保存至系统目录的”保存的图片“";
 
@@ -324,6 +328,7 @@ namespace MT2.page
         }
         private async void  showmessAsync()
         {
+            
             try
             {
                 var messagedialog = new MessageDialog("数据发生更改，您需要手动重启下应用");
@@ -343,6 +348,12 @@ namespace MT2.page
         {
             App.Current.Exit();
             return null;
+        }
+
+        private void Image_ManipulationDelta(object sender, Windows.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs e)
+        {
+            tt.X += e.Delta.Translation.X;
+            tt.Y = e.Delta.Translation.Y;
         }
     }
 }

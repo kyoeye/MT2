@@ -30,8 +30,8 @@ namespace MT2.page
         #region apis
         string hotapiuri = "https://yande.re/post/popular_recent.xml";
         string w_hotapiuri = "https://yande.re/post/popular_recent.json?period=1w";
-        string m_hotapiuri = "https://yande.re/post/popular_recent.xml?period=1m";
-        string y_hotapiuri = "https://yande.re/post/popular_recent.xml?period=1y";
+        string m_hotapiuri = "https://yande.re/post/popular_recent.json?period=1m";
+        string y_hotapiuri = "https://yande.re/post/popular_recent.json?period=1y";
         #endregion
       
         string xmltext;
@@ -99,20 +99,30 @@ namespace MT2.page
         }
         #region json接口测试by一周
         //string jsontext;
-        private async void Getjsonstring()
+        private async void Getjsonstring(string thehotapiuri ,int pivotindexs)
         {
             GetAPIstring getjson = new GetAPIstring();
-          string  jsontext = await getjson.GetWebString(w_hotapiuri);
-
-            Setjsonstring(jsontext );            
+           string  jsontext = await getjson.GetWebString(thehotapiuri);
+            Setjsonstring(jsontext,pivotindexs );            
         }
         GetJson getjson = new GetJson();
-        private void Setjsonstring(string jsontext)
+        private void Setjsonstring(string jsontext , int pivotindex)
         {
             //使用Savejson方法将json数据反序列化到存储
            var source = getjson.SaveJson(jsontext);
-            Mygridview2.ItemsSource = source;
-        
+            switch (pivotindex )
+            {
+                case 1:
+                    Mygridview2.ItemsSource = source;
+                    break;
+                case 2:
+                    Mygridview3.ItemsSource = source;
+                    break;
+                case 3:
+                    Mygridview4.ItemsSource = source;
+                    break;
+            }
+
         }
         #endregion
 
@@ -150,14 +160,16 @@ namespace MT2.page
                 case 1:
                     B1.FontFamily = new FontFamily("Segoe UI Black");
                     B1.Opacity = 1;
-                    Getjsonstring();
+                    Getjsonstring(w_hotapiuri,1);
                     break;
                 case 2:
                     B2.FontFamily = new FontFamily("Segoe UI Black");
+            Getjsonstring(m_hotapiuri ,2);
                     B2.Opacity = 1;
                     break;
                 case 3:
                     B3.FontFamily = new FontFamily("Segoe UI Black");
+            Getjsonstring(y_hotapiuri,3);
                     B3.Opacity = 1;
                     break;
             }
@@ -173,19 +185,22 @@ namespace MT2.page
         {
             pivot.SelectedIndex = 1;
             pivot.SelectedItem = pivot.Items[1];
-            Getjsonstring();
+            Getjsonstring(w_hotapiuri,1);
         }
 
         private void B2_Click(object sender, RoutedEventArgs e)
         {
             pivot.SelectedIndex = 2;
             pivot.SelectedItem = pivot.Items[2];
+            Getjsonstring(m_hotapiuri,2 );
+
         }
 
         private void B3_Click(object sender, RoutedEventArgs e)
         {
             pivot.SelectedIndex = 3;
             pivot.SelectedItem = pivot.Items[3];
+            Getjsonstring(y_hotapiuri,3);
         }
         #endregion
     }

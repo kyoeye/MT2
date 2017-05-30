@@ -37,396 +37,443 @@
         </Storyboard>
 
     </Page.Resources>
-    <ScrollViewer Name="myScrollviewer">
-        <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid>
             <Grid
-                x:Name="TopGrid"
-                Height="250"
-                Background="#FF0074B6">
-                <!--<Image Name="Logobackground"  Source="{ x:Bind Mode=TwoWay ,Path=mainpage.Homehoturl }" />-->
-                <StackPanel
-                    Height="50"
-                    VerticalAlignment="Top"
-                    Orientation="Horizontal">
-                    <AppBarButton Name="SettingGoback" Click="SettingGoback_Click">
+                Name="MyTitleBar"
+                Grid.Row="0"
+                Height="32"
+                Style="{StaticResource GridBackgroud}" />
+            <Grid Height="32" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal">
+                    <AppBarButton
+                        Name="GobackButton"
+                        Width="50"
+                        Height="32"
+                        Click="SettingGoback_Click"
+                        Visibility="Visible">
                         <TextBlock
+                            Margin="16,-9,15,9"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontFamily="Segoe MDL2 Assets"
-                            FontSize="20"
-                            Text="&#xE713;" />
+                            Foreground="Black"
+                            Style="{StaticResource TitleButtontext}"
+                            Text="&#xE096;" />
                     </AppBarButton>
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="13"
+                        Style="{StaticResource TextblockForeground}" />
+                </StackPanel>
 
-                    <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="20"
-                        Text="设置" />
-                </StackPanel>
-                <TextBlock
-                    Margin="15"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    Text="{Binding ElementName=myScrollviewer, Path=VerticalOffset, Mode=TwoWay}"
-                    Visibility="Collapsed" />
-                <StackPanel VerticalAlignment="Center">
-                    <Image
-                        Width="80"
-                        Height="80"
-                        Source="ms-appx:///Assets/Square44x44Logo.altform-unplated_targetsize-256.png" />
-                    <TextBlock
-                        HorizontalAlignment="Center"
-                        Foreground="Black"
-                        Text="当前版本：" />
-                </StackPanel>
-                <Grid Margin="10" VerticalAlignment="Bottom">
-                    <Button
-                        Name="Abutopagebutton"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Background="{x:Null}"
-                        Click="Abutopagebutton_Click">
+
+            </Grid>
+        </Grid>
+        <ScrollViewer Name="myScrollviewer" Grid.Row="1">
+            <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <Grid
+                    x:Name="TopGrid"
+                    Height="250"
+                    Background="#FFDFDFDF">
+                    <!--<Image Name="Logobackground"  Source="{ x:Bind Mode=TwoWay ,Path=mainpage.Homehoturl }" />-->
+                    <StackPanel
+                        Height="50"
+                        VerticalAlignment="Top"
+                        Orientation="Horizontal">
+                        <AppBarButton Name="SettingGoback" Width="50">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontFamily="Segoe MDL2 Assets"
+                                FontSize="20"
+                                Text="&#xE713;" />
+                        </AppBarButton>
+
                         <TextBlock
-                            Margin="5"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            FontSize="16"
-                            Text="关于MTACG" />
-                    </Button>
-                </Grid>
-            </Grid>
-            <StackPanel>
-                <Grid
-                    Margin="4"
-                    Background="{ThemeResource AppBarBorderThemeBrush}"
-                    Visibility="Collapsed">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-
-                    </Grid.RowDefinitions>
+                            FontSize="20"
+                            Text="设置" />
+                    </StackPanel>
                     <TextBlock
-                        Margin="10"
-                        HorizontalAlignment="left"
-                        FontSize="20"
-                        FontWeight="Bold"
-                        Foreground="#ff4b4b4b"
-                        Text="作者测试" />
-                    <StackPanel Grid.Row="1">
-                        <TextBlock Name="opennum" />
-
+                        Margin="15"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Text="{Binding ElementName=myScrollviewer, Path=VerticalOffset, Mode=TwoWay}"
+                        Visibility="Collapsed" />
+                    <Grid>
+                        <Image
+                            Name="logo"
+                            Width="80"
+                            Height="80"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            ManipulationDelta="Image_ManipulationDelta"
+                            ManipulationMode="System"
+                            Source="ms-appx:///Assets/Square44x44Logo.altform-unplated_targetsize-256.png" />
+                    </Grid>
+                    <StackPanel Margin="10" VerticalAlignment="Bottom">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            Foreground="Black"
+                            Text="当前版本：萌豚二号机-初版" />
                         <Button
-                            Name="beta2button"
-                            Click="beta2button_Click"
-                            Content="拉取文件选择器选择文件夹" />
-
-                        <Button
-                            Name="beta1button"
-                            Click="beta1button_Click"
-                            Content="在保存相片文件夹创建一个文件" />
+                            Name="Abutopagebutton"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Background="{x:Null}"
+                            Click="Abutopagebutton_Click">
+                            <TextBlock
+                                Margin="5"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Text="关于MTACG" />
+                        </Button>
                     </StackPanel>
                 </Grid>
-
-                <Grid Margin="4" Background="{ThemeResource AppBarBorderThemeBrush}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
-                    <TextBlock
-                        Margin="10"
-                        HorizontalAlignment="left"
-                        FontSize="20"
-                        FontWeight="Bold"
-                        Foreground="#ff4b4b4b"
-                        Text="安全控制" />
+                <StackPanel>
                     <Grid
-                        Grid.Row="1"
-                        BorderBrush="#ffd7d7d7"
-                        BorderThickness="0,2,0,0">
+                        Margin="4"
+                        Background="{ThemeResource AppBarBorderThemeBrush}"
+                        Visibility="Collapsed">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
+
                         </Grid.RowDefinitions>
+                        <TextBlock
+                            Margin="10"
+                            HorizontalAlignment="left"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="#ff4b4b4b"
+                            Text="作者测试" />
+                        <StackPanel Grid.Row="1">
+                            <TextBlock Name="opennum" />
 
-                        <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock
-                                Margin="15,15,15,15"
-                                FontSize="17"
-                                Text="启动密码" />
-                            <TextBlock
-                                Name="Nowpassword"
-                                Grid.Column="1"
-                                Margin="10"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                FontSize="14"
-                                Foreground="#FF7A7A7A"
-                                Text="当前没有密码"
-                                Visibility="Visible" />
-
-                        </Grid>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="auto" />
-                            </Grid.ColumnDefinitions>
-                            <PasswordBox
-                                Name="loagingpassword"
-                                Margin="10,10,0,10"
-                                PlaceholderText="没有输入则不需要密码" />
                             <Button
-                                Name="PasswordClick"
-                                Grid.Column="1"
-                                Width="50"
-                                Margin="0,10,15,10"
-                                VerticalAlignment="stretch"
-                                Background="#ffcdcdcd"
-                                Click="PasswordClick_Click"
-                                Content="&#xe081;"
-                                FontFamily="segoe mdl2 assets" />
+                                Name="beta2button"
+                                Click="beta2button_Click"
+                                Content="拉取文件选择器选择文件夹" />
 
-                        </Grid>
-
+                            <Button
+                                Name="beta1button"
+                                Click="beta1button_Click"
+                                Content="在保存相片文件夹创建一个文件" />
+                        </StackPanel>
                     </Grid>
-                    <Grid Grid.Row="2" BorderBrush="#ffd7d7d7">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+
+                    <Grid Margin="4" Background="{ThemeResource AppBarBorderThemeBrush}">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
                         <TextBlock
-                            Margin="15,15,15,15"
-                            FontSize="17"
-                            Text="安全级别" />
-                        <Viewbox
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            MaxWidth="300"
-                            Margin="5,5,15,5"
-                            HorizontalAlignment="Right">
-                            <TextBlock
-                                VerticalAlignment="center"
-                                FontSize="13"
-                                Foreground="#FF7A7A7A"
-                                Text="（以确保你不会在公共场合看到不该看的内容）" />
-                        </Viewbox>
-                        <StackPanel
+                            Margin="10"
+                            HorizontalAlignment="left"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="#ff4b4b4b"
+                            Text="安全控制" />
+                        <Grid
                             Grid.Row="1"
-                            Grid.ColumnSpan="3"
-                            Margin="15,5,15,5"
-                            Orientation="horizontal">
-                            <ToggleSwitch
-                                Name="NoH_Check"
-                                OffContent="表世界"
-                                OnContent="里区" />
-
-                        </StackPanel>
-                    </Grid>
-                </Grid>
-                <Grid Margin="4" Background="{ThemeResource AppBarBorderThemeBrush}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
-                    <TextBlock
-                        Grid.Row="0"
-                        Margin="10"
-                        HorizontalAlignment="left"
-                        FontSize="20"
-                        FontWeight="Bold"
-                        Foreground="#ff4b4b4b"
-                        Text="御坂网络中枢" />
-                    <StackPanel
-                        Grid.Row="1"
-                        BorderBrush="#ffd7d7d7"
-                        BorderThickness="0,2,0,0">
-                        <Grid Visibility="Visible">
-                            <Grid BorderBrush="#ffd7d7d7" BorderThickness="0,2,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="auto" />
-                                </Grid.RowDefinitions>
-                                <TextBlock
-                                    Margin="15,5,15,5"
-                                    HorizontalAlignment="left"
-                                    VerticalAlignment="center"
-                                    FontSize="17"
-                                    Text="瀑布流单次加载图片数量" />
-                                <TextBlock
-                                    Margin="15,0,15,0"
-                                    HorizontalAlignment="right"
-                                    VerticalAlignment="center"
-                                    Text="{Binding Value, ElementName=listslider, Mode=TwoWay}" />
-                                <Slider
-                                    Name="listslider"
-                                    Grid.Row="1"
-                                    Margin="15,5,15,10"
-                                    Minimum="25"
-                                    StepFrequency="5" />
-                                <Viewbox
-                                    Grid.Row="2"
-                                    MaxWidth="500"
-                                    Margin="15,0,15,15">
-                                    <TextBlock
-                                        FontSize="13"
-                                        Foreground="#FF7A7A7A"
-                                        Text="（注意：这个值在安全模式下实际显示图片会存在数量偏差，最低15，最高100）" />
-                                </Viewbox>
-                            </Grid>
-                        </Grid>
-                        <Grid>
+                            BorderBrush="#ffd7d7d7"
+                            BorderThickness="0,2,0,0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="auto" />
                             </Grid.RowDefinitions>
-                            <StackPanel Orientation="Horizontal">
+
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                    Margin="15,15,15,15"
+                                    FontSize="17"
+                                    Text="启动密码" />
+                                <TextBlock
+                                    Name="Nowpassword"
+                                    Grid.Column="1"
+                                    Margin="10"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Foreground="#FF7A7A7A"
+                                    Text="当前没有密码"
+                                    Visibility="Visible" />
+
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+                                <PasswordBox
+                                    Name="loagingpassword"
+                                    Margin="10,10,0,10"
+                                    PlaceholderText="没有输入则不需要密码" />
+                                <Button
+                                    Name="PasswordClick"
+                                    Grid.Column="1"
+                                    Width="50"
+                                    Margin="0,10,15,10"
+                                    VerticalAlignment="stretch"
+                                    Background="#ffcdcdcd"
+                                    Click="PasswordClick_Click"
+                                    Content="&#xe081;"
+                                    FontFamily="segoe mdl2 assets" />
+
+                            </Grid>
+
+                        </Grid>
+                        <Grid Grid.Row="2" BorderBrush="#ffd7d7d7">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                Margin="15,15,15,15"
+                                FontSize="17"
+                                Text="安全级别" />
+                            <Viewbox
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                MaxWidth="300"
+                                Margin="5,5,15,5"
+                                HorizontalAlignment="Right">
+                                <TextBlock
+                                    VerticalAlignment="center"
+                                    FontSize="13"
+                                    Foreground="#FF7A7A7A"
+                                    Text="（以确保你不会在公共场合看到不该看的内容）" />
+                            </Viewbox>
+                            <StackPanel
+                                Grid.Row="1"
+                                Grid.ColumnSpan="3"
+                                Margin="15,5,15,5"
+                                Orientation="horizontal">
+                                <ToggleSwitch
+                                    Name="NoH_Check"
+                                    OffContent="表世界"
+                                    OnContent="里区" />
+
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                    <Grid Margin="4" Background="{ThemeResource AppBarBorderThemeBrush}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock
+                            Grid.Row="0"
+                            Margin="10"
+                            HorizontalAlignment="left"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="#ff4b4b4b"
+                            Text="御坂网络中枢" />
+                        <StackPanel
+                            Grid.Row="1"
+                            BorderBrush="#ffd7d7d7"
+                            BorderThickness="0,2,0,0">
+                            <Grid Visibility="Visible">
+                                <Grid BorderBrush="#ffd7d7d7" BorderThickness="0,2,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock
+                                        Margin="15,5,15,5"
+                                        HorizontalAlignment="left"
+                                        VerticalAlignment="center"
+                                        FontSize="17"
+                                        Text="瀑布流单次加载图片数量" />
+                                    <TextBlock
+                                        Margin="15,0,15,0"
+                                        HorizontalAlignment="right"
+                                        VerticalAlignment="center"
+                                        Text="{Binding Value, ElementName=listslider, Mode=TwoWay}" />
+                                    <Slider
+                                        Name="listslider"
+                                        Grid.Row="1"
+                                        Margin="15,5,15,10"
+                                        Minimum="25"
+                                        StepFrequency="5" />
+
+                                    <TextBlock
+                                        Grid.Row="2"
+                                        Margin="15,0,15,15"
+                                        FontSize="13"
+                                        Style="{StaticResource Textblock_prompt}"
+                                        Text="（注意：这个值在安全模式下实际显示图片会存在数量偏差，视网络情况酌情修改）"
+                                        TextWrapping="Wrap" />
+
+                                </Grid>
+                            </Grid>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock
+                                        Margin="15,5,15,5"
+                                        HorizontalAlignment="left"
+                                        VerticalAlignment="center"
+                                        FontSize="17"
+                                        Text="数据优化" />
+                                    <TextBlock
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        Foreground="Gray"
+                                        Text="(当数据加载过慢时可尝试开启）" />
+                                </StackPanel>
+                                <Grid Grid.Row="1">
+                                    <StackPanel
+                                        Grid.Row="1"
+                                        Grid.ColumnSpan="3"
+                                        Margin="15,5,15,5"
+                                        Orientation="horizontal">
+                                        <ToggleSwitch Name="TackToJS" Toggled="TackToJS_Toggled" />
+                                    </StackPanel>
+
+                                </Grid>
+                            </Grid>
+
+                            <StackPanel>
+
                                 <TextBlock
                                     Margin="15,5,15,5"
                                     HorizontalAlignment="left"
                                     VerticalAlignment="center"
                                     FontSize="17"
-                                    Text="数据优化" />
-                                <TextBlock
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    Foreground="Gray"
-                                    Text="(当数据加载过慢时可尝试开启）" />
-                            </StackPanel>
-                            <Grid Grid.Row="1">
-                                <StackPanel
-                                    Grid.Row="1"
-                                    Grid.ColumnSpan="3"
+                                    Text="更改保存位置" />
+
+                                <CheckBox
+                                    Name="DefualtFilebutton"
                                     Margin="15,5,15,5"
-                                    Orientation="horizontal">
-                                    <ToggleSwitch Name="TackToJS" Toggled="TackToJS_Toggled" />
+                                    Checked="DefualtFilebutton_Checked"
+                                    Unchecked="DefualtFilebutton_Unchecked" />
+
+                                <StackPanel Orientation="Horizontal">
+
+                                    <Button
+                                        Name="Picksacefile"
+                                        Margin="15,10,15,10"
+                                        VerticalAlignment="stretch"
+                                        Background="#ffcdcdcd"
+                                        Click="Picksacefile_Click"
+                                        Content="更改保存路径" />
+
+                                    <TextBlock
+                                        Name="FileUri"
+                                        Margin="10,10,0,10"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        TextWrapping="Wrap" />
+
                                 </StackPanel>
+                            </StackPanel>
 
-                            </Grid>
-                        </Grid>
+                            <CheckBox
+                                Name="FileAllOpen"
+                                Margin="15,5,15,5"
+                                Checked="FileAllOpen_Checked"
+                                Content="每次保存总是询问保存位置 (将禁用保存地址）"
+                                Unchecked="FileAllOpen_Unchecked" />
 
-                        <StackPanel>
+                        </StackPanel>
 
+                    </Grid>
+                    <Grid
+                        Margin="4"
+                        Background="{ThemeResource AppBarBorderThemeBrush}"
+                        Visibility="Collapsed">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock
+                            Margin="10"
+                            HorizontalAlignment="left"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="#ff4b4b4b"
+                            Text="美化" />
+                        <Grid
+                            Grid.Row="1"
+                            BorderBrush="#ffd7d7d7"
+                            BorderThickness="0,2,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
                             <TextBlock
                                 Margin="15,5,15,5"
                                 HorizontalAlignment="left"
                                 VerticalAlignment="center"
                                 FontSize="17"
-                                Text="更改保存位置" />
+                                Text="主题色" />
+                            <TextBlock
+                                Margin="15,0,15,0"
+                                HorizontalAlignment="right"
+                                VerticalAlignment="center"
+                                Text="{Binding ElementName=listslider, Path=Value, Mode=TwoWay}" />
+                            <GridView
+                                Grid.Row="1"
+                                Margin="15,5,15,10"
+                                IsEnabled="False"
+                                ItemsSource="{x:Bind themeColors}">
+                                <GridView.ItemTemplate>
+                                    <DataTemplate x:DataType="data:ThemeColors">
+                                        <StackPanel>
+                                            <Border
+                                                Width="50"
+                                                Height="30"
+                                                Margin="3"
+                                                Background="{x:Bind Colors}" />
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                FontSize="13"
+                                                Text="{x:Bind ColorNames}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridView.ItemTemplate>
+                            </GridView>
 
-                            <CheckBox
-                                Name="DefualtFilebutton"
-                                Margin="15,5,15,5"
-                                Checked="DefualtFilebutton_Checked"
-                                Unchecked="DefualtFilebutton_Unchecked" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Margin="15,0,15,15"
+                                HorizontalAlignment="Left"
+                                FontSize="13"
+                                Foreground="#ff595959"
+                                Text="（注意：如未生效请重启应用）" />
 
-                            <StackPanel Orientation="Horizontal">
-
-                                <Button
-                                    Name="Picksacefile"
-                                    Margin="15,10,15,10"
-                                    VerticalAlignment="stretch"
-                                    Background="#ffcdcdcd"
-                                    Click="Picksacefile_Click"
-                                    Content="更改保存路径" />
-
-                                <TextBlock
-                                    Name="FileUri"
-                                    Margin="10,10,0,10"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    TextWrapping="Wrap" />
-
-                            </StackPanel>
-                        </StackPanel>
-
-                        <CheckBox
-                            Name="FileAllOpen"
-                            Margin="15,5,15,5"
-                            Checked="FileAllOpen_Checked"
-                            Content="每次保存总是询问保存位置 (将禁用保存地址）"
-                            Unchecked="FileAllOpen_Unchecked" />
-
-                    </StackPanel>
-
-                </Grid>
-                <Grid
-                    Margin="4"
-                    Background="{ThemeResource AppBarBorderThemeBrush}"
-                    Visibility="Collapsed">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
-                    <TextBlock
-                        Margin="10"
-                        HorizontalAlignment="left"
-                        FontSize="20"
-                        FontWeight="Bold"
-                        Foreground="#ff4b4b4b"
-                        Text="美化" />
-                    <Grid
-                        Grid.Row="1"
-                        BorderBrush="#ffd7d7d7"
-                        BorderThickness="0,2,0,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                        </Grid.RowDefinitions>
-                        <TextBlock
-                            Margin="15,5,15,5"
-                            HorizontalAlignment="left"
-                            VerticalAlignment="center"
-                            FontSize="17"
-                            Text="主题色" />
-                        <TextBlock
-                            Margin="15,0,15,0"
-                            HorizontalAlignment="right"
-                            VerticalAlignment="center"
-                            Text="{Binding ElementName=listslider, Path=Value, Mode=TwoWay}" />
-                        <GridView
-                            Grid.Row="1"
-                            Margin="15,5,15,10"
-                            IsEnabled="False"
-                            ItemsSource="{x:Bind themeColors}">
-                            <GridView.ItemTemplate>
-                                <DataTemplate x:DataType="data:ThemeColors">
-                                    <StackPanel>
-                                        <Border
-                                            Width="50"
-                                            Height="30"
-                                            Margin="3"
-                                            Background="{x:Bind Colors}" />
-                                        <TextBlock
-                                            HorizontalAlignment="Center"
-                                            FontSize="13"
-                                            Text="{x:Bind ColorNames}" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </GridView.ItemTemplate>
-                        </GridView>
-
-                        <TextBlock
-                            Grid.Row="2"
-                            Margin="15,0,15,15"
-                            HorizontalAlignment="Left"
-                            FontSize="13"
-                            Foreground="#ff595959"
-                            Text="（注意：如未生效请重启应用）" />
-
+                        </Grid>
                     </Grid>
-                </Grid>
 
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
-    </ScrollViewer>
+        </ScrollViewer>
+
+    </Grid>
 </Page>

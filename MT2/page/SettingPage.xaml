@@ -17,7 +17,7 @@
                 Name="MyTitleBar"
                 Grid.Row="0"
                 Height="32"
-                Style="{StaticResource GridBackgroud}" />
+                Background="#FF0074B6" />
             <Grid Height="32" VerticalAlignment="Top">
                 <StackPanel Orientation="Horizontal">
                     <AppBarButton
@@ -52,7 +52,7 @@
             <Grid
                 MinWidth="400"
                 MinHeight="300"
-                Background="#FF199DED">
+                Background="#FF0074B6">
                 <Image
                     Width="200"
                     Height="200"
