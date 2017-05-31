@@ -109,17 +109,22 @@
                         VerticalAlignment="Top"
                         Text="{Binding ElementName=myScrollviewer, Path=VerticalOffset, Mode=TwoWay}"
                         Visibility="Collapsed" />
-                    <Grid>
-                        <Image
-                            Name="logo"
-                            Width="80"
-                            Height="80"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            ManipulationDelta="Image_ManipulationDelta"
-                            ManipulationMode="System"
-                            Source="ms-appx:///Assets/Square44x44Logo.altform-unplated_targetsize-256.png" />
-                    </Grid>
+                    <Image
+                        Name="LUXUN"
+                        HorizontalAlignment="Center"
+                        Source="ms-appx:///img/640.jpg"
+                        Stretch="UniformToFill"
+                        Visibility="Collapsed" />
+                    <Image
+                        Name="logo"
+                        Width="80"
+                        Height="80"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        ManipulationDelta="Image_ManipulationDelta"
+                        ManipulationMode="All"
+                        Source="ms-appx:///Assets/Square44x44Logo.altform-unplated_targetsize-256.png" />
+
                     <StackPanel Margin="10" VerticalAlignment="Bottom">
                         <TextBlock
                             HorizontalAlignment="Center"
@@ -238,7 +243,11 @@
                             </Grid>
 
                         </Grid>
-                        <Grid Grid.Row="2" BorderBrush="#ffd7d7d7">
+                        <Grid
+                            Name="EggGrid"
+                            Grid.Row="2"
+                            BorderBrush="#ffd7d7d7"
+                            Visibility="Collapsed">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="*" />
@@ -251,18 +260,17 @@
                                 Margin="15,15,15,15"
                                 FontSize="17"
                                 Text="安全级别" />
-                            <Viewbox
+
+                            <TextBlock
                                 Grid.Row="0"
                                 Grid.Column="1"
-                                MaxWidth="300"
                                 Margin="5,5,15,5"
-                                HorizontalAlignment="Right">
-                                <TextBlock
-                                    VerticalAlignment="center"
-                                    FontSize="13"
-                                    Foreground="#FF7A7A7A"
-                                    Text="（以确保你不会在公共场合看到不该看的内容）" />
-                            </Viewbox>
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="center"
+                                FontSize="13"
+                                Foreground="#FF7A7A7A"
+                                Text="（以确保你不会在公共场合看到不该看的内容）" />
+
                             <StackPanel
                                 Grid.Row="1"
                                 Grid.ColumnSpan="3"
@@ -469,6 +477,7 @@
                                 Text="（注意：如未生效请重启应用）" />
 
                         </Grid>
+
                     </Grid>
 
                 </StackPanel>

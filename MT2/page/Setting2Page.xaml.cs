@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Media;
+using MT2.Control;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
 
@@ -38,7 +39,6 @@ namespace MT2.page
             this.InitializeComponent();
             tt = new TranslateTransform();
             logo.RenderTransform = tt;
-            logo.ManipulationMode = Windows.UI.Xaml.Input.ManipulationModes.System;
             Window.Current.SetTitleBar(MyTitleBar);
             Listslider = (int)listslider.Value;
             //coreTitleBar.ExtendViewIntoTitleBar = false;
@@ -350,10 +350,48 @@ namespace MT2.page
             return null;
         }
 
-        private void Image_ManipulationDelta(object sender, Windows.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs e)
+        ContentDialog cd;
+
+        private   void Image_ManipulationDelta(object sender, Windows.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs e)
         {
             tt.X += e.Delta.Translation.X;
-            tt.Y = e.Delta.Translation.Y;
+            tt.Y += e.Delta.Translation.Y;
+            if (Math.Abs(tt.X) > Window.Current.Bounds.Width  )
+            {
+                LUXUN.Visibility = Visibility.Visible;
+                try
+                {
+                            
+                    showContentDialog();
+
+                }
+                catch
+                {
+
+                }
+            }
+
+        }
+
+        private async void showContentDialog()
+        {
+       
+            try
+            {
+                cd = new ContentDialog()
+                {
+                    Title = "为什么会这样……",
+                    Content = new Content(),
+                    PrimaryButtonText = "打死",
+                    FullSizeDesired = true,
+                };
+                cd.PrimaryButtonClick += (_s, _e) => { EggGrid.Visibility = Visibility.Visible; };
+                await cd.ShowAsync();
+            }
+            catch
+            {
+
+            }
         }
     }
 }
