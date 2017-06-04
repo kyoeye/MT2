@@ -21,7 +21,15 @@ namespace MT2.Control
     {
         public Content()
         {
-            this.InitializeComponent();
+            this.InitializeComponent();          
+
         }
+        public string Title { get; set; }
+        public string Title2 { get; set; }
+        public string Context { get; set; }
+        public string Context2 { get; set; }
+        public string Imguri { get; set; }
+    
     }
+   
 }

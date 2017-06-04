@@ -75,8 +75,6 @@ namespace MT2.page
             base.OnNavigatedTo(e);
             try
             {
-
-
                 //修改保存路径
                 if (localsettings.Values["_Fileuri"].ToString() == a.Path)
                 {
@@ -113,6 +111,16 @@ namespace MT2.page
                 else
                 {
                     FileAllOpen.IsChecked = false;
+                }
+                //是否显示里区开关
+                if ((bool)localsettings.Values ["_EggVisble"] == true)
+                {
+                    EggGrid.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    EggGrid.Visibility = Visibility.Collapsed;
+
                 }
             }
             catch
@@ -351,8 +359,8 @@ namespace MT2.page
         }
 
         ContentDialog cd;
-
-        private   void Image_ManipulationDelta(object sender, Windows.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs e)
+        int c = 1;
+        private void Image_ManipulationDelta(object sender, Windows.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs e)
         {
             tt.X += e.Delta.Translation.X;
             tt.Y += e.Delta.Translation.Y;
@@ -361,8 +369,12 @@ namespace MT2.page
                 LUXUN.Visibility = Visibility.Visible;
                 try
                 {
-                            
-                    showContentDialog();
+                            if (c ==1)
+                    {
+                        c++;
+                        showContentDialog();
+                        
+                    }
 
                 }
                 catch
@@ -374,23 +386,43 @@ namespace MT2.page
         }
 
         private async void showContentDialog()
-        {
-       
+        {         
             try
             {
                 cd = new ContentDialog()
                 {
                     Title = "为什么会这样……",
-                    Content = new Content(),
+                    Content = new Content() {
+                        Title = "明明藏得这么好……",
+                        Context = "为什么会变成这样呢……\r\n第一次找到了藏彩蛋的地方\r\n第一次做到了自己都发现不了。\r\n这两件愉快的事情交织在了一起\r\n而这两份喜悦\r\n又会给我带来许许多多的喜悦。\r\n我本应该获得了这种如梦一般的幸福时光才对。\r\n可是，为什么\r\n会变成现在这样呢……",
+                        Title2 = "为什么你这么熟练……",
+                        Context2 ="你竟然能发现这里。。\r\n为什么你那么熟练。。\r\n那。。\r\n你是不是在期待什么\r\n我知道你在期待什么\r\n新世界的大门已经打开\r\n记得注意身体。。"
+                       
+                    },                
                     PrimaryButtonText = "打死",
                     FullSizeDesired = true,
                 };
-                cd.PrimaryButtonClick += (_s, _e) => { EggGrid.Visibility = Visibility.Visible; };
+                cd.PrimaryButtonClick += (_s, _e) => {
+                    EggGrid.Visibility = Visibility.Visible;
+                    localsettings.Values["_EggVisble"] = true;
+                };
                 await cd.ShowAsync();
             }
             catch
             {
 
+            }
+        }
+
+        private void NoH_Check_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (NoH_Check.IsOn)
+            {
+                localsettings.Values["_H"] = true;
+            }
+            else 
+            {
+                localsettings.Values["_H"] = false;
             }
         }
     }

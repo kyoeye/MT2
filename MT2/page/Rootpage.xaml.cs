@@ -59,14 +59,14 @@ namespace MT2.page
                         if ((int)localsettings.Values["_listslider"]==0)
                         {
                             localsettings.Values["_listslider"] = 25;
-                            localsettings.Values["_TackToJS"] = false;
+                            localsettings.Values["_TackToJS"] = true;
                         }
                     }
                     catch
                     {
                         //利用catch报错来初始化
                         localsettings.Values["_listslider"] = 25;
-                        localsettings.Values["_TackToJS"] = false;
+                        localsettings.Values["_TackToJS"] = true;
 
                     }
                 }
@@ -98,13 +98,34 @@ namespace MT2.page
                 }
                 #endregion
                 localsettings.Values["_listslider"] = 25;
-                localsettings.Values["_TackToJS"] = false ;
+                localsettings.Values["_TackToJS"] = true ;
+                localsettings.Values["_H"] = false;
+                localsettings.Values ["_package"] =  package.Id.Version.Major + "." + package.Id.Version.Minor + "." + package.Id.Version.Revision + "." + package.Id.Version.Build;
             }
             catch (Exception ex)
             {
                 await new MessageDialog("初始化异常" + ex).ShowAsync();
             }
         }
+        #endregion
+        #region 应用更新的配置
+        Windows.ApplicationModel.Package package = Windows.ApplicationModel.Package.Current;
+
+        //private async void UpTimeAsync()
+        //{
+        //    try
+        //    {
+        //        var pac = package.Id.Version.Major + "." + package.Id.Version.Minor + "." + package.Id.Version.Revision + "." + package.Id.Version.Build;
+        //      if (localsettings.Values["_package"].ToString () != pac  )
+        //        {
+        //            //通过判断版本号改变来配置新的功能
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await new MessageDialog("包更新验证异常" + ex).ShowAsync();
+        //    }
+        //}
         #endregion
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {

@@ -12,5 +12,7 @@ namespace MT2.CS
     {
   //每日热门
         public static ObservableCollection<Yande_post_json> Hotitemvalue;
+        //热门的第一张图
+        public static string  Frist_IMG;
     }
 }

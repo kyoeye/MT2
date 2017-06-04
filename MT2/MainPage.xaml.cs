@@ -1,5 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Toolkit.Uwp.UI.Animations;
+using MT2.Control;
 using MT2.CS;
 using MT2.Model;
 using MT2.page;
@@ -122,6 +123,7 @@ namespace MT2
         {
             //throw new NotImplementedException();
             string a = e.Size.ToString();
+         
             if (e.Size.Width <600)
             {
                 BlurListBox.Visibility = Visibility.Visible;
@@ -158,7 +160,7 @@ namespace MT2
                 appOpennum++;
                 localsettings.Values["_AppOpenNum"] = appOpennum;
                 //第一次启动调用弹窗
-                 Show_OneTextDialog();
+                 Show_OneTextDialogAsync();
                 localsettings.Values["_FileAllOpen"] = "false"; //默认关闭：每次保存文件都询问保存地址
             }
            else
@@ -170,9 +172,24 @@ namespace MT2
         
         }
 
-        private void  Show_OneTextDialog()
+        private async Task Show_OneTextDialogAsync()
         {
+            try
+            {
+                ContentDialog cd = new ContentDialog()
+                {
+                    Title = "为什么会这样……",
+                    Content = new Content(),
+                    PrimaryButtonText = "打死",
+                    FullSizeDesired = true,
+                };
+                cd.PrimaryButtonClick += (_s, _e) => {   };
+                await cd.ShowAsync();
+            }
+            catch
+            {
 
+            }
         }
 
         //如果应用第一次启动，保存路径将指向系统默认相册

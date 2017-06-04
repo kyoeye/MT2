@@ -14,10 +14,25 @@
             <RowDefinition Height=" auto" />
             <RowDefinition Height=" *" />
         </Grid.RowDefinitions>
-        <TextBlock x:Name="ContentTitle" Text="标题" />
+        <TextBlock
+            x:Name="ContentTitle"
+            FontSize="23"
+            Text="{x:Bind Title}" />
         <ScrollViewer Grid.Row="1">
             <StackPanel>
-                <TextBlock x:Name="Textcontent" Text="内容" />
+                <TextBlock
+                    x:Name="Textcontent"
+                    LineHeight="45"
+                    Text="{x:Bind Context}" />
+                <TextBlock
+                    x:Name="ContentTitle2"
+                    FontSize="23"
+                    Text="{x:Bind Title2}" />
+                <TextBlock
+                    x:Name="Textcontent2"
+                    LineHeight="45"
+                    Text="{x:Bind Context2}" />
+
             </StackPanel>
         </ScrollViewer>
     </Grid>

@@ -279,7 +279,8 @@
                                 <ToggleSwitch
                                     Name="NoH_Check"
                                     OffContent="表世界"
-                                    OnContent="里区" />
+                                    OnContent="里区"
+                                    Toggled="NoH_Check_Toggled" />
 
                             </StackPanel>
                         </Grid>
