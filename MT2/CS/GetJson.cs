@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 using Windows.UI.Popups;
 
 namespace MT2.CS
@@ -15,6 +16,8 @@ namespace MT2.CS
     {
         string JS_RequestUri;
         string JStext;
+        ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
         //public List<Yande_post_json> list;
         public async Task<string> GetWebJsonStringAsync(string uri)
         {
@@ -49,21 +52,24 @@ namespace MT2.CS
         }
         public ObservableCollection<Yande_post_json> list { get; set; }
 
-        public   ObservableCollection<Yande_post_json> SaveJson( string Jsonstring)
+        public ObservableCollection<Yande_post_json> SaveJson(string Jsonstring)
         {  //Newtonsoft.Json 引用
-            //list = new ObservableCollection<Yande_post_json>();
-                       
-             list = JsonConvert.DeserializeObject<ObservableCollection <Yande_post_json>>(Jsonstring);
+           //list = new ObservableCollection<Yande_post_json>();
 
-              for (int a = list.Count-1; a>=0;a-- ) //动动py想一想都知道用减   //最后我发现我还是不擅长动PY。。。
+            list = JsonConvert.DeserializeObject<ObservableCollection<Yande_post_json>>(Jsonstring);
+            if ((bool)localsettings.Values["_H"] == false)
             {
-                if (list[a].rating == "q" )
+                for (int a = list.Count - 1; a >= 0; a--) //动动py想一想都知道用减   //最后我发现我还是不擅长动PY。。。
                 {
-                    list.Remove(list[a]);                
-                }
-               else  if (list[a].rating == "e")
-                {
-                    list.Remove(list[a]);
+                    if (list[a].rating == "q")
+                    {
+                        list.Remove(list[a]);
+                    }
+                    else if (list[a].rating == "e")
+                    {
+                        list.Remove(list[a]);
+                    }
+
                 }
 
             }
@@ -94,20 +100,25 @@ namespace MT2.CS
                 z++;
             }
             //list.Add(list2[1].d)
-            for (int a = list.Count - 1; a >= 0; a--) //动动py想一想都知道用减   //最后我发现我还是不擅长动PY。。。
+
+            if ((bool)localsettings.Values["_H"] == false)
             {
-                if (list[a].rating == "q")
+                for (int a = list.Count - 1; a >= 0; a--) //动动py想一想都知道用减   //最后我发现我还是不擅长动PY。。。
                 {
-                    list.Remove(list[a]);
-                }
-                else if (list[a].rating == "e")
-                {
-                    list.Remove(list[a]);
+                    if (list[a].rating == "q")
+                    {
+                        list.Remove(list[a]);
+                    }
+                    else if (list[a].rating == "e")
+                    {
+                        list.Remove(list[a]);
+                    }
+
                 }
 
             }
         }
-     
+
         private async Task<UICommandInvokedHandler> chonshiAsync()
         {
             await GetWebJsonStringAsync(JS_RequestUri);

@@ -71,11 +71,19 @@ namespace MT2.page
                     }
                 }
 
-        
+                //利用trycatch判断键值是否存在
+                try
+                {
+                    var h = localsettings.Values["_H"];
+                }
+                catch
+                {
+                    localsettings.Values["_H"] = false;
+                }
+
             }
             catch 
             {
-              
             }
         }
 

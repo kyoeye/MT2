@@ -443,6 +443,7 @@
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Center"
                             Click="Share_Click"
+                            IsEnabled="False"
                             Label="分享">
                             <AppBarButton.Icon>
                                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72D;" />
@@ -454,6 +455,7 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Click="Setit_Click"
+                            IsEnabled="False"
                             Label="设为">
                             <TextBlock
                                 HorizontalAlignment="Center"
@@ -555,7 +557,7 @@
             </Grid>
 
         </ScrollViewer>
-        <RelativePanel Grid.RowSpan="2">
+        <Popup Name="lookpopup" Grid.RowSpan="2">
 
             <local:ToastDialog
                 x:Name="DownTost"
@@ -565,11 +567,9 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
                 FontSize="18"
-                Label="{x:Bind DownloadToastText, Mode=OneTime}"
-                RelativePanel.AlignBottomWithPanel="True"
-                RelativePanel.AlignHorizontalCenterWithPanel="True" />
+                Label="{x:Bind DownloadToastText, Mode=OneTime}" />
 
-        </RelativePanel>
+        </Popup>
 
     </Grid>
 </Page>

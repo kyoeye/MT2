@@ -19,16 +19,27 @@ namespace MT2.Control
 {
     public sealed partial class Content : UserControl
     {
-        public Content()
+        public Content(string webviewuri)
         {
-            this.InitializeComponent();          
+            this.InitializeComponent();
+            if (webviewuri != null)
+            {
+                ContentWebview.Visibility = Visibility.Visible;
+                ContentWebview.Source = new Uri ( webviewuri);
+            }
+            else
+            {
+                ContentWebview.Visibility = Visibility.Collapsed;
+                ContentWebview.Source = new Uri("http://w.com");
 
+            }
         }
         public string Title { get; set; }
         public string Title2 { get; set; }
         public string Context { get; set; }
         public string Context2 { get; set; }
         public string Imguri { get; set; }
+        public string Webviewuri { get; set; }
     
     }
    

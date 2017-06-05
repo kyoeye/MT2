@@ -40,6 +40,7 @@
                 <PasswordBox
                     Name="UnlockPassword"
                     Margin="10"
+                    InputScope="NumericPin"
                     PlaceholderText="输入密码才能进~" />
                 <Button
                     Name="GoingButton"

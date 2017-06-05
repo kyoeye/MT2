@@ -105,6 +105,11 @@ namespace MT2
             NavigationCacheMode = NavigationCacheMode.Enabled;
             //订阅窗口大小变化
             Window.Current.SizeChanged += Ds_SizeChanged;
+            //第一次启动弹窗
+            if ((int)localsettings.Values["_AppOpenNum"] == 1)
+            {
+                Show_OneTextDialogAsync();
+            }
         }
         //扔异步处理下载瀑布流数据
         private async void GetimgvalueAsync()
@@ -172,15 +177,24 @@ namespace MT2
         
         }
 
-        private async Task Show_OneTextDialogAsync()
+        private async void Show_OneTextDialogAsync()
         {
             try
             {
+                //string uri = "ms-appx:///CS/FristOpen.html";
+                string uri = "http://www.baidu.com";
+
                 ContentDialog cd = new ContentDialog()
                 {
-                    Title = "为什么会这样……",
-                    Content = new Content(),
-                    PrimaryButtonText = "打死",
+                    
+                    Title = "哇，竟然有人来惹……",
+                    Content = new Content(uri )
+                    {
+                        Title = "看完或许能解惑？",                       
+                        //Context = "嗯……虽然目标很多但是现在只有一个yande.re图源的。。。动漫图库？",
+                        //Title2 = "为什么访问这么慢?"
+                    },
+                    PrimaryButtonText = "知道啦",
                     FullSizeDesired = true,
                 };
                 cd.PrimaryButtonClick += (_s, _e) => {   };
@@ -259,7 +273,7 @@ namespace MT2
         
         public async Task Getimgvalue()
         {
-            Progresstext.Text = "正在和绿坝娘达成交易……";
+            Progresstext.Text = "正在和绿坝娘达成共识……";
             if((bool)localsettings.Values["_TackToJS"] == true)
             {
                 GetAPIstring getjson = new GetAPIstring();

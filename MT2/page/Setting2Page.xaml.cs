@@ -122,6 +122,17 @@ namespace MT2.page
                     EggGrid.Visibility = Visibility.Collapsed;
 
                 }
+                //silder的设置
+                listslider.Value =   (int)localsettings.Values["_listslider"];
+                //里世界是否开启
+                if ((bool)localsettings.Values["_H"] == true)
+                {
+                    NoH_Check.IsOn = true;
+                }
+                else
+                {
+                    NoH_Check.IsOn = false;
+                }
             }
             catch
             {
@@ -372,10 +383,8 @@ namespace MT2.page
                             if (c ==1)
                     {
                         c++;
-                        showContentDialog();
-                        
+                        showContentDialog();                    
                     }
-
                 }
                 catch
                 {
@@ -392,12 +401,11 @@ namespace MT2.page
                 cd = new ContentDialog()
                 {
                     Title = "为什么会这样……",
-                    Content = new Content() {
+                    Content = new Content(null ) {
                         Title = "明明藏得这么好……",
                         Context = "为什么会变成这样呢……\r\n第一次找到了藏彩蛋的地方\r\n第一次做到了自己都发现不了。\r\n这两件愉快的事情交织在了一起\r\n而这两份喜悦\r\n又会给我带来许许多多的喜悦。\r\n我本应该获得了这种如梦一般的幸福时光才对。\r\n可是，为什么\r\n会变成现在这样呢……",
                         Title2 = "为什么你这么熟练……",
-                        Context2 ="你竟然能发现这里。。\r\n为什么你那么熟练。。\r\n那。。\r\n你是不是在期待什么\r\n我知道你在期待什么\r\n新世界的大门已经打开\r\n记得注意身体。。"
-                       
+                        Context2 = "你竟然能发现这里。。\r\n为什么你那么熟练。。\r\n那。。\r\n你是不是在期待什么\r\n我知道你在期待什么\r\n新世界的大门已经打开\r\n记得注意身体。。",
                     },                
                     PrimaryButtonText = "打死",
                     FullSizeDesired = true,
@@ -408,9 +416,9 @@ namespace MT2.page
                 };
                 await cd.ShowAsync();
             }
-            catch
+            catch(Exception ex)
             {
-
+                await new MessageDialog(ex.ToString()).ShowAsync();
             }
         }
 
@@ -424,6 +432,24 @@ namespace MT2.page
             {
                 localsettings.Values["_H"] = false;
             }
+        }
+
+        private void beta3button_Click(object sender, RoutedEventArgs e)
+        {
+            localsettings.Values["_AppOpenNum"] = null;
+        }
+
+        private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
+        {
+            EggGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void HyperlinkButton2_Click(object sender, RoutedEventArgs e)
+        {
+            EggGrid.Visibility = Visibility.Collapsed;
+            localsettings.Values["_H"] = false;
+            NoH_Check.IsOn = false;
+
         }
     }
 }
