@@ -335,13 +335,7 @@
                         Foreground="#FF0078D7" />
                     <Image Name="SeeImage" Stretch="Uniform" />
                     <Grid Height="80" VerticalAlignment="Bottom">
-                        <!--<Image
-                            Name="Blurborder"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Opacity="0.3"
-                            Source="{Binding ElementName=SeeImage, Path=Source, Mode=OneTime}"
-                            Stretch="UniformToFill" />-->
+
                         <Button
                             Name="AppBarButton"
                             Width="100"
@@ -455,7 +449,7 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Click="Setit_Click"
-                            IsEnabled="False"
+                            IsEnabled="True"
                             Label="设为">
                             <TextBlock
                                 HorizontalAlignment="Center"
@@ -518,7 +512,7 @@
 
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Row="2">
+                <Grid Grid.Row="2" Visibility="Collapsed">
                     <Border
                         Margin="10"
                         Background="#FFE4E4E4"
@@ -533,7 +527,7 @@
                                 VerticalAlignment="Center"
                                 Foreground="#FF4B4B4B"
                                 Text="标签" />
-                            <GridView>
+                            <GridView x:Name="Tagsview">
                                 <GridView.ItemTemplate>
                                     <DataTemplate>
                                         <Border Background="#FFF2F2F2">

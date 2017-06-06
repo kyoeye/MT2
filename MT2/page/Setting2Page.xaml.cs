@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Media;
 using MT2.Control;
+using Windows.UI.Xaml.Media.Imaging;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
 
@@ -371,19 +372,25 @@ namespace MT2.page
 
         ContentDialog cd;
         int c = 1;
+        BitmapImage bit;
+
         private void Image_ManipulationDelta(object sender, Windows.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs e)
         {
             tt.X += e.Delta.Translation.X;
             tt.Y += e.Delta.Translation.Y;
-            if (Math.Abs(tt.X) > Window.Current.Bounds.Width  )
+            if (Math.Abs(tt.X) > Window.Current.Bounds.Width * 10 )
             {
+                bit = new BitmapImage(new Uri("ms-appx:///img/640.jpg"));
+                LUXUN.Stretch = Stretch.UniformToFill;
+                LUXUN.Source = bit;
                 LUXUN.Visibility = Visibility.Visible;
                 try
                 {
                             if (c ==1)
                     {
                         c++;
-                        showContentDialog();                    
+                        showContentDialog();
+                        fuckyou.Visibility = Visibility.Collapsed;
                     }
                 }
                 catch
@@ -391,7 +398,14 @@ namespace MT2.page
 
                 }
             }
-
+          else if (Math.Abs(tt.X) > Window.Current.Bounds.Width/2)
+            {
+                bit = new BitmapImage(new Uri("ms-appx:///img/XH(2]5G215ZT4J8X`5XSYHN.jpg"));
+                LUXUN.Stretch = Stretch.Uniform;
+                LUXUN.Source = bit;
+                LUXUN.Visibility = Visibility.Visible;
+                fuckyou.Visibility = Visibility.Visible;
+            }
         }
 
         private async void showContentDialog()
@@ -442,14 +456,24 @@ namespace MT2.page
         private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
             EggGrid.Visibility = Visibility.Collapsed;
+            localsettings.Values["_EggVisble"] = false ;
+
         }
 
         private void HyperlinkButton2_Click(object sender, RoutedEventArgs e)
         {
             EggGrid.Visibility = Visibility.Collapsed;
+            localsettings.Values["_EggVisble"] = false ;
             localsettings.Values["_H"] = false;
             NoH_Check.IsOn = false;
 
+        }
+
+        private void fuckyou_Click(object sender, RoutedEventArgs e)
+        {
+            tt.X = 0;
+            tt.Y = 0;
+            fuckyou.Visibility = Visibility.Collapsed;
         }
     }
 }

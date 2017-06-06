@@ -46,5 +46,13 @@ namespace MT2.CS
         {
             base.OnNavigatedFrom(e);    
         }
+
+        private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
+        {
+            localsettings.Values["_password"] = null;
+            localsettings.Values["_H"] = false;
+            Frame.Navigate(typeof(MainPage));
+
+        }
     }
 }

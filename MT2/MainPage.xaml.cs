@@ -181,8 +181,8 @@ namespace MT2
         {
             try
             {
-                //string uri = "ms-appx:///CS/FristOpen.html";
-                string uri = "http://www.baidu.com";
+                string uri = "ms-appx-web:///CS/FristOpen.html";
+                //string uri = "http://www.baidu.com";
 
                 ContentDialog cd = new ContentDialog()
                 {
@@ -190,7 +190,7 @@ namespace MT2
                     Title = "哇，竟然有人来惹……",
                     Content = new Content(uri )
                     {
-                        Title = "看完或许能解惑？",                       
+                        Title = "吾辈好不容易写的确定不看下吗？哇哇哇",                       
                         //Context = "嗯……虽然目标很多但是现在只有一个yande.re图源的。。。动漫图库？",
                         //Title2 = "为什么访问这么慢?"
                     },

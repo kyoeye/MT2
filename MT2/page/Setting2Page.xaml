@@ -112,8 +112,13 @@
                     <Image
                         Name="LUXUN"
                         HorizontalAlignment="Center"
-                        Source="ms-appx:///img/640.jpg"
                         Stretch="UniformToFill"
+                        Visibility="Collapsed" />
+                    <HyperlinkButton
+                        Name="fuckyou"
+                        HorizontalAlignment="Center"
+                        Click="fuckyou_Click"
+                        Content="你就这点力气吗"
                         Visibility="Collapsed" />
                     <Image
                         Name="logo"

@@ -32,6 +32,9 @@ using Windows.UI.ViewManagement;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 using MT2.Model;
+using Windows.Graphics.Imaging;
+using Windows.Graphics.Display;
+using System.Threading.Tasks;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
 
@@ -295,11 +298,19 @@ namespace MT2.page
             }
         }
         #region 设置壁纸
-        private void StartBackground_Click(object sender, RoutedEventArgs e)
+        StorageFolder sfd = ApplicationData.Current.LocalFolder;
+        StorageFile sf;
+        //public StorageFile Storagefile { get => sf; set=>sf = value; }
+
+        private async void StartBackground_Click(object sender, RoutedEventArgs e)
         {
+            sf = await sfd.CreateFileAsync(imgid + ".jpg",CreationCollisionOption.ReplaceExisting);
+           await ImgTransfromAsync();
             UserProfilePersonalizationSettings startsetting = UserProfilePersonalizationSettings.Current;
+            bool b = await startsetting.TrySetWallpaperImageAsync (sf);
 
         }
+
         private void LockBackground_Click(object sender, RoutedEventArgs e)
         {
 
@@ -313,7 +324,35 @@ namespace MT2.page
             //bool b =  await locksetting.TrySetLockScreenImageAsync(file);
             // LockBackground.Label = b.ToString ();
         }
-
+        //img转化
+        public async Task ImgTransfromAsync()
+        {
+            if (sf != null )
+            {
+                CachedFileManager.DeferUpdates(sf);
+                RenderTargetBitmap rtb = new RenderTargetBitmap();
+                await rtb.RenderAsync(SeeImage);
+                var pixelBuffer = await rtb.GetPixelsAsync();
+                //好想要存个临时文件不然报错
+                using (var fileStream = await sf.OpenAsync(FileAccessMode.ReadWrite))
+                {
+                    var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, fileStream);
+                    encoder.SetPixelData
+                    (
+                    BitmapPixelFormat.Bgra8,
+                    BitmapAlphaMode.Ignore,
+                    (uint)rtb.PixelWidth,
+                    (uint)rtb.PixelHeight,
+                    DisplayInformation.GetForCurrentView().LogicalDpi,
+                    DisplayInformation.GetForCurrentView().LogicalDpi,
+                    pixelBuffer.ToArray()
+                    );
+                    //刷新图像  
+                    await encoder.FlushAsync();
+                }
+            }
+            
+        }
         #endregion
         #region 分享
 

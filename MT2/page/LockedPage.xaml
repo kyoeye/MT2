@@ -81,7 +81,11 @@
                         </Grid>
                     </Button.Content>
                 </Button>
-
+                <HyperlinkButton
+                    HorizontalAlignment="Center"
+                    Click="HyperlinkButton_Click"
+                    Content="忘记密码？重置密码并恢复到设置的默认状态"
+                    Foreground="Gray" />
             </StackPanel>
             <TextBlock
                 Margin="5"
