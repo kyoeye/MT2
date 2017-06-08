@@ -55,6 +55,7 @@ namespace MT2.page
             IReadOnlyList<DownloadOperation> downloads = null;
             //获取正在下载的任务
             downloads = await BackgroundDownloader.GetCurrentDownloadsAsync();
+         
             if ( downloads .Count>0)
             {
                 NoTask.Visibility = Visibility.Collapsed;
@@ -85,6 +86,7 @@ namespace MT2.page
                 transfer.Progress = 0;
                 transfers.Add(transfer);
                 //当下载进度发生变化时的回调函数
+
                 Progress<DownloadOperation> progressCallback = new Progress<DownloadOperation>(downloadprogressAsync);
                 //监听已存在的后台下载任务
                 await download.AttachAsync().AsTask(cancelToken.Token, progressCallback);

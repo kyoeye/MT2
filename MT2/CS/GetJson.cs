@@ -55,22 +55,29 @@ namespace MT2.CS
         public ObservableCollection<Yande_post_json> SaveJson(string Jsonstring)
         {  //Newtonsoft.Json 引用
            //list = new ObservableCollection<Yande_post_json>();
-
-            list = JsonConvert.DeserializeObject<ObservableCollection<Yande_post_json>>(Jsonstring);
-            if ((bool)localsettings.Values["_H"] == false)
+           try
             {
-                for (int a = list.Count - 1; a >= 0; a--) //动动py想一想都知道用减   //最后我发现我还是不擅长动PY。。。
+                list = JsonConvert.DeserializeObject<ObservableCollection<Yande_post_json>>(Jsonstring);
+                if ((bool)localsettings.Values["_H"] == false)
                 {
-                    if (list[a].rating == "q")
+                    for (int a = list.Count - 1; a >= 0; a--) //动动py想一想都知道用减   //最后我发现我还是不擅长动PY。。。
                     {
-                        list.Remove(list[a]);
-                    }
-                    else if (list[a].rating == "e")
-                    {
-                        list.Remove(list[a]);
+                        if (list[a].rating == "q")
+                        {
+                            list.Remove(list[a]);
+                        }
+                        else if (list[a].rating == "e")
+                        {
+                            list.Remove(list[a]);
+                        }
+
                     }
 
                 }
+
+            }
+          catch
+            {
 
             }
             return list;

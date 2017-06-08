@@ -35,6 +35,7 @@ using MT2.Model;
 using Windows.Graphics.Imaging;
 using Windows.Graphics.Display;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
 
@@ -52,9 +53,21 @@ namespace MT2.page
         {
             this.InitializeComponent();
             Getsuface();
+            //分享——订阅
+            dataTransferManager.DataRequested += DataTransferManger_DataRequestedAsync;
+
             //Toastpopup.DataContext = tosalmodel;
             //betatext.Text = System.Windows.Forms.Screen.GetWorkingArea(this);
         }
+
+        #region 将图片下载然后再显示
+        public void downloadimg()
+        {
+           var tempfolder = ApplicationData.Current.TemporaryFolder;
+
+        }
+        #endregion
+
         double wit;
         double hei;
         ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
@@ -63,6 +76,7 @@ namespace MT2.page
         public int imgid;
         public string imguri;
         public string imgname;
+        private string imgLocalpath;
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Window.Current.SetTitleBar(MyTitleBar);
@@ -80,6 +94,10 @@ namespace MT2.page
                 imguri = gg.sample_url;
                 ImageID.Text = gg.id.ToString();
                 imgid = int.Parse(gg.id.ToString());
+                //获取到一个奇怪的不完整路径
+                var bitf = bitmapimage.UriSource.AbsolutePath;
+               imgLocalpath = bitmapimage.UriSource.LocalPath;
+             //   "/sample/78cd441063dd0dab7e88f94ab7ab8cd6/yande.re 395326 sample hatsune_miku lepoule_(kmjh90) vocaloid.jpg"
             }
           else
             {
@@ -298,14 +316,15 @@ namespace MT2.page
             }
         }
         #region 设置壁纸
-        StorageFolder sfd = ApplicationData.Current.LocalFolder;
+        StorageFolder sfd = ApplicationData.Current.TemporaryFolder;
         StorageFile sf;
         //public StorageFile Storagefile { get => sf; set=>sf = value; }
 
         private async void StartBackground_Click(object sender, RoutedEventArgs e)
         {
-            sf = await sfd.CreateFileAsync(imgid + ".jpg",CreationCollisionOption.ReplaceExisting);
-           await ImgTransfromAsync();
+            sf = await sfd.CreateFileAsync(imgid + ".jpg", CreationCollisionOption.ReplaceExisting);
+            await ImgTransfromAsync();
+            //sf = await StorageFile.GetFileFromPathAsync(imgLocalpath);
             UserProfilePersonalizationSettings startsetting = UserProfilePersonalizationSettings.Current;
             bool b = await startsetting.TrySetWallpaperImageAsync (sf);
 
@@ -319,7 +338,7 @@ namespace MT2.page
             //StorageFile file = await StorageFile.GetFileFromApplicationUriAsync();//需要将下载的目录拿到
 
             UserProfilePersonalizationSettings locksetting = UserProfilePersonalizationSettings.Current;
-
+            
 
             //bool b =  await locksetting.TrySetLockScreenImageAsync(file);
             // LockBackground.Label = b.ToString ();
@@ -331,6 +350,7 @@ namespace MT2.page
             {
                 CachedFileManager.DeferUpdates(sf);
                 RenderTargetBitmap rtb = new RenderTargetBitmap();
+           
                 await rtb.RenderAsync(SeeImage);
                 var pixelBuffer = await rtb.GetPixelsAsync();
                 //好想要存个临时文件不然报错
@@ -358,15 +378,18 @@ namespace MT2.page
 
 
         private StorageFile _tempExportFile;
+        DataTransferManager dataTransferManager = DataTransferManager.GetForCurrentView();
 
         private async void Share_Click(object sender, RoutedEventArgs e)
         {
-            DataTransferManager dataTransferManager = DataTransferManager.GetForCurrentView();
-            dataTransferManager.DataRequested += DataTransferManger_DataRequestedAsync;
-            var rmbp = await Utils.LoadWriteableBitmap(imguri);//需要替换成本地图片路径
-            StorageFile tempFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync("TemId" + imgid, CreationCollisionOption.ReplaceExisting);
+            sf = await sfd.CreateFileAsync(imgid + ".jpg", CreationCollisionOption.ReplaceExisting);
+            await  ImgTransfromAsync();
+            //var rmbp = await LoadWriteableBitmap (@"img\XH(2]5G215ZT4J8X`5XSYHN.jpg");//需要替换成本地图片路径
+            var rmbp = await LoadWriteableBitmap(sf.Path);//需要替换成本地图片路径
+            StorageFile tempFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync("TemId" + imgid+".jpg", CreationCollisionOption.ReplaceExisting);
             await rmbp.SaveStorageFile(tempFile);
-
+            _tempExportFile = tempFile;
+            DataTransferManager.ShowShareUI();
         }
 
         private async void DataTransferManger_DataRequestedAsync(DataTransferManager sender, DataRequestedEventArgs args)
@@ -392,6 +415,21 @@ namespace MT2.page
 
         }
 
+        public static async Task<WriteableBitmap> LoadWriteableBitmap(string relativePath)
+
+        {
+            StorageFile storageFile = await StorageFile.GetFileFromPathAsync(relativePath);
+            //var storageFile = await Package.Current.InstalledLocation.GetFileAsync(relativePath.Replace('/', '\\'));
+
+            var stream = await storageFile.OpenReadAsync();
+
+            var wb = new WriteableBitmap(1, 1);
+
+            wb.SetSource(stream);
+
+            return wb;
+
+        }
         #endregion
         #region 画中画
         private void Compact_Click(object sender, RoutedEventArgs e)

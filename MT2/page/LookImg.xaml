@@ -437,7 +437,7 @@
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Center"
                             Click="Share_Click"
-                            IsEnabled="False"
+                            IsEnabled="True"
                             Label="分享">
                             <AppBarButton.Icon>
                                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72D;" />
@@ -450,7 +450,8 @@
                             VerticalAlignment="Center"
                             Click="Setit_Click"
                             IsEnabled="True"
-                            Label="设为">
+                            Label="设为"
+                            Visibility="Collapsed">
                             <TextBlock
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
