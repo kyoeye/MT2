@@ -38,6 +38,7 @@
         <WebView
             Name="ContentWebview"
             Grid.Row="1"
-            Visibility="Collapsed" />
+            Visibility="Visible" />
+
     </Grid>
 </UserControl>

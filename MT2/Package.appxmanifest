@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="5758613C2F966.uwp-Beta" Publisher="CN=画渣针眼" Version="2.1.20.0" />
-  <mp:PhoneIdentity PhoneProductId="f5f3516c-6ed8-4d92-8232-2ff56ab2ca98" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="5758613C2F966.MTACG" Publisher="CN=9D42EBA3-43E5-47AA-B257-4FD8FB569F35" Version="2.1.33.0" />
+  <mp:PhoneIdentity PhoneProductId="efa857a0-8a2f-4e29-a861-3b0786b41198" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>MTACG</DisplayName>
+    <DisplayName>萌豚MTACG</DisplayName>
     <PublisherDisplayName>画渣针眼</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="MT2.App">
-      <uap:VisualElements DisplayName="萌豚" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="MTACG2" BackgroundColor="transparent">
+      <uap:VisualElements DisplayName="萌豚MTACG" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="MTACG2" BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\Square71x71Logo.png" Square310x310Logo="Assets\Square310x310Logo.png" ShortName="萌豚">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />

@@ -62,16 +62,19 @@
                     VerticalAlignment="Center"
                     FontSize="12"
                     Style="{StaticResource Textblock_prompt}"
-                    Text="（该功能仅适用15063（1703）的PC )" />
+                    Text="（该功能仅适用15063（1703）以上版本的PC )"
+                    TextWrapping="Wrap" />
             </Grid>
 
         </StackPanel>
-        <Grid Grid.Row=" 1">
+        <Grid Grid.Row="1">
             <TextBlock
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Style="{StaticResource Textblock_prompt}"
-                Text="请选择一张图片" />
+                Text="请选择一张图片（暂时不可用）" />
+
+
             <CommandBar VerticalAlignment="Bottom" ClosedDisplayMode="Compact">
                 <AppBarButton
                     Name="Addclick"

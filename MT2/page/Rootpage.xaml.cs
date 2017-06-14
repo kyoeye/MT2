@@ -106,7 +106,8 @@ namespace MT2.page
                 }
                 #endregion
                 localsettings.Values["_listslider"] = 25;
-                localsettings.Values["_TackToJS"] = true ;
+                localsettings.Values["_TackToJS"] = true;
+                localsettings.Values["_EggVisble"] = false;
                 localsettings.Values["_H"] = false;
                 localsettings.Values ["_package"] =  package.Id.Version.Major + "." + package.Id.Version.Minor + "." + package.Id.Version.Revision + "." + package.Id.Version.Build;
             }

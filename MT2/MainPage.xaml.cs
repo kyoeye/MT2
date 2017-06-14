@@ -84,6 +84,9 @@ namespace MT2
             //}
 
             #endregion
+            var f = Window.Current.Bounds;
+          int  wit = (int)f.Width;
+            sizechanged(wit);
 
             if (coreTitleBar.IsVisible == false)//失败，需要获取系统平台了
             {
@@ -106,10 +109,22 @@ namespace MT2
             //订阅窗口大小变化
             Window.Current.SizeChanged += Ds_SizeChanged;
             //第一次启动弹窗
-            if ((int)localsettings.Values["_AppOpenNum"] == 1)
+            //if ((int)localsettings.Values["_AppOpenNum"] == 1)
+            //{
+            //    Show_OneTextDialogAsync();
+            //}
+            try
+            {
+                if ((bool)localsettings.Values["_BuzaixianshiOnetost"] != true)
+                {
+                    Show_OneTextDialogAsync();
+                }
+            }
+            catch
             {
                 Show_OneTextDialogAsync();
             }
+
         }
         //扔异步处理下载瀑布流数据
         private async void GetimgvalueAsync()
@@ -128,18 +143,37 @@ namespace MT2
         {
             //throw new NotImplementedException();
             string a = e.Size.ToString();
-         
-            if (e.Size.Width <600)
+            sizechanged(e);
+            //betatext.Text = "已改变窗口" + "  大小：" + a;
+        }
+
+        private void sizechanged(Windows.UI.Core.WindowSizeChangedEventArgs e)
+        {
+            if (e.Size.Width < 600)
             {
                 BlurListBox.Visibility = Visibility.Visible;
                 MenuBlurGrid.Visibility = Visibility.Collapsed;
             }
-            if (e.Size.Width >600)
+            if (e.Size.Width > 600)
             {
                 BlurListBox.Visibility = Visibility.Collapsed;
                 MenuBlurGrid.Visibility = Visibility.Visible;
             }
-            //betatext.Text = "已改变窗口" + "  大小：" + a;
+
+        }
+        private void sizechanged(int e)
+        {
+            if (e< 600)
+            {
+                BlurListBox.Visibility = Visibility.Visible;
+                MenuBlurGrid.Visibility = Visibility.Collapsed;
+            }
+            if (e> 600)
+            {
+                BlurListBox.Visibility = Visibility.Collapsed;
+                MenuBlurGrid.Visibility = Visibility.Visible;
+            }
+
         }
 
         #endregion
@@ -154,8 +188,9 @@ namespace MT2
             Window.Current.SetTitleBar(TitleBar2);
             base.OnNavigatedTo(e);
             limit = (int ) localsettings.Values["_listslider"];
-        } 
-       
+
+        }
+
 
         #region 判断应用打开次数以管理整个应用&符合第一次打开应用执行的方法
         public   void TheAppOpenNum()
@@ -165,7 +200,6 @@ namespace MT2
                 appOpennum++;
                 localsettings.Values["_AppOpenNum"] = appOpennum;
                 //第一次启动调用弹窗
-                 Show_OneTextDialogAsync();
                 localsettings.Values["_FileAllOpen"] = "false"; //默认关闭：每次保存文件都询问保存地址
             }
            else
@@ -181,23 +215,30 @@ namespace MT2
         {
             try
             {
-                string uri = "ms-appx-web:///CS/FristOpen.html";
-                //string uri = "http://www.baidu.com";
+                string uri = "ms-appx-web:///page/FristOpen.html";
+                string uri2 = "http://www.baidu.com";
 
                 ContentDialog cd = new ContentDialog()
                 {
-                    
+
                     Title = "哇，竟然有人来惹……",
-                    Content = new Content(uri )
+                    Content = new Content(uri)
                     {
-                        Title = "吾辈好不容易写的确定不看下吗？哇哇哇",                       
+                        Title = "吾辈好不容易写的确定不看下吗？哇哇哇",
+                      
                         //Context = "嗯……虽然目标很多但是现在只有一个yande.re图源的。。。动漫图库？",
                         //Title2 = "为什么访问这么慢?"
                     },
-                    PrimaryButtonText = "知道啦",
+                    PrimaryButtonText = "不再提示",
+                    SecondaryButtonText = "知道啦",
                     FullSizeDesired = true,
                 };
-                cd.PrimaryButtonClick += (_s, _e) => {   };
+                cd.PrimaryButtonClick += (_s, _e) => {
+                    localsettings.Values["_BuzaixianshiOnetost"] = true;
+                };
+                cd.SecondaryButtonClick += (_s, _e) => {
+                       
+                };
                 await cd.ShowAsync();
             }
             catch
@@ -381,6 +422,11 @@ namespace MT2
                     Frame.Navigate(typeof(DownloadPage));
                     Mymenu.IsPaneOpen = false;
 
+                }
+                else if (item == picinpciitem)
+                {
+                    Frame.Navigate(typeof(PicinPicPage));
+                    Mymenu.IsPaneOpen = false;
                 }
             }
             

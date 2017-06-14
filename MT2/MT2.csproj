@@ -16,12 +16,12 @@
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>MT2_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>MT2_StoreKey.pfx</PackageCertificateKeyFile>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-    <AppxPackageDir>C:\Users\ghhhg\Desktop\</AppxPackageDir>
+    <AppxPackageDir>F:\萌豚\商店包\</AppxPackageDir>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>B2EFF2FFFABC4412EE561EEF6A0CB75EF535FFAD</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>A839E25ED2D7756D8D5E50695428E776AC578CD5</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -213,7 +213,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
-    <Content Include="CS\FristOpen.html" />
+    <Content Include="page\FristOpen.html" />
     <Content Include="img\640.jpg" />
     <Content Include="img\XH%282]5G215ZT4J8X`5XSYHN.jpg" />
     <Content Include="img\萌豚娘表情包设定1.jpg" />

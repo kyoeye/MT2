@@ -77,6 +77,8 @@ namespace MT2.page
         public string imguri;
         public string imgname;
         private string imgLocalpath;
+
+        BitmapImage bitmapimage;
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Window.Current.SetTitleBar(MyTitleBar);
@@ -103,7 +105,7 @@ namespace MT2.page
             {
                 #region 旧的
                 ItemGET.listsave lookit2 = (ItemGET.listsave)e.Parameter;
-                BitmapImage bitmapimage = new BitmapImage(new Uri(lookit2.sample_url));
+                 bitmapimage = new BitmapImage(new Uri(lookit2.sample_url));
                 SeeImage.Source = bitmapimage;
                 bitmapimage.DownloadProgress += Bitmapimage_DownloadProgress;
                 imguri = lookit2.sample_url;
@@ -135,7 +137,13 @@ namespace MT2.page
             //}
             #endregion
         }
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            dataTransferManager.DataRequested -= DataTransferManger_DataRequestedAsync;
+            bitmapimage.DownloadProgress -= Bitmapimage_DownloadProgress;
 
+        }
         #region 对UI绘制
         public async void BlurUiAsync()
         {
@@ -290,7 +298,7 @@ namespace MT2.page
 
         #endregion
 
-        private void Copybutton_Click(object sender, RoutedEventArgs e)  //暂时用复制uri替代收藏
+        private void Copybutton_Click(object sender, RoutedEventArgs e)  //暂时用复制uri替代收藏 //废弃
         {
             DataPackage dp = new DataPackage();
             dp.SetText(imguri);
@@ -399,7 +407,8 @@ namespace MT2.page
                 DataPackage requestData = args.Request.Data;
                 requestData.Properties.Title = "分享一张心仪的图片";
                 requestData.Properties.Description = imguri;//在能调用pixiv之前先传原图链接
-
+              
+                requestData.SetText("这是我要共享的图片");//传到QQ这句没效果。。
                 List<IStorageItem> imageItems = new List<IStorageItem> { _tempExportFile };
                 requestData.SetStorageItems(imageItems);
 

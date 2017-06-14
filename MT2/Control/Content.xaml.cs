@@ -25,6 +25,7 @@ namespace MT2.Control
             if (webviewuri != null)
             {
                 ContentWebview.Visibility = Visibility.Visible;
+              
                 ContentWebview.Navigate(new Uri(webviewuri));
             }
             else

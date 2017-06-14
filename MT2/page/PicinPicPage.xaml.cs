@@ -35,13 +35,21 @@ namespace MT2.page
                 Frame.GoBack();
         }
 
+        private List<Imgitems> Imgitem = new List<Imgitems>();
+     
         private async void Addclick_ClickAsync(object sender, RoutedEventArgs e)
         {
             FileOpenPicker fop = new FileOpenPicker();
             fop.FileTypeFilter.Add(".jpg");
             fop.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
             var fopvalue = await fop.PickSingleFileAsync();
+            Imgitem.Add(new Imgitems { Imgpath = fopvalue.Path, Filename = fopvalue.Name });
         }
 
+    }
+    public class Imgitems
+    {
+        public string Imgpath { get; set; }
+        public string Filename { get; set; }
     }
 }

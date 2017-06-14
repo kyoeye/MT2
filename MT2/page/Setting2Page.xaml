@@ -154,7 +154,7 @@
                     <Grid
                         Margin="4"
                         Background="{ThemeResource AppBarBorderThemeBrush}"
-                        Visibility="Visible">
+                        Visibility="Collapsed">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
@@ -373,7 +373,7 @@
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
                                         Foreground="Gray"
-                                        Text="(当数据加载过慢时可尝试开启）" />
+                                        Text="(默认开启，不建议关闭）" />
                                 </StackPanel>
                                 <Grid Grid.Row="1">
                                     <StackPanel
