@@ -49,10 +49,14 @@ namespace MT2.CS
                 var s = ec.Message.ToString();
                 var messagedialog = new MessageDialog(s);
                 messagedialog.Commands.Add(new UICommand("重试", cmd =>{ },commandId:0));
+                messagedialog.Commands.Add(new UICommand("取消", cmd => { }, commandId: 1));
                 messagedialog.DefaultCommandIndex = 0;
+                messagedialog.CancelCommandIndex = 1;
                var a= await messagedialog.ShowAsync();
-               
-                a.Invoked += await chonshi();
+                if ((int)a.Id == 0)
+                {
+                    a.Invoked += await chonshi();
+                }
                 result = null;
 
             }

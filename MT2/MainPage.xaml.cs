@@ -11,6 +11,7 @@ using Windows.ApplicationModel.Core;
 using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Composition;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -85,7 +86,7 @@ namespace MT2
 
             #endregion
             var f = Window.Current.Bounds;
-          int  wit = (int)f.Width;
+             int  wit = (int)f.Width;
             sizechanged(wit);
 
             if (coreTitleBar.IsVisible == false)//失败，需要获取系统平台了
@@ -216,7 +217,7 @@ namespace MT2
             try
             {
                 string uri = "ms-appx-web:///page/FristOpen.html";
-                string uri2 = "http://www.baidu.com";
+                //string uri2 = "http://www.baidu.com";
 
                 ContentDialog cd = new ContentDialog()
                 {
@@ -318,9 +319,11 @@ namespace MT2
             if((bool)localsettings.Values["_TackToJS"] == true)
             {
                 GetAPIstring getjson = new GetAPIstring();
-                string jsontext = await getjson.GetWebString(Mainapiuri + ".json?limit=" + limit);
-
-                SetjsonstringAsync(jsontext);
+                if(getjson != null)
+                {
+                    string jsontext = await getjson.GetWebString(Mainapiuri + ".json?limit=" + limit);
+                    SetjsonstringAsync(jsontext);
+                }       
             }
             else
             {
@@ -339,11 +342,17 @@ namespace MT2
         GetJson getjson = new GetJson();
         private async void SetjsonstringAsync(string jsontext)
         {
-           
-            Progresstext.Text = "正在排列一些奇怪的东西……";
-            var source = getjson.SaveJson(jsontext);
-            Pictureada.ItemsSource = source;
-            await newGetHotimageAsync();
+            try
+            {
+                Progresstext.Text = "正在排列一些奇怪的东西……";
+                var source = getjson.SaveJson(jsontext);
+                Pictureada.ItemsSource = source;
+                await newGetHotimageAsync();
+            }
+            catch (Exception ex)
+            {
+                await new MessageDialog(ex.ToString ()).ShowAsync();
+            }
         }
 
         //HotimageHub hih = new HotimageHub();
@@ -411,25 +420,29 @@ namespace MT2
                 {
                     Frame.Navigate(typeof(MainPage));
                     Mymenu.IsPaneOpen = false;
+                    MenuListhoxitem.SelectedItem = null;
+
                 }
                 else if (item == hotitem)
                 {
                     Frame.Navigate(typeof(hotitempage));
+                    MenuListhoxitem.SelectedItem = null;
                     Mymenu.IsPaneOpen = false;
                 }
                 else if (item == downitem)
                 {
                     Frame.Navigate(typeof(DownloadPage));
+                    MenuListhoxitem.SelectedItem = null;
                     Mymenu.IsPaneOpen = false;
 
                 }
                 else if (item == picinpciitem)
                 {
                     Frame.Navigate(typeof(PicinPicPage));
+                    MenuListhoxitem.SelectedItem = null;
                     Mymenu.IsPaneOpen = false;
                 }
             }
-            
         }
 
         #endregion

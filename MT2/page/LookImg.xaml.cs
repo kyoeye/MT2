@@ -141,8 +141,6 @@ namespace MT2.page
         {
             base.OnNavigatedFrom(e);
             dataTransferManager.DataRequested -= DataTransferManger_DataRequestedAsync;
-            bitmapimage.DownloadProgress -= Bitmapimage_DownloadProgress;
-
         }
         #region 对UI绘制
         public async void BlurUiAsync()

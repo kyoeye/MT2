@@ -34,9 +34,19 @@ namespace MT2.page
         {
             base.OnNavigatedTo(e);
             var a = (string)e.Parameter;
-            BitmapImage bitmapimage = new BitmapImage(new Uri(a));
-            Myimage.Source = bitmapimage;
+            if (a.Contains("http"))
+            {
+                BitmapImage bitmapimage = new BitmapImage(new Uri(a));
+                Myimage.Source = bitmapimage;
+            }
+            else
+            {
+                SCPimguri.scpimguri = a.ToString();
+            }
         }
-
+        public class SCPimguri
+        {
+            public static string scpimguri { get; set; }
+        }
     }
 }

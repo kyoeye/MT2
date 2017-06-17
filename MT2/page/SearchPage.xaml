@@ -240,63 +240,110 @@
             </Setter>
         </Style>
     </Page.Resources>
-    <Grid Background="#FFEEEEEE">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid
-            Grid.Row="0"
-            Height="50"
-            Background="#FFE2E2E2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="auto" />
-            </Grid.ColumnDefinitions>
-            <Border />
-            <TextBox
-                Grid.Column="0"
-                PlaceholderText="请尽量输入合适的标签"
-                Style="{StaticResource TextBoxStyle1}" />
-            <AppBarButton Grid.Column="1">
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontFamily="segoe mdl2 assets"
-                    Text="&#xE0AD;" />
-            </AppBarButton>
-        </Grid>
-        <Grid
-            Grid.Row="1"
-            BorderBrush="#FF0074B6"
-            BorderThickness="0,2,0,2">
-            <GridView
-                Name="searchdata"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                animations:ReorderGridAnimation.Duration="450"
-                ItemsSource="{x:Bind secitem}">
-                <GridView.ItemTemplate>
-                    <DataTemplate x:DataType="data:Seachitem">
-                        <Grid Width="80" Height="40">
-                            <TextBlock
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Foreground="#FF2F2F2F"
-                                Text="{x:Bind Seachstring}" />
-                        </Grid>
-                    </DataTemplate>
-                </GridView.ItemTemplate>
-            </GridView>
+        <Grid>
+            <Grid
+                Name="MyTitleBar"
+                Grid.Row="0"
+                Height="32"
+                Style="{StaticResource GridBackgroud}" />
+            <Grid Height="32" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal">
+                    <AppBarButton
+                        Name="GobackButton"
+                        Width="50"
+                        Height="32"
+                        Click="SettingGoback_Click"
+                        Visibility="Visible">
+                        <TextBlock
+                            Margin="16,-9,15,9"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontFamily="Segoe MDL2 Assets"
+                            Foreground="Black"
+                            Style="{StaticResource TitleButtontext}"
+                            Text="&#xE096;" />
+                    </AppBarButton>
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="13"
+                        Style="{StaticResource TextblockForeground}"
+                        Text="（未完成的搜索）" />
+                </StackPanel>
 
+
+            </Grid>
         </Grid>
-        <Grid Grid.Row="2">
-            <TextBlock
-                Margin="0,20,0,0"
-                HorizontalAlignment="Center"
-                Foreground="#FF636363"
-                Text="暂时没有搜索记录（暂不可用）" />
+        <Grid Grid.Row="1" Background="#FFEEEEEE">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid
+                Grid.Row="0"
+                Height="50"
+                Background="#FFE2E2E2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Border />
+                <TextBox
+                    Name="mytextbox"
+                    Grid.Column="0"
+                    PlaceholderText="这个搜索框你除了念诗什么也做不了"
+                    Style="{StaticResource TextBoxStyle1}" />
+                <AppBarButton
+                    Name="SeachClick"
+                    Grid.Column="1"
+                    Click="SeachClick_Click">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontFamily="segoe mdl2 assets"
+                        Text="&#xE0AD;" />
+                </AppBarButton>
+            </Grid>
+            <Grid
+                Grid.Row="1"
+                BorderBrush="#FF0074B6"
+                BorderThickness="0,2,0,2"
+                Visibility="Collapsed">
+                <GridView
+                    Name="searchdata"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    animations:ReorderGridAnimation.Duration="450"
+                    ItemsSource="{x:Bind secitem}">
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="data:Seachitem">
+                            <Grid Width="80" Height="40">
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Foreground="#FF2F2F2F"
+                                    Text="{x:Bind Seachstring}" />
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+
+            </Grid>
+            <Grid Grid.Row="2">
+                <TextBlock
+                    Margin="0,20,0,0"
+                    HorizontalAlignment="Center"
+                    Foreground="#FF636363"
+                    Text="施工中，下个版本完成（flag）" />
+            </Grid>
         </Grid>
+
     </Grid>
 </Page>

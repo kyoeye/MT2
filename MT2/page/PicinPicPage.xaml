@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:data="using:MT2.page"
     xmlns:local="using:MT2.page"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -73,8 +74,34 @@
                 VerticalAlignment="Center"
                 Style="{StaticResource Textblock_prompt}"
                 Text="请选择一张图片（暂时不可用）" />
-
-
+            <GridView
+                Name="Pictureada"
+                Margin="10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                ItemsSource="{x:Bind ImgitemOb}">
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="data:Imgitem">
+                        <StackPanel
+                            x:Name="Picturegrid"
+                            Width="130"
+                            Margin="0.5"
+                            HorizontalAlignment="Center"
+                            Background="#FFD1D1D1"
+                            Tapped="Picturegrid_Tapped">
+                            <Image
+                                Height="205"
+                                HorizontalAlignment="Center"
+                                Stretch="UniformToFill" />
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="20"
+                                Text="{x:Bind Filename}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
             <CommandBar VerticalAlignment="Bottom" ClosedDisplayMode="Compact">
                 <AppBarButton
                     Name="Addclick"

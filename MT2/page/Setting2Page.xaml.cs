@@ -67,6 +67,37 @@ namespace MT2.page
             {
                 Nowpassword.Visibility = Visibility.Collapsed;
             }
+            
+            if ((int)localsettings.Values["_AppOpenNum"] >= 20)
+            {
+                Steins.Visibility = Visibility.Visible;
+
+                try
+                {
+                    if ((bool)localsettings.Values["_OpenH"] == true)
+                    {
+                        Steins.Visibility = Visibility.Visible;
+                        NoH_Check.IsEnabled = true;
+                        NoH_Check.OffContent = "表";
+                        HyperlinkButton2.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        Steins.Visibility = Visibility.Visible;
+                        localsettings.Values["_EggVisble"] = true;
+                        NoH_Check.IsEnabled = false;
+                        HyperlinkButton2.Visibility = Visibility.Visible;
+                        NoH_Check.OffContent = "命运石选中之人才可以开启哦";
+
+
+                    }
+                }
+                catch
+                {
+                    localsettings.Values["_OpenH"] = false;
+                }
+
+            }
 
 
         }
@@ -116,11 +147,11 @@ namespace MT2.page
                 //是否显示里区开关
                 if ((bool)localsettings.Values ["_EggVisble"] == true)
                 {
-                    EggGrid.Visibility = Visibility.Visible;
+                    Steins.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    EggGrid.Visibility = Visibility.Collapsed;
+                    Steins.Visibility = Visibility.Collapsed;
 
                 }
                 //silder的设置
@@ -409,31 +440,34 @@ namespace MT2.page
         }
 
         private async void showContentDialog()
-        {         
-            try
-            {
-                cd = new ContentDialog()
-                {
-                    Title = "为什么会这样……",
-                    Content = new Content(null ) {
-                        Title = "明明藏得这么好……",
-                        Context = "为什么会变成这样呢……\r\n第一次找到了藏彩蛋的地方\r\n第一次做到了自己都发现不了。\r\n这两件愉快的事情交织在了一起\r\n而这两份喜悦\r\n又会给我带来许许多多的喜悦。\r\n我本应该获得了这种如梦一般的幸福时光才对。\r\n可是，为什么\r\n会变成现在这样呢……",
-                        Title2 = "为什么你这么熟练……",
-                        Context2 = "你竟然能发现这里。。\r\n为什么你那么熟练。。\r\n那。。\r\n你是不是在期待什么\r\n我知道你在期待什么\r\n新世界的大门已经打开\r\n记得注意身体。。",
-                    },                
-                    PrimaryButtonText = "打死",
-                    FullSizeDesired = true,
-                };
-                cd.PrimaryButtonClick += (_s, _e) => {
-                    EggGrid.Visibility = Visibility.Visible;
-                    localsettings.Values["_EggVisble"] = true;
-                };
-                await cd.ShowAsync();
-            }
-            catch(Exception ex)
-            {
-                await new MessageDialog(ex.ToString()).ShowAsync();
-            }
+        {
+            //try
+            //{
+            //    cd = new ContentDialog()
+            //    {
+            //        Title = "为什么会这样……",
+            //        Content = new Content(null)
+            //        {
+            //            Title = "明明藏得这么好……",
+            //            Context = "为什么会变成这样呢……\r\n第一次找到了藏彩蛋的地方\r\n第一次做到了自己都发现不了。\r\n这两件愉快的事情交织在了一起\r\n而这两份喜悦\r\n又会给我带来许许多多的喜悦。\r\n我本应该获得了这种如梦一般的幸福时光才对。\r\n可是，为什么\r\n会变成现在这样呢……",
+            //            Title2 = "为什么你这么熟练……",
+            //            Context2 = "你竟然能发现这里。。\r\n为什么你那么熟练。。\r\n那。。\r\n你是不是在期待什么\r\n我知道你在期待什么\r\n新世界的大门已经打开\r\n记得注意身体。。",
+            //        },
+
+            //        PrimaryButtonText = "打死",
+            //        FullSizeDesired = true,
+            //    };
+            //    cd.PrimaryButtonClick += (_s, _e) => {
+            //        Steins.Visibility = Visibility.Visible;
+            //        localsettings.Values["_EggVisble"] = true;
+            //    };
+            //    await cd.ShowAsync();
+            //}
+            //catch(Exception ex)
+            //{
+            //    await new MessageDialog(ex.ToString()).ShowAsync();
+            //}
+            await new MessageDialog("不存在的").ShowAsync();
         }
 
         private void NoH_Check_Toggled(object sender, RoutedEventArgs e)
@@ -455,14 +489,14 @@ namespace MT2.page
 
         private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
-            EggGrid.Visibility = Visibility.Collapsed;
+            Steins.Visibility = Visibility.Collapsed;
             localsettings.Values["_EggVisble"] = false ;
 
         }
 
         private void HyperlinkButton2_Click(object sender, RoutedEventArgs e)
         {
-            EggGrid.Visibility = Visibility.Collapsed;
+            Steins.Visibility = Visibility.Collapsed;
             localsettings.Values["_EggVisble"] = false ;
             localsettings.Values["_H"] = false;
             NoH_Check.IsOn = false;

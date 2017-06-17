@@ -8,6 +8,9 @@
     mc:Ignorable="d">
 
     <Grid Background="Black">
-        <Image Name="Myimage" Stretch="Uniform" />
+        <Image
+            Name="Myimage"
+            Source="{Binding SCPimguri.scpimguri}"
+            Stretch="Uniform" />
     </Grid>
 </Page>
