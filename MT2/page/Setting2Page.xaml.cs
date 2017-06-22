@@ -44,6 +44,7 @@ namespace MT2.page
             Listslider = (int)listslider.Value;
             //coreTitleBar.ExtendViewIntoTitleBar = false;
             //DefualtFilebutton.Content = @"默认保存至系统目录的”保存的图片“";
+            FuckMsSlider.ValueChanged += FuckMsSlider_ValueChanged1;
 
             themeColors = ThemeColorsAdd.GetThemeColors(); //返回主题数据
 
@@ -68,38 +69,12 @@ namespace MT2.page
                 Nowpassword.Visibility = Visibility.Collapsed;
             }
             
-            if ((int)localsettings.Values["_AppOpenNum"] >= 20)
-            {
-                Steins.Visibility = Visibility.Visible;
 
-                try
-                {
-                    if ((bool)localsettings.Values["_OpenH"] == true)
-                    {
-                        Steins.Visibility = Visibility.Visible;
-                        NoH_Check.IsEnabled = true;
-                        NoH_Check.OffContent = "表";
-                        HyperlinkButton2.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        Steins.Visibility = Visibility.Visible;
-                        localsettings.Values["_EggVisble"] = true;
-                        NoH_Check.IsEnabled = false;
-                        HyperlinkButton2.Visibility = Visibility.Visible;
-                        NoH_Check.OffContent = "命运石选中之人才可以开启哦";
+        }
 
-
-                    }
-                }
-                catch
-                {
-                    localsettings.Values["_OpenH"] = false;
-                }
-
-            }
-
-
+        private void FuckMsSlider_ValueChanged1(object sender, Windows.UI.Xaml.Controls.Primitives.RangeBaseValueChangedEventArgs e)
+        {
+            localsettings.Values["_FuckSlider"] = (int)FuckMsSlider.Value;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -107,6 +82,7 @@ namespace MT2.page
             base.OnNavigatedTo(e);
             try
             {
+              
                 //修改保存路径
                 if (localsettings.Values["_Fileuri"].ToString() == a.Path)
                 {
@@ -145,30 +121,80 @@ namespace MT2.page
                     FileAllOpen.IsChecked = false;
                 }
                 //是否显示里区开关
-                if ((bool)localsettings.Values ["_EggVisble"] == true)
+                if ((bool)localsettings.Values ["_Fu_kMSvisble"] == true)
                 {
                     Steins.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    Steins.Visibility = Visibility.Collapsed;
+                    Steins.Visibility = Visibility.Visible;
 
                 }
                 //silder的设置
                 listslider.Value =   (int)localsettings.Values["_listslider"];
-                //里世界是否开启
-                if ((bool)localsettings.Values["_H"] == true)
-                {
-                    NoH_Check.IsOn = true;
-                }
-                else
-                {
-                    NoH_Check.IsOn = false;
-                }
+                
+                //if ((bool)localsettings.Values["_Fu_kMS"] == true)
+                //{
+                //    //NoH_Check.IsOn = true;
+                //}
+                //else
+                //{
+                //    //NoH_Check.IsOn = false;
+                //}
             }
             catch
             {
 
+            }
+            try
+            {
+                //确定slider的大小（电脑配件）
+                FuckMsSlider.Value = (int)localsettings.Values["_FuckSlider"];
+                if ((int)localsettings.Values["_AppOpenNum"] >= 200)
+                {
+                    //Steins.Visibility = Visibility.Visible;
+                    FuckMsSlider.Maximum = 2;
+
+                    //if ((int)localsettings.Values["_AppOpenNum"] >= 20)
+                    //{
+                    //    FuckMsSlider.Maximum = 2;
+
+                    //}
+                    //try
+                    //{
+                    //    if ((bool)localsettings.Values["_OpenH"] == true)
+                    //    {
+                    //        Steins.Visibility = Visibility.Visible;
+                    //        //NoH_Check.IsEnabled = true;
+                    //        //NoH_Check.OffContent = "表";
+                    //        HyperlinkButton2.Visibility = Visibility.Visible;
+                    //    }
+                    //    else
+                    //    {
+                    //        Steins.Visibility = Visibility.Visible;
+                    //        localsettings.Values["_Fu_kMSvisble"] = true;
+                    //        //NoH_Check.IsEnabled = false;
+                    //        HyperlinkButton2.Visibility = Visibility.Visible;
+                    //        //NoH_Check.OffContent = "命运石选中之人才可以开启哦";
+                    //    }
+                    //}
+                    //catch
+                    //{
+                    //    localsettings.Values["_OpenH"] = false;
+                    //}
+
+                }
+                else
+                {
+                    FuckMsSlider.Maximum = 1;
+                }
+
+            }
+            catch
+            {
+                //确定slider的大小（电脑配件）
+                FuckMsSlider.Value = 1;
+                localsettings.Values["_FuckSlider"] = 1;
             }
         }
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -459,7 +485,7 @@ namespace MT2.page
             //    };
             //    cd.PrimaryButtonClick += (_s, _e) => {
             //        Steins.Visibility = Visibility.Visible;
-            //        localsettings.Values["_EggVisble"] = true;
+            //        localsettings.Values["_Fu_kMSvisble"] = true;
             //    };
             //    await cd.ShowAsync();
             //}
@@ -470,36 +496,36 @@ namespace MT2.page
             await new MessageDialog("不存在的").ShowAsync();
         }
 
-        private void NoH_Check_Toggled(object sender, RoutedEventArgs e)
-        {
-            if (NoH_Check.IsOn)
-            {
-                localsettings.Values["_H"] = true;
-            }
-            else 
-            {
-                localsettings.Values["_H"] = false;
-            }
-        }
+        //private void NoH_Check_Toggled(object sender, RoutedEventArgs e)
+        //{
+        //    if (NoH_Check.IsOn)
+        //    {
+        //        localsettings.Values["_Fu_kMS"] = true;
+        //    }
+        //    else 
+        //    {
+        //        localsettings.Values["_Fu_kMS"] = false;
+        //    }
+        //}
 
         private void beta3button_Click(object sender, RoutedEventArgs e)
         {
-            localsettings.Values["_AppOpenNum"] = null;
+            localsettings.Values["_AppOpenNum"] = 26;
         }
 
         private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
             Steins.Visibility = Visibility.Collapsed;
-            localsettings.Values["_EggVisble"] = false ;
+            localsettings.Values["_Fu_kMS"] = false ;
 
         }
 
         private void HyperlinkButton2_Click(object sender, RoutedEventArgs e)
         {
             Steins.Visibility = Visibility.Collapsed;
-            localsettings.Values["_EggVisble"] = false ;
-            localsettings.Values["_H"] = false;
-            NoH_Check.IsOn = false;
+            localsettings.Values["_Fu_kMSvisble"] = false ;
+            localsettings.Values["_Fu_kMS"] = false;
+            //NoH_Check.IsOn = false;
 
         }
 
@@ -509,5 +535,11 @@ namespace MT2.page
             tt.Y = 0;
             fuckyou.Visibility = Visibility.Collapsed;
         }
+        //这个事件不能直接用，试试事件订阅
+        //private void FuckMsSlider_ValueChanged(object sender, Windows.UI.Xaml.Controls.Primitives.RangeBaseValueChangedEventArgs e)
+        //{
+    
+             
+        //}
     }
 }

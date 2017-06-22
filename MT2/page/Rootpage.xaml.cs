@@ -74,11 +74,11 @@ namespace MT2.page
                 //利用trycatch判断键值是否存在
                 try
                 {
-                    var h = localsettings.Values["_H"];
+                    var h = localsettings.Values["_Fu_kMS"];
                 }
                 catch
                 {
-                    localsettings.Values["_H"] = false;
+                    localsettings.Values["_Fu_kMS"] = false;
                 }
 
             }
@@ -106,9 +106,10 @@ namespace MT2.page
                 }
                 #endregion
                 localsettings.Values["_listslider"] = 25;
+                localsettings.Values["_FuckSlider"] = 1;
                 localsettings.Values["_TackToJS"] = true;
-                localsettings.Values["_EggVisble"] = false;
-                localsettings.Values["_H"] = false;
+                localsettings.Values["_Fu_kMSvisble"] = false;
+                localsettings.Values["_Fu_kMS"] = false;
                 localsettings.Values ["_package"] =  package.Id.Version.Major + "." + package.Id.Version.Minor + "." + package.Id.Version.Revision + "." + package.Id.Version.Build;
             }
             catch (Exception ex)

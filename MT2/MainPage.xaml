@@ -20,6 +20,12 @@
         </TransitionCollection>
     </Page.Transitions>-->
     <!--  xmlns:local="using:MT2.pubuliu"  -->
+    <!--<Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition />
+        </TransitionCollection>
+    </Page.Transitions>-->
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="32" />

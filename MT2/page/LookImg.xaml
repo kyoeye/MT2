@@ -7,6 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="Black"
     mc:Ignorable="d">
+    <Page.Transitions>
+        <TransitionCollection>
+            <EntranceThemeTransition />
+        </TransitionCollection>
+    </Page.Transitions>
     <Page.Resources>
         <Style x:Key="AppBarButtonStyle1" TargetType="AppBarButton">
             <Setter Property="Background" Value="{ThemeResource AppBarButtonBackground}" />

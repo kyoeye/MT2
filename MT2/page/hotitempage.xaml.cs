@@ -29,9 +29,9 @@ namespace MT2.page
     {
         #region apis
         string hotapiuri = "https://yande.re/post/popular_recent.xml";
-        string w_hotapiuri = "https://yande.re/post/popular_recent.json?period=1w";
-        string m_hotapiuri = "https://yande.re/post/popular_recent.json?period=1m";
-        string y_hotapiuri = "https://yande.re/post/popular_recent.json?period=1y";
+        string w_Hotapiuri = "https://yande.re/post/popular_recent.json?period=1w";
+        string m_Hotapiuri = "https://yande.re/post/popular_recent.json?period=1m";
+        string y_Hotapiuri = "https://yande.re/post/popular_recent.json?period=1y";
         #endregion
       
         string xmltext;
@@ -160,16 +160,16 @@ namespace MT2.page
                 case 1:
                     B1.FontFamily = new FontFamily("Segoe UI Black");
                     B1.Opacity = 1;
-                    Getjsonstring(w_hotapiuri,1);
+                    Getjsonstring(w_Hotapiuri,1);
                     break;
                 case 2:
                     B2.FontFamily = new FontFamily("Segoe UI Black");
-            Getjsonstring(m_hotapiuri ,2);
+            Getjsonstring(m_Hotapiuri ,2);
                     B2.Opacity = 1;
                     break;
                 case 3:
                     B3.FontFamily = new FontFamily("Segoe UI Black");
-            Getjsonstring(y_hotapiuri,3);
+            Getjsonstring(y_Hotapiuri,3);
                     B3.Opacity = 1;
                     break;
             }
@@ -185,14 +185,14 @@ namespace MT2.page
         {
             pivot.SelectedIndex = 1;
             pivot.SelectedItem = pivot.Items[1];
-            Getjsonstring(w_hotapiuri,1);
+            Getjsonstring(w_Hotapiuri,1);
         }
 
         private void B2_Click(object sender, RoutedEventArgs e)
         {
             pivot.SelectedIndex = 2;
             pivot.SelectedItem = pivot.Items[2];
-            Getjsonstring(m_hotapiuri,2 );
+            Getjsonstring(m_Hotapiuri,2 );
 
         }
 
@@ -200,7 +200,7 @@ namespace MT2.page
         {
             pivot.SelectedIndex = 3;
             pivot.SelectedItem = pivot.Items[3];
-            Getjsonstring(y_hotapiuri,3);
+            Getjsonstring(y_Hotapiuri,3);
         }
         #endregion
     }

@@ -8,6 +8,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="#FF0074B6"
     mc:Ignorable="d">
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition />
+        </TransitionCollection>
+    </Page.Transitions>
     <Page.Resources>
         <Storyboard x:Name="OpenGrid">
             <DoubleAnimation
@@ -154,7 +159,7 @@
                     <Grid
                         Margin="4"
                         Background="{ThemeResource AppBarBorderThemeBrush}"
-                        Visibility="Collapsed">
+                        Visibility="Visible">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
@@ -199,6 +204,71 @@
                             FontWeight="Bold"
                             Foreground="#ff4b4b4b"
                             Text="安全控制" />
+                        <Grid
+                            Name="Steins"
+                            Grid.Row="2"
+                            BorderBrush="#ffd7d7d7"
+                            Visibility="Visible">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                Margin="15,15,15,15"
+                                FontSize="17"
+                                Text="数据安全防御级别" />
+
+                            <TextBlock
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Margin="5,5,15,5"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="center"
+                                FontSize="13"
+                                Foreground="#FF7A7A7A"
+                                Text="（电脑配件.功能暂不开放）" />
+
+                            <StackPanel
+                                Grid.Row="1"
+                                Grid.ColumnSpan="3"
+                                Margin="15,5,15,5"
+                                Orientation="Vertical">
+                                <Slider
+                                    Name="FuckMsSlider"
+                                    Grid.Row="1"
+                                    Margin="15,5,15,10"
+                                    StepFrequency="1"
+                                    Value="1" />
+
+                                <!--<ToggleSwitch
+                                    Name="NoH_Check"
+                                    OffContent="表"
+                                    OnContent="里"
+                                    Toggled="NoH_Check_Toggled" />-->
+                                <StackPanel
+                                    Name="Hypbutton"
+                                    Orientation="Horizontal"
+                                    Visibility="Visible">
+                                    <HyperlinkButton
+                                        Click="HyperlinkButton_Click"
+                                        Content="隐藏选项"
+                                        Foreground="#FF373737" />
+                                    <HyperlinkButton
+                                        Name="HyperlinkButton2"
+                                        Margin="5"
+                                        Click="HyperlinkButton2_Click"
+                                        Content="隐藏选项并恢复默认"
+                                        Foreground="#FF373737" />
+
+                                </StackPanel>
+
+                            </StackPanel>
+                        </Grid>
+
                         <Grid
                             Grid.Row="1"
                             BorderBrush="#ffd7d7d7"
@@ -334,57 +404,6 @@
                                     </StackPanel>
 
                                 </Grid>
-                            </Grid>
-                            <Grid
-                                Name="Steins"
-                                Grid.Row="2"
-                                BorderBrush="#ffd7d7d7"
-                                Visibility="Collapsed">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="auto" />
-                                </Grid.RowDefinitions>
-                                <TextBlock
-                                    Margin="15,15,15,15"
-                                    FontSize="17"
-                                    Text="命运石之门" />
-
-                                <TextBlock
-                                    Grid.Row="0"
-                                    Grid.Column="1"
-                                    Margin="5,5,15,5"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="center"
-                                    FontSize="13"
-                                    Foreground="#FF7A7A7A"
-                                    Text="（这一切，都是石头门的选择）" />
-
-                                <StackPanel
-                                    Grid.Row="1"
-                                    Grid.ColumnSpan="3"
-                                    Margin="15,5,15,5"
-                                    Orientation="horizontal">
-                                    <ToggleSwitch
-                                        Name="NoH_Check"
-                                        OffContent="表"
-                                        OnContent="里"
-                                        Toggled="NoH_Check_Toggled" />
-                                    <HyperlinkButton
-                                        Click="HyperlinkButton_Click"
-                                        Content="隐藏选项"
-                                        Foreground="#FF373737" />
-                                    <HyperlinkButton
-                                        Name="HyperlinkButton2"
-                                        Margin="5"
-                                        Click="HyperlinkButton2_Click"
-                                        Content="隐藏选项并恢复默认"
-                                        Foreground="#FF373737" />
-
-                                </StackPanel>
                             </Grid>
 
                             <StackPanel>

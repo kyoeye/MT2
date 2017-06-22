@@ -50,7 +50,7 @@ namespace MT2.CS
         private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
             localsettings.Values["_password"] = null;
-            localsettings.Values["_H"] = false;
+            localsettings.Values["_Fu_kMS"] = false;
             Frame.Navigate(typeof(MainPage));
 
         }

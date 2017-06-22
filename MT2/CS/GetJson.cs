@@ -58,9 +58,29 @@ namespace MT2.CS
            try
             {
                 list = JsonConvert.DeserializeObject<ObservableCollection<Yande_post_json>>(Jsonstring);
-                if ((bool)localsettings.Values["_H"] == false)
+                try
                 {
-                    for (int a = list.Count - 1; a >= 0; a--) //动动py想一想都知道用减   //最后我发现我还是不擅长动PY。。。
+                    if ((int)localsettings.Values["_FuckSlider"] != 2)
+                    {
+                        for (int a = list.Count - 1; a >= 0; a--) //动动py想一想都知道用减   //最后我发现我还是不擅长动PY。。。
+                        {
+                            if (list[a].rating == "q")
+                            {
+                                list.Remove(list[a]);
+                            }
+                            else if (list[a].rating == "e")
+                            {
+                                list.Remove(list[a]);
+                            }
+
+                        }
+
+                    }
+
+                }
+                catch
+                {
+                    for (int a = list.Count - 1; a >= 0; a--)  
                     {
                         if (list[a].rating == "q")
                         {
@@ -72,7 +92,6 @@ namespace MT2.CS
                         }
 
                     }
-
                 }
 
             }
@@ -83,8 +102,10 @@ namespace MT2.CS
             return list;
         }
 
-        public void Loadingitem(string Jsonstring, int limit)
+        public async void Loadingitem(string Jsonstring, int limit)
         {
+            try
+            {    
             var listcount = list.Count;
             var list2 = JsonConvert.DeserializeObject<List<Yande_post_json>>(Jsonstring);
             #region MyRegion
@@ -107,22 +128,49 @@ namespace MT2.CS
                 z++;
             }
             //list.Add(list2[1].d)
-
-            if ((bool)localsettings.Values["_H"] == false)
+            try
             {
-                for (int a = list.Count - 1; a >= 0; a--) //动动py想一想都知道用减   //最后我发现我还是不擅长动PY。。。
+                if ((int)localsettings.Values["_FuckSlider"] != 2)
                 {
-                    if (list[a].rating == "q")
+                    for (int a = list.Count - 1; a >= 0; a--)  
                     {
-                        list.Remove(list[a]);
+                        if (list[a].rating == "q")
+                        {
+                            list.Remove(list[a]);
+                        }
+                        else if (list[a].rating == "e")
+                        {
+                            list.Remove(list[a]);
+                        }
+
                     }
-                    else if (list[a].rating == "e")
+
+                }
+            }
+            catch
+            {
+                if ((int)localsettings.Values["_FuckSlider"] == 2)
+                {
+                    for (int a = list.Count - 1; a >= 0; a--) 
                     {
-                        list.Remove(list[a]);
+                        if (list[a].rating == "q")
+                        {
+                            list.Remove(list[a]);
+                        }
+                        else if (list[a].rating == "e")
+                        {
+                            list.Remove(list[a]);
+                        }
+
                     }
 
                 }
 
+            }
+            }
+            catch(Exception ex)
+            {
+                await new MessageDialog(ex.ToString()).ShowAsync();
             }
         }
 
