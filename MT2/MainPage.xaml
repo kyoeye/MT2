@@ -131,7 +131,7 @@
                                     Text="下载" />
                             </StackPanel>
                         </ListBoxItem>
-                        <ListBoxItem Name="picinpciitem" Visibility="Collapsed">
+                        <ListBoxItem Name="picinpciitem" Visibility="Visible">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon
                                     Margin="5"

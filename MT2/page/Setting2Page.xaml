@@ -159,7 +159,7 @@
                     <Grid
                         Margin="4"
                         Background="{ThemeResource AppBarBorderThemeBrush}"
-                        Visibility="Visible">
+                        Visibility="Collapsed">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />

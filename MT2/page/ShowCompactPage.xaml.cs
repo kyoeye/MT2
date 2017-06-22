@@ -42,8 +42,13 @@ namespace MT2.page
             else
             {
                 SCPimguri.scpimguri = a.ToString();
+                //失败
+                Myimage.Source = new BitmapImage(new Uri(a));
             }
         }
+
+     
+
         public class SCPimguri
         {
             public static string scpimguri { get; set; }
