@@ -358,13 +358,22 @@
     <Language Code="zu-za" InMinimumRequirementSet="true" />
   </SupportedLocales>
   <ProductReservedInfo>
-    <MainPackageIdentityName>5758613C2F966.MTACG</MainPackageIdentityName>
+    <MainPackageIdentityName>5758613C2F966.uwp-Beta</MainPackageIdentityName>
     <ReservedNames>
-      <ReservedName>萌豚MTACG</ReservedName>
+      <ReservedName>萌豚uwp-Beta</ReservedName>
     </ReservedNames>
   </ProductReservedInfo>
   <AccountPackageIdentityNames>
-    <MainPackageIdentityName>5758613C2F966.uwp-Beta</MainPackageIdentityName>
+    <MainPackageIdentityName>5758613C2F966.5690347B99467</MainPackageIdentityName>
+    <MainPackageIdentityName>5758613C2F966.MTACG</MainPackageIdentityName>
+    <MainPackageIdentityName>5758613C2F966.5690347B99467</MainPackageIdentityName>
+    <MainPackageIdentityName>5758613C2F966.MTACG</MainPackageIdentityName>
+    <MainPackageIdentityName>5758613C2F966.5690347B99467</MainPackageIdentityName>
+    <MainPackageIdentityName>5758613C2F966.MTACG</MainPackageIdentityName>
+    <MainPackageIdentityName>5758613C2F966.5690347B99467</MainPackageIdentityName>
+    <MainPackageIdentityName>5758613C2F966.MTACG</MainPackageIdentityName>
+    <MainPackageIdentityName>5758613C2F966.5690347B99467</MainPackageIdentityName>
+    <MainPackageIdentityName>5758613C2F966.MTACG</MainPackageIdentityName>
   </AccountPackageIdentityNames>
-  <PackageInfoList LandingUrl="https://developer.microsoft.com/dashboard/Application?appId=9NRNSLZQRCK0" />
+  <PackageInfoList LandingUrl="https://developer.microsoft.com/dashboard/Application?appId=9NBLGGH5254R" />
 </StoreAssociation>

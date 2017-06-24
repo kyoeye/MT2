@@ -156,7 +156,7 @@
                     </StackPanel>
                 </Grid>
                 <StackPanel>
-                    <Grid
+                    <!--<Grid
                         Margin="4"
                         Background="{ThemeResource AppBarBorderThemeBrush}"
                         Visibility="Collapsed">
@@ -189,7 +189,7 @@
                                 Click="beta3button_Click"
                                 Content="一键清零启动次数" />
                         </StackPanel>
-                    </Grid>
+                    </Grid>-->
 
                     <Grid Margin="4" Background="{ThemeResource AppBarBorderThemeBrush}">
                         <Grid.RowDefinitions>
