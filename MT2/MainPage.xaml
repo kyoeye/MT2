@@ -188,9 +188,11 @@
                 <ScrollViewer Grid.RowSpan="3">
                     <StackPanel>
                         <Grid
+                            Name="HotGridTap"
                             Height="400"
                             animations:ParallaxService.VerticalMultiplier="-0.8"
-                            Background="#FFBFBFBF">
+                            Background="#FFBFBFBF"
+                            Tapped="HotGridTap_Tapped">
                             <Image
                                 Name="HomeHot"
                                 Height="410"
@@ -331,7 +333,7 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Click="Searchbutton_Click"
-                        Visibility="Visible">
+                        Visibility="Collapsed">
                         <TextBlock
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"

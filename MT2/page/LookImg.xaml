@@ -557,7 +557,7 @@
             </Grid>
 
         </ScrollViewer>
-        <Popup Name="lookpopup" Grid.RowSpan="2">
+        <Popup Name="lookpopup" Grid.Row="1">
 
             <local:ToastDialog
                 x:Name="DownTost"

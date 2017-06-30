@@ -506,6 +506,13 @@ namespace MT2
                 Mymenu.IsPaneOpen = false;
         }
 
+        
 
+        private void HotGridTap_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(hotitempage));
+            MenuListhoxitem.SelectedItem = null;
+            Mymenu.IsPaneOpen = false;
+        }
     }
 }
