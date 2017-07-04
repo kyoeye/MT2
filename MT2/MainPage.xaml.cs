@@ -189,7 +189,7 @@ namespace MT2
             Window.Current.SetTitleBar(TitleBar2);
             base.OnNavigatedTo(e);
             limit = (int ) localsettings.Values["_listslider"];
-
+      
         }
 
 
@@ -466,7 +466,7 @@ namespace MT2
 
         private void Searchbutton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(SearchPage));
+            Frame.Navigate(typeof(Seach2Page));
         }
         #region 加载更多
         private void LoadingButton_Click(object sender, RoutedEventArgs e)

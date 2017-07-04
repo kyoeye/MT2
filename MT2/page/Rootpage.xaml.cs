@@ -27,10 +27,11 @@ namespace MT2.page
     {
         ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
         int appOpennum;
+        public static Frame myMainframe;
         public Rootpage()
         {
             this.InitializeComponent();
-
+            myMainframe = Mainframe;
             //Setting2Page set = new Setting2Page();
             try
             {

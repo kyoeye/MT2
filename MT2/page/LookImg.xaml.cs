@@ -388,6 +388,9 @@ namespace MT2.page
 
         private async void Share_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+
             sf = await sfd.CreateFileAsync(imgid + ".jpg", CreationCollisionOption.ReplaceExisting);
             await  ImgTransfromAsync();
             //var rmbp = await LoadWriteableBitmap (@"img\XH(2]5G215ZT4J8X`5XSYHN.jpg");//需要替换成本地图片路径
@@ -396,6 +399,11 @@ namespace MT2.page
             await rmbp.SaveStorageFile(tempFile);
             _tempExportFile = tempFile;
             DataTransferManager.ShowShareUI();
+            }
+            catch (Exception ex)
+            {
+                await new MessageDialog(ex.ToString()).ShowAsync();
+            }
         }
 
         private async void DataTransferManger_DataRequestedAsync(DataTransferManager sender, DataRequestedEventArgs args)
