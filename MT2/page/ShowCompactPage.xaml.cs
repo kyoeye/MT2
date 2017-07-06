@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -43,11 +44,20 @@ namespace MT2.page
             {
                 SCPimguri.scpimguri = a.ToString();
                 //失败
-                Myimage.Source = new BitmapImage(new Uri(a));
+                showpathimg(a);
+                      
+                //Myimage.Source = bi.sou(new Uri(a.ToString ());
+           
             }
         }
 
-     
+        private async void showpathimg(string a)
+        {
+            var filepath = await  StorageFile.GetFileFromPathAsync(a);
+            BitmapImage bi = new BitmapImage();
+            await bi.SetSourceAsync(await filepath.OpenAsync(FileAccessMode.Read));
+            Myimage.Source = bi;
+        }
 
         public class SCPimguri
         {

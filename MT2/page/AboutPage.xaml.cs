@@ -34,7 +34,7 @@ namespace MT2.page
         {
             this.InitializeComponent();
             Window.Current.SetTitleBar(MyTitleBar);
-            buildtext.Text ="版本号:"+ package.Id.Version.Major + "." + package.Id.Version.Minor + "." + package.Id.Version.Revision + "." + package.Id.Version.Build;
+            buildtext.Text ="版本号:"+package.Id.Version.Major + "." + package.Id.Version.Minor + "." + package.Id.Version.Build + "." + package.Id.Version.Revision;
         }
 
         private void Gobackbutton_Click(object sender, RoutedEventArgs e)
@@ -81,7 +81,7 @@ namespace MT2.page
                   $"固件版本：{deviceInfo.SystemFirmwareVersion}， " +
                   $"硬件版本：{deviceInfo.SystemHardwareVersion}，）" +
                   $"DispalyName: " + package.DisplayName +"，"+
-                  $"build版本：" + package.Id.Version.Build+ "包版本："+package.Id.Version.Major +"."+package.Id.Version.Minor+"."+package.Id.Version .Revision+"." + package.Id.Version.Build;
+                  $"build版本：" + package.Id.Version.Build+ "包版本："+ package.Id.Version.Major + "." + package.Id.Version.Minor + "." + package.Id.Version.Build + "." + package.Id.Version.Revision;
                   
             //原来还有这种操作.jpg
             return _content;

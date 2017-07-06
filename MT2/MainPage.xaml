@@ -333,7 +333,7 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Click="Searchbutton_Click"
-                        Visibility="Visible">
+                        Visibility="Collapsed">
                         <TextBlock
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"

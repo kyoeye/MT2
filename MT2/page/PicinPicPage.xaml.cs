@@ -29,6 +29,7 @@ namespace MT2.page
     /// </summary>
     public sealed partial class PicinPicPage : Page
     {
+      
         public PicinPicPage()
         {
             this.InitializeComponent();
@@ -54,11 +55,15 @@ namespace MT2.page
                 fop.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
                 fopvalue = await fop.PickSingleFileAsync();
                 NewMethod(fopvalue);
-
+                //拿到缩略图
+               var slt = await  fopvalue.GetScaledImageAsThumbnailAsync(Windows.Storage.FileProperties.ThumbnailMode.PicturesView);
+                tosttextblock.Visibility = Visibility.Collapsed;
             }
             catch
             {
                 await new MessageDialog("您没有选择文件，或者文件格式不正确").ShowAsync();
+                tosttextblock.Visibility = Visibility.Visible;
+
             }
 
 

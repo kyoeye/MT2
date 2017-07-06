@@ -1,4 +1,5 @@
-﻿using MT2.CS;
+﻿using MT2.Control;
+using MT2.CS;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,6 +27,7 @@ namespace MT2.page
     public sealed partial class Rootpage : Page
     {
         ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+       public static  string thisDevice = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily;
         int appOpennum;
         public static Frame myMainframe;
         public Rootpage()
@@ -59,19 +61,32 @@ namespace MT2.page
 
                         if ((int)localsettings.Values["_listslider"]==0)
                         {
-                            localsettings.Values["_listslider"] = 25;
+                            localsettings.Values["_listslider"] = 50;
                             localsettings.Values["_TackToJS"] = true;
                         }
                     }
                     catch
                     {
                         //利用catch报错来初始化
-                        localsettings.Values["_listslider"] = 25;
+                        localsettings.Values["_listslider"] = 50;
                         localsettings.Values["_TackToJS"] = true;
 
                     }
                 }
+            
+                if (localsettings.Values["_package"].ToString() != package.Id.Version.Major + "." + package.Id.Version.Minor + "." + package.Id.Version.Build + "." + package.Id.Version.Revision)
+                {
+                    localsettings.Values["_listslider"] = 50;
 
+                    Show_ContentDialogAsync(
+                        "更新日志",
+                        package.Id.Version.Major + "." + package.Id.Version.Minor + "." + package.Id.Version.Build + "." + package.Id.Version.Revision+"更新",
+                        "1.现已适配手机端，您现在可以在手机端下载MTACG了\r\n2.现在参考图(画中画)功能现在已经可用，但仅限于运行创意者更新的电脑\r\n3.现已将瀑布流默认单次图片加载数量调整为：50\r\n4.给新功能铺路ing...",
+                        "",
+                        ""
+                        );
+
+                }
                 //利用trycatch判断键值是否存在
                 try
                 {
@@ -81,12 +96,37 @@ namespace MT2.page
                 {
                     localsettings.Values["_Fu_kMS"] = false;
                 }
+                //获取系统平台
+                localsettings.Values["_package"] = package.Id.Version.Major + "." + package.Id.Version.Minor + "." + package.Id.Version.Build + "." + package.Id.Version.Revision;
 
             }
             catch 
             {
             }
+
         }
+
+        private async  void Show_ContentDialogAsync(string title,string title1 ,string content ,string Title2,string content2)
+        {
+            ContentDialog cd = new ContentDialog()
+            {
+
+                Title = title ,
+                Content = new Content(null)
+                {
+                    Title = title1,
+                    Context = content ,
+                    Title2 = Title2 ,
+                    Context2 = content2 
+                    //Context = "嗯……虽然目标很多但是现在只有一个yande.re图源的。。。动漫图库？",
+                    //Title2 = "为什么访问这么慢?"
+                },
+                SecondaryButtonText = "知道啦",
+                FullSizeDesired = false,
+            };
+            cd.ShowAsync();
+        }
+
 
         #region 初始化操作
         private async void ONETimeAsync()
@@ -94,7 +134,6 @@ namespace MT2.page
             try
             {
                 #region 判断系统平台
-                var thisDevice = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily;
 
                 if (thisDevice == "Windows.Desktop")
                 {
@@ -106,12 +145,12 @@ namespace MT2.page
 
                 }
                 #endregion
-                localsettings.Values["_listslider"] = 25;
+                localsettings.Values["_listslider"] = 50;
                 localsettings.Values["_FuckSlider"] = 1;
                 localsettings.Values["_TackToJS"] = true;
                 localsettings.Values["_Fu_kMSvisble"] = false;
                 localsettings.Values["_Fu_kMS"] = false;
-                localsettings.Values ["_package"] =  package.Id.Version.Major + "." + package.Id.Version.Minor + "." + package.Id.Version.Revision + "." + package.Id.Version.Build;
+                localsettings.Values ["_package"] = package.Id.Version.Major + "." + package.Id.Version.Minor + "." + package.Id.Version.Build + "." + package.Id.Version.Revision;
             }
             catch (Exception ex)
             {

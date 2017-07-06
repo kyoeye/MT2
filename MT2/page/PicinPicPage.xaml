@@ -70,10 +70,11 @@
         </StackPanel>
         <Grid Grid.Row="1">
             <TextBlock
+                Name="tosttextblock"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Style="{StaticResource Textblock_prompt}"
-                Text="请选择一张图片（暂时不可用）" />
+                Text="请选择一张图片" />
             <GridView
                 Name="Pictureada"
                 Margin="10"
