@@ -132,15 +132,7 @@ namespace MT2.page
                 }
                 //silder的设置
                 listslider.Value =   (int)localsettings.Values["_listslider"];
-                
-                //if ((bool)localsettings.Values["_Fu_kMS"] == true)
-                //{
-                //    //NoH_Check.IsOn = true;
-                //}
-                //else
-                //{
-                //    //NoH_Check.IsOn = false;
-                //}
+
             }
             catch
             {
@@ -155,33 +147,7 @@ namespace MT2.page
                     //Steins.Visibility = Visibility.Visible;
                     FuckMsSlider.Maximum = 2;
 
-                    //if ((int)localsettings.Values["_AppOpenNum"] >= 20)
-                    //{
-                    //    FuckMsSlider.Maximum = 2;
-
-                    //}
-                    //try
-                    //{
-                    //    if ((bool)localsettings.Values["_OpenH"] == true)
-                    //    {
-                    //        Steins.Visibility = Visibility.Visible;
-                    //        //NoH_Check.IsEnabled = true;
-                    //        //NoH_Check.OffContent = "表";
-                    //        HyperlinkButton2.Visibility = Visibility.Visible;
-                    //    }
-                    //    else
-                    //    {
-                    //        Steins.Visibility = Visibility.Visible;
-                    //        localsettings.Values["_Fu_kMSvisble"] = true;
-                    //        //NoH_Check.IsEnabled = false;
-                    //        HyperlinkButton2.Visibility = Visibility.Visible;
-                    //        //NoH_Check.OffContent = "命运石选中之人才可以开启哦";
-                    //    }
-                    //}
-                    //catch
-                    //{
-                    //    localsettings.Values["_OpenH"] = false;
-                    //}
+                 
 
                 }
                 else

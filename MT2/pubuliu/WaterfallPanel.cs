@@ -54,7 +54,7 @@ namespace MT2.pubuliu
             }
             return new Size(availableSize.Width, flowLens.Last().Key);//返回值是该元素本身实际需要的大小。
         }
-
+       
         protected override Size ArrangeOverride(Size finalSize)
         {
             // 同样记录流的长度。  

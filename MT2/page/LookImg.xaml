@@ -3,9 +3,10 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:data="using:MT2.CS"
     xmlns:local="using:MT2.Control"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Background="Black"
+    Background="#FF0074B6"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -287,6 +288,22 @@
         <Grid.Background>
             <SolidColorBrush Color="Black" />
         </Grid.Background>
+        <Grid.Resources>
+            <Storyboard x:Name="StoryboardShowPopup">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Toast" Storyboard.TargetProperty="(UIElement.Opacity)">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                    <!--  这里的0:0:0.2是关键帧在时间轴上的位置  -->
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" />
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Name="StoryboardHiddenPopup">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Toast" Storyboard.TargetProperty="(UIElement.Opacity)">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+        </Grid.Resources>
+
         <Grid>
             <Grid
                 Name="MyTitleBar"
@@ -518,13 +535,8 @@
 
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Row="2" Visibility="Collapsed">
-                    <Border
-                        Margin="10"
-                        Background="#FFE4E4E4"
-                        BorderBrush="#FF2291DE"
-                        BorderThickness="2"
-                        CornerRadius="2">
+                <Grid Grid.Row="2" Visibility="Visible">
+                    <Border Margin="5" Background="#FFF2F2F2">
                         <StackPanel>
                             <TextBlock
                                 Name="betatext"
@@ -533,14 +545,22 @@
                                 VerticalAlignment="Center"
                                 Foreground="#FF4B4B4B"
                                 Text="标签" />
-                            <GridView x:Name="Tagsview">
+                            <GridView x:Name="Tagsview" ItemsSource="{x:Bind TagModes}">
                                 <GridView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Border Background="#FFF2F2F2">
+                                    <DataTemplate x:DataType="data:TagMode">
+                                        <Border
+                                            Name="TagBorder"
+                                            Background="#FFF2F2F2"
+                                            BorderBrush="#FF434343"
+                                            BorderThickness="1"
+                                            CornerRadius="5"
+                                            Tapped="TagBorder_Tapped">
                                             <TextBlock
                                                 Margin="5"
-                                                Foreground="#FFA8A8A8"
-                                                Text="" />
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="#FF434343"
+                                                Text="{x:Bind Tag}" />
                                         </Border>
                                     </DataTemplate>
 
@@ -557,7 +577,29 @@
             </Grid>
 
         </ScrollViewer>
-        <Popup Name="lookpopup" Grid.Row="1">
+        <Grid
+            x:Name="Toast"
+            Grid.Row="1"
+            Height="40"
+            VerticalAlignment="Top"
+            Background="#FF0074B6"
+            Visibility="Collapsed">
+            <TextBlock
+                Margin="10,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Foreground="#FFE7E7E7"
+                Text="正在下载，请尽量避免下载过程中退出应用" />
+            <Button
+                Name="TastButton"
+                Height="40"
+                HorizontalAlignment="Right"
+                Click="TastButton_Click"
+                Foreground="#FFD2DDE3">
+                <TextBlock Text="下载管理" />
+            </Button>
+        </Grid>
+        <!--<Popup Name="lookpopup" Grid.Row="1">
 
             <local:ToastDialog
                 x:Name="DownTost"
@@ -569,7 +611,7 @@
                 FontSize="18"
                 Label="{x:Bind DownloadToastText, Mode=OneTime}" />
 
-        </Popup>
+        </Popup>-->
 
     </Grid>
 </Page>

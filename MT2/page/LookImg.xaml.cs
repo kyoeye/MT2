@@ -36,6 +36,7 @@ using Windows.Graphics.Imaging;
 using Windows.Graphics.Display;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
+using System.Collections.ObjectModel;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
 
@@ -46,15 +47,17 @@ namespace MT2.page
     /// </summary>
     public sealed partial class LookImg : Page
     {
-        TosatModel tosalmodel = new TosatModel();
+        //TosatModel tosalmodel = new TosatModel();
 
 
         public LookImg()
         {
             this.InitializeComponent();
             Getsuface();
+            my_Image = SeeImage;
             //分享——订阅
             dataTransferManager.DataRequested += DataTransferManger_DataRequestedAsync;
+            TagModes = new ObservableCollection<TagMode>();
 
             //Toastpopup.DataContext = tosalmodel;
             //betatext.Text = System.Windows.Forms.Screen.GetWorkingArea(this);
@@ -75,31 +78,34 @@ namespace MT2.page
         public int a;
         public int imgid;
         public string imguri;
+        public string img_sample_url;
         public string imgname;
         private string imgLocalpath;
-
+        public static Image my_Image;
         BitmapImage bitmapimage;
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Window.Current.SetTitleBar(MyTitleBar);
             base.OnNavigatedTo(e);
-
-
+         
             #region new
             var type = e.Parameter.GetType();
             if (type.Name == "Yande_post_json")
             {
                 var gg = (Yande_post_json)e.Parameter;
+                img_sample_url = gg.sample_url;
                 BitmapImage bitmapimage = new BitmapImage(new Uri(gg.sample_url));
                 SeeImage.Source = bitmapimage;
                 bitmapimage.DownloadProgress += Bitmapimage_DownloadProgress;
-                imguri = gg.sample_url;
+                imguri = gg.file_url;
                 ImageID.Text = gg.id.ToString();
                 imgid = int.Parse(gg.id.ToString());
                 //获取到一个奇怪的不完整路径
                 var bitf = bitmapimage.UriSource.AbsolutePath;
                imgLocalpath = bitmapimage.UriSource.LocalPath;
-             //   "/sample/78cd441063dd0dab7e88f94ab7ab8cd6/yande.re 395326 sample hatsune_miku lepoule_(kmjh90) vocaloid.jpg"
+                // 处理tag
+                TagFuntion(gg.tags);
+                //   "/sample/78cd441063dd0dab7e88f94ab7ab8cd6/yande.re 395326 sample hatsune_miku lepoule_(kmjh90) vocaloid.jpg"
             }
           else
             {
@@ -108,7 +114,7 @@ namespace MT2.page
                  bitmapimage = new BitmapImage(new Uri(lookit2.sample_url));
                 SeeImage.Source = bitmapimage;
                 bitmapimage.DownloadProgress += Bitmapimage_DownloadProgress;
-                imguri = lookit2.sample_url;
+                imguri = lookit2.imguri;
                 ImageID.Text = lookit2.id;
                 imgid = int.Parse(lookit2.id);
                 #endregion
@@ -203,14 +209,14 @@ namespace MT2.page
             savefile.FileTypeChoices.Add(f, new List<string>() { ".jpg", ".png", ".bmp" });
             savefile.SuggestedFileName = imgname + "ID" + imgid;
             storagefile = await savefile.PickSaveFileAsync();
-            var a = new ToastDialog();
+            //var a = new ToastDialog();
 
             if (storagefile != null)
             {
-                DownloadToastText = "正在后台下载……";
-                a.Label = DownloadToastText;
+                await showtast();
+                //a.Label = DownloadToastText;
 
-                await a.Show();
+                //await a.Show();
 
 
                 CachedFileManager.DeferUpdates(storagefile);
@@ -230,12 +236,24 @@ namespace MT2.page
                 BackgroundDownloader backgrounddownloader = new BackgroundDownloader();//后台下载
                 DownloadOperation downloader = backgrounddownloader.CreateDownload(transferUri, storagefile);
                 await downloader.StartAsync();
-                tosalmodel.Info = new Entity() { name = "正在后台下载……" };
+                //tosalmodel.Info = new Entity() { name = "正在后台下载……" };
+
                 //a.Label = "下载完成";
                 //await a.Show();
                 //Mypopup.IsOpen = true;
             }
         }//总是调起资源选择器
+
+        private async Task showtast()
+        {
+            Toast.Visibility = Visibility.Visible;
+            this.StoryboardShowPopup.Begin();
+            //内容提示停留1.2s后开始隐藏
+            await Task.Delay(3000);
+            this.StoryboardHiddenPopup.Begin();
+            Toast.Visibility = Visibility.Collapsed;
+        }
+
         public async void Savefile2(string jpguri)//不调用自愿选择器
         {
             //Savefile();
@@ -250,12 +268,7 @@ namespace MT2.page
                 if (storagefile != null)
                 {
                     CachedFileManager.DeferUpdates(storagefile);
-
-                    var a = new ToastDialog();
-                    DownloadToastText = "正在后台下载……";
-                    a.Label = DownloadToastText;
-
-                    await a.Show();
+                     await  showtast();
 
                     string Filename = imgname + imgid;
                     string _transferUri = jpguri;
@@ -464,7 +477,7 @@ namespace MT2.page
             {
                 var frame = new Frame();
                 compactViewId = ApplicationView.GetForCurrentView().Id;
-                frame.Navigate(typeof(ShowCompactPage), imguri);
+                frame.Navigate(typeof(ShowCompactPage), img_sample_url);
                 Window.Current.Content = frame;
                 Window.Current.Activate();
                 ApplicationView.GetForCurrentView().Title = "CompactOverlay Window";
@@ -472,23 +485,45 @@ namespace MT2.page
             bool viewShown = await ApplicationViewSwitcher.TryShowAsViewModeAsync(compactViewId, ApplicationViewMode.CompactOverlay);
         }
         #endregion
-
+        #region Tags
+        public ObservableCollection<TagMode> TagModes { get; set; }
+        private void TagFuntion(string Tags_all)
+        {
+            string[] TagArray = Tags_all.Split(' ');
+          for( int a=0; a<TagArray.Count() ; a++ )
+            {
+                TagModes.Add(new TagMode { Tag = TagArray[a] });
+            }
+        }
+        #endregion
         private void GobackButton_Click(object sender, RoutedEventArgs e)
         {
             if (Frame.CanGoBack)
                 Frame.GoBack();
         }
-    }
-    //弹窗
-    public class TosatModel : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-        private Entity _info;
-        public Entity Info
+
+        private void TagBorder_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            get { return _info; }
-            set { _info = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Info")); }
+            var boxs = sender as Border;
+            var box = boxs.DataContext as TagMode;
+            Frame.Navigate(typeof(Seach2Page),box);
+        }
+
+        private void TastButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(DownloadPage));
         }
     }
+    //弹窗
+    //public class TosatModel : INotifyPropertyChanged
+    //{
+    //    public event PropertyChangedEventHandler PropertyChanged;
+    //    private Entity _info;
+    //    public Entity Info
+    //    {
+    //        get { return _info; }
+    //        set { _info = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Info")); }
+    //    }
+    //}
 
 }

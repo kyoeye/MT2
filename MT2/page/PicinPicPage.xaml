@@ -93,12 +93,15 @@
                             <Image
                                 Height="205"
                                 HorizontalAlignment="Center"
+                                Source="{x:Bind imgSamp}"
                                 Stretch="UniformToFill" />
                             <TextBlock
+                                Margin="5"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                FontSize="20"
-                                Text="{x:Bind Filename}" />
+                                FontSize="13"
+                                Text="{x:Bind Filename}"
+                                TextWrapping="Wrap" />
                         </StackPanel>
                     </DataTemplate>
                 </GridView.ItemTemplate>

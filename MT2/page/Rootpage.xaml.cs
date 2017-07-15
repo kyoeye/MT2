@@ -81,7 +81,7 @@ namespace MT2.page
                     Show_ContentDialogAsync(
                         "更新日志",
                         package.Id.Version.Major + "." + package.Id.Version.Minor + "." + package.Id.Version.Build + "." + package.Id.Version.Revision+"更新",
-                        "1.现已适配手机端，您现在可以在手机端下载MTACG了\r\n2.现在参考图(画中画)功能现在已经可用，但仅限于运行创意者更新的电脑\r\n3.现已将瀑布流默认单次图片加载数量调整为：50\r\n4.给新功能铺路ing...",
+                        "1.【新功能】搜索功能现已可用（虽然并不好用）\r\n2.【新功能】标签（Tags）现已加入，点击任一一个标签便可跳转到搜索界面进行搜索\r\n3.【修复】现已修复画中画功能无权打开其他磁盘文件的bug\r\n4.【修复】现已修复下载文件尺寸过小清晰度不佳的bug\r\n5.【修复】现已修复首页top图未完成加载的情况下“日”榜二次加载造成无法打开的bug\r\n6.【优化】版本号判断不正确的bug\r\n7.一些优化和修复……",
                         "",
                         ""
                         );
@@ -124,7 +124,7 @@ namespace MT2.page
                 SecondaryButtonText = "知道啦",
                 FullSizeDesired = false,
             };
-            cd.ShowAsync();
+           await  cd.ShowAsync();
         }
 
 

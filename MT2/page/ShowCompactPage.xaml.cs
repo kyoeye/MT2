@@ -34,28 +34,31 @@ namespace MT2.page
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            var a = (string)e.Parameter;
-            if (a.Contains("http"))
+            if(e.Parameter.GetType().Name == "Imgitem")
             {
-                BitmapImage bitmapimage = new BitmapImage(new Uri(a));
-                Myimage.Source = bitmapimage;
+                showpathimg((Imgitem)e.Parameter);
+
             }
             else
             {
-                SCPimguri.scpimguri = a.ToString();
+                var a = (string)e.Parameter;
+
+                BitmapImage bitmapimage = new BitmapImage(new Uri(a));
+                Myimage.Source = bitmapimage;
+            }
+          
+                //SCPimguri.scpimguri = a.ToString();
                 //失败
-                showpathimg(a);
                       
                 //Myimage.Source = bi.sou(new Uri(a.ToString ());
            
-            }
+         
         }
 
-        private async void showpathimg(string a)
+        private async void showpathimg(Imgitem  a)
         {
-            var filepath = await  StorageFile.GetFileFromPathAsync(a);
             BitmapImage bi = new BitmapImage();
-            await bi.SetSourceAsync(await filepath.OpenAsync(FileAccessMode.Read));
+            await bi.SetSourceAsync(await a.SF.OpenAsync(FileAccessMode.Read));
             Myimage.Source = bi;
         }
 

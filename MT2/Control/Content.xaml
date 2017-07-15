@@ -17,21 +17,25 @@
         <TextBlock
             x:Name="ContentTitle"
             FontSize="23"
-            Text="{x:Bind Title}" />
+            Text="{x:Bind Title}"
+            TextWrapping="Wrap" />
         <ScrollViewer Grid.Row="1">
             <StackPanel>
                 <TextBlock
                     x:Name="Textcontent"
                     LineHeight="45"
-                    Text="{x:Bind Context}" />
+                    Text="{x:Bind Context}"
+                    TextWrapping="Wrap" />
                 <TextBlock
                     x:Name="ContentTitle2"
                     FontSize="23"
-                    Text="{x:Bind Title2}" />
+                    Text="{x:Bind Title2}"
+                    TextWrapping="Wrap" />
                 <TextBlock
                     x:Name="Textcontent2"
                     LineHeight="45"
-                    Text="{x:Bind Context2}" />
+                    Text="{x:Bind Context2}"
+                    TextWrapping="Wrap" />
 
             </StackPanel>
         </ScrollViewer>

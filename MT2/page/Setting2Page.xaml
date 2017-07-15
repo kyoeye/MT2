@@ -230,7 +230,7 @@
                                 VerticalAlignment="center"
                                 FontSize="13"
                                 Foreground="#FF7A7A7A"
-                                Text="（电脑配件.功能暂不开放）" />
+                                Text="（电脑配件）" />
 
                             <StackPanel
                                 Grid.Row="1"

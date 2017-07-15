@@ -28,7 +28,7 @@ namespace MT2.page
     public sealed partial class hotitempage : Page
     {
         #region apis
-        string hotapiuri = "https://yande.re/post/popular_recent.xml";
+        string hotapiuri = "https://yande.re/post/popular_recent.json";
         string w_Hotapiuri = "https://yande.re/post/popular_recent.json?period=1w";
         string m_Hotapiuri = "https://yande.re/post/popular_recent.json?period=1m";
         string y_Hotapiuri = "https://yande.re/post/popular_recent.json?period=1y";
@@ -50,7 +50,7 @@ namespace MT2.page
             }
             else
             {
-                getxmltext();
+                Getjsonstring(hotapiuri,0);
             }
             NavigationCacheMode = NavigationCacheMode.Enabled;
 
@@ -65,28 +65,25 @@ namespace MT2.page
             base.OnNavigatedTo(e);
         }
 
-        public async void getxmltext()
-        {
-            GetAPIstring getxml = new GetAPIstring();
-            XmlText  = await getxml.GetWebString(hotapiuri );
+        //public async void getjsontext()
+        //{
+        
+        //    GetAPIstring getxml = new GetAPIstring();
+        //    XmlText  = await getxml.GetWebString(hotapiuri );
            
-            itemssoureGet();
-        }
-        public void itemssoureGet()
-        {
-            itemget.Toitem(xmltext);
-            itemget.getlistitems(false);
-            Mygridview.ItemsSource = itemget.Listapiitems;
+        //    itemssoureGet();
+        //}
+        //public void itemssoureGet()
+        //{
+        //    itemget.Toitem(xmltext);
+        //    itemget.getlistitems(false);
+        //    Mygridview.ItemsSource = itemget.Listapiitems;
             
-            progressrin.IsActive = false;
-        }
+        //    progressrin.IsActive = false;
+        //}
         private void gridstackpanel_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            var boxs = sender as StackPanel;
-            //var box = boxs.DataContext as ItemGET.listsave;
-            //string lookuri = box.sample_url;
-            //Frame.Navigate(typeof(LookImg), box);
-
+            var boxs = sender as StackPanel;     
             var boxx = boxs.DataContext as Yande_post_json;
             string lookurii = boxx.sample_url;
             Frame.Navigate(typeof(LookImg), boxx);
@@ -112,6 +109,10 @@ namespace MT2.page
            var source = getjson.SaveJson(jsontext);
             switch (pivotindex )
             {
+                case 0:
+                    Mygridview.ItemsSource = source;
+                    progressrin.IsActive = false;
+                    break;
                 case 1:
                     Mygridview2.ItemsSource = source;
                     break;
