@@ -272,7 +272,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid>
+        <Grid Name="MyTitleBarVB">
             <Grid
                 Name="MyTitleBar"
                 Grid.Row="0"

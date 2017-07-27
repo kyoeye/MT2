@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,10 +26,16 @@ namespace MT2.page
     /// </summary>
     public sealed partial class Seach2Page : Page
     {
+        ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
         public Seach2Page()
         {
             this.InitializeComponent();
             Window.Current.SetTitleBar(MyTitleBar);
+            if (localsettings.Values["_ThisDeviceis"].ToString() == "Mobile")
+            {
+                MyTitleBarVB.Visibility = Visibility.Collapsed;
+            }
             TagModes = new ObservableCollection<Yande_post_json>();
         }
         #region 变量

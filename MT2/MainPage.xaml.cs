@@ -48,23 +48,15 @@ namespace MT2
         {
             //需要判断运行环境是否为手机（如果是则需要隐藏MyTitleBar)，建议在启动的时候判断，以免影响首页加载速度
             this.InitializeComponent();
-            #region 网络判断
-            //switch (ConnectionHelper.ConnectionType)
-            //{
-            //    case ConnectionType.Ethernet:
-            //        // Ethernet
-            //        break;
-            //    case ConnectionType.WiFi:
-            //        // WiFi
-            //        break;
-            //    case ConnectionType.Data:
-            //        // Data
-            //        break;
-            //    case ConnectionType.Unknown:
-            //        // Unknown
-            //        break;
-            //}
-
+            #region 设备判断
+           if (localsettings.Values["_ThisDeviceis"].ToString () == "Mobile")
+            {
+                TopBlur.Visibility = Visibility.Collapsed;
+                TitleBar2.Visibility = Visibility.Collapsed;
+                MyTitleBar.Visibility = Visibility.Collapsed;
+                picinpciitem.Visibility = Visibility.Collapsed;
+           
+            }
             #endregion
             //开始计算启动次数
             //TheAppOpenNum();
@@ -109,11 +101,7 @@ namespace MT2
             NavigationCacheMode = NavigationCacheMode.Enabled;
             //订阅窗口大小变化
             Window.Current.SizeChanged += Ds_SizeChanged;
-            //第一次启动弹窗
-            //if ((int)localsettings.Values["_AppOpenNum"] == 1)
-            //{
-            //    Show_OneTextDialogAsync();
-            //}
+     
             try
             {
                 if ((bool)localsettings.Values["_BuzaixianshiOnetost"] != true)
@@ -469,11 +457,11 @@ namespace MT2
             Frame.Navigate(typeof(Seach2Page));
         }
         #region 加载更多
-        private void LoadingButton_Click(object sender, RoutedEventArgs e)
+        private async  void LoadingButton_Click(object sender, RoutedEventArgs e)
         {
-            LoadingfuctionAsync();
+          await   LoadingfuctionAsync();
         }
-        private async void LoadingfuctionAsync()
+        private async Task LoadingfuctionAsync()
         {
             //当数据更改后暂时让用户强退应用以免出现问题
             page++;
@@ -489,9 +477,9 @@ namespace MT2
                 MainItemget.Toitem(xmltext);
                 MainItemget.Loadinglistitems();
             }
-         
 
 
+            return;
 
         }
         #endregion
@@ -513,6 +501,23 @@ namespace MT2
             Frame.Navigate(typeof(hotitempage));
             MenuListhoxitem.SelectedItem = null;
             Mymenu.IsPaneOpen = false;
+        }
+
+        private async void ScrollViewer_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+           if (LoadingfuctionAsync().IsCompleted == true)
+            {
+
+            }
+           else
+            {
+                if (Myscrollviewer.VerticalOffset == Myscrollviewer.ScrollableHeight)
+                {
+                    AppName.Text = "True";
+                    await LoadingfuctionAsync();
+                }
+
+            }
         }
     }
 }

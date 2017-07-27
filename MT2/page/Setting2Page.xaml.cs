@@ -38,6 +38,11 @@ namespace MT2.page
             //Logobackground.Source =  mainpage.Homehoturl;
 
             this.InitializeComponent();
+
+            if (localsettings.Values["_ThisDeviceis"].ToString() == "Mobile")
+            {
+                MyTitleBarVB.Visibility = Visibility.Collapsed;
+            }
             tt = new TranslateTransform();
             logo.RenderTransform = tt;
             Window.Current.SetTitleBar(MyTitleBar);
@@ -82,7 +87,8 @@ namespace MT2.page
             base.OnNavigatedTo(e);
             try
             {
-              
+                
+
                 //修改保存路径
                 if (localsettings.Values["_Fileuri"].ToString() == a.Path)
                 {

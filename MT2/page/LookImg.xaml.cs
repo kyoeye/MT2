@@ -1,42 +1,30 @@
-﻿using MT2.Control;
-using MT2.CS;
+﻿using Edi.UWP.Helpers;
 using Microsoft.Toolkit.Uwp.UI.Animations;
+using MT2.CS;
+using MT2.Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using Windows.System.UserProfile;
-using System.IO;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.DataTransfer;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
+using Windows.Graphics.Imaging;
 using Windows.Networking.BackgroundTransfer;
 using Windows.Storage;
 using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
+using Windows.System.UserProfile;
+using Windows.UI.Core;
+using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-using static MT2.Control.MyToastControl;
-using static MT2.MainPage;
-using Windows.UI.Popups;
-using Windows.Storage.Streams;
-using Edi.UWP.Helpers;
-using Windows.UI.ViewManagement;
-using Windows.ApplicationModel.Core;
-using Windows.UI.Core;
-using MT2.Model;
-using Windows.Graphics.Imaging;
-using Windows.Graphics.Display;
-using System.Threading.Tasks;
-using Windows.ApplicationModel;
-using System.Collections.ObjectModel;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
 
@@ -53,6 +41,11 @@ namespace MT2.page
         public LookImg()
         {
             this.InitializeComponent();
+            if (localsettings.Values["_ThisDeviceis"].ToString() == "Mobile")
+            {
+                MyTitleBarVB.Visibility = Visibility.Collapsed;
+            }
+
             Getsuface();
             my_Image = SeeImage;
             //分享——订阅
@@ -494,6 +487,7 @@ namespace MT2.page
             {
                 TagModes.Add(new TagMode { Tag = TagArray[a] });
             }
+            TagTitle.Text = "标签" + "  " + "（共"+TagModes.Count+"个）";
         }
         #endregion
         private void GobackButton_Click(object sender, RoutedEventArgs e)

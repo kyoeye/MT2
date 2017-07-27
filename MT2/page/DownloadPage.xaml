@@ -28,7 +28,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel>
-            <Grid>
+            <Grid Name="MyTitleBarVB">
                 <Grid
                     Name="MyTitleBar"
                     Grid.Row="0"

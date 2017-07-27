@@ -152,26 +152,31 @@
 
                     </ListBox>
                     <Grid Height="50" VerticalAlignment="Bottom">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <AppBarButton
-                            Name="SettingButton"
-                            Grid.ColumnSpan="3"
-                            Width="{Binding ElementName=Mymenu, Path=OpenPaneLength, Mode=OneWay}"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            HorizontalContentAlignment="Stretch"
-                            Click="Setting_Click">
+                        <Border
+                            Background="#FFE8E8E8"
+                            Opacity="0.1"
+                            Tapped="Setting_Click " />
+                        <StackPanel Orientation="Horizontal">
+
                             <TextBlock
+                                Margin="16"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 FontFamily="Segoe MDL2 Assets"
                                 FontSize="18"
                                 Text="&#xE713;" />
-                        </AppBarButton>
+
+
+
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="15"
+                                Text="设置" />
+                        </StackPanel>
+
+
                     </Grid>
                 </Grid>
 
@@ -185,7 +190,7 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <ScrollViewer Grid.RowSpan="3">
+                <ScrollViewer Name="Myscrollviewer" Grid.RowSpan="3">
                     <StackPanel>
                         <Grid
                             Name="HotGridTap"
@@ -294,7 +299,8 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     Source="{Binding ElementName=HomeHot, Path=Source, Mode=TwoWay}"
-                    Stretch="UniformToFill" />
+                    Stretch="UniformToFill"
+                    Visibility="Visible" />
 
                 <Border
                     Name="TitleBar2"
@@ -302,7 +308,8 @@
                     Height="{Binding ElementName=MyTitleBar, Path=Height, Mode=TwoWay}"
                     VerticalAlignment="Top"
                     Background="#FFDDDDDD"
-                    Opacity="0.3" />
+                    Opacity="0.3"
+                    Visibility="Visible" />
                 <Grid
                     Grid.Row="1"
                     Height="50"
@@ -348,9 +355,11 @@
         <Grid
             Name="MyTitleBar"
             Height="32"
-            VerticalAlignment="Top">
+            VerticalAlignment="Top"
+            Visibility="Visible">
             <Grid>
                 <TextBlock
+                    Name="AppName"
                     Margin="0,0,0,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"

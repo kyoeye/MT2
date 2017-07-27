@@ -28,6 +28,8 @@ namespace MT2.CS
         public LockedPage()
         {
             this.InitializeComponent();
+         
+
         }
 
         private void GoingButton_Click(object sender, RoutedEventArgs e)

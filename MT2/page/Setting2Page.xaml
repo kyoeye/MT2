@@ -48,7 +48,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid>
+        <Grid Name="MyTitleBarVB">
             <Grid
                 Name="MyTitleBar"
                 Grid.Row="0"
@@ -235,12 +235,12 @@
                             <StackPanel
                                 Grid.Row="1"
                                 Grid.ColumnSpan="3"
-                                Margin="15,5,15,5"
+                                Margin="5"
                                 Orientation="Vertical">
                                 <Slider
                                     Name="FuckMsSlider"
                                     Grid.Row="1"
-                                    Margin="15,5,15,10"
+                                    Margin="10,5,10,10"
                                     StepFrequency="1"
                                     Value="1" />
 

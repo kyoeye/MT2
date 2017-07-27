@@ -9,6 +9,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -33,7 +34,8 @@ namespace MT2.page
         string m_Hotapiuri = "https://yande.re/post/popular_recent.json?period=1m";
         string y_Hotapiuri = "https://yande.re/post/popular_recent.json?period=1y";
         #endregion
-      
+        ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
         string xmltext;
         public string  XmlText { get { return xmltext; }set { xmltext = value; } } 
         ItemGET itemget = new ItemGET();
@@ -42,8 +44,11 @@ namespace MT2.page
         {
             this.InitializeComponent();
             progressrin.IsActive = true;
-          
-          if (MTHub.Hotitemvalue != null )
+            if (localsettings.Values["_ThisDeviceis"].ToString() == "Mobile")
+            {
+                MyTitleBarVB.Visibility = Visibility.Collapsed;
+            }
+            if (MTHub.Hotitemvalue != null )
             {
                 Mygridview.ItemsSource = MTHub.Hotitemvalue;
                 progressrin.IsActive = false;

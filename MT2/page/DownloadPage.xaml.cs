@@ -30,9 +30,15 @@ namespace MT2.page
     /// </summary>
     public sealed partial class DownloadPage : Page
     {
+        ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
         public DownloadPage()
         {
             this.InitializeComponent();
+            if (localsettings.Values["_ThisDeviceis"].ToString() == "Mobile")
+            {
+                MyTitleBarVB.Visibility = Visibility.Collapsed;
+            }
         }
 
         private  List<DownloadOperation> DownloadList; //活动的下载任务对象 

@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:data="using:MT2.CS"
-    xmlns:local="using:MT2.Control"
+    xmlns:local="using:MT2.pubuliu"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="#FF0074B6"
     mc:Ignorable="d">
@@ -304,7 +304,7 @@
             </Storyboard>
         </Grid.Resources>
 
-        <Grid>
+        <Grid Name="MyTitleBarVB">
             <Grid
                 Name="MyTitleBar"
                 Grid.Row="0"
@@ -539,33 +539,44 @@
                     <Border Margin="5" Background="#FFF2F2F2">
                         <StackPanel>
                             <TextBlock
-                                Name="betatext"
+                                Name="TagTitle"
                                 Margin="5"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 Foreground="#FF4B4B4B"
                                 Text="标签" />
-                            <GridView x:Name="Tagsview" ItemsSource="{x:Bind TagModes}">
-                                <GridView.ItemTemplate>
-                                    <DataTemplate x:DataType="data:TagMode">
-                                        <Border
-                                            Name="TagBorder"
-                                            Background="#FFF2F2F2"
-                                            BorderBrush="#FF434343"
-                                            BorderThickness="1"
-                                            CornerRadius="5"
-                                            Tapped="TagBorder_Tapped">
-                                            <TextBlock
-                                                Margin="5"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                Foreground="#FF434343"
-                                                Text="{x:Bind Tag}" />
-                                        </Border>
-                                    </DataTemplate>
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" ZoomMode="Enabled">
+                                <GridView
+                                    x:Name="Tagsview"
+                                    Margin="5"
+                                    ItemsSource="{x:Bind TagModes}">
+                                    <GridView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <local:WaterfallPanel ColumnNum="1" Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </GridView.ItemsPanel>
+                                    <GridView.ItemTemplate>
+                                        <DataTemplate x:DataType="data:TagMode">
+                                            <Border
+                                                Name="TagBorder"
+                                                Background="#FFF2F2F2"
+                                                BorderBrush="#FF434343"
+                                                BorderThickness="1"
+                                                CornerRadius="5"
+                                                Tapped="TagBorder_Tapped">
+                                                <TextBlock
+                                                    Margin="5"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Foreground="#FF434343"
+                                                    Text="{x:Bind Tag}" />
+                                            </Border>
+                                        </DataTemplate>
 
-                                </GridView.ItemTemplate>
-                            </GridView>
+                                    </GridView.ItemTemplate>
+                                </GridView>
+
+                            </ScrollViewer>
                         </StackPanel>
                     </Border>
                 </Grid>

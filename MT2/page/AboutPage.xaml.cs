@@ -35,8 +35,12 @@ namespace MT2.page
             this.InitializeComponent();
             Window.Current.SetTitleBar(MyTitleBar);
             buildtext.Text ="版本号:"+package.Id.Version.Major + "." + package.Id.Version.Minor + "." + package.Id.Version.Build + "." + package.Id.Version.Revision;
+            if (localsettings.Values["_ThisDeviceis"].ToString() == "Mobile")
+            {
+                MyTitleBarVB.Visibility = Visibility.Collapsed;
+            }
         }
-
+         
         private void Gobackbutton_Click(object sender, RoutedEventArgs e)
         {
              if (Frame.CanGoBack)
