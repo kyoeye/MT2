@@ -51,7 +51,7 @@ namespace MT2
             #region 设备判断
            if (localsettings.Values["_ThisDeviceis"].ToString () == "Mobile")
             {
-                TopBlur.Visibility = Visibility.Collapsed;
+                //TopBlur.Visibility = Visibility.Collapsed;
                 TitleBar2.Visibility = Visibility.Collapsed;
                 MyTitleBar.Visibility = Visibility.Collapsed;
                 picinpciitem.Visibility = Visibility.Collapsed;
@@ -61,7 +61,7 @@ namespace MT2
             //开始计算启动次数
             //TheAppOpenNum();
             BlurGlass(BlurListBox);
-
+            BlurGlass(TopBlur);
             if (localsettings.Values["_AppOpenNum"].ToString() == "1")
             {
                 one_SaveFileUri();
@@ -101,7 +101,8 @@ namespace MT2
             NavigationCacheMode = NavigationCacheMode.Enabled;
             //订阅窗口大小变化
             Window.Current.SizeChanged += Ds_SizeChanged;
-     
+            Myscrollviewer.ViewChanged += Loadingit;
+
             try
             {
                 if ((bool)localsettings.Values["_BuzaixianshiOnetost"] != true)
@@ -115,6 +116,12 @@ namespace MT2
             }
 
         }
+
+        private void Loadingit(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            ScrollViewer_SizeChanged();
+        }
+
         //扔异步处理下载瀑布流数据
         private async void GetimgvalueAsync()
         {
@@ -265,7 +272,7 @@ namespace MT2
             titlebar.ButtonForegroundColor = Colors.Black;
 
             await MenuBlur.Blur(value: 10, duration: 1076, delay: 0).StartAsync();
-            await TopBlur.Blur(value: 10, duration: 1076, delay: 0).StartAsync();         
+            //await TopBlur.Blur(value: 10, duration: 1076, delay: 0).StartAsync();         
         }
         private void BlurGlass(UIElement BlurUI)
         {
@@ -503,20 +510,16 @@ namespace MT2
             Mymenu.IsPaneOpen = false;
         }
 
-        private async void ScrollViewer_SizeChanged(object sender, SizeChangedEventArgs e)
+        private async  void ScrollViewer_SizeChanged()
         {
-           if (LoadingfuctionAsync().IsCompleted == true)
-            {
-
-            }
-           else
+           
+           if(Myscrollviewer.ScrollableHeight >100)
             {
                 if (Myscrollviewer.VerticalOffset == Myscrollviewer.ScrollableHeight)
                 {
-                    AppName.Text = "True";
-                    await LoadingfuctionAsync();
+                    //AppName.Text = "True";
+                    await   LoadingfuctionAsync();
                 }
-
             }
         }
     }

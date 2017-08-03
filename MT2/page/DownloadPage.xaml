@@ -75,18 +75,25 @@
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
                     <Button
+                        Name="Downin_button"
                         Background="{x:Null}"
+                        Click="Downin_button_Click"
                         Content="正在下载"
                         Foreground="Black" />
                     <Button
+                        Name="Downed_button"
                         Background="{x:Null}"
+                        Click="Downed_button_Click"
                         Content="已完成"
                         Foreground="Black" />
                 </StackPanel>
             </Grid>
 
         </StackPanel>
-        <Pivot Grid.Row="1" Style="{StaticResource PivotStyle1}">
+        <Pivot
+            Name="DowPivot"
+            Grid.Row="1"
+            Style="{StaticResource PivotStyle1}">
             <PivotItem
                 Name="Nowdownload"
                 Margin="0"
@@ -163,7 +170,16 @@
             <PivotItem
                 Name="Downloaded"
                 Margin="0"
-                Header="下载历史" />
+                Header="下载历史">
+                <StackPanel>
+                    <Button
+                        Name="FolderOpen"
+                        Height="50"
+                        HorizontalAlignment="Stretch"
+                        Click="FolderOpen_Click"
+                        Content="打开保存目录（还不能用）" />
+                </StackPanel>
+            </PivotItem>
 
         </Pivot>
 

@@ -111,7 +111,6 @@
       <DependentUpon>MyToastControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="CS\apiset\apiurisave.cs" />
-    <Compile Include="CS\apiset\Listapiset.cs" />
     <Compile Include="CS\ArraryHelp.cs" />
     <Compile Include="CS\GetJson.cs" />
     <Compile Include="CS\GetXml.cs" />

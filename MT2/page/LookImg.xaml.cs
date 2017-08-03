@@ -44,6 +44,7 @@ namespace MT2.page
             if (localsettings.Values["_ThisDeviceis"].ToString() == "Mobile")
             {
                 MyTitleBarVB.Visibility = Visibility.Collapsed;
+                Compact.Visibility = Visibility.Collapsed;
             }
 
             Getsuface();

@@ -31,7 +31,8 @@ namespace MT2.page
         public Seach2Page()
         {
             this.InitializeComponent();
-            Window.Current.SetTitleBar(MyTitleBar);
+            NavigationCacheMode = NavigationCacheMode.Enabled;
+
             if (localsettings.Values["_ThisDeviceis"].ToString() == "Mobile")
             {
                 MyTitleBarVB.Visibility = Visibility.Collapsed;
@@ -46,6 +47,8 @@ namespace MT2.page
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            Window.Current.SetTitleBar(MyTitleBar);
+
             try
             {
                 if (e.Parameter.GetType().Name == "TagMode")

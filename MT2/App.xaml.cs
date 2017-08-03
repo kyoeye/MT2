@@ -77,13 +77,28 @@ namespace MT2
         }
 
         #region 处理返回
-        private void GobackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
+        private async void GobackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
         {
             var rootFrame = Rootpage.myMainframe;
             if (rootFrame.CanGoBack)
             {
                 rootFrame.GoBack();
                 e.Handled = true;
+            }
+            else if (!rootFrame.CanGoBack)
+            {
+                e.Handled = true;
+                //  rootFrame.GoBack();
+                var dialog = new ContentDialog()
+                {
+                    Title = "嗷嗷~点击下面按钮就能退出啦~",
+                    Content = "常来看看哇/(ㄒoㄒ)/~~",
+                    PrimaryButtonText = "戳了一下",
+                    FullSizeDesired = false,
+                };
+                dialog.PrimaryButtonClick += (_s, _e) => { Current.Exit(); };
+                await dialog.ShowAsync();
+
             }
         }
         #endregion

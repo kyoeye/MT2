@@ -81,7 +81,7 @@ namespace MT2.page
                     Show_ContentDialogAsync(
                         "更新日志",
                         package.Id.Version.Major + "." + package.Id.Version.Minor + "." + package.Id.Version.Build + "." + package.Id.Version.Revision+"更新",
-                        "1.【新功能】搜索功能现已可用（虽然并不好用）\r\n2.【新功能】标签（Tags）现已加入，点击任一一个标签便可跳转到搜索界面进行搜索\r\n3.【修复】现已修复画中画功能无权打开其他磁盘文件的bug\r\n4.【修复】现已修复下载文件尺寸过小清晰度不佳的bug\r\n5.【修复】现已修复首页top图未完成加载的情况下“日”榜二次加载造成无法打开的bug\r\n6.【优化】版本号判断不正确的bug\r\n7.一些优化和修复……",
+                        "1.【改进】首页瀑布流滚动到底部将会自动加载，不再需要手动点击加载按钮\r\n2.【改进】手机端在首页点击返回键将会有退出弹窗，而不是之前的直接进入后台\r\n3.【改进】手机端将不会再显示一些不必要的东西\r\n4.【改进】Tag标签现在已经能够显示全了\r\n5.【改进】ui调整",
                         "",
                         ""
                         );

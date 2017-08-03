@@ -152,10 +152,7 @@
 
                     </ListBox>
                     <Grid Height="50" VerticalAlignment="Bottom">
-                        <Border
-                            Background="#FFE8E8E8"
-                            Opacity="0.1"
-                            Tapped="Setting_Click " />
+
                         <StackPanel Orientation="Horizontal">
 
                             <TextBlock
@@ -175,7 +172,10 @@
                                 FontSize="15"
                                 Text="设置" />
                         </StackPanel>
-
+                        <Border
+                            Background="#FFE8E8E8"
+                            Opacity="0.1"
+                            Tapped="Setting_Click " />
 
                     </Grid>
                 </Grid>
@@ -251,10 +251,10 @@
                                         <ItemsPresenter />
                                         <Button
                                             Name="LoadingButton"
-                                            HorizontalAlignment="Center"
+                                            HorizontalAlignment="Stretch"
                                             VerticalAlignment="Center"
                                             Click="LoadingButton_Click"
-                                            Content="加载" />
+                                            Content="加载更多" />
                                     </StackPanel>
 
                                 </ControlTemplate>
@@ -292,7 +292,7 @@
                         </Grid>
                     </StackPanel>
                 </ScrollViewer>
-                <Image
+                <!--<Image
                     x:Name="TopBlur"
                     Grid.RowSpan="2"
                     Height="82"
@@ -300,8 +300,8 @@
                     VerticalAlignment="Top"
                     Source="{Binding ElementName=HomeHot, Path=Source, Mode=TwoWay}"
                     Stretch="UniformToFill"
-                    Visibility="Visible" />
-
+                    Visibility="Visible" />-->
+                <Border x:Name="TopBlur" Grid.RowSpan="2" />
                 <Border
                     Name="TitleBar2"
                     Grid.Row="0"

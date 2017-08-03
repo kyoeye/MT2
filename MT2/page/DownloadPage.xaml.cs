@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
+using Windows.Storage.Pickers;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
 
@@ -137,5 +138,25 @@ namespace MT2.page
             if (Frame.CanGoBack)
                 Frame.GoBack();
         }
+
+        private void Downed_button_Click(object sender, RoutedEventArgs e)
+        {
+            DowPivot.SelectedIndex = 0;
+        }
+
+        private void Downin_button_Click(object sender, RoutedEventArgs e)
+        {
+            DowPivot.SelectedIndex = 1;
+
+        }
+        #region 打开文件保存目录
+        private async  void FolderOpen_Click(object sender, RoutedEventArgs e)
+        {
+            string fileuri = localsettings.Values["_Fileuri"].ToString();
+            StorageFolder storagefolder = await StorageFolder.GetFolderFromPathAsync(fileuri);
+            
+        }
+
+        #endregion
     }
 }

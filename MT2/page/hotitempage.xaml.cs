@@ -166,21 +166,38 @@ namespace MT2.page
                 case 1:
                     B1.FontFamily = new FontFamily("Segoe UI Black");
                     B1.Opacity = 1;
-                    Getjsonstring(w_Hotapiuri,1);
+                    if (p1==0)
+                    {
+                        p1++;
+                        Getjsonstring(w_Hotapiuri, 1);
+                    }
                     break;
                 case 2:
                     B2.FontFamily = new FontFamily("Segoe UI Black");
-            Getjsonstring(m_Hotapiuri ,2);
                     B2.Opacity = 1;
+                    if (p2 ==0)
+                    {
+                        p2++;
+                        Getjsonstring(m_Hotapiuri, 2);
+                    }
                     break;
                 case 3:
                     B3.FontFamily = new FontFamily("Segoe UI Black");
-            Getjsonstring(y_Hotapiuri,3);
                     B3.Opacity = 1;
+                    if(p3 ==0)
+                    {
+                        p3++;
+                        Getjsonstring(y_Hotapiuri, 3);
+
+                    }
                     break;
             }
         }
-
+        #region 记录pivotitem的展示次数
+        int p1;
+        int p2;
+        int p3;
+        #endregion
         private void B0_Click(object sender, RoutedEventArgs e)
         {
             pivot.SelectedIndex = 0;
