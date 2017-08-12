@@ -73,7 +73,8 @@ namespace MT2.page
 
                     }
                 }
-            
+                  localsettings.Values["_FuckSlider"] = 1; //暂时关闭里区入口
+
                 if (localsettings.Values["_package"].ToString() != package.Id.Version.Major + "." + package.Id.Version.Minor + "." + package.Id.Version.Build + "." + package.Id.Version.Revision)
                 {
                     localsettings.Values["_listslider"] = 50;
@@ -81,19 +82,23 @@ namespace MT2.page
                     Show_ContentDialogAsync(
                         "更新日志",
                         package.Id.Version.Major + "." + package.Id.Version.Minor + "." + package.Id.Version.Build + "." + package.Id.Version.Revision+"更新",
-                        "1.【改进】首页瀑布流滚动到底部将会自动加载，不再需要手动点击加载按钮\r\n2.【改进】手机端在首页点击返回键将会有退出弹窗，而不是之前的直接进入后台\r\n3.【改进】手机端将不会再显示一些不必要的东西\r\n4.【改进】Tag标签现在已经能够显示全了\r\n5.【改进】ui调整",
+                        "0.【改进】移除和过滤成人内容\r\n1.【改进】首页瀑布流滚动到底部将会自动加载，不再需要手动点击加载按钮\r\n2.【改进】手机端在首页点击返回键将会有退出弹窗，而不是之前的直接进入后台\r\n3.【改进】手机端将不会再显示一些不必要的东西\r\n4.【改进】Tag标签现在已经能够显示全了\r\n5.【改进】ui调整\r\n6.【改进】忘了改了啥，反正就是有(￢︿̫̿￢☆)",
                         "",
                         ""
                         );
 
                 }
+               
+
                 //利用trycatch判断键值是否存在
                 try
                 {
+
                     var h = localsettings.Values["_Fu_kMS"];
                 }
                 catch
                 {
+            
                     localsettings.Values["_Fu_kMS"] = false;
                 }
                 //获取系统平台

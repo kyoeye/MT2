@@ -148,16 +148,16 @@ namespace MT2.page
             {
                 //确定slider的大小（电脑配件）
                 FuckMsSlider.Value = (int)localsettings.Values["_FuckSlider"];
-                if ((int)localsettings.Values["_AppOpenNum"] >= 20)
+                if ((int)localsettings.Values["_AppOpenNum"] >= 200)
                 {
                     //Steins.Visibility = Visibility.Visible;
                     FuckMsSlider.Maximum = 2;
-
-                 
+       
 
                 }
                 else
                 {
+                    Steins.Visibility = Visibility.Collapsed; //暂时隐藏里区入口
                     FuckMsSlider.Maximum = 1;
                 }
 

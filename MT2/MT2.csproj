@@ -308,6 +308,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppThemes\" />
+    <Folder Include="CS\Pixiv_api\" />
     <Folder Include="Windows\Foundation\" />
   </ItemGroup>
   <ItemGroup>

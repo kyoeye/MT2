@@ -141,12 +141,12 @@ namespace MT2.page
 
         private void Downed_button_Click(object sender, RoutedEventArgs e)
         {
-            DowPivot.SelectedIndex = 0;
+            DowPivot.SelectedIndex = 1;
         }
 
         private void Downin_button_Click(object sender, RoutedEventArgs e)
         {
-            DowPivot.SelectedIndex = 1;
+            DowPivot.SelectedIndex = 2;
 
         }
         #region 打开文件保存目录

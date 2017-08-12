@@ -208,7 +208,7 @@
                             Name="Steins"
                             Grid.Row="2"
                             BorderBrush="#ffd7d7d7"
-                            Visibility="Visible">
+                            Visibility="Collapsed">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="*" />

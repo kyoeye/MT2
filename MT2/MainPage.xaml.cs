@@ -105,6 +105,7 @@ namespace MT2
 
             try
             {
+                //不再显示第一次启动弹窗
                 if ((bool)localsettings.Values["_BuzaixianshiOnetost"] != true)
                 {
                     Show_OneTextDialogAsync();
@@ -310,7 +311,7 @@ namespace MT2
         
         public async Task Getimgvalue()
         {
-            Progresstext.Text = "正在和绿坝娘达成共识……";
+            Progresstext.Text = "少女迷茫中……";
             if((bool)localsettings.Values["_TackToJS"] == true)
             {
                 GetAPIstring getjson = new GetAPIstring();

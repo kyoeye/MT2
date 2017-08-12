@@ -60,7 +60,7 @@ namespace MT2.CS
                 list = JsonConvert.DeserializeObject<ObservableCollection<Yande_post_json>>(Jsonstring);
                 try
                 {
-                    if ((int)localsettings.Values["_FuckSlider"] != 2)
+                    if ((int)localsettings.Values["_FuckSlider"] != 20) //2才是对的，暂时弄一个不可能的值以防开关误触发
                     {
                         for (int a = list.Count - 1; a >= 0; a--) //动动py想一想都知道用减   //最后我发现我还是不擅长动PY。。。
                         {
@@ -130,7 +130,7 @@ namespace MT2.CS
             //list.Add(list2[1].d)
             try
             {
-                if ((int)localsettings.Values["_FuckSlider"] != 2)
+                if ((int)localsettings.Values["_FuckSlider"] != 20)
                 {
                     for (int a = list.Count - 1; a >= 0; a--)  
                     {
@@ -149,8 +149,7 @@ namespace MT2.CS
             }
             catch
             {
-                if ((int)localsettings.Values["_FuckSlider"] == 2)
-                {
+           
                     for (int a = list.Count - 1; a >= 0; a--) 
                     {
                         if (list[a].rating == "q")
@@ -163,8 +162,6 @@ namespace MT2.CS
                         }
 
                     }
-
-                }
 
             }
             }
