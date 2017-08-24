@@ -113,11 +113,13 @@
     <Compile Include="CS\apiset\apiurisave.cs" />
     <Compile Include="CS\ArraryHelp.cs" />
     <Compile Include="CS\GetJson.cs" />
+    <Compile Include="CS\GetPixivJson.cs" />
     <Compile Include="CS\GetXml.cs" />
     <Compile Include="CS\HotimageHub.cs" />
     <Compile Include="CS\Modes.cs" />
     <Compile Include="CS\MTHub.cs" />
     <Compile Include="CS\ItemGET.cs" />
+    <Compile Include="CS\Pixiv_api\tuijian.cs" />
     <Compile Include="page\LockedPage.xaml.cs">
       <DependentUpon>LockedPage.xaml</DependentUpon>
     </Compile>
@@ -308,7 +310,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppThemes\" />
-    <Folder Include="CS\Pixiv_api\" />
     <Folder Include="Windows\Foundation\" />
   </ItemGroup>
   <ItemGroup>

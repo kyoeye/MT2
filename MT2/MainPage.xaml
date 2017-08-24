@@ -228,7 +228,7 @@
                                     FontSize="15" />
                             </StackPanel>
                         </Grid>
-                        <Pivot>
+                        <Pivot Name="HomePage_Pivot" SelectionChanged="HomePage_Pivot_SelectionChanged">
                             <PivotItem Margin="0" Header="Yande.re">
                                 <Grid
                                     Name="Yande_re"
@@ -279,89 +279,63 @@
 
 
 
-                                    <GridView  animations:ReorderGridAnimation.Duration="450"  Name="Pictureada" HorizontalAlignment="Stretch"  VerticalAlignment="Top">
-                            <GridView.ItemTemplate>
-                                <DataTemplate  >
-                                    <Grid
-                                        Name="Picturegrid"
-                                        Tapped="Picturegrid_Tapped"
-                                        Width="130"
-                                        Height="200"
-                                        Margin="0.5"
-                                        Background="#FFD1D1D1" HorizontalAlignment="Center">
-                                        <Image Stretch="UniformToFill"  Height="205" Source="{Binding preview_url}" HorizontalAlignment="Center" />
-                                    </Grid>
-                                </DataTemplate>
-                            </GridView.ItemTemplate>
-                        </GridView>
+                                    <GridView
+                                        Name="Pictureada"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Top"
+                                        animations:ReorderGridAnimation.Duration="450">
+                                        <GridView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid
+                                                    Name="Picturegrid"
+                                                    Width="130"
+                                                    Height="200"
+                                                    Margin="0.5"
+                                                    HorizontalAlignment="Center"
+                                                    Background="#FFD1D1D1"
+                                                    Tapped="Picturegrid_Tapped">
+                                                    <Image
+                                                        Height="205"
+                                                        HorizontalAlignment="Center"
+                                                        Source="{Binding large}"
+                                                        Stretch="UniformToFill" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </GridView.ItemTemplate>
+                                    </GridView>
                                 </Grid>
 
                             </PivotItem>
                             <PivotItem Header="Pixiv">
                                 <Grid
-                                    Name="Pixiv"
+                                    Name="Pixiv_List"
                                     Margin="5"
                                     Background="White">
-                                    <Grid.Resources>
-                                        <DataTemplate x:Key="GridviewTemplete">
-                                            <Grid
-                                                Name="Picturegrid"
-                                                Width="145"
-                                                Height="200"
-                                                Margin="0.5"
-                                                HorizontalAlignment="Center"
-                                                Background="#FFD1D1D1"
-                                                Tapped="Picturegrid_Tapped">
-                                                <Image
-                                                    Height="205"
+
+                                    <GridView
+                                        Name="Pictureada_Pixiv"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Top"
+                                        animations:ReorderGridAnimation.Duration="450">
+                                        <GridView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid
+                                                    Name="Picturegrid"
+                                                    Width="130"
+                                                    Height="200"
+                                                    Margin="0.5"
                                                     HorizontalAlignment="Center"
-                                                    Source="{Binding preview_url}"
-                                                    Stretch="UniformToFill" />
-                                            </Grid>
-                                        </DataTemplate>
-                                        <ControlTemplate x:Key="Controltemplate">
-                                            <StackPanel>
-                                                <ItemsPresenter />
-                                                <Button
-                                                    Name="LoadingButton"
-                                                    HorizontalAlignment="Stretch"
-                                                    VerticalAlignment="Center"
-                                                    Click="LoadingButton_Click"
-                                                    Content="加载更多" />
-                                            </StackPanel>
-
-                                        </ControlTemplate>
-                                    </Grid.Resources>
-
-                                    <controls:AdaptiveGridView
-                                        x:Name="Pictureada2"
-                                        animations:ReorderGridAnimation.Duration="204"
-                                        Control.Template="{StaticResource Controltemplate}"
-                                        DesiredWidth="140"
-                                        IsItemClickEnabled="True"
-                                        ItemHeight="200"
-                                        ItemTemplate="{StaticResource GridviewTemplete}"
-                                        OneRowModeEnabled="False"
-                                        ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                                        SelectionMode="Single" />
-
-
-
-                                    <!--<GridView  animations:ReorderGridAnimation.Duration="450"  Name="Pictureada" HorizontalAlignment="Stretch"  VerticalAlignment="Top">
-                            <GridView.ItemTemplate>
-                                <DataTemplate  >
-                                    <Grid
-                                        Name="Picturegrid"
-                                        Tapped="Picturegrid_Tapped"
-                                        Width="130"
-                                        Height="200"
-                                        Margin="0.5"
-                                        Background="#FFD1D1D1" HorizontalAlignment="Center">
-                                        <Image Stretch="UniformToFill"  Height="205" Source="{Binding preview_url}" HorizontalAlignment="Center" />
-                                    </Grid>
-                                </DataTemplate>
-                            </GridView.ItemTemplate>
-                        </GridView>-->
+                                                    Background="#FFD1D1D1"
+                                                    Tapped="Picturegrid_Tapped">
+                                                    <Image
+                                                        Height="205"
+                                                        HorizontalAlignment="Center"
+                                                        Source="{Binding preview_url}"
+                                                        Stretch="UniformToFill" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </GridView.ItemTemplate>
+                                    </GridView>
                                 </Grid>
 
                             </PivotItem>

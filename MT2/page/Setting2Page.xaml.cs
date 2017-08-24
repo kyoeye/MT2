@@ -26,7 +26,7 @@ namespace MT2.page
         ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
         public List<ThemeColors> themeColors;
         Fallsclass falclass = new Fallsclass();
-        public bool TackToJS_bool;
+        //public bool TackToJS_bool;
         StorageFolder a = KnownFolders.SavedPictures;//获取图片保存目录
         //public int fallshub { get { return falclass.FallsHub; } set { falclass.FallsHub = value; } }
         //MainPage mainpage;
@@ -105,17 +105,17 @@ namespace MT2.page
                 }
 
                 //是否使用js获取数据
-                if ((bool)localsettings.Values["_TackToJS"] == true)
-                {
-                    TackToJS_bool = true ;
-                    TackToJS.IsOn = true;
-                }
-                else
-                {
-                    TackToJS_bool = false;
-                    TackToJS.IsOn = false;
-                    //localsettings.Values["_TackToJS"] = false;
-                }
+                //if ((bool)localsettings.Values["_TackToJS"] == true)
+                //{
+                //    TackToJS_bool = true ;
+                //    TackToJS.IsOn = true;
+                //}
+                //else
+                //{
+                //    TackToJS_bool = false;
+                //    TackToJS.IsOn = false;
+                //    //localsettings.Values["_TackToJS"] = false;
+                //}
 
                 //总是拉取文件选取器
                 if (localsettings.Values["_FileAllOpen"].ToString() == "true")
@@ -148,9 +148,9 @@ namespace MT2.page
             {
                 //确定slider的大小（电脑配件）
                 FuckMsSlider.Value = (int)localsettings.Values["_FuckSlider"];
-                if ((int)localsettings.Values["_AppOpenNum"] >= 200)
+                if ((int)localsettings.Values["_AppOpenNum"] >= 20)
                 {
-                    //Steins.Visibility = Visibility.Visible;
+                    Steins.Visibility = Visibility.Visible;
                     FuckMsSlider.Maximum = 2;
        
 
@@ -354,27 +354,27 @@ namespace MT2.page
 
         #endregion
 
-        private void TackToJS_Toggled(object sender, RoutedEventArgs e)
-        {
+        //private void TackToJS_Toggled(object sender, RoutedEventArgs e)
+        //{
            
            
-            if (TackToJS.IsOn == true)
-            {
-                localsettings.Values["_TackToJS"] = true;
-            }
-            else
-            {
-                localsettings.Values["_TackToJS"] = false;
+        //    if (TackToJS.IsOn == true)
+        //    {
+        //        localsettings.Values["_TackToJS"] = true;
+        //    }
+        //    else
+        //    {
+        //        localsettings.Values["_TackToJS"] = false;
 
-            }
-            if ((bool)localsettings.Values["_TackToJS"] != TackToJS_bool)
-            {
-                showmessAsync();
+        //    }
+        //    if ((bool)localsettings.Values["_TackToJS"] != TackToJS_bool)
+        //    {
+        //        showmessAsync();
 
-            }
+        //    }
 
 
-        }
+        //}
         private async void  showmessAsync()
         {
             

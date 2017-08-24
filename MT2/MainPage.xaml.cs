@@ -451,12 +451,12 @@ namespace MT2
                 var box = boxs.DataContext as Yande_post_json;
                 Frame.Navigate(typeof(LookImg), box);
             }
-            else
-            {
-                var boxs = sender as Grid;
-                var box = boxs.DataContext as ItemGET.listsave;
-                Frame.Navigate(typeof(LookImg), box);
-            }
+            //else
+            //{
+            //    var boxs = sender as Grid;
+            //    var box = boxs.DataContext as ItemGET.listsave;
+            //    Frame.Navigate(typeof(LookImg), box);
+            //}
           
         }
 
@@ -479,19 +479,28 @@ namespace MT2
                 getjson.Loadingitem(jsontext,limit);
 
             }
-            else
-            {
-                xmltext = await getapistring.GetWebString(Mainapiuri + ".xml?limit=" + limit + "&page=" + page);
-                MainItemget.Toitem(xmltext);
-                MainItemget.Loadinglistitems();
-            }
+            //else
+            //{
+            //    xmltext = await getapistring.GetWebString(Mainapiuri + ".xml?limit=" + limit + "&page=" + page);
+            //    MainItemget.Toitem(xmltext);
+            //    MainItemget.Loadinglistitems();
+            //}
 
 
             return;
 
         }
         #endregion
-
+        #region pixiv
+        private async void get_Pixivjson()
+        {
+            getjson = new GetJson();
+           var pixiv_retunJsonstring =  await getjson.GetWebJsonStringAsync(@" https://app-api.pixiv.net/v1/illust/recommended-nologin?include_ranking_illusts=false&offset=30");
+            GetPixivJson gpj = new GetPixivJson();
+            var ret =   gpj.SaveJson(pixiv_retunJsonstring);
+            Pictureada_Pixiv.ItemsSource = ret;
+        }
+        #endregion
         private void GobackButton_Click(object sender, RoutedEventArgs e)
         {
             //if (Frame .CanGoBack)
@@ -521,6 +530,19 @@ namespace MT2
                     //AppName.Text = "True";
                     await   LoadingfuctionAsync();
                 }
+            }
+        }
+
+        private void HomePage_Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch(HomePage_Pivot.SelectedIndex)
+            {
+                case 0:
+
+                    break;
+                case 1:
+                    get_Pixivjson();
+                    break;
             }
         }
     }

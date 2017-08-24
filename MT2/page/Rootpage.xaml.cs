@@ -73,7 +73,7 @@ namespace MT2.page
 
                     }
                 }
-                  localsettings.Values["_FuckSlider"] = 1; //暂时关闭里区入口
+                  //localsettings.Values["_FuckSlider"] = 1; //暂时关闭里区入口
 
                 if (localsettings.Values["_package"].ToString() != package.Id.Version.Major + "." + package.Id.Version.Minor + "." + package.Id.Version.Build + "." + package.Id.Version.Revision)
                 {

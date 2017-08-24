@@ -19,6 +19,7 @@ namespace MT2.CS
         ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
 
         //public List<Yande_post_json> list;
+        #region 通用获取json返回
         public async Task<string> GetWebJsonStringAsync(string uri)
         {
             JS_RequestUri = uri;
@@ -50,6 +51,8 @@ namespace MT2.CS
 
             return jsstring;
         }
+
+        #endregion
         public ObservableCollection<Yande_post_json> list { get; set; }
 
         public ObservableCollection<Yande_post_json> SaveJson(string Jsonstring)
@@ -60,7 +63,7 @@ namespace MT2.CS
                 list = JsonConvert.DeserializeObject<ObservableCollection<Yande_post_json>>(Jsonstring);
                 try
                 {
-                    if ((int)localsettings.Values["_FuckSlider"] != 20) //2才是对的，暂时弄一个不可能的值以防开关误触发
+                    if ((int)localsettings.Values["_FuckSlider"] != 2) //2才是对的，暂时弄一个不可能的值以防开关误触发
                     {
                         for (int a = list.Count - 1; a >= 0; a--) //动动py想一想都知道用减   //最后我发现我还是不擅长动PY。。。
                         {
@@ -130,7 +133,7 @@ namespace MT2.CS
             //list.Add(list2[1].d)
             try
             {
-                if ((int)localsettings.Values["_FuckSlider"] != 20)
+                if ((int)localsettings.Values["_FuckSlider"] != 2)
                 {
                     for (int a = list.Count - 1; a >= 0; a--)  
                     {

@@ -139,7 +139,7 @@
                         <TextBlock
                             HorizontalAlignment="Center"
                             Foreground="Black"
-                            Text="当前版本：萌豚二号机-初版" />
+                            Text="当前版本：萌豚二号机-夏末" />
                         <Button
                             Name="Abutopagebutton"
                             HorizontalAlignment="Center"
@@ -376,7 +376,7 @@
 
                                 </Grid>
                             </Grid>
-                            <Grid>
+                            <!--<Grid Visibility="Collapsed" >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto" />
                                     <RowDefinition Height="auto" />
@@ -404,7 +404,7 @@
                                     </StackPanel>
 
                                 </Grid>
-                            </Grid>
+                            </Grid>-->
 
                             <StackPanel>
 
