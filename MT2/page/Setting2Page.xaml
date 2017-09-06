@@ -93,7 +93,10 @@
                         Height="50"
                         VerticalAlignment="Top"
                         Orientation="Horizontal">
-                        <AppBarButton Name="SettingGoback" Width="50">
+                        <AppBarButton
+                            Name="Setting_setting"
+                            Width="50"
+                            Click="Setting_setting_Click">
                             <TextBlock
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
@@ -103,6 +106,7 @@
                         </AppBarButton>
 
                         <TextBlock
+                            Name="Setting_Title"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontSize="20"
@@ -137,9 +141,11 @@
 
                     <StackPanel Margin="10" VerticalAlignment="Bottom">
                         <TextBlock
+                            Name="MoeTon_name"
                             HorizontalAlignment="Center"
                             Foreground="Black"
-                            Text="当前版本：萌豚二号机-夏末" />
+                            IsTextSelectionEnabled="True"
+                            Text="萌豚二号机-开学季" />
                         <Button
                             Name="Abutopagebutton"
                             HorizontalAlignment="Center"
@@ -147,15 +153,55 @@
                             Background="{x:Null}"
                             Click="Abutopagebutton_Click">
                             <TextBlock
+                                Name="about_text"
                                 Margin="5"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 FontSize="16"
-                                Text="关于MTACG" />
+                                Text="关于MoeTon" />
                         </Button>
                     </StackPanel>
                 </Grid>
                 <StackPanel>
+                    <StackPanel Margin="4" Background="{ThemeResource AppBarBorderThemeBrush}">
+                        <TextBlock
+                            Name="Language_Title"
+                            Margin="10"
+                            HorizontalAlignment="left"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="#ff4b4b4b"
+                            Text="语言" />
+                        <StackPanel BorderBrush="#FFD7D7D7" BorderThickness="0,2,0,0">
+                            <GridView
+                                Name="LanguageSelect"
+                                Margin="15,5,15,10"
+                                Padding="0"
+                                IsEnabled="True"
+                                ItemsSource="{x:Bind Languagelist}"
+                                SelectionChanged="LanguageSelect_SelectionChanged"
+                                UseLayoutRounding="False">
+                                <GridView.ItemTemplate>
+                                    <DataTemplate x:DataType="data:LanguageMode">
+                                        <StackPanel>
+                                            <Image
+                                                Width="50"
+                                                Height="30"
+                                                Margin="3"
+                                                Source="{x:Bind LanguageIMG_Uri}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridView.ItemTemplate>
+                            </GridView>
+                            <TextBlock
+                                Name="Translate_By"
+                                Margin="15,0,15,10"
+                                Foreground="Gray"
+                                Text="翻译提供：Watson花生酱" />
+                        </StackPanel>
+
+                    </StackPanel>
+
                     <!--<Grid
                         Margin="4"
                         Background="{ThemeResource AppBarBorderThemeBrush}"
@@ -198,77 +244,14 @@
                             <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
                         <TextBlock
+                            Name="Safetycontrol_Title"
                             Margin="10"
                             HorizontalAlignment="left"
                             FontSize="20"
                             FontWeight="Bold"
                             Foreground="#ff4b4b4b"
+                            IsTextSelectionEnabled="True"
                             Text="安全控制" />
-                        <Grid
-                            Name="Steins"
-                            Grid.Row="2"
-                            BorderBrush="#ffd7d7d7"
-                            Visibility="Collapsed">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
-                            </Grid.RowDefinitions>
-                            <TextBlock
-                                Margin="15,15,15,15"
-                                FontSize="17"
-                                Text="数据安全防御级别" />
-
-                            <TextBlock
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                Margin="5,5,15,5"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="center"
-                                FontSize="13"
-                                Foreground="#FF7A7A7A"
-                                Text="（电脑配件）" />
-
-                            <StackPanel
-                                Grid.Row="1"
-                                Grid.ColumnSpan="3"
-                                Margin="5"
-                                Orientation="Vertical">
-                                <Slider
-                                    Name="FuckMsSlider"
-                                    Grid.Row="1"
-                                    Margin="10,5,10,10"
-                                    StepFrequency="1"
-                                    Value="1" />
-
-                                <!--<ToggleSwitch
-                                    Name="NoH_Check"
-                                    OffContent="表"
-                                    OnContent="里"
-                                    Toggled="NoH_Check_Toggled" />-->
-                                <StackPanel
-                                    Name="Hypbutton"
-                                    Orientation="Horizontal"
-                                    Visibility="Visible">
-                                    <HyperlinkButton
-                                        Click="HyperlinkButton_Click"
-                                        Content="隐藏选项"
-                                        Foreground="#FF373737" />
-                                    <HyperlinkButton
-                                        Name="HyperlinkButton2"
-                                        Margin="5"
-                                        Click="HyperlinkButton2_Click"
-                                        Content="隐藏选项并恢复默认"
-                                        Foreground="#FF373737" />
-
-                                </StackPanel>
-
-                            </StackPanel>
-                        </Grid>
-
                         <Grid
                             Grid.Row="1"
                             BorderBrush="#ffd7d7d7"
@@ -284,8 +267,10 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <TextBlock
+                                    Name="Apppassword_Title"
                                     Margin="15,15,15,15"
                                     FontSize="17"
+                                    IsTextSelectionEnabled="True"
                                     Text="启动密码" />
                                 <TextBlock
                                     Name="Nowpassword"
@@ -295,6 +280,7 @@
                                     VerticalAlignment="Center"
                                     FontSize="14"
                                     Foreground="#FF7A7A7A"
+                                    IsTextSelectionEnabled="True"
                                     Text="当前没有密码"
                                     Visibility="Visible" />
 
@@ -323,6 +309,80 @@
                             </Grid>
 
                         </Grid>
+
+                        <Grid
+                            Name="Steins"
+                            Grid.Row="2"
+                            BorderBrush="#ffd7d7d7"
+                            Visibility="Visible">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                Margin="15,15,15,15"
+                                FontSize="17"
+                                IsTextSelectionEnabled="True"
+                                Text="命运石之门" />
+
+                            <TextBlock
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Margin="5,5,15,5"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="center"
+                                FontSize="13"
+                                Foreground="#FF7A7A7A"
+                                IsTextSelectionEnabled="True"
+                                Text="（电脑配件）" />
+
+                            <StackPanel
+                                Grid.Row="1"
+                                Grid.ColumnSpan="3"
+                                Margin="5"
+                                Orientation="Vertical">
+                                <TextBlock
+                                    Name="Steins_Prompt"
+                                    Margin="10,0,0,0"
+                                    Foreground="#FF7A7A7A"
+                                    IsTextSelectionEnabled="True"
+                                    Text="此时建议不要在公共场合打开应用"
+                                    Visibility="Collapsed" />
+                                <Slider
+                                    Name="FuckMsSlider"
+                                    Grid.Row="1"
+                                    Margin="10,5,10,10"
+                                    StepFrequency="1" />
+
+                                <!--<ToggleSwitch
+                                    Name="NoH_Check"
+                                    OffContent="表"
+                                    OnContent="里"
+                                    Toggled="NoH_Check_Toggled" />-->
+                                <StackPanel
+                                    Name="Hypbutton"
+                                    Orientation="Horizontal"
+                                    Visibility="Visible">
+                                    <HyperlinkButton
+                                        Click="HyperlinkButton_Click"
+                                        Content="隐藏选项"
+                                        Foreground="#FF373737" />
+                                    <HyperlinkButton
+                                        Name="HyperlinkButton2"
+                                        Margin="5"
+                                        Click="HyperlinkButton2_Click"
+                                        Content="隐藏选项并恢复默认"
+                                        Foreground="#FF373737" />
+
+                                </StackPanel>
+
+                            </StackPanel>
+                        </Grid>
+
                     </Grid>
                     <Grid Margin="4" Background="{ThemeResource AppBarBorderThemeBrush}">
                         <Grid.RowDefinitions>
@@ -330,17 +390,16 @@
                             <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
                         <TextBlock
+                            Name="NetworkSettings_Title"
                             Grid.Row="0"
                             Margin="10"
                             HorizontalAlignment="left"
                             FontSize="20"
                             FontWeight="Bold"
                             Foreground="#ff4b4b4b"
+                            IsTextSelectionEnabled="True"
                             Text="御坂网络中枢" />
-                        <StackPanel
-                            Grid.Row="1"
-                            BorderBrush="#ffd7d7d7"
-                            BorderThickness="0,2,0,0">
+                        <StackPanel Grid.Row="1">
                             <Grid Visibility="Visible">
                                 <Grid BorderBrush="#ffd7d7d7" BorderThickness="0,2,0,0">
                                     <Grid.RowDefinitions>
@@ -349,10 +408,12 @@
                                         <RowDefinition Height="auto" />
                                     </Grid.RowDefinitions>
                                     <TextBlock
+                                        Name="Picturestoload_Title"
                                         Margin="15,5,15,5"
                                         HorizontalAlignment="left"
                                         VerticalAlignment="center"
                                         FontSize="17"
+                                        IsTextSelectionEnabled="True"
                                         Text="瀑布流单次加载图片数量" />
                                     <TextBlock
                                         Margin="15,0,15,0"
@@ -367,9 +428,11 @@
                                         StepFrequency="5" />
 
                                     <TextBlock
+                                        Name="Picturestoload_Prompt"
                                         Grid.Row="2"
                                         Margin="15,0,15,15"
                                         FontSize="13"
+                                        IsTextSelectionEnabled="True"
                                         Style="{StaticResource Textblock_prompt}"
                                         Text="（注意：这个值在安全模式下实际显示图片会存在数量偏差，视网络情况酌情修改）"
                                         TextWrapping="Wrap" />
@@ -409,19 +472,25 @@
                             <StackPanel>
 
                                 <TextBlock
+                                    Name="SavePath_Title"
                                     Margin="15,5,15,5"
                                     HorizontalAlignment="left"
                                     VerticalAlignment="center"
                                     FontSize="17"
+                                    IsTextSelectionEnabled="True"
                                     Text="更改保存位置" />
 
                                 <CheckBox
                                     Name="DefualtFilebutton"
                                     Margin="15,5,15,5"
                                     Checked="DefualtFilebutton_Checked"
+                                    Content="自定义保存路径"
                                     Unchecked="DefualtFilebutton_Unchecked" />
 
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel
+                                    Margin="2"
+                                    Background="#FFD7D7D7"
+                                    Orientation="Horizontal">
 
                                     <Button
                                         Name="Picksacefile"
@@ -433,7 +502,7 @@
 
                                     <TextBlock
                                         Name="FileUri"
-                                        Margin="10,10,0,10"
+                                        Margin="4,10,0,10"
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
                                         TextWrapping="Wrap" />
@@ -514,6 +583,7 @@
                                 HorizontalAlignment="Left"
                                 FontSize="13"
                                 Foreground="#ff595959"
+                                IsTextSelectionEnabled="True"
                                 Text="（注意：如未生效请重启应用）" />
 
                         </Grid>

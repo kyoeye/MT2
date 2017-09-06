@@ -52,7 +52,7 @@
                 <Grid
                     Height="250"
                     VerticalAlignment="Top"
-                    an:ParallaxService.VerticalMultiplier="2"
+                    an:ParallaxService.VerticalMultiplier="-0.4"
                     Background="#FF0074B6">
                     <StackPanel VerticalAlignment="Center">
                         <Image
@@ -63,7 +63,7 @@
                             Name="buildtext"
                             HorizontalAlignment="Center"
                             Foreground="White"
-                            Text="MTACG版本：" />
+                            Text="MoeTon版本：" />
                         <TextBlock
                             Margin="5"
                             HorizontalAlignment="Center"
@@ -71,120 +71,137 @@
                             Text="Yande.reAPI版本：API 1.13.0+update.3" />
                     </StackPanel>
                 </Grid>
-                <StackPanel>
-                    <TextBlock
-                        Margin="5"
+                <StackPanel Background="#FFF6F6F6">
+                    <StackPanel>
+                        <TextBlock
+                            Margin="5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            IsTextSelectionEnabled="True"
+                            Text="声明" />
+                        <TextBlock
+                            Margin="5"
+                            FontSize="14"
+                            IsTextSelectionEnabled="True"
+                            Opacity="0.5"
+                            Text="软件所有资源来源网络，只用于学习交流与个人使用，请勿用于商业用途，作品版权归原作者所有。"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap" />
+                        <TextBlock
+                            Margin="5,15,5,5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            IsTextSelectionEnabled="True"
+                            Text="隐私策略" />
+                        <HyperlinkButton
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Content="隐私策略页面"
+                            NavigateUri="http://mtacg.azurewebsites.net/" />
+                    </StackPanel>
+                    <StackPanel
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Text="声明" />
-                    <TextBlock
-                        Margin="5"
-                        FontSize="14"
-                        Opacity="0.5"
-                        Text="软件所有资源来源网络，只用于学习交流与个人使用，请勿用于商业用途，作品版权归原作者所有。"
-                        TextAlignment="Center"
-                        TextWrapping="Wrap" />
-                    <TextBlock
-                        Margin="5,15,5,5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Text="隐私策略" />
-                    <HyperlinkButton
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Content="隐私策略页面"
-                        NavigateUri="http://mtacg.azurewebsites.net/" />
-                </StackPanel>
-                <StackPanel
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Opacity="0.7">
-                    <TextBlock
-                        Margin="5,15,5,5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="18"
-                        Text="弱势群体" />
-                    <TextBlock
-                        Margin="5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Text="画渣针眼" />
-                    <TextBlock
-                        Margin="5,15,5,5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="18"
-                        Text="好基友们" />
-                    <TextBlock
-                        Margin="5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Text="大魔导（it之家）" />
-                    <TextBlock
-                        Margin="5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Text="旋风小伙（微页）" />
-                    <TextBlock
-                        Margin="5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Text="飞翔（极简天气）" />
-                    <TextBlock
-                        Margin="5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Text="花露水（算命的一枚）" />
-                    <TextBlock
-                        Margin="5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="10"
-                        Text="画针扎眼（测试）针眼绅士（UI）" />
-                    <TextBlock
-                        Margin="5,15,5,5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="18"
-                        Text="联系方式＆反馈" />
-                    <Button
-                        Name="QQ"
-                        Margin="5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Click="QQ_Click"
-                        Content="QQ群：531234373" />
-                    <TextBlock
-                        Margin="5"
-                        FontSize="14"
-                        Opacity="0.5"
-                        Text="邮箱反馈将默认发送一些设备信息，如您不同意可在邮件页面删除"
-                        TextWrapping="Wrap" />
-                    <Button
-                        Name="email_i"
-                        Margin="5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Click="email_i_Click"
-                        Content="邮箱：ghhhgvchbvc55667@outlook.com" />
+                        Opacity="0.7">
+                        <TextBlock
+                            Margin="5,15,5,5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            IsTextSelectionEnabled="True"
+                            Text="弱势群体" />
+                        <TextBlock
+                            Margin="5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="画渣针眼" />
+                        <TextBlock
+                            Margin="5,15,5,5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            IsTextSelectionEnabled="True"
+                            Text="好基友们" />
+                        <TextBlock
+                            Margin="5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="大魔导（it之家）" />
+                        <TextBlock
+                            Margin="5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="旋风小伙（微页）" />
+                        <TextBlock
+                            Margin="5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="飞翔（极简天气）" />
+                        <TextBlock
+                            Margin="5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="花露水（算命的一枚）" />
+                        <TextBlock
+                            Margin="5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="Watson花生酱（翻译担当）" />
+                        <TextBlock
+                            Margin="5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="10"
+                            Text="画针扎眼（测试）针眼绅士（UI）" />
+                        <TextBlock
+                            Name="Feedback_text"
+                            Margin="5,15,5,5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            IsTextSelectionEnabled="True"
+                            Text="联系方式＆反馈" />
+                        <Button
+                            Name="QQ"
+                            Margin="5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Click="QQ_Click"
+                            Content="QQ群：531234373" />
+                        <TextBlock
+                            Name="Feedback_tishi"
+                            Margin="5"
+                            FontSize="14"
+                            IsTextSelectionEnabled="True"
+                            Opacity="0.5"
+                            Text="邮箱反馈将默认发送一些设备信息，如您不同意可在邮件页面删除"
+                            TextWrapping="Wrap" />
+                        <Button
+                            Name="email_i"
+                            Margin="5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Click="email_i_Click"
+                            Content="Email：ghhhgvchbvc55667@outlook.com" />
 
-                    <TextBlock
-                        Margin="5,15,5,5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Text="开发者模式"
-                        Visibility="Collapsed" />
-                    <Button
-                        Name="Objectadmin"
-                        Margin="5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Click="Objectadmin_Click"
-                        Content="只有帅的人才看到的"
-                        Visibility="Collapsed" />
+                        <TextBlock
+                            Margin="5,15,5,5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="开发者模式"
+                            Visibility="Collapsed" />
+                        <Button
+                            Name="Objectadmin"
+                            Margin="5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Click="Objectadmin_Click"
+                            Content="只有帅的人才看到的"
+                            Visibility="Collapsed" />
 
+                    </StackPanel>
                 </StackPanel>
+
 
 
 

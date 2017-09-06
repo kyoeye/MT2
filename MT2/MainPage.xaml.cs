@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Resources;
 using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Composition;
@@ -49,19 +50,38 @@ namespace MT2
             //需要判断运行环境是否为手机（如果是则需要隐藏MyTitleBar)，建议在启动的时候判断，以免影响首页加载速度
             this.InitializeComponent();
             #region 设备判断
-           if (localsettings.Values["_ThisDeviceis"].ToString () == "Mobile")
+            if (localsettings.Values["_ThisDeviceis"].ToString() == "Mobile")
             {
                 //TopBlur.Visibility = Visibility.Collapsed;
                 TitleBar2.Visibility = Visibility.Collapsed;
                 MyTitleBar.Visibility = Visibility.Collapsed;
                 picinpciitem.Visibility = Visibility.Collapsed;
-           
+
             }
             #endregion
             //开始计算启动次数
             //TheAppOpenNum();
             BlurGlass(BlurListBox);
             BlurGlass(TopBlur);
+            #region 设置应用语言
+            try
+            {
+                if (localsettings.Values["Language"].ToString() == "China")
+                {
+                    LanguageSelection.SettingLanguage("China");
+                }
+                else if (localsettings.Values["Language"].ToString() == "USA")
+                {
+                    LanguageSelection.SettingLanguage("USA");
+                }
+
+            }
+            catch
+            {
+
+            }
+            #endregion
+
             if (localsettings.Values["_AppOpenNum"].ToString() == "1")
             {
                 one_SaveFileUri();
@@ -78,13 +98,13 @@ namespace MT2
 
             #endregion
             var f = Window.Current.Bounds;
-             int  wit = (int)f.Width;
+            int wit = (int)f.Width;
             sizechanged(wit);
 
             if (coreTitleBar.IsVisible == false)//失败，需要获取系统平台了
             {
                 coreTitleBar.ExtendViewIntoTitleBar = true;
-               
+
                 UiLoading();
 
             }
@@ -160,12 +180,12 @@ namespace MT2
         }
         private void sizechanged(int e)
         {
-            if (e< 600)
+            if (e < 600)
             {
                 BlurListBox.Visibility = Visibility.Visible;
                 MenuBlurGrid.Visibility = Visibility.Collapsed;
             }
-            if (e> 600)
+            if (e > 600)
             {
                 BlurListBox.Visibility = Visibility.Collapsed;
                 MenuBlurGrid.Visibility = Visibility.Visible;
@@ -184,28 +204,36 @@ namespace MT2
         {
             Window.Current.SetTitleBar(TitleBar2);
             base.OnNavigatedTo(e);
-            limit = (int ) localsettings.Values["_listslider"];
-      
+            try
+            {
+                SetText();
+            }
+            catch
+            {
+                //新用户会catch，不会对语言进行操作，升级用户会被调到UpPage进行配置
+            }
+            limit = (int)localsettings.Values["_listslider"];
+
         }
 
 
         #region 判断应用打开次数以管理整个应用&符合第一次打开应用执行的方法
-        public   void TheAppOpenNum()
+        public void TheAppOpenNum()
         {
-           if ( localsettings.Values["_AppOpenNum"] == null)
+            if (localsettings.Values["_AppOpenNum"] == null)
             {
                 appOpennum++;
                 localsettings.Values["_AppOpenNum"] = appOpennum;
                 //第一次启动调用弹窗
                 localsettings.Values["_FileAllOpen"] = "false"; //默认关闭：每次保存文件都询问保存地址
             }
-           else
+            else
             {
-                appOpennum = int.Parse(localsettings.Values["_AppOpenNum"].ToString ());
+                appOpennum = int.Parse(localsettings.Values["_AppOpenNum"].ToString());
                 appOpennum++;
                 localsettings.Values["_AppOpenNum"] = appOpennum;
             }
-        
+
         }
 
         private async void Show_OneTextDialogAsync()
@@ -222,7 +250,7 @@ namespace MT2
                     Content = new Content(uri)
                     {
                         Title = "吾辈好不容易写的确定不看下吗？哇哇哇",
-                      
+
                         //Context = "嗯……虽然目标很多但是现在只有一个yande.re图源的。。。动漫图库？",
                         //Title2 = "为什么访问这么慢?"
                     },
@@ -230,11 +258,13 @@ namespace MT2
                     SecondaryButtonText = "知道啦",
                     FullSizeDesired = true,
                 };
-                cd.PrimaryButtonClick += (_s, _e) => {
+                cd.PrimaryButtonClick += (_s, _e) =>
+                {
                     localsettings.Values["_BuzaixianshiOnetost"] = true;
                 };
-                cd.SecondaryButtonClick += (_s, _e) => {
-                       
+                cd.SecondaryButtonClick += (_s, _e) =>
+                {
+
                 };
                 await cd.ShowAsync();
             }
@@ -245,12 +275,12 @@ namespace MT2
         }
 
         //如果应用第一次启动，保存路径将指向系统默认相册
-        private void one_SaveFileUri ()
+        private void one_SaveFileUri()
         {
             StorageFolder picuri = KnownFolders.SavedPictures;
             localsettings.Values["_Fileuri"] = picuri.Path.ToString();
         }
-     #endregion
+        #endregion
 
         //#region 导航处理
         //// 每次完成导航 确定下是否显示系统后退按钮  
@@ -285,11 +315,11 @@ namespace MT2
                 BorderMode = EffectBorderMode.Hard,
                 Source = new ArithmeticCompositeEffect
                 {
-                    MultiplyAmount =0,
+                    MultiplyAmount = 0,
                     Source1Amount = 0.5f,
                     Source2Amount = 0.5f,
-                    Source1 = new CompositionEffectSourceParameter ("backdropBrush"),
-                    Source2 = new ColorSourceEffect { Color = Color.FromArgb(255,245,245,245)}
+                    Source1 = new CompositionEffectSourceParameter("backdropBrush"),
+                    Source2 = new ColorSourceEffect { Color = Color.FromArgb(255, 245, 245, 245) }
 
                 }
             };
@@ -308,30 +338,30 @@ namespace MT2
         }
 
         #endregion
-        
+
         public async Task Getimgvalue()
         {
             Progresstext.Text = "少女迷茫中……";
-            if((bool)localsettings.Values["_TackToJS"] == true)
+            if ((bool)localsettings.Values["_TackToJS"] == true)
             {
                 GetAPIstring getjson = new GetAPIstring();
-                if(getjson != null)
+                if (getjson != null)
                 {
                     string jsontext = await getjson.GetWebString(Mainapiuri + ".json?limit=" + limit);
                     SetjsonstringAsync(jsontext);
-                }       
+                }
             }
             else
             {
-                xmltext = await getapistring.GetWebString(Mainapiuri+ ".xml?limit=" + limit);
-                MainItemget.Toitem(xmltext);        
-                    Progresstext.Text = "正在排列一些奇怪的东西……";
-                    MainItemget.getlistitems(true);
-                    Pictureada.ItemsSource = MainItemget.Listapiitems;
-                    await GetHotimage();
-            
+                xmltext = await getapistring.GetWebString(Mainapiuri + ".xml?limit=" + limit);
+                MainItemget.Toitem(xmltext);
+                Progresstext.Text = "正在排列一些奇怪的东西……";
+                MainItemget.getlistitems(true);
+                Pictureada.ItemsSource = MainItemget.Listapiitems;
+                await GetHotimage();
+
             }
-          
+
             //progressrin.IsActive = false;
         }
 
@@ -347,7 +377,7 @@ namespace MT2
             }
             catch (Exception ex)
             {
-                await new MessageDialog(ex.ToString ()).ShowAsync();
+                await new MessageDialog(ex.ToString()).ShowAsync();
             }
         }
 
@@ -457,7 +487,7 @@ namespace MT2
             //    var box = boxs.DataContext as ItemGET.listsave;
             //    Frame.Navigate(typeof(LookImg), box);
             //}
-          
+
         }
 
         private void Searchbutton_Click(object sender, RoutedEventArgs e)
@@ -465,9 +495,9 @@ namespace MT2
             Frame.Navigate(typeof(Seach2Page));
         }
         #region 加载更多
-        private async  void LoadingButton_Click(object sender, RoutedEventArgs e)
+        private async void LoadingButton_Click(object sender, RoutedEventArgs e)
         {
-          await   LoadingfuctionAsync();
+            await LoadingfuctionAsync();
         }
         private async Task LoadingfuctionAsync()
         {
@@ -476,7 +506,7 @@ namespace MT2
             if ((bool)localsettings.Values["_TackToJS"] == true)
             {
                 jsontext = await getapistring.GetWebString(Mainapiuri + ".json?limit=" + limit + "&page=" + page);
-                getjson.Loadingitem(jsontext,limit);
+                getjson.Loadingitem(jsontext, limit);
 
             }
             //else
@@ -494,11 +524,19 @@ namespace MT2
         #region pixiv
         private async void get_Pixivjson()
         {
-            getjson = new GetJson();
-           var pixiv_retunJsonstring =  await getjson.GetWebJsonStringAsync(@" https://app-api.pixiv.net/v1/illust/recommended-nologin?include_ranking_illusts=false&offset=30");
-            GetPixivJson gpj = new GetPixivJson();
-            var ret =   gpj.SaveJson(pixiv_retunJsonstring);
-            Pictureada_Pixiv.ItemsSource = ret;
+            try
+            {
+                getjson = new GetJson();
+                var pixiv_retunJsonstring = await getjson.GetWebJsonStringAsync(@" https://app-api.pixiv.net/v1/illust/recommended-nologin?include_ranking_illusts=false&offset=30");
+                GetPixivJson gpj = new GetPixivJson();
+                var ret = gpj.SaveJson(pixiv_retunJsonstring);
+                //Pictureada_Pixiv.ItemsSource = ret; //pivot控件会让瀑布流失效，所以暂时回退注释掉关于瀑布流的更改
+            }
+            catch
+            {
+                await new MessageDialog("还没准备好").ShowAsync();
+            }
+         
         }
         #endregion
         private void GobackButton_Click(object sender, RoutedEventArgs e)
@@ -511,7 +549,7 @@ namespace MT2
                 Mymenu.IsPaneOpen = false;
         }
 
-        
+
 
         private void HotGridTap_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -520,30 +558,44 @@ namespace MT2
             Mymenu.IsPaneOpen = false;
         }
 
-        private async  void ScrollViewer_SizeChanged()
+        private async void ScrollViewer_SizeChanged()
         {
-           
-           if(Myscrollviewer.ScrollableHeight >100)
+
+            if (Myscrollviewer.ScrollableHeight > 100)
             {
                 if (Myscrollviewer.VerticalOffset == Myscrollviewer.ScrollableHeight)
                 {
                     //AppName.Text = "True";
-                    await   LoadingfuctionAsync();
+                    await LoadingfuctionAsync();
                 }
             }
         }
 
-        private void HomePage_Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //private void HomePage_Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    switch (HomePage_Pivot.SelectedIndex)
+        //    {
+        //        case 0:
+        //            HomePage_Pivot.SelectedItem = 0;
+        //            break;
+        //        case 1:
+        //            HomePage_Pivot.SelectedItem = 1;
+        //            //get_Pixivjson();
+        //            break;
+        //    }
+        //}
+        #region 显示文字
+        private void SetText()
         {
-            switch(HomePage_Pivot.SelectedIndex)
-            {
-                case 0:
-
-                    break;
-                case 1:
-                    get_Pixivjson();
-                    break;
-            }
+            ResourceLoader rl = new ResourceLoader();
+            Mainpage_Title.Text = rl.GetString("Mainpage_Shouye");
+            Mainpage_Shouye.Text = rl.GetString("Mainpage_Shouye");
+            Mainpage_Hot.Text = rl.GetString("Mainpage_Hot");
+            Mainpage_User.Text = rl.GetString("Mainpage_User");
+            Mainpage_PicinPic.Text = rl.GetString("Mainpage_PicinPic");
+            Mainpage_Download.Text = rl.GetString("Mainpage_Download");
+            Mainpage_setting.Text = rl.GetString("Setting_Title");
         }
+        #endregion
     }
 }

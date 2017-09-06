@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -47,6 +48,7 @@ namespace MT2.page
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            SetText();
             Window.Current.SetTitleBar(MyTitleBar);
 
             try
@@ -121,5 +123,15 @@ namespace MT2.page
             Seach_text = SeachTextBox.Text;
             GetSeachResult(Seach_text);
         }
+        #region 显示文字
+        private void SetText()
+        {
+            ResourceLoader rl = new ResourceLoader();
+            Seach_Title.Text = rl.GetString("String21");
+            SeachTextBox.PlaceholderText = rl.GetString("String22");
+          
+        }
+        #endregion
+
     }
 }

@@ -96,6 +96,8 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="MT2_StoreKey.pfx" />
     <None Include="project.json" />
+    <PRIResource Include="Strings\zh-Hans\Resources.resw" />
+    <PRIResource Include="Strings\en-US\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -116,6 +118,8 @@
     <Compile Include="CS\GetPixivJson.cs" />
     <Compile Include="CS\GetXml.cs" />
     <Compile Include="CS\HotimageHub.cs" />
+    <Compile Include="CS\Languages.cs" />
+    <Compile Include="CS\LanguageSelection.cs" />
     <Compile Include="CS\Modes.cs" />
     <Compile Include="CS\MTHub.cs" />
     <Compile Include="CS\ItemGET.cs" />
@@ -167,6 +171,9 @@
     <Compile Include="page\ShowCompactPage.xaml.cs">
       <DependentUpon>ShowCompactPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="page\UpPage.xaml.cs">
+      <DependentUpon>UpPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="pubuliu\SufaceLoader.cs" />
     <Compile Include="pubuliu\TagPanel.cs" />
@@ -182,6 +189,8 @@
     <None Include="Package.StoreAssociation.xml">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Assets\icon\China.png" />
+    <Content Include="Assets\icon\USA.png" />
     <Content Include="Assets\Square150x150Logo.scale-100.png" />
     <Content Include="Assets\Square150x150Logo.scale-125.png" />
     <Content Include="Assets\Square150x150Logo.scale-150.png" />
@@ -299,6 +308,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="page\ShowCompactPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\UpPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

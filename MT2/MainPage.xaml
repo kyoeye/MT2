@@ -79,7 +79,7 @@
                                 </AppBarButton>
                             </Grid>
                         </ListBoxItem>-->
-                        <ListBoxItem Name="homepage">
+                        <ListBoxItem Name="homepage" Visibility="Visible">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock
                                     Margin="5"
@@ -89,6 +89,7 @@
                                     FontSize="18"
                                     Text="&#xE10F;" />
                                 <TextBlock
+                                    Name="Mainpage_Shouye"
                                     Margin="15,0,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
@@ -96,6 +97,30 @@
                                     Text="首页" />
                             </StackPanel>
                         </ListBoxItem>
+                        <ListBoxItem
+                            Name="UserManage"
+                            IsEnabled="False"
+                            Visibility="Visible">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon
+                                    Margin="5"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    FontSize="18"
+                                    Glyph="&#xE13D;" />
+
+                                <TextBlock
+                                    Name="Mainpage_User"
+                                    Margin="15,0,0,0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="15"
+                                    Text="账号管理（施工）" />
+                            </StackPanel>
+
+                        </ListBoxItem>
+
                         <ListBoxItem Name="hotitem">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock
@@ -106,6 +131,7 @@
                                     FontSize="18"
                                     Text="&#xE8E1;" />
                                 <TextBlock
+                                    Name="Mainpage_Hot"
                                     Margin="15,0,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
@@ -124,6 +150,7 @@
                                     FontSize="18"
                                     Text="&#xE118;" />
                                 <TextBlock
+                                    Name="Mainpage_Download"
                                     Margin="15,0,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
@@ -142,6 +169,7 @@
                                     Glyph="&#xF16E;" />
 
                                 <TextBlock
+                                    Name="Mainpage_PicinPic"
                                     Margin="15,0,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
@@ -166,6 +194,7 @@
 
 
                             <TextBlock
+                                Name="Mainpage_setting"
                                 Margin="5,0,0,0"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
@@ -228,58 +257,56 @@
                                     FontSize="15" />
                             </StackPanel>
                         </Grid>
-                        <Pivot Name="HomePage_Pivot" SelectionChanged="HomePage_Pivot_SelectionChanged">
-                            <PivotItem Margin="0" Header="Yande.re">
-                                <Grid
-                                    Name="Yande_re"
-                                    Margin="5"
-                                    Background="White">
-                                    <!--<Grid.Resources>
-                                        <DataTemplate x:Key="GridviewTemplete">
-                                            <Grid
-                                                Name="Picturegrid"
-                                                Width="145"
-                                                Height="200"
-                                                Margin="0.5"
-                                                HorizontalAlignment="Center"
-                                                Background="#FFD1D1D1"
-                                                Tapped="Picturegrid_Tapped">
-                                                <Image
-                                                    Height="205"
-                                                    HorizontalAlignment="Center"
-                                                    Source="{Binding preview_url}"
-                                                    Stretch="UniformToFill" />
-                                            </Grid>
-                                        </DataTemplate>
-                                        <ControlTemplate x:Key="Controltemplate">
-                                            <StackPanel>
-                                                <ItemsPresenter />
-                                                <Button
-                                                    Name="LoadingButton"
-                                                    HorizontalAlignment="Stretch"
-                                                    VerticalAlignment="Center"
-                                                    Click="LoadingButton_Click"
-                                                    Content="加载更多" />
-                                            </StackPanel>
+                        <Grid
+                            Name="Yande_re"
+                            Margin="5"
+                            Background="White">
+                            <Grid.Resources>
+                                <DataTemplate x:Key="GridviewTemplete">
+                                    <Grid
+                                        Name="Picturegrid"
+                                        Width="145"
+                                        Height="200"
+                                        Margin="0.5"
+                                        HorizontalAlignment="Center"
+                                        Background="#FFD1D1D1"
+                                        Tapped="Picturegrid_Tapped">
+                                        <Image
+                                            Height="205"
+                                            HorizontalAlignment="Center"
+                                            Source="{Binding preview_url}"
+                                            Stretch="UniformToFill" />
+                                    </Grid>
+                                </DataTemplate>
+                                <ControlTemplate x:Key="Controltemplate">
+                                    <StackPanel>
+                                        <ItemsPresenter />
+                                        <Button
+                                            Name="LoadingButton"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Center"
+                                            Click="LoadingButton_Click"
+                                            Content="加载更多" />
+                                    </StackPanel>
 
-                                        </ControlTemplate>
-                                    </Grid.Resources>
+                                </ControlTemplate>
+                            </Grid.Resources>
 
-                                    <controls:AdaptiveGridView
-                                        x:Name="Pictureada"
-                                        animations:ReorderGridAnimation.Duration="204"
-                                        Control.Template="{StaticResource Controltemplate}"
-                                        DesiredWidth="140"
-                                        IsItemClickEnabled="True"
-                                        ItemHeight="200"
-                                        ItemTemplate="{StaticResource GridviewTemplete}"
-                                        OneRowModeEnabled="False"
-                                        ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                                        SelectionMode="Single" />-->
+                            <controls:AdaptiveGridView
+                                x:Name="Pictureada"
+                                animations:ReorderGridAnimation.Duration="204"
+                                Control.Template="{StaticResource Controltemplate}"
+                                DesiredWidth="140"
+                                IsItemClickEnabled="True"
+                                ItemHeight="200"
+                                ItemTemplate="{StaticResource GridviewTemplete}"
+                                OneRowModeEnabled="False"
+                                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                SelectionMode="Single" />
 
 
 
-                                    <GridView
+                            <!--<GridView
                                         Name="Pictureada"
                                         HorizontalAlignment="Stretch"
                                         VerticalAlignment="Top"
@@ -302,11 +329,14 @@
                                                 </Grid>
                                             </DataTemplate>
                                         </GridView.ItemTemplate>
-                                    </GridView>
-                                </Grid>
+                                    </GridView>-->
+                        </Grid>
+
+                        <!--<Pivot Name="HomePage_Pivot" SelectionChanged="HomePage_Pivot_SelectionChanged">
+                            <PivotItem Margin="0" Header="Yande.re">
 
                             </PivotItem>
-                            <PivotItem Header="Pixiv">
+                            <PivotItem Header="Pixiv" IsEnabled="False">
                                 <Grid
                                     Name="Pixiv_List"
                                     Margin="5"
@@ -340,7 +370,7 @@
 
                             </PivotItem>
 
-                        </Pivot>
+                        </Pivot>-->
                     </StackPanel>
                 </ScrollViewer>
                 <!--<Image
@@ -379,6 +409,7 @@
                                 Text="&#xE700;" />
                         </AppBarButton>
                         <TextBlock
+                            Name="Mainpage_Title"
                             Margin="5"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
@@ -416,7 +447,7 @@
                     VerticalAlignment="Center"
                     FontSize="13"
                     Style="{StaticResource TextblockForeground}"
-                    Text="MTACG" />
+                    Text="MoeTon" />
 
             </Grid>
             <StackPanel Orientation="Horizontal">

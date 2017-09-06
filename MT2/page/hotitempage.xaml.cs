@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -67,6 +68,7 @@ namespace MT2.page
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Window.Current.SetTitleBar(MyTitleBar);
+            SetText();
             base.OnNavigatedTo(e);
         }
 
@@ -136,10 +138,10 @@ namespace MT2.page
 
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            B0.Content = "每日";
-            B1.Content = "每周";
-            B2.Content = "每月";
-            B3.Content = "每年";
+            //B0.Content = "每日";
+            //B1.Content = "每周";
+            //B2.Content = "每月";
+            //B3.Content = "每年";
             B0.FontSize = 15;
             B1.FontSize = 15;
             B2.FontSize = 15;
@@ -226,5 +228,17 @@ namespace MT2.page
             Getjsonstring(y_Hotapiuri,3);
         }
         #endregion
+        #region 显示文字
+        private void SetText()
+        {
+            ResourceLoader rl = new ResourceLoader();
+            Hot_Title.Text = rl.GetString("Hot_Title");
+            B0.Content = rl.GetString("B0");
+            B1.Content = rl.GetString("B1");
+            B2.Content = rl.GetString("B2");
+            B3.Content = rl.GetString("B3");          
+        }
+        #endregion
+
     }
 }

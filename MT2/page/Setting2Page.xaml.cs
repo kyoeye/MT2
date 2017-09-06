@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Media;
 using MT2.Control;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.ApplicationModel.Resources.Core;
+using Windows.ApplicationModel.Resources;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
 
@@ -25,6 +27,8 @@ namespace MT2.page
     {
         ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
         public List<ThemeColors> themeColors;
+        public List<LanguageMode> Languagelist;
+
         Fallsclass falclass = new Fallsclass();
         //public bool TackToJS_bool;
         StorageFolder a = KnownFolders.SavedPictures;//获取图片保存目录
@@ -49,9 +53,17 @@ namespace MT2.page
             Listslider = (int)listslider.Value;
             //coreTitleBar.ExtendViewIntoTitleBar = false;
             //DefualtFilebutton.Content = @"默认保存至系统目录的”保存的图片“";
-            FuckMsSlider.ValueChanged += FuckMsSlider_ValueChanged1;
+            try
+            {
+                FuckMsSlider.ValueChanged += FuckMsSlider_ValueChanged1;
+            }
+            catch
+            {
 
-            themeColors = ThemeColorsAdd.GetThemeColors(); //返回主题数据
+            }
+
+          //  themeColors = ThemeColorsAdd.GetThemeColors(); //返回主题数据
+            Languagelist = Languages.GetLanguages();//返回语言列表
 
             falclass.FallsHub = (int)listslider.Value;
             //按下默认下载位置的按钮   
@@ -79,7 +91,23 @@ namespace MT2.page
 
         private void FuckMsSlider_ValueChanged1(object sender, Windows.UI.Xaml.Controls.Primitives.RangeBaseValueChangedEventArgs e)
         {
-            localsettings.Values["_FuckSlider"] = (int)FuckMsSlider.Value;
+            try
+            {
+                localsettings.Values["_FuckSlider"] = (int)FuckMsSlider.Value;
+                if ((int)localsettings.Values["_FuckSlider"] == 2)
+                {
+                    Steins_Prompt.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    Steins_Prompt.Visibility = Visibility.Collapsed;
+
+                }
+            }
+          catch
+            {
+
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -92,16 +120,15 @@ namespace MT2.page
                 //修改保存路径
                 if (localsettings.Values["_Fileuri"].ToString() == a.Path)
                 {
-                    DefualtFilebutton.Content = "勾选以启用自定义路径";
+                    //DefualtFilebutton.Content = "勾选以启用自定义路径";
                     Picksacefile.IsEnabled = false;
                     FileUri.Text = @"系统“保存的图片”文件夹" + localsettings.Values["_Fileuri"].ToString();
                 }
                 else
                 {
-                    DefualtFilebutton.Content = "取消勾选以恢复默认保存路径";
-                    Picksacefile.IsEnabled = true;
+                    //Picksacefile.IsEnabled = true;
                     //DefualtFilebutton.Content  = localsettings.Values["_Fileuri"].ToString();
-                    FileUri.Text = "当前保存的文件夹" + localsettings.Values["_Fileuri"].ToString();
+                    FileUri.Text = "Path" + localsettings.Values["_Fileuri"].ToString();
                 }
 
                 //是否使用js获取数据
@@ -138,6 +165,7 @@ namespace MT2.page
                 }
                 //silder的设置
                 listslider.Value =   (int)localsettings.Values["_listslider"];
+                SetText();
 
             }
             catch
@@ -152,7 +180,15 @@ namespace MT2.page
                 {
                     Steins.Visibility = Visibility.Visible;
                     FuckMsSlider.Maximum = 2;
-       
+                    if ((int)localsettings.Values["_FuckSlider"] == 2)
+                    {
+                        Steins_Prompt.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        Steins_Prompt.Visibility = Visibility.Collapsed;
+
+                    }
 
                 }
                 else
@@ -173,7 +209,8 @@ namespace MT2.page
         {
             base.OnNavigatedFrom(e);
             localsettings.Values["_listslider"] = (int)listslider.Value;
-           
+            FuckMsSlider.ValueChanged -= FuckMsSlider_ValueChanged1;
+
         }
         #region 访问器们\(￣︶￣*\))
         int _listslider;
@@ -471,11 +508,67 @@ namespace MT2.page
             tt.Y = 0;
             fuckyou.Visibility = Visibility.Collapsed;
         }
+
+        private void LanguageSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selection = sender as GridView;
+            switch (selection.SelectedIndex)
+            {
+                case 0:
+                    localsettings.Values["Language"] = "China";
+                    LanguageSelection.SettingLanguage(localsettings.Values["Language"].ToString());
+                    SetText();
+                    break;
+                case 1:
+                    localsettings.Values["Language"] = "USA";
+                    LanguageSelection.SettingLanguage(localsettings.Values["Language"].ToString());
+                    SetText();
+                    break;
+                default:
+                    localsettings.Values["Language"] = "China";
+                    LanguageSelection.SettingLanguage(localsettings.Values["Language"].ToString());
+                    SetText();
+                    break;
+            }
+        }
+        private void SetText()
+        {
+            //英文版将不开启h
+            //Steins.Visibility = Visibility.Collapsed;
+            ResourceLoader rl = new ResourceLoader();
+            Setting_Title.Text = rl.GetString("Setting_Title");
+            Language_Title.Text = rl.GetString("Language_Title");
+            Safetycontrol_Title.Text = rl.GetString("String3");
+            Apppassword_Title.Text = rl.GetString("String4");
+            Nowpassword.Text = rl.GetString("String5");
+            loagingpassword.PlaceholderText = rl.GetString("String6");
+            NetworkSettings_Title.Text = rl.GetString("String11");
+            Picturestoload_Title.Text = rl.GetString("String12");
+            Picturestoload_Prompt.Text = rl.GetString("String13");
+            SavePath_Title.Text = rl.GetString("String14");
+            Picksacefile.Content = rl.GetString("String16");
+            DefualtFilebutton.Content = rl.GetString("String15");
+            FileAllOpen.Content = rl.GetString("String18");
+            Translate_By.Text = rl.GetString("Translate_By");
+            about_text.Text = rl.GetString("String35");
+            MoeTon_name.Text = rl.GetString("MoeTon_name");
+        }
+        int ssclick;
+        private void Setting_setting_Click(object sender, RoutedEventArgs e)
+        {
+            ssclick++;
+            if (ssclick ==20)
+            {
+                Frame.Navigate(typeof(UpPage));
+            }
+        }
+
+
         //这个事件不能直接用，试试事件订阅
         //private void FuckMsSlider_ValueChanged(object sender, Windows.UI.Xaml.Controls.Primitives.RangeBaseValueChangedEventArgs e)
         //{
-    
-             
+
+
         //}
     }
 }

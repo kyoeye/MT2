@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="B0" xml:space="preserve">
+    <value>日</value>
+    <comment>日</comment>
+  </data>
+  <data name="B1" xml:space="preserve">
+    <value>周</value>
+    <comment>周</comment>
+  </data>
+  <data name="B2" xml:space="preserve">
+    <value>月</value>
+    <comment>月</comment>
+  </data>
+  <data name="B3" xml:space="preserve">
+    <value>年</value>
+    <comment>年</comment>
+  </data>
+  <data name="Compact" xml:space="preserve">
+    <value>画中画</value>
+    <comment>查看图片页面的画中画</comment>
+  </data>
+  <data name="DownloadButton" xml:space="preserve">
+    <value>下载</value>
+    <comment>下载</comment>
+  </data>
+  <data name="Hot_Title" xml:space="preserve">
+    <value>热榜</value>
+    <comment>热榜</comment>
+  </data>
+  <data name="Language_Title" xml:space="preserve">
+    <value>语言</value>
+    <comment>语言</comment>
+  </data>
+  <data name="Loading_01" xml:space="preserve">
+    <value>少女迷茫中……</value>
+    <comment>少女迷茫中……</comment>
+  </data>
+  <data name="Loading_02" xml:space="preserve">
+    <value>正在达成交易……</value>
+    <comment>正在达成交易……</comment>
+  </data>
+  <data name="Mainpage_Download" xml:space="preserve">
+    <value>下载</value>
+    <comment>下载管理</comment>
+  </data>
+  <data name="Mainpage_Hot" xml:space="preserve">
+    <value>热榜</value>
+    <comment>热榜</comment>
+  </data>
+  <data name="Mainpage_PicinPic" xml:space="preserve">
+    <value>画中画</value>
+    <comment>画中画</comment>
+  </data>
+  <data name="Mainpage_Shouye" xml:space="preserve">
+    <value>首页</value>
+    <comment>首页</comment>
+  </data>
+  <data name="Mainpage_User" xml:space="preserve">
+    <value>账户管理</value>
+    <comment>账户管理</comment>
+  </data>
+  <data name="MoeTon_name" xml:space="preserve">
+    <value>萌豚二号机-开学季</value>
+    <comment>萌豚二号机-开学季</comment>
+  </data>
+  <data name="Setting_Title" xml:space="preserve">
+    <value>设置</value>
+    <comment>设置</comment>
+  </data>
+  <data name="Steins_Prompt" xml:space="preserve">
+    <value>此时建议不要在公共场合打开应用</value>
+    <comment>此时建议不要在公共场合打开应用</comment>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>更新完成</value>
+    <comment>更新完成</comment>
+  </data>
+  <data name="String10" xml:space="preserve">
+    <value>隐藏并恢复默认</value>
+    <comment>隐藏并恢复默认</comment>
+  </data>
+  <data name="String11" xml:space="preserve">
+    <value>御坂网络</value>
+    <comment>网络控制</comment>
+  </data>
+  <data name="String12" xml:space="preserve">
+    <value>瀑布流单次加载图片数量</value>
+    <comment>瀑布流单次加载图片数量</comment>
+  </data>
+  <data name="String13" xml:space="preserve">
+    <value>注意：这个值在安全模式下实际显示图片会存在数量偏差</value>
+    <comment>注意：这个值在安全模式下实际显示图片会存在数量偏差</comment>
+  </data>
+  <data name="String14" xml:space="preserve">
+    <value>保存位置</value>
+    <comment>保存位置</comment>
+  </data>
+  <data name="String15" xml:space="preserve">
+    <value>自定义保存路径</value>
+    <comment>自定义保存路径</comment>
+  </data>
+  <data name="String16" xml:space="preserve">
+    <value>更改保存路径</value>
+    <comment>更改保存路径</comment>
+  </data>
+  <data name="String17" xml:space="preserve">
+    <value>系统的“保存的图片”文件夹</value>
+    <comment>系统的“保存的图片”文件夹</comment>
+  </data>
+  <data name="String18" xml:space="preserve">
+    <value>每次保存总是询问保存位置（将禁用保存路径）</value>
+    <comment>每次保存总是询问保存位置（将禁用保存路径）</comment>
+  </data>
+  <data name="String19" xml:space="preserve">
+    <value>分享</value>
+    <comment>分享</comment>
+  </data>
+  <data name="String2" xml:space="preserve">
+    <value>开学季</value>
+    <comment>开学季</comment>
+  </data>
+  <data name="String20" xml:space="preserve">
+    <value>标签</value>
+    <comment>标签</comment>
+  </data>
+  <data name="String21" xml:space="preserve">
+    <value>搜索</value>
+    <comment>搜索</comment>
+  </data>
+  <data name="String22" xml:space="preserve">
+    <value>推荐您通过点击Tag的方式搜索</value>
+    <comment>建议您通过点击Tag的方式搜索</comment>
+  </data>
+  <data name="String23" xml:space="preserve">
+    <value>新功能快速配置</value>
+    <comment>新功能快速配置</comment>
+  </data>
+  <data name="String24" xml:space="preserve">
+    <value>正在下载Top数据</value>
+    <comment>正在下载Top数据</comment>
+  </data>
+  <data name="String25" xml:space="preserve">
+    <value>版本号</value>
+    <comment>版本号</comment>
+  </data>
+  <data name="String26" xml:space="preserve">
+    <value>版权声明</value>
+    <comment>版权声明</comment>
+  </data>
+  <data name="String27" xml:space="preserve">
+    <value>软件所有资源来源网络，只用于学习交流与个人使用，不得用于商业用途，作品版权归原作者所有</value>
+    <comment>软件所有资源来源网络，只用于学习交流与个人使用，不得用于商业用途，作品版权归原作者所有</comment>
+  </data>
+  <data name="String28" xml:space="preserve">
+    <value>隐私策略</value>
+    <comment>隐私策略</comment>
+  </data>
+  <data name="String29" xml:space="preserve">
+    <value>开发者</value>
+    <comment>开发者</comment>
+  </data>
+  <data name="String3" xml:space="preserve">
+    <value>安全控制</value>
+    <comment>安全控制</comment>
+  </data>
+  <data name="String30" xml:space="preserve">
+    <value>好朋友们</value>
+    <comment>好朋友们</comment>
+  </data>
+  <data name="String31" xml:space="preserve">
+    <value>联系方式＆反馈</value>
+    <comment>联系方式＆反馈</comment>
+  </data>
+  <data name="String32" xml:space="preserve">
+    <value>邮箱反馈将发送一些设备信息，您可以自由删除</value>
+    <comment>邮箱反馈将发送一些设备信息，您可以自由删除</comment>
+  </data>
+  <data name="String33" xml:space="preserve">
+    <value>正在下载，请尽量避免下载过程中退出应用</value>
+    <comment>正在下载，请尽量避免下载过程中退出应用</comment>
+  </data>
+  <data name="String34" xml:space="preserve">
+    <value>画中画</value>
+    <comment>画中画</comment>
+  </data>
+  <data name="String35" xml:space="preserve">
+    <value>关于MoeTon</value>
+    <comment>关于</comment>
+  </data>
+  <data name="String36" xml:space="preserve">
+    <value>升级完成</value>
+    <comment>升级完成</comment>
+  </data>
+  <data name="String37" xml:space="preserve">
+    <value>New function quick settings</value>
+    <comment>新功能快速配置</comment>
+  </data>
+  <data name="String38" xml:space="preserve">
+    <value>设置语言</value>
+    <comment>设置语言</comment>
+  </data>
+  <data name="String4" xml:space="preserve">
+    <value>启动密码</value>
+    <comment>启动密码</comment>
+  </data>
+  <data name="String5" xml:space="preserve">
+    <value>当前没有密码</value>
+    <comment>当前没有密码</comment>
+  </data>
+  <data name="String6" xml:space="preserve">
+    <value>没有输入则不需要密码</value>
+    <comment>没有输入则不需要密码</comment>
+  </data>
+  <data name="String7" xml:space="preserve">
+    <value>命运石之门</value>
+    <comment>公共场合安全级别</comment>
+  </data>
+  <data name="String8" xml:space="preserve">
+    <value>电脑配件</value>
+    <comment>电脑配件</comment>
+  </data>
+  <data name="String9" xml:space="preserve">
+    <value>隐藏</value>
+    <comment>隐藏</comment>
+  </data>
+  <data name="Translate_By" xml:space="preserve">
+    <value>翻译提供：Watson花生酱</value>
+    <comment>翻译提供：Watson</comment>
+  </data>
+</root>

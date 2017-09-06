@@ -10,5 +10,6 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Frame Name="Mainframe" />
+        <Frame Name="Upframe" />
     </Grid>
 </Page>

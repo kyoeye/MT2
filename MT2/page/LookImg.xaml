@@ -544,7 +544,8 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 Foreground="#FF4B4B4B"
-                                Text="标签" />
+                                IsTextSelectionEnabled="False"
+                                Text="Tags" />
                             <ScrollViewer HorizontalScrollBarVisibility="Auto" ZoomMode="Enabled">
                                 <GridView
                                     x:Name="Tagsview"
@@ -596,6 +597,7 @@
             Background="#FF0074B6"
             Visibility="Collapsed">
             <TextBlock
+                Name="Toast_Text"
                 Margin="10,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
@@ -606,9 +608,8 @@
                 Height="40"
                 HorizontalAlignment="Right"
                 Click="TastButton_Click"
-                Foreground="#FFD2DDE3">
-                <TextBlock Text="下载管理" />
-            </Button>
+                Content="下载管理"
+                Foreground="#FFD2DDE3" />
         </Grid>
         <!--<Popup Name="lookpopup" Grid.Row="1">
 

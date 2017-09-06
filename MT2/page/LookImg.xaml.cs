@@ -10,6 +10,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.ApplicationModel.Resources;
 using Windows.Graphics.Display;
 using Windows.Graphics.Imaging;
 using Windows.Networking.BackgroundTransfer;
@@ -81,7 +82,7 @@ namespace MT2.page
         {
             Window.Current.SetTitleBar(MyTitleBar);
             base.OnNavigatedTo(e);
-         
+            SetText();
             #region new
             var type = e.Parameter.GetType();
             if (type.Name == "Yande_post_json")
@@ -207,7 +208,6 @@ namespace MT2.page
 
             if (storagefile != null)
             {
-                await showtast();
                 //a.Label = DownloadToastText;
 
                 //await a.Show();
@@ -230,6 +230,8 @@ namespace MT2.page
                 BackgroundDownloader backgrounddownloader = new BackgroundDownloader();//后台下载
                 DownloadOperation downloader = backgrounddownloader.CreateDownload(transferUri, storagefile);
                 await downloader.StartAsync();
+                await showtast();
+
                 //tosalmodel.Info = new Entity() { name = "正在后台下载……" };
 
                 //a.Label = "下载完成";
@@ -488,7 +490,7 @@ namespace MT2.page
             {
                 TagModes.Add(new TagMode { Tag = TagArray[a] });
             }
-            TagTitle.Text = "标签" + "  " + "（共"+TagModes.Count+"个）";
+            TagTitle.Text = "Tags" + "  " + "（共"+TagModes.Count+"个）";
         }
         #endregion
         private void GobackButton_Click(object sender, RoutedEventArgs e)
@@ -508,7 +510,23 @@ namespace MT2.page
         {
             Frame.Navigate(typeof(DownloadPage));
         }
+        #region 显示文字
+        private void SetText()
+        {
+            ResourceLoader rl = new ResourceLoader();
+            Share.Label = rl.GetString("String21");
+            TagTitle.Text = rl.GetString("String20");
+            Toast_Text.Text = rl.GetString("String33");
+            TastButton.Content = rl.GetString("Mainpage_Download");
+            DownloadButton.Label = rl.GetString("Mainpage_Download");
+            Compact.Label = rl.GetString("String34");
+            TastButton.Content = rl.GetString("Mainpage_Download");
+            
+        }
+        #endregion
+
     }
+
     //弹窗
     //public class TosatModel : INotifyPropertyChanged
     //{

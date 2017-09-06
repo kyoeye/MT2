@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.Email;
+using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Security.ExchangeActiveSyncProvisioning;
@@ -40,7 +41,11 @@ namespace MT2.page
                 MyTitleBarVB.Visibility = Visibility.Collapsed;
             }
         }
-         
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            SetText();
+        }
         private void Gobackbutton_Click(object sender, RoutedEventArgs e)
         {
              if (Frame.CanGoBack)
@@ -63,7 +68,7 @@ namespace MT2.page
             try
             {
                 //em = new EmailMessage();
-               string Subject = "MTACG反馈";
+               string Subject = "MoeTon反馈";
                 string Body = "您礼貌的反馈和建议是吾辈前进的动力poi~ \r\n";
                 await Tasks.OpenEmailComposeAsync("ghhhgvchbvc55667@outlook.com", Subject, Body + Readyourdevice());
             }
@@ -100,5 +105,14 @@ namespace MT2.page
             Clipboard.SetContent(cp);
             QQ.Content = "已复制，请前往qq粘贴搜索群(微页UWP交流群)";
         }
+        #region 显示文字
+        private void SetText()
+        {
+            ResourceLoader rl = new ResourceLoader();
+            Feedback_text.Text  = rl.GetString("String31");
+            Feedback_tishi.Text = rl.GetString("String32");
+        }
+        #endregion
+
     }
 }

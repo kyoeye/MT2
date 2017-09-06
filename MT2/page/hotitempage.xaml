@@ -57,6 +57,7 @@
             </Grid>
             <Grid Height="50" Style="{StaticResource GridBackgroud}">
                 <TextBlock
+                    Name="Hot_Title"
                     Margin="10,0,10,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"

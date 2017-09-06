@@ -295,6 +295,7 @@
                             Text="&#xE096;" />
                     </AppBarButton>
                     <TextBlock
+                        Name="Seach_Title"
                         Margin="5,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
