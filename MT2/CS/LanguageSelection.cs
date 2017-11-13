@@ -25,6 +25,7 @@ namespace MT2.CS
                 }
                 //ResourceContext rs = ResourceContext.GetForCurrentView();
                 ResourceContext rs = ResourceManager.Current.DefaultContext;
+               
                 rs.Languages = new List<string>(new string[] { AppLanguage });
             }
         }

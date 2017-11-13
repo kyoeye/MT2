@@ -17,7 +17,7 @@ namespace MT2.CS
         ItemGET hotitemget2 = new ItemGET();
 
         public HotimageHub()
-        {
+        {       
             Gethotxml();
         }
 
@@ -37,6 +37,12 @@ namespace MT2.CS
         }
 
         public string Tophotimg { get { return tohotimg; } set {  tohotimg = value ; } }
+        //建多个模型，多个模型集合存储到同一个xml
+        public void SaveXml_Totext()
+        {
+            
+        }
+
     }
   
 }

@@ -12,7 +12,7 @@
     <DefaultLanguage>zh-CN</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -116,7 +116,7 @@
     <Compile Include="CS\ArraryHelp.cs" />
     <Compile Include="CS\GetJson.cs" />
     <Compile Include="CS\GetPixivJson.cs" />
-    <Compile Include="CS\GetXml.cs" />
+    <Compile Include="CS\GetContent.cs" />
     <Compile Include="CS\HotimageHub.cs" />
     <Compile Include="CS\Languages.cs" />
     <Compile Include="CS\LanguageSelection.cs" />
@@ -170,6 +170,9 @@
     </Compile>
     <Compile Include="page\ShowCompactPage.xaml.cs">
       <DependentUpon>ShowCompactPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\StarPage.xaml.cs">
+      <DependentUpon>StarPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="page\UpPage.xaml.cs">
       <DependentUpon>UpPage.xaml</DependentUpon>
@@ -311,6 +314,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="page\StarPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="page\UpPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -323,6 +330,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppThemes\" />
+    <Folder Include="CS\Mode\" />
     <Folder Include="Windows\Foundation\" />
   </ItemGroup>
   <ItemGroup>

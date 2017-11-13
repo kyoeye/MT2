@@ -341,28 +341,13 @@ namespace MT2
 
         public async Task Getimgvalue()
         {
-            Progresstext.Text = "少女迷茫中……";
-            if ((bool)localsettings.Values["_TackToJS"] == true)
-            {
+            Progresstext.Text = "少女迷茫中……";    
                 GetAPIstring getjson = new GetAPIstring();
                 if (getjson != null)
                 {
                     string jsontext = await getjson.GetWebString(Mainapiuri + ".json?limit=" + limit);
                     SetjsonstringAsync(jsontext);
                 }
-            }
-            else
-            {
-                xmltext = await getapistring.GetWebString(Mainapiuri + ".xml?limit=" + limit);
-                MainItemget.Toitem(xmltext);
-                Progresstext.Text = "正在排列一些奇怪的东西……";
-                MainItemget.getlistitems(true);
-                Pictureada.ItemsSource = MainItemget.Listapiitems;
-                await GetHotimage();
-
-            }
-
-            //progressrin.IsActive = false;
         }
 
         GetJson getjson = new GetJson();
@@ -468,6 +453,12 @@ namespace MT2
                     MenuListhoxitem.SelectedItem = null;
                     Mymenu.IsPaneOpen = false;
                 }
+                else if (item == collects)
+                {
+                    Frame.Navigate(typeof(StarPage));
+                    MenuListhoxitem.SelectedItem = null;
+                    Mymenu.IsPaneOpen = false;
+                }
             }
         }
 
@@ -536,7 +527,7 @@ namespace MT2
             {
                 await new MessageDialog("还没准备好").ShowAsync();
             }
-         
+
         }
         #endregion
         private void GobackButton_Click(object sender, RoutedEventArgs e)

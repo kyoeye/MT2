@@ -536,6 +536,7 @@ namespace MT2.page
             //英文版将不开启h
             //Steins.Visibility = Visibility.Collapsed;
             ResourceLoader rl = new ResourceLoader();
+            //rl.GetString getString();
             Setting_Title.Text = rl.GetString("Setting_Title");
             Language_Title.Text = rl.GetString("Language_Title");
             Safetycontrol_Title.Text = rl.GetString("String3");

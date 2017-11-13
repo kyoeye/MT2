@@ -13,26 +13,18 @@ using Windows.UI.Popups;
 namespace MT2.CS
 {
 
-
-
     class GetAPIstring
     {
-
-        //private CancellationTokenSource cts = new CancellationTokenSource();
         string RequestUri;
 
-        public   async Task<string> GetWebString(string url ) 
+        public async Task<string> GetWebString(string url)
         {
-               RequestUri = url;
-
+            RequestUri = url;
 
             string result;
 
             try
             {
-
-
-
                 using (Windows.Web.Http.HttpClient httpclient = new Windows.Web.Http.HttpClient())
                 {
                     using (Windows.Web.Http.HttpResponseMessage httpResponseMessage = await httpclient.GetAsync(new Uri(RequestUri)))
@@ -48,11 +40,11 @@ namespace MT2.CS
 
                 var s = ec.Message.ToString();
                 var messagedialog = new MessageDialog(s);
-                messagedialog.Commands.Add(new UICommand("重试", cmd =>{ },commandId:0));
+                messagedialog.Commands.Add(new UICommand("重试", cmd => { }, commandId: 0));
                 messagedialog.Commands.Add(new UICommand("取消", cmd => { }, commandId: 1));
                 messagedialog.DefaultCommandIndex = 0;
                 messagedialog.CancelCommandIndex = 1;
-               var a= await messagedialog.ShowAsync();
+                var a = await messagedialog.ShowAsync();
                 if ((int)a.Id == 0)
                 {
                     a.Invoked += await chonshi();
@@ -61,10 +53,10 @@ namespace MT2.CS
 
             }
             return result;
-            
+
         }
         //重试
-        private async Task< UICommandInvokedHandler> chonshi()
+        private async Task<UICommandInvokedHandler> chonshi()
         {
             await GetWebString(RequestUri);
             return null;
@@ -139,7 +131,7 @@ namespace MT2.CS
         //    return webString;
         //}
 
-        private  void getStatuscode(string s)
+        private void getStatuscode(string s)
         {
             string dialog = "";
             switch (s)
@@ -188,7 +180,7 @@ namespace MT2.CS
             }
         }
 
-        public async  void showText(string a)
+        public async void showText(string a)
         {
             await new MessageDialog(a).ShowAsync();
         }

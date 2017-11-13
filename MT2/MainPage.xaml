@@ -10,21 +10,6 @@
     Background="#FF0074B6"
     RequestedTheme="Light"
     mc:Ignorable="d">
-    <!--<Page.Transitions>
-        <TransitionCollection>
-            <NavigationThemeTransition>
-                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                    <CommonNavigationTransitionInfo />
-                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
-            </NavigationThemeTransition>
-        </TransitionCollection>
-    </Page.Transitions>-->
-    <!--  xmlns:local="using:MT2.pubuliu"  -->
-    <!--<Page.Transitions>
-        <TransitionCollection>
-            <NavigationThemeTransition />
-        </TransitionCollection>
-    </Page.Transitions>-->
 
     <Grid>
         <Grid.RowDefinitions>
@@ -158,6 +143,26 @@
                                     Text="下载" />
                             </StackPanel>
                         </ListBoxItem>
+                        <ListBoxItem Name="collects" Visibility="Visible">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon
+                                    Margin="5"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    FontSize="18"
+                                    Glyph="&#xE224;" />
+
+                                <TextBlock
+                                    Name="Mainpage_collects"
+                                    Margin="15,0,0,0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="15"
+                                    Text="收藏" />
+                            </StackPanel>
+                        </ListBoxItem>
+
                         <ListBoxItem Name="picinpciitem" Visibility="Visible">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon
@@ -408,14 +413,24 @@
                                 Style="{StaticResource TextblockForeground}"
                                 Text="&#xE700;" />
                         </AppBarButton>
-                        <TextBlock
-                            Name="Mainpage_Title"
-                            Margin="5"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            FontSize="18"
-                            Style="{StaticResource TextblockForeground}"
-                            Text="首页" />
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock
+                                Name="Mainpage_Title"
+                                Margin="5"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                FontSize="18"
+                                Style="{StaticResource TextblockForeground}"
+                                Text="首页"
+                                Visibility="Collapsed" />
+                            <AppBarButton Margin="2,0,2,0">
+                                <AppBarButton.Icon>
+                                    <FontIcon FontFamily="Segoe UI" Glyph="Yande.re" />
+                                </AppBarButton.Icon>
+                            </AppBarButton>
+                        </StackPanel>
+
                     </StackPanel>
                     <AppBarButton
                         Name="Searchbutton"
