@@ -17,7 +17,7 @@ namespace MT2.CS
         string JS_RequestUri;
         string JStext;
         ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-
+        //Yande的子站的api是相同的
         //public List<Yande_post_json> list;
         #region 通用获取json返回
         public async Task<string> GetWebJsonStringAsync(string uri)
@@ -54,6 +54,7 @@ namespace MT2.CS
 
         #endregion
         public ObservableCollection<Yande_post_json> list { get; set; }
+        public ObservableCollection<Konachan_post_json>list_konachan { get; set; }
 
         public ObservableCollection<Yande_post_json> SaveJson(string Jsonstring)
         {  //Newtonsoft.Json 引用
@@ -103,6 +104,55 @@ namespace MT2.CS
 
             }
             return list;
+        }
+        public ObservableCollection<Konachan_post_json> SaveJson_konachan(string Jsonstring)
+        {  //Newtonsoft.Json 引用
+           //list = new ObservableCollection<Yande_post_json>();
+            try
+            {
+                list_konachan  = JsonConvert.DeserializeObject<ObservableCollection<Konachan_post_json >>(Jsonstring);
+                try
+                {
+                    if ((int)localsettings.Values["_FuckSlider"] != 2) //2才是对的，暂时弄一个不可能的值以防开关误触发
+                    {
+                        for (int a = list_konachan.Count - 1; a >= 0; a--) //动动py想一想都知道用减   //最后我发现我还是不擅长动PY。。。
+                        {
+                            if (list_konachan[a].rating == "q")
+                            {
+                                list_konachan.Remove(list_konachan[a]);
+                            }
+                            else if (list_konachan[a].rating == "e")
+                            {
+                                list_konachan.Remove(list_konachan[a]);
+                            }
+
+                        }
+
+                    }
+
+                }
+                catch
+                {
+                    for (int a = list_konachan.Count - 1; a >= 0; a--)
+                    {
+                        if (list_konachan[a].rating == "q")
+                        {
+                            list_konachan.Remove(list_konachan[a]);
+                        }
+                        else if (list_konachan[a].rating == "e")
+                        {
+                            list_konachan.Remove(list_konachan[a]);
+                        }
+
+                    }
+                }
+
+            }
+            catch
+            {
+
+            }
+            return list_konachan;
         }
 
         public async void Loadingitem(string Jsonstring, int limit)

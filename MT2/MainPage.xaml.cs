@@ -33,7 +33,8 @@ namespace MT2
         ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
         #region 存了点变量poi~
         int appOpennum;
-        string Mainapiuri = "https://yande.re/post"; // Mainapiuri+ ".xml?limit=" + limit 和 Mainapiuri+ ".json?limit=" + limit
+        string Mainapiuri = "https://yande.re/post",
+                  Konachauri= "https://konachan.net/post"; // Mainapiuri+ ".xml?limit=" + limit 和 Mainapiuri+ ".json?limit=" + limit
         string hotapiuri = "https://yande.re/post/popular_recent.json";
         //string apitype;
         int limit;//列表总数
@@ -104,9 +105,7 @@ namespace MT2
             if (coreTitleBar.IsVisible == false)//失败，需要获取系统平台了
             {
                 coreTitleBar.ExtendViewIntoTitleBar = true;
-
                 UiLoading();
-
             }
             else
             {
@@ -146,7 +145,7 @@ namespace MT2
         //扔异步处理下载瀑布流数据
         private async void GetimgvalueAsync()
         {
-            await Getimgvalue();
+            await Getimgvalue(Mainapiuri,0);
         }
         #region 获取保存地址
         //public void SaveFileUri()
@@ -339,26 +338,37 @@ namespace MT2
 
         #endregion
 
-        public async Task Getimgvalue()
+        public async Task Getimgvalue(string  uri,int item) //item是标记，用来判断是哪个数据源在使用这个方法 //0=yande;1=konacha
         {
             Progresstext.Text = "少女迷茫中……";    
                 GetAPIstring getjson = new GetAPIstring();
                 if (getjson != null)
                 {
-                    string jsontext = await getjson.GetWebString(Mainapiuri + ".json?limit=" + limit);
-                    SetjsonstringAsync(jsontext);
+                    string jsontext = await getjson.GetWebString(uri + ".json?limit=" + limit);
+                    SetjsonstringAsync(jsontext,item);
                 }
         }
 
         GetJson getjson = new GetJson();
-        private async void SetjsonstringAsync(string jsontext)
+        GetJson getjson_konachan = new GetJson();
+        private async void SetjsonstringAsync(string jsontext,int item)
         {
             try
             {
                 Progresstext.Text = "正在排列一些奇怪的东西……";
-                var source = getjson.SaveJson(jsontext);
-                Pictureada.ItemsSource = source;
-                await newGetHotimageAsync();
+
+                switch (item)
+                {
+                    case 0:
+                        var source = getjson.SaveJson(jsontext);
+                        Pictureada.ItemsSource = source;
+                        await newGetHotimageAsync();
+                        break;
+                    case 1:
+                        var soure_konacha = getjson_konachan.SaveJson_konachan(jsontext);
+                        Pictureada2.ItemsSource = soure_konacha;
+                        break;
+                }
             }
             catch (Exception ex)
             {
@@ -370,30 +380,38 @@ namespace MT2
 
         string homehoturl;
         public string Homehoturl { get { return homehoturl; } set { homehoturl = value; } }
+        #region 通用top方法
+        GetAPIstring getapi_String = new GetAPIstring();
 
-        public async Task GetHotimage() //按照获取首页瀑布流的方法获取热榜瀑布流数据，热榜直接继承这个类
+        private async Task Get_Top(string uri)
         {
-            GetAPIstring gethotxml = new GetAPIstring();
             Progresstext.Text = "正在下载TOP数据……";
+            string content = await getapistring.GetWebString(uri);
+       }
+        #endregion
+        //public async Task GetHotimage() //按照获取首页瀑布流的方法获取热榜瀑布流数据，热榜直接继承这个类
+        //{
+        //    GetAPIstring gethotxml = new GetAPIstring();
+        //    Progresstext.Text = "正在下载TOP数据……";
 
-            try
-            {
-                string hotxmltext = await gethotxml.GetWebString(@"https://yande.re/post/popular_recent.xml");
-                Hotitemget.Toitem(hotxmltext);
-                Hotitemget.getlistitems(false);
-                var HotitemList = Hotitemget.Listapiitems;
-                Progresstext.Text = "请坐和放宽……";
-                Homehoturl = HotitemList.First().sample_url;
-                //Homehoturl = HotitemList[1].sample_url;
-                BitmapImage bit = new BitmapImage(new Uri(Homehoturl));
-                HomeHot.Source = bit;
-                Topprogress.Visibility = Visibility.Collapsed;
+        //    try
+        //    {
+        //        string hotxmltext = await gethotxml.GetWebString(@"https://yande.re/post/popular_recent.xml");
+        //        Hotitemget.Toitem(hotxmltext);
+        //        Hotitemget.getlistitems(false);
+        //        var HotitemList = Hotitemget.Listapiitems;
+        //        Progresstext.Text = "请坐和放宽……";
+        //        Homehoturl = HotitemList.First().sample_url;
+        //        //Homehoturl = HotitemList[1].sample_url;
+        //        BitmapImage bit = new BitmapImage(new Uri(Homehoturl));
+        //        HomeHot.Source = bit;
+        //        Topprogress.Visibility = Visibility.Collapsed;
 
-            }
-            catch
-            {
-            }
-        }
+        //    }
+        //    catch
+        //    {
+        //    }
+        //}
         public async Task newGetHotimageAsync()
         {
             getapistring = new GetAPIstring();
@@ -427,9 +445,9 @@ namespace MT2
         {
             foreach (var item in e.AddedItems)
             {
-                if (item == homepage)
+                if (item == homepage) //改成了搜索索索~~~
                 {
-                    Frame.Navigate(typeof(MainPage));
+                    Frame.Navigate(typeof(Seach2Page));
                     Mymenu.IsPaneOpen = false;
                     MenuListhoxitem.SelectedItem = null;
 
@@ -562,19 +580,23 @@ namespace MT2
             }
         }
 
-        //private void HomePage_Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    switch (HomePage_Pivot.SelectedIndex)
-        //    {
-        //        case 0:
-        //            HomePage_Pivot.SelectedItem = 0;
-        //            break;
-        //        case 1:
-        //            HomePage_Pivot.SelectedItem = 1;
-        //            //get_Pixivjson();
-        //            break;
-        //    }
-        //}
+        private async void  HomePage_Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (HomePage_Pivot.SelectedIndex)
+            {
+                case 0:
+                     await Getimgvalue(Mainapiuri,0);
+
+                    //HomePage_Pivot.SelectedItem = 0;
+                    break;
+                case 1:
+                     await Getimgvalue(Konachauri,1);
+                    //获取源数据
+                    //HomePage_Pivot.SelectedItem = 1;
+                    //get_Pixivjson();
+                    break;
+            }
+        }
         #region 显示文字
         private void SetText()
         {
@@ -588,5 +610,17 @@ namespace MT2
             Mainpage_setting.Text = rl.GetString("Setting_Title");
         }
         #endregion
+
+        private void yande_button_Click(object sender, RoutedEventArgs e)
+        {
+            HomePage_Pivot.SelectedIndex = 0;
+            HomePage_Pivot.SelectedItem = HomePage_Pivot.Items[0];
+        }
+
+        private void konachan_button_Click(object sender, RoutedEventArgs e)
+        {
+            HomePage_Pivot.SelectedIndex =1;
+            HomePage_Pivot.SelectedItem = HomePage_Pivot.Items[1];
+        }
     }
 }
