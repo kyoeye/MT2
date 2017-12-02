@@ -253,7 +253,8 @@
             </Setter>
         </Style>
     </Page.Resources>
-
+  
+ 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="32" />
@@ -270,12 +271,6 @@
                 <Grid HorizontalAlignment="Left" Background="{x:Null}">
                     <Grid x:Name="BlurListBox" />
                     <Grid x:Name="MenuBlurGrid">
-                        <Grid.Resources>
-                            <ResourceDictionary >
-                                <media:AcrylicBrush x:Key="CustomAcrylicBackgroundBrush" BackgroundSource="HostBackdrop"
-TintOpacity="0.169999996200204" TintColor="#FF000000" FallbackColor="#FF008000" />
-                            </ResourceDictionary>
-                        </Grid.Resources>
                         <Image
                             x:Name="MenuBlur"
                             Visibility="Collapsed" 
@@ -283,16 +278,14 @@ TintOpacity="0.169999996200204" TintColor="#FF000000" FallbackColor="#FF008000" 
                             VerticalAlignment="Center"
                             Source="{Binding ElementName=HomeHot, Path=Source, Mode=TwoWay}"
                             Stretch="UniformToFill" />
-                        <Rectangle  Fill="{ThemeResource SystemControlAcrylicWindowBrush}" >
-
-
-                        </Rectangle>
+                        <Rectangle  Fill="{ThemeResource SystemControlChromeMediumLowAcrylicWindowMediumBrush}"/>
 
                         <!--<Rectangle Fill="White" Opacity="0.7" />-->
                     </Grid>
-                    <ListBox
+                    <ListView 
                         Name="MenuListhoxitem"
                         Margin="0,32,0,0"
+                        Width="200"
                         HorizontalAlignment="Left"
                         Background="{x:Null}"
                         SelectionChanged="MenuListboxitem_SelectionChanged"
@@ -318,7 +311,7 @@ TintOpacity="0.169999996200204" TintColor="#FF000000" FallbackColor="#FF008000" 
                                 </AppBarButton>
                             </Grid>
                         </ListBoxItem>-->
-                        <ListBoxItem Name="homepage" Visibility="Visible">
+                        <ListViewItem Height="50"  Name="homepage" Visibility="Visible">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock
                                     Margin="5"
@@ -335,8 +328,8 @@ TintOpacity="0.169999996200204" TintColor="#FF000000" FallbackColor="#FF008000" 
                                     FontSize="15"
                                     Text="搜索" />
                             </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem
+                        </ListViewItem>
+                        <ListViewItem  Height="50"
                             Name="UserManage"
                             IsEnabled="False"
                             Visibility="Visible">
@@ -357,8 +350,8 @@ TintOpacity="0.169999996200204" TintColor="#FF000000" FallbackColor="#FF008000" 
                                     FontSize="15"
                                     Text="账号管理（施工）" />
                             </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem Name="hotitem">
+                        </ListViewItem>
+                        <ListViewItem Name="hotitem"  Height="50">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock
                                     Margin="5"
@@ -375,8 +368,8 @@ TintOpacity="0.169999996200204" TintColor="#FF000000" FallbackColor="#FF008000" 
                                     FontSize="15"
                                     Text="热榜" />
                             </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem Name="downitem">
+                        </ListViewItem>
+                        <ListViewItem Name="downitem"  Height="50">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock
                                     Margin="5"
@@ -393,8 +386,8 @@ TintOpacity="0.169999996200204" TintColor="#FF000000" FallbackColor="#FF008000" 
                                     FontSize="15"
                                     Text="下载" />
                             </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem Name="collects" Visibility="Visible">
+                        </ListViewItem>
+                        <ListViewItem Name="collects"  Height="50" Visibility="Visible">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon
                                     Margin="5"
@@ -411,8 +404,8 @@ TintOpacity="0.169999996200204" TintColor="#FF000000" FallbackColor="#FF008000" 
                                     FontSize="15"
                                     Text="收藏" />
                             </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem Name="picinpciitem" Visibility="Visible">
+                        </ListViewItem>
+                        <ListViewItem Name="picinpciitem"  Height="50" Visibility="Visible">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon
                                     Margin="5"
@@ -429,8 +422,8 @@ TintOpacity="0.169999996200204" TintColor="#FF000000" FallbackColor="#FF008000" 
                                     FontSize="15"
                                     Text="画中画" />
                             </StackPanel>
-                        </ListBoxItem>
-                    </ListBox>
+                        </ListViewItem>
+                    </ListView>
                     <Grid Height="50" VerticalAlignment="Bottom">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock

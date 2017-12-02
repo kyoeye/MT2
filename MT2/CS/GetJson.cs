@@ -9,10 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.UI.Popups;
-
+using System.Collections.Generic;
 namespace MT2.CS
 {
-    class GetJson
+    class GetJson<T>
     {
         string JS_RequestUri;
         string JStext;
@@ -55,7 +55,7 @@ namespace MT2.CS
         #endregion
         public ObservableCollection<Yande_post_json> list { get; set; }
         public ObservableCollection<Konachan_post_json>list_konachan { get; set; }
-
+    
         public ObservableCollection<Yande_post_json> SaveJson(string Jsonstring)
         {  //Newtonsoft.Json 引用
            //list = new ObservableCollection<Yande_post_json>();
@@ -76,11 +76,8 @@ namespace MT2.CS
                             {
                                 list.Remove(list[a]);
                             }
-
                         }
-
                     }
-
                 }
                 catch
                 {
@@ -93,11 +90,9 @@ namespace MT2.CS
                         else if (list[a].rating == "e")
                         {
                             list.Remove(list[a]);
-                        }
-
+                        }    
                     }
                 }
-
             }
           catch
             {
@@ -154,8 +149,7 @@ namespace MT2.CS
             }
             return list_konachan;
         }
-
-        public async void Loadingitem(string Jsonstring, int limit)
+        public async void Loadingitem( string Jsonstring, int limit )
         {
             try
             {    

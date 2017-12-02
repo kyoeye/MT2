@@ -431,23 +431,15 @@
                         Orientation="Horizontal">
                         <AppBarButton
                             Name="DownloadButton"
-                            Width="80"
+                            Width="80"  Style="{ThemeResource AppBarButtonRevealStyle }" 
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Click="DownloadButton_Click"
                             Icon="Download"
                             Label="下载" />
-                        <!--<AppBarButton
-                            Name="Copybutton"
-                            Width="80"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Click="Copybutton_Click"
-                            Icon="Paste"
-                            Label="复制uri" />-->
                         <AppBarButton
                             Name="Compact"
-                            Width="80"
+                            Width="80"  Style="{ThemeResource AppBarButtonRevealStyle }" 
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Click="Compact_Click"
@@ -455,22 +447,36 @@
                             Label="画中画" />
                         <AppBarButton
                             Name="Share"
-                            Width="80"
+                            Width="80"  Style="{ThemeResource AppBarButtonRevealStyle }" 
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Center"
-                            Click="Share_Click"
                             IsEnabled="True"
                             Label="分享">
                             <AppBarButton.Icon>
                                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72D;" />
                             </AppBarButton.Icon>
+                            <AppBarButton.Flyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Text="分享" Click="Share_Click" Tag="rating">
+                                        <!--<MenuFlyoutItem.Icon>
+                                            <FontIcon Glyph="&#xE72D;"/>
+                                        </MenuFlyoutItem.Icon>-->
+                                    </MenuFlyoutItem>
+                                    <MenuFlyoutItem Text="以链接形式分享" Click="Shareuri_Click" Tag="rating">
+                                        <!--<MenuFlyoutItem.Icon>
+                                            <FontIcon Glyph="&#xE8C8;"/>
+                                        </MenuFlyoutItem.Icon>-->
+                                    </MenuFlyoutItem>
+
+                                </MenuFlyout>
+                                </AppBarButton.Flyout>
                         </AppBarButton>
                         <AppBarButton
                             Name="Setit"
                             Width="80"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Click="Setit_Click"
+                            Click="Setit_Click"  Style="{ThemeResource AppBarButtonRevealStyle }" 
                             IsEnabled="True"
                             Label="设为"
                             Visibility="Collapsed">
@@ -504,7 +510,7 @@
                                 </Grid.ColumnDefinitions>
                                 <AppBarButton
                                     Name="StartBackground"
-                                    Width="80"
+                                    Width="80"  Style="{ThemeResource AppBarButtonRevealStyle }" 
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Center"
                                     Click="StartBackground_Click"
@@ -516,7 +522,7 @@
                                 <AppBarButton
                                     Name="LockBackground"
                                     Grid.Column="1"
-                                    Width="80"
+                                    Width="80"  Style="{ThemeResource AppBarButtonRevealStyle }" 
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Click="LockBackground_Click"

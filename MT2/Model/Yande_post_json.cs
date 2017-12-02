@@ -69,7 +69,12 @@ namespace MT2.Model
         public string md5 { get; set; }
         public int file_size { get; set; }
         public string file_ext { get; set; }
-        public string file_url { get; set; }
+        private string _f_url;
+        public string file_url
+        {
+            get { return _f_url; }
+            set { _f_url = "https:" + value; }
+        }
         public bool is_shown_in_index { get; set; }
         private string _p_url;
         public string preview_url
@@ -81,7 +86,12 @@ namespace MT2.Model
         public int preview_Height { get; set; }
         public int actual_preview_width { get; set; }
         public int actual_preview_Height { get; set; }
-        public string sample_url { get; set; }//样品的url
+        private string _s_url;
+        public string sample_url
+        {
+            get { return _s_url; }
+            set { _s_url = "https:" + value; }
+        }//样品的url
         public int sample_width { get; set; }
         public int sample_Height { get; set; }
         public int sample_file_size { get; set; }

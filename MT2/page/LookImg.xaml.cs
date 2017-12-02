@@ -102,6 +102,22 @@ namespace MT2.page
                 TagFuntion(gg.tags);
                 //   "/sample/78cd441063dd0dab7e88f94ab7ab8cd6/yande.re 395326 sample hatsune_miku lepoule_(kmjh90) vocaloid.jpg"
             }
+            else if (type.Name == "Konachan_post_json")
+            {
+                var gg = (Konachan_post_json)e.Parameter;
+                img_sample_url = gg.sample_url;
+                BitmapImage bitmapimage = new BitmapImage(new Uri(gg.sample_url));
+                SeeImage.Source = bitmapimage;
+                bitmapimage.DownloadProgress += Bitmapimage_DownloadProgress;
+                imguri = gg.file_url;
+                ImageID.Text = gg.id.ToString();
+                imgid = int.Parse(gg.id.ToString());
+                //获取到一个奇怪的不完整路径
+                var bitf = bitmapimage.UriSource.AbsolutePath;
+                imgLocalpath = bitmapimage.UriSource.LocalPath;
+                // 处理tag
+                TagFuntion(gg.tags);
+            }
           else
             {
                 #region 旧的
@@ -305,13 +321,6 @@ namespace MT2.page
 
         #endregion
 
-        private void Copybutton_Click(object sender, RoutedEventArgs e)  //暂时用复制uri替代收藏 //废弃
-        {
-            DataPackage dp = new DataPackage();
-            dp.SetText(imguri);
-            Clipboard.SetContent(dp);
-
-        }
         public int b = 0;
 
         private void Setit_Click(object sender, RoutedEventArgs e)
@@ -525,6 +534,13 @@ namespace MT2.page
         }
         #endregion
 
+        //以链接形式分享
+        private void Shareuri_Click(object sender, RoutedEventArgs e)
+        {
+            DataPackage dp = new DataPackage();
+            dp.SetText(imguri);
+            Clipboard.SetContent(dp);
+        }
     }
 
     //弹窗

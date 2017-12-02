@@ -5,6 +5,7 @@ using MT2.CS;
 using MT2.Model;
 using MT2.page;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
@@ -484,21 +485,20 @@ namespace MT2
 
         private void Picturegrid_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if ((bool)localsettings.Values["_TackToJS"] == true)
+            var boxs = sender as Grid;
+            switch (HomePage_Pivot.SelectedIndex) //目前暂时用pivot排序的方式来做区分，如果以后实现了自定义接口排序，这里要改
             {
-                var boxs = sender as Grid;
-                var box = boxs.DataContext as Yande_post_json;
-                Frame.Navigate(typeof(LookImg), box);
+                case 0:
+                    var box = boxs.DataContext as Yande_post_json;
+                    Frame.Navigate(typeof(LookImg), box);
+                    break;
+                case 1:
+                    var box2 = boxs.DataContext as Konachan_post_json;
+                    Frame.Navigate(typeof(LookImg), box2);
+                    break;
             }
-            //else
-            //{
-            //    var boxs = sender as Grid;
-            //    var box = boxs.DataContext as ItemGET.listsave;
-            //    Frame.Navigate(typeof(LookImg), box);
-            //}
-
         }
-
+          
         private void Searchbutton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(Seach2Page));
@@ -550,10 +550,6 @@ namespace MT2
         #endregion
         private void GobackButton_Click(object sender, RoutedEventArgs e)
         {
-            //if (Frame .CanGoBack)
-            //{
-            //    Frame .GoBack();
-            //}
             if (Mymenu.IsPaneOpen)
                 Mymenu.IsPaneOpen = false;
         }
