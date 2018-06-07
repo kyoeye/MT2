@@ -24,7 +24,9 @@ namespace MT2.CS
                         break;
                 }
                 //ResourceContext rs = ResourceContext.GetForCurrentView();
+#pragma warning disable CS0618 // “ResourceManager.DefaultContext.get”已过时:“DefaultContext may be altered or unavailable for releases after Windows Phone 'OSVersion' (TBD). Instead, use ResourceContext.GetForCurrentView.”
                 ResourceContext rs = ResourceManager.Current.DefaultContext;
+#pragma warning restore CS0618 // “ResourceManager.DefaultContext.get”已过时:“DefaultContext may be altered or unavailable for releases after Windows Phone 'OSVersion' (TBD). Instead, use ResourceContext.GetForCurrentView.”
                
                 rs.Languages = new List<string>(new string[] { AppLanguage });
             }

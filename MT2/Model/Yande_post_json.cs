@@ -53,6 +53,7 @@ namespace MT2.Model
         public bool is_note_locked { get; set; }
         public int last_noted_at { get; set; }
         public int last_commented_at { get; set; }
+        public DateTime startime { get; set; }
     }
     public class Konachan_post_json
     {

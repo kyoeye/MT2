@@ -9,13 +9,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.UI.Popups;
-using System.Collections.Generic;
+
 namespace MT2.CS
 {
-    class GetJson<T>
+    class GetJson
     {
         string JS_RequestUri;
+#pragma warning disable CS0169 // 从不使用字段“GetJson.JStext”
         string JStext;
+#pragma warning restore CS0169 // 从不使用字段“GetJson.JStext”
         ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
         //Yande的子站的api是相同的
         //public List<Yande_post_json> list;
@@ -55,13 +57,21 @@ namespace MT2.CS
         #endregion
         public ObservableCollection<Yande_post_json> list { get; set; }
         public ObservableCollection<Konachan_post_json>list_konachan { get; set; }
-    
+        public ObservableCollection<Model.Yande_Tage> tages_yande { get; set; }
+
+        public ObservableCollection<Model.Yande_Tage> SaveJson_Tag_yande(string Jsonstring)
+        {
+                tages_yande = JsonConvert.DeserializeObject<ObservableCollection<Model.Yande_Tage >>(Jsonstring);
+                return tages_yande;
+        }
         public ObservableCollection<Yande_post_json> SaveJson(string Jsonstring)
         {  //Newtonsoft.Json 引用
+    
            //list = new ObservableCollection<Yande_post_json>();
            try
             {
-                list = JsonConvert.DeserializeObject<ObservableCollection<Yande_post_json>>(Jsonstring);
+                list = JsonConvert.DeserializeObject<ObservableCollection<Yande_post_json >>(Jsonstring);
+  
                 try
                 {
                     if ((int)localsettings.Values["_FuckSlider"] != 2) //2才是对的，暂时弄一个不可能的值以防开关误触发
@@ -120,11 +130,8 @@ namespace MT2.CS
                             {
                                 list_konachan.Remove(list_konachan[a]);
                             }
-
                         }
-
                     }
-
                 }
                 catch
                 {
@@ -138,36 +145,19 @@ namespace MT2.CS
                         {
                             list_konachan.Remove(list_konachan[a]);
                         }
-
                     }
                 }
-
             }
             catch
-            {
-
-            }
+            {  }
             return list_konachan;
         }
-        public async void Loadingitem( string Jsonstring, int limit )
+        public    bool Loadingitem( string Jsonstring, int limit )
         {
             try
             {    
             var listcount = list.Count;
             var list2 = JsonConvert.DeserializeObject<List<Yande_post_json>>(Jsonstring);
-            #region MyRegion
-            //ObservableCollection<Yande_post_json> lc =( ObservableCollection < Yande_post_json >) list.Concat(list2); ;
-            //var lc =  list.Concat(list2);
-            //  var s = lc.Count();
-            //  list =(ObservableCollection<Yande_post_json >) lc;
-            //var list3 = lc.ToList<Yande_post_json>();
-
-            //var gg =  lc.AsQueryable();
-            //var cc = gg.AsEnumerable<Yande_post_json>();
-            //var kk = cc.ToList<ObservableCollection<Yande_post_json>>();
-            //ObservableCollection <Yande_post_json > query = (ObservableCollection<Yande_post_json>)list.Select(Yande_post_json => Yande_post_json  ).Concat(list2.Select(Yande_post_json => Yande_post_json));
-
-            #endregion
             int z = 0;
             for (int i = listcount; i < listcount + limit; i++)
             {
@@ -195,8 +185,7 @@ namespace MT2.CS
                 }
             }
             catch
-            {
-           
+            {          
                     for (int a = list.Count - 1; a >= 0; a--) 
                     {
                         if (list[a].rating == "q")
@@ -207,12 +196,71 @@ namespace MT2.CS
                         {
                             list.Remove(list[a]);
                         }
-
+                    }
+            }
+            }
+            catch 
+            {
+  
+            }
+            return true;
+        }
+        //河蟹
+        public  void NoH()
+        {
+            if ((int)localsettings.Values["_FuckSlider"] != 2)
+            {
+                for (int a = list.Count - 1; a >= 0; a--)
+                {
+                    if (list[a].rating == "q")
+                    {
+                        list.Remove(list[a]);
+                    }
+                    else if (list[a].rating == "e")
+                    {
+                        list.Remove(list[a]);
                     }
 
+                }
             }
+        }
+        public async void Loadingitem_konachan(string Jsonstring, int limit)
+        {
+            try
+            {
+                var listcount = list_konachan.Count;
+                var list2 = JsonConvert.DeserializeObject<List<Konachan_post_json>>(Jsonstring);
+                int z = 0;
+                for (int i = listcount; i < listcount + limit; i++)
+                {
+                    list_konachan.Add(list2[z]);
+                    z++;
+                }
+                //list.Add(list2[1].d)
+                try
+                {
+                    if ((int)localsettings.Values["_FuckSlider"] != 2)
+                    {
+                        for (int a = list_konachan.Count - 1; a >= 0; a--)
+                        {
+                            if (list_konachan[a].rating == "q")
+                            {
+                                list_konachan.Remove(list_konachan[a]);
+                            }
+                            else if (list_konachan[a].rating == "e")
+                            {
+                                list_konachan.Remove(list_konachan[a]);
+                            }
+
+                        }
+
+                    }
+                }
+                catch
+                {
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 await new MessageDialog(ex.ToString()).ShowAsync();
             }

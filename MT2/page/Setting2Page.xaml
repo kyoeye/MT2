@@ -6,7 +6,7 @@
     xmlns:data="using:MT2.CS"
     xmlns:local="using:MT2.page"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Background="#FF0074B6"
+   
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -53,7 +53,7 @@
                 Name="MyTitleBar"
                 Grid.Row="0"
                 Height="32"
-                Style="{StaticResource GridBackgroud}" />
+                />
             <Grid Height="32" VerticalAlignment="Top">
                 <StackPanel Orientation="Horizontal">
                     <AppBarButton
@@ -83,11 +83,13 @@
             </Grid>
         </Grid>
         <ScrollViewer Name="myScrollviewer" Grid.Row="1">
-            <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <StackPanel>
+
                 <Grid
                     x:Name="TopGrid"
                     Height="250"
-                    Background="#FFDFDFDF">
+                   >
+                  
                     <!--<Image Name="Logobackground"  Source="{ x:Bind Mode=TwoWay ,Path=mainpage.Homehoturl }" />-->
                     <StackPanel
                         Height="50"
@@ -145,7 +147,7 @@
                             HorizontalAlignment="Center"
                             Foreground="Black"
                             IsTextSelectionEnabled="True"
-                            Text="萌豚二号机-开学季" />
+                            Text="萌豚二号机-咕咕咕" />
                         <Button
                             Name="Abutopagebutton"
                             HorizontalAlignment="Center"
@@ -236,7 +238,49 @@
                                 Content="一键清零启动次数" />
                         </StackPanel>
                     </Grid>-->
+                    <StackPanel Visibility="Collapsed"  Margin="4" Background="{ThemeResource AppBarBorderThemeBrush}">
+                        <TextBlock
+                            Name="Dtct_Title"
+                            Margin="10"
+                            HorizontalAlignment="left"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="#ff4b4b4b"
+                            Text="动态磁贴" />
 
+                        <StackPanel Margin="10,0,0,0" Orientation="Horizontal"  BorderBrush="#FFD7D7D7" BorderThickness="0,2,0,0">
+                            <RadioButton Name="Dtct_No" Content="无"/>
+                            <RadioButton Name="Dtct_Hot" Content="显示热榜"/>
+                            <RadioButton Visibility="Collapsed"  Name="Dtct_Star" Content="显示收藏"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                    <StackPanel Visibility="Collapsed"  Margin="4" Background="{ThemeResource AppBarBorderThemeBrush}">
+                        <TextBlock
+                            Name="Star_Title"
+                            Margin="10"
+                            HorizontalAlignment="left"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="#ff4b4b4b"
+                            Text="收藏" />
+
+                        <StackPanel Margin="5,0,0,0" Orientation="Horizontal"  BorderBrush="#FFD7D7D7" BorderThickness="0,2,0,0">
+                            <Button Name="Save_StarFile" Margin="5" Content="备份图片收藏"/>
+                            <Button Name="Read_StarFile" Margin="5" Content="恢复图片收藏"/>
+                            <Button Name="Save_StarTagFile" Margin="5" Content="备份Tag收藏"/>
+                            <Button Name="Read_StarTagFile" Margin="5" Content="恢复Tag收藏"/>
+
+                        </StackPanel>
+                        <TextBlock
+                                    Name="Star_Title_tishi"
+                                    Margin="10,0,0,0"
+                            TextWrapping="Wrap" 
+                                    Foreground="#FF7A7A7A"
+                                    IsTextSelectionEnabled="True"
+                                    Text="我很建议您卸载应用前备份下收藏文件。。但您真的想卸载嘛QAQ"
+                                    Visibility="Visible" />
+                    </StackPanel>
                     <Grid Margin="4" Background="{ThemeResource AppBarBorderThemeBrush}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
@@ -358,15 +402,11 @@
                                     Margin="10,5,10,10"
                                     StepFrequency="1" />
 
-                                <!--<ToggleSwitch
-                                    Name="NoH_Check"
-                                    OffContent="表"
-                                    OnContent="里"
-                                    Toggled="NoH_Check_Toggled" />-->
-                                <StackPanel
+                      
+                                <!--<StackPanel
                                     Name="Hypbutton"
                                     Orientation="Horizontal"
-                                    Visibility="Visible">
+                                    Visibility="Collapsed">
                                     <HyperlinkButton
                                         Click="HyperlinkButton_Click"
                                         Content="隐藏选项"
@@ -378,7 +418,7 @@
                                         Content="隐藏选项并恢复默认"
                                         Foreground="#FF373737" />
 
-                                </StackPanel>
+                                </StackPanel>-->
 
                             </StackPanel>
                         </Grid>
@@ -479,6 +519,15 @@
                                     FontSize="17"
                                     IsTextSelectionEnabled="True"
                                     Text="更改保存位置" />
+                                <TextBlock 
+                                    Margin="15,5,15,5"
+                                    HorizontalAlignment="left"
+                                    VerticalAlignment="center"
+                                    FontSize="14"
+                                    TextWrapping="Wrap"
+                                    IsTextSelectionEnabled="True"
+                                    Foreground="#FFE89999"
+                                    Text="如果点击下载图片无任何提示也无法创建任务，请关闭自定义保存路径使用默认路径，正在排查原因" />
 
                                 <CheckBox
                                     Name="DefualtFilebutton"

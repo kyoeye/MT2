@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MT2.CS;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +23,9 @@ namespace MT2.Control
         public LoadingControl()
         {
             this.InitializeComponent();
+            Toasttext toasttext = new Toasttext();
+            LoadingText.Text = toasttext.GetToasttext();
         }
+        
     }
 }

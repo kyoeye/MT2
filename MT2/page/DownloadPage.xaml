@@ -5,7 +5,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:MT2.page"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Background="#FF0074B6"
     mc:Ignorable="d">
     <!--<Page.Transitions>
         <TransitionCollection>
@@ -22,18 +21,19 @@
         </TransitionCollection>
     </Page.Transitions>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Name="DownBackground" >
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+     
         <StackPanel>
             <Grid Name="MyTitleBarVB">
                 <Grid
                     Name="MyTitleBar"
                     Grid.Row="0"
                     Height="32"
-                    Style="{StaticResource GridBackgroud}" />
+                    />
                 <Grid Height="32" VerticalAlignment="Top">
                     <StackPanel Orientation="Horizontal">
                         <AppBarButton
@@ -88,7 +88,6 @@
                         Foreground="Black" />
                 </StackPanel>
             </Grid>
-
         </StackPanel>
         <Pivot
             Name="DowPivot"
@@ -127,7 +126,7 @@
                                         <TextBlock
                                             Name="DownloadID"
                                             Grid.Column="1"
-                                            Text="{Binding Source}" />
+                                            Text="{Binding ID}" />
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -177,7 +176,7 @@
                         Height="50"
                         HorizontalAlignment="Stretch"
                         Click="FolderOpen_Click"
-                        Content="打开保存目录（还不能用）" />
+                        Content="打开保存目录" />
                 </StackPanel>
             </PivotItem>
 

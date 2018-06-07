@@ -2,6 +2,7 @@
 using Microsoft.Toolkit.Uwp.UI.Animations;
 using MT2.Control;
 using MT2.CS;
+using MT2.CS.apiset;
 using MT2.Model;
 using MT2.page;
 using System;
@@ -39,9 +40,10 @@ namespace MT2
         string hotapiuri = "https://yande.re/post/popular_recent.json";
         //string apitype;
         int limit;//列表总数
-        int page = 1;
 
+#pragma warning disable CS0169 // 从不使用字段“MainPage.xmltext”
         string xmltext;
+#pragma warning restore CS0169 // 从不使用字段“MainPage.xmltext”
         string jsontext;
 
         #endregion
@@ -81,6 +83,22 @@ namespace MT2
             catch
             {
 
+            }
+            #endregion
+            #region 判断api是否支持
+            if (VersionHelper.Windows10Build15063 == true)
+            {
+                var style = Application.Current.Resources["SystemControlChromeMediumLowAcrylicWindowMediumBrush"];
+                var buttonrevealstyle = Application.Current.Resources["ButtonRevealStyle"];
+                MenuBlur.Visibility = Visibility.Collapsed;
+                MenuBackground.Visibility = Visibility.Collapsed;
+                MenuBackgroundAc.Fill = ( Windows.UI.Xaml.Media.Brush )style;
+            }
+            else
+            {
+                MenuBackgroundAc.Visibility = Visibility.Collapsed;
+                MenuBackground.Visibility = Visibility.Visible;
+                MenuBlur.Visibility = Visibility.Visible;
             }
             #endregion
 
@@ -170,11 +188,13 @@ namespace MT2
             {
                 BlurListBox.Visibility = Visibility.Visible;
                 MenuBlurGrid.Visibility = Visibility.Collapsed;
+                Searchbutton.Visibility = Visibility.Visible;
             }
             if (e.Size.Width > 600)
             {
                 BlurListBox.Visibility = Visibility.Collapsed;
                 MenuBlurGrid.Visibility = Visibility.Visible;
+                Searchbutton.Visibility = Visibility.Collapsed;
             }
 
         }
@@ -282,18 +302,6 @@ namespace MT2
         }
         #endregion
 
-        //#region 导航处理
-        //// 每次完成导航 确定下是否显示系统后退按钮  
-        //private void RootFrame_Navigated(object sender, NavigationEventArgs e)
-        //{
-
-        //    // ReSharper disable once PossibleNullReferenceException  
-        //    SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-        //        (Window.Current.Content as Frame).BackStack.Any()
-        //        ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
-        //}
-        //#endregion
-
         #region 对ui元素的处理
         public async void UiLoading()
         {
@@ -338,10 +346,10 @@ namespace MT2
         }
 
         #endregion
-
+        Toasttext tt = new Toasttext();
         public async Task Getimgvalue(string  uri,int item) //item是标记，用来判断是哪个数据源在使用这个方法 //0=yande;1=konacha
         {
-            Progresstext.Text = "少女迷茫中……";    
+    
                 GetAPIstring getjson = new GetAPIstring();
                 if (getjson != null)
                 {
@@ -356,18 +364,22 @@ namespace MT2
         {
             try
             {
-                Progresstext.Text = "正在排列一些奇怪的东西……";
-
+         
                 switch (item)
                 {
                     case 0:
+                        Topprogress.Visibility = Visibility.Visible;
+
                         var source = getjson.SaveJson(jsontext);
                         Pictureada.ItemsSource = source;
                         await newGetHotimageAsync();
                         break;
                     case 1:
+                        Topprogress2.Visibility = Visibility.Visible;
                         var soure_konacha = getjson_konachan.SaveJson_konachan(jsontext);
                         Pictureada2.ItemsSource = soure_konacha;
+                        await newGetHotimageAsync();
+                        Topprogress2.Visibility = Visibility.Collapsed;
                         break;
                 }
             }
@@ -386,7 +398,6 @@ namespace MT2
 
         private async Task Get_Top(string uri)
         {
-            Progresstext.Text = "正在下载TOP数据……";
             string content = await getapistring.GetWebString(uri);
        }
         #endregion
@@ -413,19 +424,37 @@ namespace MT2
         //    {
         //    }
         //}
+        GetJson gethotjson = new GetJson();
+
         public async Task newGetHotimageAsync()
         {
-            getapistring = new GetAPIstring();
-            Progresstext.Text = "正在下载TOP数据……";
-            var Hotjsonvalue = await getapistring.GetWebString(hotapiuri);
-            GetJson gethotjson = new GetJson();
-            var savejsonreturn = gethotjson.SaveJson(Hotjsonvalue);
-            Homehoturl = savejsonreturn.First().sample_url;
-            BitmapImage bit = new BitmapImage(new Uri(Homehoturl));
-            HomeHot.Source = bit;
-            Topprogress.Visibility = Visibility.Collapsed;
-            //江+1s热榜瀑布流传递给热榜页面
-            MTHub.Hotitemvalue = savejsonreturn;
+         //   getapistring = new GetAPIstring();
+ 
+            switch(HomePage_Pivot.SelectedIndex)
+            {
+                case 0:
+                    var Hotjsonvalue = await getapistring.GetWebString(hotapiuri);
+                    var savejsonreturn = gethotjson.SaveJson(Hotjsonvalue);
+                    Homehoturl = savejsonreturn.First().sample_url;
+                    BitmapImage bit = new BitmapImage(new Uri(Homehoturl));
+                    HomeHot.Source = bit;
+                    Topprogress.Visibility = Visibility.Collapsed;
+                    //江+1s热榜瀑布流传递给热榜页面
+                    MTHub.Hotitemvalue = savejsonreturn;     
+             break;
+                case 1:
+                    var Hotjsonvalue2 = await getapistring.GetWebString($"{apiurisave.KonachanHotHost}");
+                    var savejsonreturn2 = gethotjson.SaveJson_konachan(Hotjsonvalue2);
+                  string  hoturi = savejsonreturn2.First().sample_url;
+                    BitmapImage bit2 = new BitmapImage(new Uri(hoturi));
+                    HomeHot2.Source = bit2;
+                    Topprogress.Visibility = Visibility.Collapsed;
+                    //江+1s热榜瀑布流传递给热榜页面
+                    MTHub.Hotitemvalue_Konachan = savejsonreturn2;
+                    break;
+            }
+       
+         
         }
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
@@ -478,6 +507,12 @@ namespace MT2
                     MenuListhoxitem.SelectedItem = null;
                     Mymenu.IsPaneOpen = false;
                 }
+                else if (item == UserManage)
+                {
+                    Frame.Navigate(typeof(UserManagePage));
+                    MenuListhoxitem.SelectedItem = null;
+                    Mymenu.IsPaneOpen = false;
+                }
             }
         }
 
@@ -508,26 +543,26 @@ namespace MT2
         {
             await LoadingfuctionAsync();
         }
+
+        int page = 1, page_konacha = 1;
+
         private async Task LoadingfuctionAsync()
         {
-            //当数据更改后暂时让用户强退应用以免出现问题
-            page++;
-            if ((bool)localsettings.Values["_TackToJS"] == true)
+            switch (HomePage_Pivot.SelectedIndex)
             {
-                jsontext = await getapistring.GetWebString(Mainapiuri + ".json?limit=" + limit + "&page=" + page);
-                getjson.Loadingitem(jsontext, limit);
-
+                case 0:
+                    page++;
+                        jsontext = await getapistring.GetWebString(Mainapiuri + ".json?limit=" + limit + "&page=" + page);
+                        getjson.Loadingitem(jsontext, limit);
+                    break;
+                    //待处理page值的问题，来回切换两个源时page的自加是不可行的
+                case 1:
+                    page_konacha++;     
+                    jsontext = await getapistring.GetWebString(Konachauri + ".json?limit=" + limit + "&page=" + page_konacha);
+                    getjson_konachan.Loadingitem_konachan(jsontext, limit);
+                    break;
             }
-            //else
-            //{
-            //    xmltext = await getapistring.GetWebString(Mainapiuri + ".xml?limit=" + limit + "&page=" + page);
-            //    MainItemget.Toitem(xmltext);
-            //    MainItemget.Loadinglistitems();
-            //}
-
-
             return;
-
         }
         #endregion
         #region pixiv
@@ -574,22 +609,25 @@ namespace MT2
                     await LoadingfuctionAsync();
                 }
             }
+ 
         }
-
+        //不允许pivot改变后再次请求刷新,，减轻服务器请求压力和流量消耗
+        private int Changedint = 0; 
         private async void  HomePage_Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Changedint++;
+
             switch (HomePage_Pivot.SelectedIndex)
             {
                 case 0:
+                    if(Changedint==1)
                      await Getimgvalue(Mainapiuri,0);
-
                     //HomePage_Pivot.SelectedItem = 0;
                     break;
                 case 1:
-                     await Getimgvalue(Konachauri,1);
-                    //获取源数据
-                    //HomePage_Pivot.SelectedItem = 1;
-                    //get_Pixivjson();
+                    if (Changedint == 2)
+                        await Getimgvalue(Konachauri,1);
+ 
                     break;
             }
         }

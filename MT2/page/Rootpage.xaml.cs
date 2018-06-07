@@ -114,8 +114,7 @@ namespace MT2.page
                     Context = content ,
                     Title2 = Title2 ,
                     Context2 = content2 
-                    //Context = "嗯……虽然目标很多但是现在只有一个yande.re图源的。。。动漫图库？",
-                    //Title2 = "为什么访问这么慢?"
+
                 },
                 SecondaryButtonText = "知道啦",
                 FullSizeDesired = false,

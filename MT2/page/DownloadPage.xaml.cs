@@ -21,6 +21,8 @@ using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Windows.Storage.Pickers;
+using MT2.Control;
+using Windows.UI;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
 
@@ -36,10 +38,28 @@ namespace MT2.page
         public DownloadPage()
         {
             this.InitializeComponent();
+            #region 判断api是否支持
+            if (VersionHelper.Windows10Build15063 == true)
+            {
+                Windows.UI.Xaml.Media.AcrylicBrush acrylic = new Windows.UI.Xaml.Media.AcrylicBrush();
+                acrylic.TintOpacity = 0.5;
+                acrylic.TintColor = Colors.White;
+                acrylic.BackgroundSource = AcrylicBackgroundSource.HostBackdrop;
+                MyTitleBar.Style = (Style)Application.Current.Resources["GridBackgroud"];
+                DownBackground.Background = acrylic;
+            }
+            else
+            {
+                MyTitleBar.Background = new SolidColorBrush(Color.FromArgb(100, 244, 244, 244));
+                DownBackground.Background = new SolidColorBrush(Colors.White);
+            }
+            #endregion
+
             if (localsettings.Values["_ThisDeviceis"].ToString() == "Mobile")
             {
                 MyTitleBarVB.Visibility = Visibility.Collapsed;
             }
+
         }
 
         private  List<DownloadOperation> DownloadList; //活动的下载任务对象 
@@ -141,12 +161,12 @@ namespace MT2.page
 
         private void Downed_button_Click(object sender, RoutedEventArgs e)
         {
-            DowPivot.SelectedIndex = 0;
+            DowPivot.SelectedIndex = 1;
         }
 
         private void Downin_button_Click(object sender, RoutedEventArgs e)
         {
-            DowPivot.SelectedIndex = 1;
+            DowPivot.SelectedIndex = 0;
 
         }
         #region 打开文件保存目录
@@ -154,7 +174,7 @@ namespace MT2.page
         {
             string fileuri = localsettings.Values["_Fileuri"].ToString();
             StorageFolder storagefolder = await StorageFolder.GetFolderFromPathAsync(fileuri);
-            
+            var success = await Windows.System.Launcher.LaunchFolderAsync(storagefolder);
         }
 
         #endregion

@@ -12,7 +12,11 @@ namespace MT2.CS
     {
   //每日热门
         public static ObservableCollection<Yande_post_json> Hotitemvalue;
+        public static ObservableCollection<Konachan_post_json> Hotitemvalue_Konachan;
+
         //热门的第一张图
+#pragma warning disable CS0649 // 从未对字段“MTHub.Frist_IMG”赋值，字段将一直保持其默认值 null
         public static string  Frist_IMG;
+#pragma warning restore CS0649 // 从未对字段“MTHub.Frist_IMG”赋值，字段将一直保持其默认值 null
     }
 }

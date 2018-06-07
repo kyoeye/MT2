@@ -14,14 +14,16 @@
             <NavigationThemeTransition />
         </TransitionCollection>
     </Page.Transitions>
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid  Name="HotGrid" >
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackPanel>
+
+        <StackPanel >
+         
             <Grid Name="MyTitleBarVB">
+            
                 <Grid
                     Name="MyTitleBar"
                     Grid.Row="0"
@@ -45,59 +47,43 @@
                                 Text="&#xE096;" />
                         </AppBarButton>
                         <TextBlock
+                            Name="Hot_Title"
                             Margin="5,0,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             FontSize="13"
+                            Text="热榜"
                             Style="{StaticResource TextblockForeground}" />
                     </StackPanel>
 
 
                 </Grid>
             </Grid>
-            <Grid Height="50" Style="{StaticResource GridBackgroud}">
-                <TextBlock
-                    Name="Hot_Title"
-                    Margin="10,0,10,0"
+            <Grid Height="50"  Style="{StaticResource GridBackgroud}">
+               
+                <StackPanel
+                    Visibility="Visible" 
+                    Margin="10"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    FontSize="25"
-                    Style="{StaticResource TextblockForeground}"
-                    Text="热榜" />
-                <StackPanel
-                    Margin="10"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
                     Orientation="Horizontal">
-                    <Button
-                        Name="B0"
+                    <AppBarButton
+                        Name="Yande"
                         Background="{x:Null}"
-                        Click="B0_Click"
-                        Content="每日"
-                        FontSize="15"
+                        Content="Yande"
+                        FontSize="18"
+                        Click="Yande_Click"
                         Foreground="Black"
-                        Style="{StaticResource ButtonStyle1}" />
-                    <Button
-                        Name="B1"
+                        Style="{StaticResource ButtonStyle1}" Padding="0,0,0,0" />
+                    <AppBarButton
+                        Name="Konachan"
                         Background="{x:Null}"
-                        Click="B1_Click"
-                        Content="每周"
-                        FontSize="15"
-                        Foreground="Black" />
-                    <Button
-                        Name="B2"
-                        Background="{x:Null}"
-                        Click="B2_Click"
-                        Content="每月"
-                        FontSize="15"
-                        Foreground="Black" />
-                    <Button
-                        Name="B3"
-                        Background="{x:Null}"
-                        Click="B3_Click"
-                        Content="每年"
-                        FontSize="15"
-                        Foreground="Black" />
+                        Click="Konachan_Click"
+                        Width="90"
+                        Content="Konachan"
+                        FontSize="18" 
+                        Style="{StaticResource ButtonStyle1}" 
+                        Foreground="Black" Padding="0,0,0,0" UseLayoutRounding="False" />
 
                 </StackPanel>
             </Grid>
@@ -109,8 +95,8 @@
             Padding="0"
             SelectionChanged="Pivot_SelectionChanged"
             Style="{StaticResource PivotStyle1}">
-            <PivotItem Margin="0" Header="{x:Null}">
-                <Grid>
+            <PivotItem Margin="0"  >
+              <Grid>
                     <GridView x:Name="Mygridview" SelectionMode="Single">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -208,12 +194,6 @@
                                 <ScrollViewer>
                                     <StackPanel>
                                         <ItemsPresenter />
-                                        <!--<Button
-                                    Name="Loadingbutton"
-                                    Margin="12"
-                                    HorizontalAlignment="Center"
-                                    Click="Loadingbutton_Click"
-                                    Content="加载更多(｡･∀･)ﾉﾞ" />-->
                                     </StackPanel>
                                 </ScrollViewer>
                             </ControlTemplate>
@@ -221,18 +201,6 @@
                         <GridView.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="2">
-                                    <!--<Grid.ChildrenTransitions>
-                                        <TransitionCollection>
-                                            <EntranceThemeTransition />
-                                        </TransitionCollection>
-                                    </Grid.ChildrenTransitions>-->
-
-                                    <!--<Border
-                                            Padding="2"
-                                            Background="White"
-                                            CornerRadius="0,0,3,3" />-->
-
-
                                     <StackPanel
                                         Name="gridstackpanel"
                                         Margin="1"
@@ -254,11 +222,6 @@
                                             HorizontalAlignment="Stretch"
                                             VerticalAlignment="Bottom"
                                             Visibility="Collapsed">
-                                            <!--<Rectangle
-                                            Width="{Binding ElementName=gridstackpanel, Path=Width, Mode=TwoWay}"
-                                            Height="{Binding ElementName=gridstackpanel, Path=Height, Mode=TwoWay}"
-                                            Fill="White"
-                                            Opacity="0.3" />-->
                                             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
                                                 <TextBlock
                                                     Name="Imagetext"
@@ -294,12 +257,7 @@
                                 <ScrollViewer>
                                     <StackPanel>
                                         <ItemsPresenter />
-                                        <!--<Button
-                                    Name="Loadingbutton"
-                                    Margin="12"
-                                    HorizontalAlignment="Center"
-                                    Click="Loadingbutton_Click"
-                                    Content="加载更多(｡･∀･)ﾉﾞ" />-->
+                             
                                     </StackPanel>
                                 </ScrollViewer>
                             </ControlTemplate>
@@ -307,18 +265,6 @@
                         <GridView.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="2">
-                                    <!--<Grid.ChildrenTransitions>
-                                        <TransitionCollection>
-                                            <EntranceThemeTransition />
-                                        </TransitionCollection>
-                                    </Grid.ChildrenTransitions>-->
-
-                                    <!--<Border
-                                            Padding="2"
-                                            Background="White"
-                                            CornerRadius="0,0,3,3" />-->
-
-
                                     <StackPanel
                                         Name="gridstackpanel"
                                         Margin="1"
@@ -340,11 +286,6 @@
                                             HorizontalAlignment="Stretch"
                                             VerticalAlignment="Bottom"
                                             Visibility="Collapsed">
-                                            <!--<Rectangle
-                                            Width="{Binding ElementName=gridstackpanel, Path=Width, Mode=TwoWay}"
-                                            Height="{Binding ElementName=gridstackpanel, Path=Height, Mode=TwoWay}"
-                                            Fill="White"
-                                            Opacity="0.3" />-->
                                             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
                                                 <TextBlock
                                                     Name="Imagetext"
@@ -455,7 +396,28 @@
             </PivotItem>
 
         </Pivot>
-
+        <CommandBar  IsOpen="False" Grid.Row="1" VerticalAlignment="Bottom" FontFamily="Segoe UI">
+            <AppBarButton    Click="B0_Click"    Label="DAY" FontFamily="Candara"  >
+                <AppBarButton.Icon>
+                    <FontIcon FontFamily="Microsoft YaHei UI"  Glyph="日"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton  Click="B1_Click"  Label="WEEK" FontFamily="Candara" >
+                <AppBarButton.Icon>
+                    <FontIcon FontFamily="Microsoft YaHei UI" Glyph="周"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton Click="B2_Click"   Label="MONTH" FontFamily="Candara"   >
+                <AppBarButton.Icon>
+                    <FontIcon FontFamily="Candara" Glyph="月"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton   Click="B3_Click" Label="YEAR" FontFamily="Candara" >
+                <AppBarButton.Icon>
+                    <FontIcon FontFamily="Microsoft YaHei UI" Glyph="年"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+        </CommandBar>
         <ProgressRing
             Name="progressrin"
             Grid.Row="1"

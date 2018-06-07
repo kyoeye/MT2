@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MT2.Control;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,7 @@ using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,6 +32,21 @@ namespace MT2.page
             this.InitializeComponent();
             CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;
+            #region 判断api是否支持
+            if (VersionHelper.Windows10Build15063 == true)
+            {
+                Windows.UI.Xaml.Media.AcrylicBrush acrylic = new Windows.UI.Xaml.Media.AcrylicBrush();
+                acrylic.TintOpacity = 0.5;
+                acrylic.TintColor = Colors.White;
+                acrylic.BackgroundSource = AcrylicBackgroundSource.HostBackdrop;
+                compactbackground.Background = acrylic;
+            }
+            else
+            {
+                compactbackground.Background = new SolidColorBrush(Colors.White);
+            }
+            #endregion
+
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -37,22 +54,13 @@ namespace MT2.page
             if(e.Parameter.GetType().Name == "Imgitem")
             {
                 showpathimg((Imgitem)e.Parameter);
-
             }
             else
             {
                 var a = (string)e.Parameter;
-
                 BitmapImage bitmapimage = new BitmapImage(new Uri(a));
                 Myimage.Source = bitmapimage;
             }
-          
-                //SCPimguri.scpimguri = a.ToString();
-                //失败
-                      
-                //Myimage.Source = bi.sou(new Uri(a.ToString ());
-           
-         
         }
 
         private async void showpathimg(Imgitem  a)

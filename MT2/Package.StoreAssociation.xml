@@ -2,6 +2,7 @@
 <StoreAssociation xmlns="http://schemas.microsoft.com/appx/2010/storeassociation">
   <Publisher>CN=9D42EBA3-43E5-47AA-B257-4FD8FB569F35</Publisher>
   <PublisherDisplayName>画渣针眼</PublisherDisplayName>
+  <DeveloperAccountType>MSA</DeveloperAccountType>
   <GeneratePackageHash>http://www.w3.org/2001/04/xmlenc#sha256</GeneratePackageHash>
   <SupportedLocales>
     <Language Code="af" InMinimumRequirementSet="true" />
@@ -365,6 +366,7 @@
     </ReservedNames>
   </ProductReservedInfo>
   <AccountPackageIdentityNames>
+    <MainPackageIdentityName>5758613C2F966.3099315253CCD</MainPackageIdentityName>
     <MainPackageIdentityName>5758613C2F966.5690347B99467</MainPackageIdentityName>
     <MainPackageIdentityName>5758613C2F966.MTACG</MainPackageIdentityName>
   </AccountPackageIdentityNames>

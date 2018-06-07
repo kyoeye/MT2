@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:data="using:MT2.Model"
+    xmlns:data="using:MT2.CS.Model"
     xmlns:local="using:MT2.pubuliu"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -277,7 +277,7 @@
                 Name="MyTitleBar"
                 Grid.Row="0"
                 Height="32"
-                Style="{StaticResource GridBackgroud}" />
+                />
             <Grid Height="32" VerticalAlignment="Top">
                 <StackPanel Orientation="Horizontal">
                     <AppBarButton
@@ -310,12 +310,37 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Grid Height="50" Style="{StaticResource GridBackgroud}">
-                <TextBox
+            <Grid Name="SuggestBackgroud" Height="50" >
+                <!--<TextBox
                     Name="SeachTextBox"
                     Margin="5"
+                    Visibility="Collapsed" 
                     PlaceholderText="请尽量输入比较通用的词汇"
-                    Style="{StaticResource TextBoxStyle1}" />
+                    Style="{StaticResource TextBoxStyle1}" />-->
+                <AutoSuggestBox 
+                                Name="SeachTextBox" 
+                                TextChanged="SeachTextBox2_TextChanged"   
+                                QueryIcon="Find" 
+                                 BorderThickness="1.5"
+                                BorderBrush="{ThemeResource SystemControlBackgroundAccentRevealBorderBrush}"
+                                  Background="{ThemeResource SystemControlAcrylicElementBrush}"
+                                  MaxSuggestionListHeight="400"
+                                 ItemsSource="{x:Bind Tag_yande}"
+                                  TextMemberPath="name"
+                                PlaceholderText="输入tag然后等待提示出现"       
+                                SuggestionChosen="SeachTextBox2_SuggestionChosen"
+                                QuerySubmitted="SeachTextBox2_QuerySubmitted"
+                                Margin="5">
+                    <AutoSuggestBox.ItemTemplate 
+                    >
+                    
+                        <DataTemplate x:DataType="data:Yande_Tage">
+                            <Grid>
+                                <TextBlock Margin="5" Text="{x:Bind name}" />
+                            </Grid>
+                        </DataTemplate>
+                    </AutoSuggestBox.ItemTemplate>
+                </AutoSuggestBox>
             </Grid>
 
             <GridView
@@ -336,9 +361,9 @@
                                     Name="Loadingbutton"
                                     Margin="12"
                                     HorizontalAlignment="Center"
-                                    Click="Loadingbutton_Click"
+                                    Click="Loadingbutton_Click_1"
                                     Content="探索更多"
-                                    Visibility="Collapsed" />
+                                    Visibility="Visible" />
                             </StackPanel>
                         </ScrollViewer>
                     </ControlTemplate>

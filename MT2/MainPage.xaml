@@ -8,6 +8,7 @@
     xmlns:data="using:MT2.CS"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="using:Windows.UI.Xaml.Media"
+    xmlns:local="using:MT2.Control"
     Background="#FF0074B6"
     RequestedTheme="Light"
     mc:Ignorable="d">
@@ -253,8 +254,8 @@
             </Setter>
         </Style>
     </Page.Resources>
-  
- 
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="32" />
@@ -273,12 +274,14 @@
                     <Grid x:Name="MenuBlurGrid">
                         <Image
                             x:Name="MenuBlur"
-                            Visibility="Collapsed" 
+                            Visibility="Collapsed"          
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Source="{Binding ElementName=HomeHot, Path=Source, Mode=TwoWay}"
                             Stretch="UniformToFill" />
-                        <Rectangle  Fill="{ThemeResource SystemControlChromeMediumLowAcrylicWindowMediumBrush}"/>
+                        <Rectangle Name="MenuBackground" Visibility="Collapsed"  Fill="White" Opacity="0.7" />
+
+                        <Rectangle Name="MenuBackgroundAc"  />
 
                         <!--<Rectangle Fill="White" Opacity="0.7" />-->
                     </Grid>
@@ -331,7 +334,7 @@
                         </ListViewItem>
                         <ListViewItem  Height="50"
                             Name="UserManage"
-                            IsEnabled="False"
+                            IsEnabled="True"
                             Visibility="Visible">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon
@@ -369,24 +372,6 @@
                                     Text="热榜" />
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem Name="downitem"  Height="50">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock
-                                    Margin="5"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    FontFamily="Segoe MDL2 Assets"
-                                    FontSize="18"
-                                    Text="&#xE118;" />
-                                <TextBlock
-                                    Name="Mainpage_Download"
-                                    Margin="15,0,0,0"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    FontSize="15"
-                                    Text="下载" />
-                            </StackPanel>
-                        </ListViewItem>
                         <ListViewItem Name="collects"  Height="50" Visibility="Visible">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon
@@ -403,6 +388,25 @@
                                     VerticalAlignment="Center"
                                     FontSize="15"
                                     Text="收藏" />
+                            </StackPanel>
+                        </ListViewItem>
+
+                        <ListViewItem Name="downitem"  Height="50">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                                    Margin="5"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    FontSize="18"
+                                    Text="&#xE118;" />
+                                <TextBlock
+                                    Name="Mainpage_Download"
+                                    Margin="15,0,0,0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="15"
+                                    Text="下载" />
                             </StackPanel>
                         </ListViewItem>
                         <ListViewItem Name="picinpciitem"  Height="50" Visibility="Visible">
@@ -484,22 +488,9 @@
                                 FontSize="30"
                                 FontWeight="Bold"
                                 Foreground="#FF606060"
-                                Text="TOP" />
-                                        <StackPanel
-                                Name="Topprogress"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center">
-                                            <ProgressRing
-                                    Width="50"
-                                    Height="50"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    IsActive="True" />
-                                            <TextBlock
-                                    Name="Progresstext"
-                                    Margin="10"
-                                    FontSize="15" />
-                                        </StackPanel>
+                                Text="Yande" />
+                                        <local:LoadingControl   x:Name="Topprogress" />
+
                                     </Grid>
                                     <Grid
                             Name="Yande_re"
@@ -515,6 +506,7 @@
                                         HorizontalAlignment="Center"
                                         Background="#FFD1D1D1"
                                         Tapped="Picturegrid_Tapped">
+
                                                     <Image
                                             Height="205"
                                             HorizontalAlignment="Center"
@@ -527,7 +519,6 @@
                                                     <ItemsPresenter />
                                                     <Button
                                             Name="LoadingButton"
-                                            Style="{StaticResource ButtonRevealStyle}"
                                             HorizontalAlignment="Stretch"
                                             VerticalAlignment="Center"
                                             Click="LoadingButton_Click"
@@ -547,7 +538,9 @@
                                 ItemTemplate="{StaticResource GridviewTemplete}"
                                 OneRowModeEnabled="False"
                                 ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                                SelectionMode="Single" />
+                                SelectionMode="Single" >
+
+                                        </controls:AdaptiveGridView>
                                         <!--<GridView
                                         Name="Pictureada"
                                         HorizontalAlignment="Stretch"
@@ -581,10 +574,10 @@
                     </PivotItem>
                     <PivotItem Header="2"  Margin="0"   >
                         <Grid >
-                            <ScrollViewer Name="Myscrollviewer2" Grid.RowSpan="3">
+                            <ScrollViewer Name="Myscrollviewer2"   Grid.RowSpan="3">
                                 <StackPanel>
                                     <Grid
-                            Name="HotGridTap2"
+                            Name="HotGridTap2"                       
                             Height="400"
                             animations:ParallaxService.VerticalMultiplier="-0.8"
                             Background="#FFBFBFBF"
@@ -602,22 +595,8 @@
                                 FontSize="30"
                                 FontWeight="Bold"
                                 Foreground="#FF606060"
-                                Text="TOP" />
-                                        <StackPanel
-                                Name="Topprogress2"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center">
-                                            <ProgressRing
-                                    Width="50"
-                                    Height="50"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    IsActive="True" />
-                                            <TextBlock
-                                    Name="Progresstex2t"
-                                    Margin="10"
-                                    FontSize="15" />
-                                        </StackPanel>
+                                Text="konacha" />
+                                        <local:LoadingControl    x:Name="Topprogress2" />
                                     </Grid>
                                     <Grid
                             Name="konacha"
@@ -661,6 +640,7 @@
                                 animations:ReorderGridAnimation.Duration="204"
                                 Control.Template="{StaticResource Controltemplate}"
                                 DesiredWidth="340"
+                                IsRightTapEnabled="True" 
                                 IsItemClickEnabled="True"
                                 ItemHeight="150"
                                 ItemTemplate="{StaticResource GridviewTemplete}"

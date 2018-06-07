@@ -1,1 +1,1 @@
-C:\Users\ghhhg\Documents\MTACG\MT2\MT2\bin\ARM\Release\Upload\MT2_1.2.10.0\MT2_1.2.10.0_x86_x64_arm.appxbundle
+C:\Users\ghhhg\source\repos\MT2\MT2\bin\ARM\Release\Upload\MT2_1.3.22.0\MT2_1.3.22.0_x86_x64_arm.appxbundle

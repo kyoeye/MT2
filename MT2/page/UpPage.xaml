@@ -73,23 +73,6 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <TextBlock
-                        Name="UpPage_Title2"
-                        Margin="10"
-                        FontSize="30"
-                        IsTextSelectionEnabled="True"
-                        Text="新功能快速配置" />
-                    <StackPanel Margin="10,0,10,10">
-                        <ComboBox
-                            Name="Mycombobox"
-                            Width="200"
-                            Header="设置语言"
-                            PlaceholderText="Languages"
-                            SelectionChanged="ComboBox_SelectionChanged">
-                            <ComboBoxItem>中文</ComboBoxItem>
-                            <ComboBoxItem>English</ComboBoxItem>
-                        </ComboBox>
-                    </StackPanel>
                 </StackPanel>
 
             </StackPanel>

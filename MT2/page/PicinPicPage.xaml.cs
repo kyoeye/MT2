@@ -20,6 +20,8 @@ using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Media.Imaging;
+using MT2.Control;
+using Windows.UI;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -34,6 +36,20 @@ namespace MT2.page
         public PicinPicPage()
         {
             this.InitializeComponent();
+            #region 判断api是否支持
+            if (VersionHelper.Windows10Build15063 == true)
+            {
+                 MyTitleBar.Style = (Style)Application.Current.Resources["GridBackgroud"];
+                PIPBackground.Style = (Style)Application.Current.Resources["GridBackgroud"];
+            }
+            else
+            {
+                MyTitleBar.Background = new SolidColorBrush(Color.FromArgb(100, 244, 244, 244));
+                PIPBackground.Background = new SolidColorBrush(Color.FromArgb(100, 244, 244, 244));
+            }
+            #endregion
+            Window.Current.SetTitleBar(MyTitleBar);
+
             NavigationCacheMode = NavigationCacheMode.Enabled;
             ImgitemOb = new ObservableCollection<Imgitem>();
         }
@@ -71,10 +87,7 @@ namespace MT2.page
             {
                 await new MessageDialog("您没有选择文件，或者文件格式不正确").ShowAsync();
                 tosttextblock.Visibility = Visibility.Visible;
-
             }
-
-
         }
 
         private void NewMethod(StorageFile fopvalue ,BitmapImage Bi )

@@ -1,4 +1,5 @@
-﻿using MT2.CS;
+﻿using MT2.Control;
+using MT2.CS;
 using MT2.Model;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using MT2.CS.apiset;
 using Windows.UI.Xaml.Navigation;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
@@ -31,9 +33,7 @@ namespace MT2.page
     {
         #region apis
         string hotapiuri = "https://yande.re/post/popular_recent.json";
-        string w_Hotapiuri = "https://yande.re/post/popular_recent.json?period=1w";
-        string m_Hotapiuri = "https://yande.re/post/popular_recent.json?period=1m";
-        string y_Hotapiuri = "https://yande.re/post/popular_recent.json?period=1y";
+
         #endregion
         ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
 
@@ -44,6 +44,21 @@ namespace MT2.page
         public  hotitempage()
         {
             this.InitializeComponent();
+            #region 判断api是否支持
+            if (VersionHelper.Windows10Build15063 == true)
+            {
+                Windows.UI.Xaml.Media.AcrylicBrush acrylic = new Windows.UI.Xaml.Media.AcrylicBrush();
+                acrylic.TintOpacity = 0.5;
+                acrylic.TintColor =  Colors.White;
+                acrylic.BackgroundSource = AcrylicBackgroundSource.HostBackdrop;           
+                HotGrid.Background = acrylic;
+            }
+            else
+            {
+                HotGrid.Background = new SolidColorBrush(  Color.FromArgb (100,215,215,215));
+            }
+            #endregion
+
             progressrin.IsActive = true;
             if (localsettings.Values["_ThisDeviceis"].ToString() == "Mobile")
             {
@@ -90,10 +105,18 @@ namespace MT2.page
         //}
         private void gridstackpanel_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            var boxs = sender as StackPanel;     
-            var boxx = boxs.DataContext as Yande_post_json;
-            string lookurii = boxx.sample_url;
-            Frame.Navigate(typeof(LookImg), boxx);
+                var boxs = sender as StackPanel;
+                switch (pivot.SelectedIndex) //目前暂时用pivot排序的方式来做区分，如果以后实现了自定义接口排序，这里要改
+                {
+                    case 0:
+                        var box = boxs.DataContext as Yande_post_json;
+                        Frame.Navigate(typeof(LookImg), box);
+                        break;
+                    case 1:
+                        var box2 = boxs.DataContext as Konachan_post_json;
+                        Frame.Navigate(typeof(LookImg), box2);
+                    break;
+                }
         }
 
         private void GobackButton_Click(object sender, RoutedEventArgs e)
@@ -103,32 +126,37 @@ namespace MT2.page
         }
         #region json接口测试by一周
         //string jsontext;
+        GetAPIstring getresponse = new GetAPIstring();
+
         private async void Getjsonstring(string thehotapiuri ,int pivotindexs)
         {
-            GetAPIstring getjson = new GetAPIstring();
-           string  jsontext = await getjson.GetWebString(thehotapiuri);
+           string  jsontext = await getresponse.GetWebString(thehotapiuri);
             Setjsonstring(jsontext,pivotindexs );            
         }
         GetJson getjson = new GetJson();
-        private void Setjsonstring(string jsontext , int pivotindex)
+        private void Setjsonstring(string jsontext , int sourceindex)
         {
             //使用Savejson方法将json数据反序列化到存储
-           var source = getjson.SaveJson(jsontext);
-            switch (pivotindex )
+            //       getjson.NoH();
+            //   Mygridview.ItemsSource = source;
+
+            switch (sourceindex)
             {
                 case 0:
+                    var source = getjson.SaveJson(jsontext);
                     Mygridview.ItemsSource = source;
                     progressrin.IsActive = false;
                     break;
                 case 1:
-                    Mygridview2.ItemsSource = source;
+                    var source2 = getjson.SaveJson_konachan(jsontext);
+                    Mygridview2.ItemsSource = source2;
                     break;
-                case 2:
-                    Mygridview3.ItemsSource = source;
-                    break;
-                case 3:
-                    Mygridview4.ItemsSource = source;
-                    break;
+                //case 2:
+                //    Mygridview3.ItemsSource = source;
+                //    break;
+                //case 3:
+                //    Mygridview4.ItemsSource = source;
+                //    break;
             }
 
         }
@@ -138,94 +166,115 @@ namespace MT2.page
 
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //B0.Content = "每日";
-            //B1.Content = "每周";
-            //B2.Content = "每月";
-            //B3.Content = "每年";
-            B0.FontSize = 15;
-            B1.FontSize = 15;
-            B2.FontSize = 15;
-            B3.FontSize = 15;
-            B0.Opacity = 0.5;
-            B1.Opacity = 0.5;
-            B2.Opacity = 0.5;
-            B3.Opacity = 0.5;
-                    B0.FontFamily = new FontFamily("Segoe UI");
-                    B1.FontFamily = new FontFamily("Segoe UI");
-                    B2.FontFamily = new FontFamily("Segoe UI");
-                    B3.FontFamily = new FontFamily("Segoe UI");
-            //B0.Foreground = new SolidColorBrush(Color.FromArgb(225, 128, 128, 128));
-            //B1.Foreground = new SolidColorBrush(Color.FromArgb(225, 128, 128, 128));
-            //B2.Foreground = new SolidColorBrush(Color.FromArgb(225, 128, 128, 128));
-            //B3.Foreground = new SolidColorBrush(Color.FromArgb(225, 128, 128, 128));
-
+ 
+            Yande.FontSize = 15;
+            Konachan.FontSize = 15;
+            Yande.Opacity = 0.5;
+            Konachan.Opacity = 0.5;
+            Yande.FontFamily = new FontFamily("Segoe UI");
+            Konachan.FontFamily = new FontFamily("Segoe UI");
+ 
             switch (pivot.SelectedIndex)
             {
                 case 0 :
-                    B0.Opacity = 1;
-                    B0.FontFamily = new FontFamily("Segoe UI Black");
+                    Yande.Opacity = 1;
+                    Yande.FontFamily = new FontFamily("Segoe UI Black");
                     break;
                 case 1:
-                    B1.FontFamily = new FontFamily("Segoe UI Black");
-                    B1.Opacity = 1;
+                    Konachan.FontFamily = new FontFamily("Segoe UI Black");
+                    Konachan.Opacity = 1;
                     if (p1==0)
                     {
                         p1++;
-                        Getjsonstring(w_Hotapiuri, 1);
+                        Getjsonstring($"{apiurisave.KonachanHotHost}", 1);
                     }
                     break;
-                case 2:
-                    B2.FontFamily = new FontFamily("Segoe UI Black");
-                    B2.Opacity = 1;
-                    if (p2 ==0)
-                    {
-                        p2++;
-                        Getjsonstring(m_Hotapiuri, 2);
-                    }
-                    break;
-                case 3:
-                    B3.FontFamily = new FontFamily("Segoe UI Black");
-                    B3.Opacity = 1;
-                    if(p3 ==0)
-                    {
-                        p3++;
-                        Getjsonstring(y_Hotapiuri, 3);
-
-                    }
-                    break;
+    
             }
         }
         #region 记录pivotitem的展示次数
         int p1;
-        int p2;
-        int p3;
+        //int p2;
+        //int p3;
+        #endregion
+        #region 更改日榜周榜月榜等
+        private void DanbooruDWMY(int index)
+        {   
+            switch (index)
+            {
+                case 0:
+                    if (pivot.SelectedIndex == 0)
+                    {
+                        // Getjsonstring($"{apiurisave.YandeHotHost}", 0);
+                        if (MTHub.Hotitemvalue != null)
+                        {
+                            Mygridview.ItemsSource = MTHub.Hotitemvalue;
+                            progressrin.IsActive = false;
+                        }
+                    }
+                        
+                     else if (pivot.SelectedIndex == 1)
+                    {
+                        //  Getjsonstring($"{apiurisave.KonachanHotHost}", 1);
+                        if (MTHub.Hotitemvalue != null)
+                        {
+                            Mygridview2.ItemsSource = MTHub.Hotitemvalue_Konachan;
+                            progressrin.IsActive = false;
+                        }
+                    }
+                    
+                    break;
+                case 1:
+                        p1++;
+                        if(pivot.SelectedIndex==0)
+                              Getjsonstring($"{apiurisave.YandeHotHost}?period=1w",0);
+                        else if (pivot.SelectedIndex ==1)
+                              Getjsonstring($"{apiurisave.KonachanHotHost}?period=1w", 1);  
+                    break;
+                case 2:
+                        if (pivot.SelectedIndex == 0)
+                            Getjsonstring($"{apiurisave.YandeHotHost}?period=1m", 0);
+                        else if (pivot.SelectedIndex == 1)
+                            Getjsonstring($"{apiurisave.KonachanHotHost}?period=1m", 1);
+                    break;
+                case 3:
+                         if (pivot.SelectedIndex == 0)
+                            Getjsonstring($"{apiurisave.YandeHotHost}?period=1y", 0);
+                        else if (pivot.SelectedIndex == 1)
+                            Getjsonstring($"{apiurisave.KonachanHotHost}?period=1y", 1);         
+                    break;
+            }
+
+        }
+
         #endregion
         private void B0_Click(object sender, RoutedEventArgs e)
         {
-            pivot.SelectedIndex = 0;
-            pivot.SelectedItem = pivot.Items[0];
+            DanbooruDWMY(0);
+   
         }
 
         private void B1_Click(object sender, RoutedEventArgs e)
         {
-            pivot.SelectedIndex = 1;
-            pivot.SelectedItem = pivot.Items[1];
-            Getjsonstring(w_Hotapiuri,1);
+            DanbooruDWMY(1);
+ 
         }
 
         private void B2_Click(object sender, RoutedEventArgs e)
         {
-            pivot.SelectedIndex = 2;
-            pivot.SelectedItem = pivot.Items[2];
-            Getjsonstring(m_Hotapiuri,2 );
+            DanbooruDWMY(2);
+
+         //   Getjsonstring(m_Hotapiuri,2 );
 
         }
 
         private void B3_Click(object sender, RoutedEventArgs e)
         {
-            pivot.SelectedIndex = 3;
-            pivot.SelectedItem = pivot.Items[3];
-            Getjsonstring(y_Hotapiuri,3);
+            DanbooruDWMY(3);
+
+            //pivot.SelectedIndex = 3;
+            //pivot.SelectedItem = pivot.Items[3];
+            //Getjsonstring(y_Hotapiuri,3);
         }
         #endregion
         #region 显示文字
@@ -233,12 +282,23 @@ namespace MT2.page
         {
             ResourceLoader rl = new ResourceLoader();
             Hot_Title.Text = rl.GetString("Hot_Title");
-            B0.Content = rl.GetString("B0");
-            B1.Content = rl.GetString("B1");
-            B2.Content = rl.GetString("B2");
-            B3.Content = rl.GetString("B3");          
         }
         #endregion
 
+        private void Konachan_Click(object sender, RoutedEventArgs e)
+        {
+            pivot.SelectedIndex = 1;
+            pivot.SelectedItem = pivot.Items[1];
+            DanbooruDWMY(0);
+          
+        }
+
+        private void Yande_Click(object sender, RoutedEventArgs e)
+        {
+            pivot.SelectedIndex = 0;
+            pivot.SelectedItem = pivot.Items[0];
+        //    DanbooruDWMY(0);        
+
+        }
     }
 }

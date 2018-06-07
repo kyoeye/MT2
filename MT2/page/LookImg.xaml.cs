@@ -1,5 +1,7 @@
 ﻿using Edi.UWP.Helpers;
+using Edi.UWP.Helpers.Extensions;
 using Microsoft.Toolkit.Uwp.UI.Animations;
+using MT2.Control;
 using MT2.CS;
 using MT2.Model;
 using System;
@@ -7,10 +9,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.Resources;
+using Windows.Foundation.Metadata;
 using Windows.Graphics.Display;
 using Windows.Graphics.Imaging;
 using Windows.Networking.BackgroundTransfer;
@@ -24,6 +28,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
@@ -42,18 +47,28 @@ namespace MT2.page
         public LookImg()
         {
             this.InitializeComponent();
+            ResourceLoader resourceLoader = new ResourceLoader();
+        
             if (localsettings.Values["_ThisDeviceis"].ToString() == "Mobile")
             {
                 MyTitleBarVB.Visibility = Visibility.Collapsed;
                 Compact.Visibility = Visibility.Collapsed;
             }
-
+            
             Getsuface();
             my_Image = SeeImage;
             //分享——订阅
             dataTransferManager.DataRequested += DataTransferManger_DataRequestedAsync;
             TagModes = new ObservableCollection<TagMode>();
-
+     
+            if (VersionHelper.Windows10Build15063==true)
+            {
+                Windows.UI.Xaml.Media.AcrylicBrush acrylic = new Windows.UI.Xaml.Media.AcrylicBrush();
+                MyTitleBar.Style =(Style) Application.Current.Resources["GridBackgroud"];
+                Kongzhitai.Background = acrylic;
+            }
+          
+         
             //Toastpopup.DataContext = tosalmodel;
             //betatext.Text = System.Windows.Forms.Screen.GetWorkingArea(this);
         }
@@ -75,9 +90,15 @@ namespace MT2.page
         public string imguri;
         public string img_sample_url;
         public string imgname;
+        private string pass_hash;
+        private bool is_favourite;
         private string imgLocalpath;
         public static Image my_Image;
         BitmapImage bitmapimage;
+        Yande_post_json yande_parameter;
+        Konachan_post_json Konachan_parameter;
+        string source;
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Window.Current.SetTitleBar(MyTitleBar);
@@ -87,36 +108,56 @@ namespace MT2.page
             var type = e.Parameter.GetType();
             if (type.Name == "Yande_post_json")
             {
-                var gg = (Yande_post_json)e.Parameter;
-                img_sample_url = gg.sample_url;
-                BitmapImage bitmapimage = new BitmapImage(new Uri(gg.sample_url));
+                 yande_parameter = (Yande_post_json)e.Parameter;
+                img_sample_url = yande_parameter.sample_url;
+                BitmapImage bitmapimage = new BitmapImage(new Uri(yande_parameter.sample_url));
                 SeeImage.Source = bitmapimage;
                 bitmapimage.DownloadProgress += Bitmapimage_DownloadProgress;
-                imguri = gg.file_url;
-                ImageID.Text = gg.id.ToString();
-                imgid = int.Parse(gg.id.ToString());
+                imguri = yande_parameter.file_url;
+                ImageID.Text = yande_parameter.id.ToString();
+                imgid = int.Parse(yande_parameter.id.ToString());
                 //获取到一个奇怪的不完整路径
                 var bitf = bitmapimage.UriSource.AbsolutePath;
                imgLocalpath = bitmapimage.UriSource.LocalPath;
                 // 处理tag
-                TagFuntion(gg.tags);
+                TagFuntion(yande_parameter.tags);
+                //处理来源
+                 source= yande_parameter.source;
                 //   "/sample/78cd441063dd0dab7e88f94ab7ab8cd6/yande.re 395326 sample hatsune_miku lepoule_(kmjh90) vocaloid.jpg"
+                #region 获取信息
+                GetImgData(yande_parameter.author,yande_parameter.jpeg_width,yande_parameter.jpeg_Height);
+                #endregion
+                #region 是喜欢的嘛
+                try
+                {
+                    if (SettingHelper.Username_Yande != null)
+                    {
+                        pass_hash = HttpHelper.Hashpass("choujin-steiner--" + SettingHelper.UserPass_Yande + "--");
+                        isfavourite(pass_hash);
+                    }
+                }
+                catch { }
+                
+                #endregion
             }
             else if (type.Name == "Konachan_post_json")
             {
-                var gg = (Konachan_post_json)e.Parameter;
-                img_sample_url = gg.sample_url;
-                BitmapImage bitmapimage = new BitmapImage(new Uri(gg.sample_url));
+                 Konachan_parameter = (Konachan_post_json)e.Parameter;
+                img_sample_url = Konachan_parameter.sample_url;
+                Star.Visibility = Visibility.Collapsed;
+                BitmapImage bitmapimage = new BitmapImage(new Uri(Konachan_parameter.sample_url));
                 SeeImage.Source = bitmapimage;
                 bitmapimage.DownloadProgress += Bitmapimage_DownloadProgress;
-                imguri = gg.file_url;
-                ImageID.Text = gg.id.ToString();
-                imgid = int.Parse(gg.id.ToString());
+                imguri = Konachan_parameter.file_url;
+                ImageID.Text = Konachan_parameter.id.ToString();
+                imgid = int.Parse(Konachan_parameter.id.ToString());
                 //获取到一个奇怪的不完整路径
                 var bitf = bitmapimage.UriSource.AbsolutePath;
                 imgLocalpath = bitmapimage.UriSource.LocalPath;
                 // 处理tag
-                TagFuntion(gg.tags);
+                TagFuntion(Konachan_parameter.tags);
+                //处理来源
+                source = Konachan_parameter.source;
             }
           else
             {
@@ -130,6 +171,7 @@ namespace MT2.page
                 imgid = int.Parse(lookit2.id);
                 #endregion
             }
+            GetSource(source);
             #endregion
             #region 旧的
             //try
@@ -159,6 +201,58 @@ namespace MT2.page
             base.OnNavigatedFrom(e);
             dataTransferManager.DataRequested -= DataTransferManger_DataRequestedAsync;
         }
+        #region 获取信息
+        private void GetImgData(string poster,int  width,int  height)
+        {
+            Data1.Text = $"上传者：{poster}";
+            Data2.Text = $"尺寸：{width}x{height}";
+        }
+        #endregion
+        #region 是喜欢的嘛
+        public async  void  isfavourite(string pass_hash)
+        {
+            is_favourite = await StarClass.Isfavourite(imgid, SettingHelper.Username_Yande, pass_hash, CS.apiset.apiurisave.YandeHost);
+            if (is_favourite==true)
+            {
+                Star.Label = "取消收藏";
+                Star.Icon = new SymbolIcon ( Symbol.SolidStar);
+            }
+            else
+            {
+                Star.Label = "收藏";
+                Star.Icon = new SymbolIcon(Symbol.OutlineStar);
+            }
+        }
+        #endregion
+        #region 获取来源
+        string olduri;
+         private void GetSource(string source)
+        {
+            GotoSource.Content = this.source;
+            if (source.Contains("pximg"))
+            {
+                Regex rx = new Regex("[1-9][0-9]{4,}");
+                 bool res = rx.IsMatch(source);
+                if(res==true)
+                {
+                    Match match = rx.Match(source);
+                    string value = match.Value;
+                    olduri = source;
+                    this.source = @"https://www.pixiv.net/member_illust.php?mode=medium&illust_id="+value;
+                    Oldsource_text.Text = "原链接：" + olduri;
+                    Oldsource_text.Visibility = Visibility.Visible;
+                    GotoSource.Content =this.source;
+                    //https://i.pximg.net/img-original/img/2018/02/20/00/58/24/67365313_p1.jpg
+                }
+            }
+
+        }
+        private async void GotoSource_Click(object sender, RoutedEventArgs e)
+        {
+            var success = await Windows.System.Launcher.LaunchUriAsync(new Uri(source));
+            
+        }
+        #endregion
         #region 对UI绘制
         public async void BlurUiAsync()
         {
@@ -182,18 +276,18 @@ namespace MT2.page
             wit = f.Width;
             hei = f.Height;
             //betatext.Text = "宽度" + wit + "--高度：" + hei;
-            betaborder.Height = hei;
+            betaborder.Height = hei-32;
         }
 
-        private void textbutoon_Click(object sender, RoutedEventArgs e)
-        {
-            textbutoon.Content = imguri;
-            string text = (string)imguri;
-            DataPackage dp = new DataPackage();
-            dp.SetText(text);
-            Clipboard.SetContent(dp);
+        //private void textbutoon_Click(object sender, RoutedEventArgs e)
+        //{
+        //    textbutoon.Content = imguri;
+        //    string text = (string)imguri;
+        //    DataPackage dp = new DataPackage();
+        //    dp.SetText(text);
+        //    Clipboard.SetContent(dp);
 
-        }
+        //}
 
         #region 后台下载方法
         private string DownloadToastText { get; set; }
@@ -224,13 +318,7 @@ namespace MT2.page
 
             if (storagefile != null)
             {
-                //a.Label = DownloadToastText;
-
-                //await a.Show();
-
-
                 CachedFileManager.DeferUpdates(storagefile);
-
                 string Filename = imgname + imgid;
                 string _transferUri = imguri;
                 Uri transferUri;
@@ -247,12 +335,6 @@ namespace MT2.page
                 DownloadOperation downloader = backgrounddownloader.CreateDownload(transferUri, storagefile);
                 await downloader.StartAsync();
                 await showtast();
-
-                //tosalmodel.Info = new Entity() { name = "正在后台下载……" };
-
-                //a.Label = "下载完成";
-                //await a.Show();
-                //Mypopup.IsOpen = true;
             }
         }//总是调起资源选择器
 
@@ -260,7 +342,7 @@ namespace MT2.page
         {
             Toast.Visibility = Visibility.Visible;
             this.StoryboardShowPopup.Begin();
-            //内容提示停留1.2s后开始隐藏
+            //内容提示停留3s后开始隐藏
             await Task.Delay(3000);
             this.StoryboardHiddenPopup.Begin();
             Toast.Visibility = Visibility.Collapsed;
@@ -269,14 +351,14 @@ namespace MT2.page
         public async void Savefile2(string jpguri)//不调用自愿选择器
         {
             //Savefile();
+            //UWP应用在任何情况下都不支持直接使用Path，也就是文本路径，必须使用StorageFolder。FolderPicker返回的就是一个StorageFolder，你需要使用这个，否则就只能使用下面链接中的位置了
             try
             {
                 string fileuri = localsettings.Values["_Fileuri"].ToString();
+
                 StorageFolder storagefolder = await StorageFolder.GetFolderFromPathAsync(fileuri);
-                //StorageFolder fd = await ApplicationData.Current.LocalFolder.CreateFolderAsync("string", CreationCollisionOption.OpenIfExists);
-                //StorageFolder fd2 = await fd.CreateFolderAsync("dd");
-                storagefile = await storagefolder.CreateFileAsync(imgname + "ID" + imgid+".jpg", CreationCollisionOption.OpenIfExists);
-             
+      
+                storagefile = await storagefolder.CreateFileAsync(imgname + "ID" + imgid+".jpg", CreationCollisionOption.ReplaceExisting);
                 if (storagefile != null)
                 {
                     CachedFileManager.DeferUpdates(storagefile);
@@ -302,9 +384,9 @@ namespace MT2.page
                 //HttpResponseMessage httpResponseMessage = await httpclient.GetAsync(new Uri(jpguri));
 
             }
-            catch
+            catch(Exception ex)
             {
-
+                await new MessageDialog(ex.ToString()).ShowAsync();
             }
 
         }
@@ -320,9 +402,7 @@ namespace MT2.page
         }
 
         #endregion
-
         public int b = 0;
-
         private void Setit_Click(object sender, RoutedEventArgs e)
         {
 
@@ -432,7 +512,7 @@ namespace MT2.page
                 requestData.Properties.Title = "分享一张心仪的图片";
                 requestData.Properties.Description = imguri;//在能调用pixiv之前先传原图链接
               
-                requestData.SetText("这是我要共享的图片");//传到QQ这句没效果。。
+                requestData.SetText("这图好看");//传到QQ这句没效果。。
                 List<IStorageItem> imageItems = new List<IStorageItem> { _tempExportFile };
                 requestData.SetStorageItems(imageItems);
 
@@ -452,17 +532,19 @@ namespace MT2.page
 
         {
             StorageFile storageFile = await StorageFile.GetFileFromPathAsync(relativePath);
-            //var storageFile = await Package.Current.InstalledLocation.GetFileAsync(relativePath.Replace('/', '\\'));
-
             var stream = await storageFile.OpenReadAsync();
-
             var wb = new WriteableBitmap(1, 1);
-
             wb.SetSource(stream);
-
             return wb;
-
         }
+        //以链接形式分享
+        private void Shareuri_Click(object sender, RoutedEventArgs e)
+        {
+            DataPackage dp = new DataPackage();
+            dp.SetText(imguri);
+            Clipboard.SetContent(dp);
+        }
+
         #endregion
         #region 画中画
         private void Compact_Click(object sender, RoutedEventArgs e)
@@ -523,7 +605,7 @@ namespace MT2.page
         private void SetText()
         {
             ResourceLoader rl = new ResourceLoader();
-            Share.Label = rl.GetString("String21");
+            Share.Label = rl.GetString("String19");
             TagTitle.Text = rl.GetString("String20");
             Toast_Text.Text = rl.GetString("String33");
             TastButton.Content = rl.GetString("Mainpage_Download");
@@ -534,25 +616,45 @@ namespace MT2.page
         }
         #endregion
 
-        //以链接形式分享
-        private void Shareuri_Click(object sender, RoutedEventArgs e)
+        #region 收藏
+        private async  void Star_Click(object sender, RoutedEventArgs e)
         {
-            DataPackage dp = new DataPackage();
-            dp.SetText(imguri);
-            Clipboard.SetContent(dp);
+            //判断是否登录了某个站点，可能也得用传参的方式
+        //   var hashpass =HttpHelper.Hashpass(SettingHelper.UserPass_Yande);
+               if(SettingHelper.IsLoagin_Yande =="1")
+            {
+                if (is_favourite == true)
+                {
+                    Star.IsEnabled = false;
+                    await  StarClass.Setfavourite(imgid, SettingHelper.Username_Yande, pass_hash, 2, CS.apiset.apiurisave.YandeHost);
+                    //存在不执行的问题，待查
+                    is_favourite = false;
+                    Star.Icon = new SymbolIcon(Symbol.OutlineStar);
+                    Star.Label = "收藏";
+                    Star.IsEnabled = true;
+                }
+                else
+                {
+                    Star.IsEnabled = false;
+                    await  StarClass.Setfavourite(imgid, SettingHelper.Username_Yande, pass_hash, 3, CS.apiset.apiurisave.YandeHost);
+                    is_favourite = true;
+                    Star.Icon = new SymbolIcon(Symbol.SolidStar);
+                    Star.Label = "取消收藏";
+                    Star.IsEnabled = true;
+                }
+            }
+               else
+            {
+                   await new MessageDialog("请先登录喵~").ShowAsync();
+
+            }
+
         }
+
+        #endregion
+
+
     }
 
-    //弹窗
-    //public class TosatModel : INotifyPropertyChanged
-    //{
-    //    public event PropertyChangedEventHandler PropertyChanged;
-    //    private Entity _info;
-    //    public Entity Info
-    //    {
-    //        get { return _info; }
-    //        set { _info = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Info")); }
-    //    }
-    //}
 
 }

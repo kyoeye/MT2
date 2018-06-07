@@ -52,7 +52,9 @@ namespace MT2.CS
         private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
             localsettings.Values["_password"] = null;
-            localsettings.Values["_Fu_kMS"] = false;
+            // localsettings.Values["_Fu_kMS"] = false;
+            localsettings.Values["_Fu_kMSvisble"] = false;
+            localsettings.Values["_FuckSlider"] = 1;
             Frame.Navigate(typeof(MainPage));
 
         }

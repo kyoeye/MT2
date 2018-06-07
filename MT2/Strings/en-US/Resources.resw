@@ -170,7 +170,7 @@
     <comment>画中画</comment>
   </data>
   <data name="Mainpage_Shouye" xml:space="preserve">
-    <value>Home</value>
+    <value>Search</value>
     <comment>首页</comment>
   </data>
   <data name="Mainpage_User" xml:space="preserve">
@@ -178,7 +178,7 @@
     <comment>账户管理</comment>
   </data>
   <data name="MoeTon_name" xml:space="preserve">
-    <value>MoeTon Ⅱ-school season</value>
+    <value>MoeTon Ⅱ-poi~</value>
     <comment>萌豚二号机-开学季</comment>
   </data>
   <data name="Setting_Title" xml:space="preserve">
@@ -234,7 +234,7 @@
     <comment>分享</comment>
   </data>
   <data name="String2" xml:space="preserve">
-    <value>school season</value>
+    <value>HAPPY NEW YEAR</value>
     <comment>开学季</comment>
   </data>
   <data name="String20" xml:space="preserve">

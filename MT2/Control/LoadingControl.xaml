@@ -12,8 +12,9 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <ProgressRing
-                Width="70"
-                Height="70"
+                Width="50"
+                Height="50"
+                Margin="10"
                 IsActive="True" />
             <TextBlock
                 Name="LoadingText"

@@ -19,7 +19,7 @@
                     Name="MyTitleBar"
                     Grid.Row="0"
                     Height="32"
-                    Style="{StaticResource GridBackgroud}" />
+                    />
                 <Grid Height="32" VerticalAlignment="Top">
                     <StackPanel Orientation="Horizontal">
                         <AppBarButton
@@ -49,7 +49,7 @@
                 </Grid>
             </Grid>
 
-            <Grid Height="50" Style="{StaticResource GridBackgroud}">
+            <Grid Name="PIPBackground" Height="50">
                 <TextBlock
                     Margin="10,0,10,0"
                     HorizontalAlignment="Left"
@@ -66,6 +66,7 @@
                     Text="（该功能仅适用15063（1703）以上版本的PC )"
                     TextWrapping="Wrap" />
             </Grid>
+            <TextBlock TextWrapping="Wrap"  Margin="5" Text="置顶图片来做参考图，关闭程序置顶窗口依旧保留" Foreground="#FF949494"/>
 
         </StackPanel>
         <Grid Grid.Row="1">

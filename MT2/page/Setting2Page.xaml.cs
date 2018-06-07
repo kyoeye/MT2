@@ -15,6 +15,7 @@ using MT2.Control;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.ApplicationModel.Resources.Core;
 using Windows.ApplicationModel.Resources;
+using Windows.UI;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
 
@@ -39,9 +40,24 @@ namespace MT2.page
         private TranslateTransform tt;
         public Setting2Page()
         {
-            //Logobackground.Source =  mainpage.Homehoturl;
 
             this.InitializeComponent();
+            #region 判断api是否支持
+            if (VersionHelper.Windows10Build15063 == true)
+            {
+                Windows.UI.Xaml.Media.AcrylicBrush acrylic = new Windows.UI.Xaml.Media.AcrylicBrush();
+                acrylic.TintOpacity = 0.5;
+                acrylic.TintColor = Colors.White;
+                acrylic.BackgroundSource = AcrylicBackgroundSource.HostBackdrop;
+                MyTitleBar.Style = (Style)Application.Current.Resources["GridBackgroud"];
+                TopGrid.Background = acrylic;
+            }
+            else
+            {
+                MyTitleBar.Background = new SolidColorBrush(Color.FromArgb(100, 244, 244, 244));
+                TopGrid.Background = new SolidColorBrush(Color.FromArgb(100, 244, 244, 244));
+            }
+            #endregion
 
             if (localsettings.Values["_ThisDeviceis"].ToString() == "Mobile")
             {
@@ -62,7 +78,7 @@ namespace MT2.page
 
             }
 
-          //  themeColors = ThemeColorsAdd.GetThemeColors(); //返回主题数据
+            //  themeColors = ThemeColorsAdd.GetThemeColors(); //返回主题数据
             Languagelist = Languages.GetLanguages();//返回语言列表
 
             falclass.FallsHub = (int)listslider.Value;
@@ -85,7 +101,7 @@ namespace MT2.page
             {
                 Nowpassword.Visibility = Visibility.Collapsed;
             }
-            
+
 
         }
 
@@ -104,7 +120,7 @@ namespace MT2.page
 
                 }
             }
-          catch
+            catch
             {
 
             }
@@ -115,8 +131,6 @@ namespace MT2.page
             base.OnNavigatedTo(e);
             try
             {
-                
-
                 //修改保存路径
                 if (localsettings.Values["_Fileuri"].ToString() == a.Path)
                 {
@@ -131,18 +145,6 @@ namespace MT2.page
                     FileUri.Text = "Path" + localsettings.Values["_Fileuri"].ToString();
                 }
 
-                //是否使用js获取数据
-                //if ((bool)localsettings.Values["_TackToJS"] == true)
-                //{
-                //    TackToJS_bool = true ;
-                //    TackToJS.IsOn = true;
-                //}
-                //else
-                //{
-                //    TackToJS_bool = false;
-                //    TackToJS.IsOn = false;
-                //    //localsettings.Values["_TackToJS"] = false;
-                //}
 
                 //总是拉取文件选取器
                 if (localsettings.Values["_FileAllOpen"].ToString() == "true")
@@ -153,24 +155,34 @@ namespace MT2.page
                 {
                     FileAllOpen.IsChecked = false;
                 }
-                //是否显示里区开关
-                if ((bool)localsettings.Values ["_Fu_kMSvisble"] == true)
-                {
+                #region 是否显示里世界开关
+                if ((bool)localsettings.Values["_Fu_kMSvisble"] == true)
                     Steins.Visibility = Visibility.Visible;
-                }
                 else
-                {
                     Steins.Visibility = Visibility.Visible;
+                #endregion
 
-                }
+           
                 //silder的设置
-                listslider.Value =   (int)localsettings.Values["_listslider"];
+                listslider.Value = (int)localsettings.Values["_listslider"];
                 SetText();
-
+                #region 动态磁贴
+                try
+                {
+                    if ((int)localsettings.Values["_Dtct"] == 0)
+                        Dtct_No.IsChecked = true;
+                    else if ((int)localsettings.Values["_Dtct"] == 1)
+                        Dtct_Hot.IsChecked = true;
+                }
+                catch
+                {
+                    localsettings.Values["_Dtct"] = 0;         
+                }
+                #endregion
             }
             catch
             {
-
+                
             }
             try
             {
@@ -181,15 +193,9 @@ namespace MT2.page
                     Steins.Visibility = Visibility.Visible;
                     FuckMsSlider.Maximum = 2;
                     if ((int)localsettings.Values["_FuckSlider"] == 2)
-                    {
                         Steins_Prompt.Visibility = Visibility.Visible;
-                    }
                     else
-                    {
                         Steins_Prompt.Visibility = Visibility.Collapsed;
-
-                    }
-
                 }
                 else
                 {
@@ -305,6 +311,13 @@ namespace MT2.page
                 fop.FileTypeFilter.Add("*");
                 var f = await fop.PickSingleFolderAsync();
                 localsettings.Values["_Fileuri"] = f.Path;
+                //localsettings.Values["_Fileuri"] = f;
+                //if(f!=null)
+                //{
+                //    StorageFolder sf =(StorageFolder) localsettings.Values["_Fileuri"];
+                //    FileUri.Text = "当前保存的文件夹" + sf.Path.ToString();
+
+                //}
                 DefualtFilebutton.Content = "取消勾选以恢复默认保存路径";
                 FileUri.Text = "当前保存的文件夹" + localsettings.Values["_Fileuri"].ToString();
                 //DefualtFilebutton.Content = localsettings.Values["_Fileuri"].ToString();
@@ -320,7 +333,6 @@ namespace MT2.page
                 if (localsettings.Values["_Fileuri"].ToString() == a.Path)
                 {
                     DefualtFilebutton.IsChecked = false;
-
                 }
             }
             #region 备份
@@ -393,8 +405,8 @@ namespace MT2.page
 
         //private void TackToJS_Toggled(object sender, RoutedEventArgs e)
         //{
-           
-           
+
+
         //    if (TackToJS.IsOn == true)
         //    {
         //        localsettings.Values["_TackToJS"] = true;
@@ -412,9 +424,9 @@ namespace MT2.page
 
 
         //}
-        private async void  showmessAsync()
+        private async void showmessAsync()
         {
-            
+
             try
             {
                 var messagedialog = new MessageDialog("数据发生更改，您需要手动重启下应用");
@@ -436,7 +448,9 @@ namespace MT2.page
             return null;
         }
 
+#pragma warning disable CS0169 // 从不使用字段“Setting2Page.cd”
         ContentDialog cd;
+#pragma warning restore CS0169 // 从不使用字段“Setting2Page.cd”
         int c = 1;
         BitmapImage bit;
 
@@ -444,7 +458,7 @@ namespace MT2.page
         {
             tt.X += e.Delta.Translation.X;
             tt.Y += e.Delta.Translation.Y;
-            if (Math.Abs(tt.X) > Window.Current.Bounds.Width * 10 )
+            if (Math.Abs(tt.X) > Window.Current.Bounds.Width * 10)
             {
                 bit = new BitmapImage(new Uri("ms-appx:///img/640.jpg"));
                 LUXUN.Stretch = Stretch.UniformToFill;
@@ -452,7 +466,7 @@ namespace MT2.page
                 LUXUN.Visibility = Visibility.Visible;
                 try
                 {
-                            if (c ==1)
+                    if (c == 1)
                     {
                         c++;
                         showContentDialog();
@@ -464,7 +478,7 @@ namespace MT2.page
 
                 }
             }
-          else if (Math.Abs(tt.X) > Window.Current.Bounds.Width/2)
+            else if (Math.Abs(tt.X) > Window.Current.Bounds.Width / 2)
             {
                 bit = new BitmapImage(new Uri("ms-appx:///img/XH(2]5G215ZT4J8X`5XSYHN.jpg"));
                 LUXUN.Stretch = Stretch.Uniform;
@@ -476,31 +490,31 @@ namespace MT2.page
 
         private async void showContentDialog()
         {
-           
+
             await new MessageDialog("不存在的").ShowAsync();
         }
 
-    
+
         //private void beta3button_Click(object sender, RoutedEventArgs e)
         //{
         //    localsettings.Values["_AppOpenNum"] = 26;
         //}
+        //1.3.11移除这两个没用的开关
+        //private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Steins.Visibility = Visibility.Collapsed;
+        //    localsettings.Values["_Fu_kMS"] = false;
 
-        private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
-        {
-            Steins.Visibility = Visibility.Collapsed;
-            localsettings.Values["_Fu_kMS"] = false ;
+        //}
 
-        }
+        //private void HyperlinkButton2_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Steins.Visibility = Visibility.Collapsed;
+        //    localsettings.Values["_Fu_kMSvisble"] = false;
+        //    localsettings.Values["_Fu_kMS"] = false;
+        //    //NoH_Check.IsOn = false;
 
-        private void HyperlinkButton2_Click(object sender, RoutedEventArgs e)
-        {
-            Steins.Visibility = Visibility.Collapsed;
-            localsettings.Values["_Fu_kMSvisble"] = false ;
-            localsettings.Values["_Fu_kMS"] = false;
-            //NoH_Check.IsOn = false;
-
-        }
+        //}
 
         private void fuckyou_Click(object sender, RoutedEventArgs e)
         {
@@ -558,7 +572,7 @@ namespace MT2.page
         private void Setting_setting_Click(object sender, RoutedEventArgs e)
         {
             ssclick++;
-            if (ssclick ==20)
+            if (ssclick == 20)
             {
                 Frame.Navigate(typeof(UpPage));
             }
