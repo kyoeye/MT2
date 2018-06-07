@@ -53,7 +53,7 @@ namespace MT2.CS
         }
 
         #endregion
-        #region 登录
+        #region 登录 参考了prpr的思路
         public async Task<bool> LoginClient(string id, string pass, string uri)
         {
             try
